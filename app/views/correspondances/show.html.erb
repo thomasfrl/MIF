@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User1:</strong>
+  <%= @correspondance.user1 %>
+</p>
+
+<p>
+  <strong>User2:</strong>
+  <%= @correspondance.user2 %>
+</p>
+
+<%= link_to 'Edit', edit_correspondance_path(@correspondance) %> |
+<%= link_to 'Back', correspondances_path %>
