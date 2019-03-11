@@ -13,3 +13,6 @@
  *= require_tree .
  *= require_self
  */
+@import "fontawesome-free/css/all.min.css";
+@import "css/style.css";
+@import "css/vendor.css";
