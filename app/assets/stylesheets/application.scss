@@ -11,8 +11,9 @@
  * It is generally better to create a new file per style scope.
  *
  *= require_self
- */
+ *= require style
+ *= require vendor
+ *= require font-awesome
+ *= require icomoon-free/style
 
-@import "font-awesome";
-@import "style.css";
-@import "vendor.css";
+ */
