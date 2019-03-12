@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User:</strong>
+  <%= @testify.user %>
+</p>
+
+<p>
+  <strong>Content:</strong>
+  <%= @testify.content %>
+</p>
+
+<p>
+  <strong>Accepted:</strong>
+  <%= @testify.accepted %>
+</p>
+
+<%= link_to 'Edit', edit_testify_path(@testify) %> |
+<%= link_to 'Back', testifies_path %>
