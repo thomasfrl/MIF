@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  devise_for :users
+
   resources :user_languages
   resources :tickets
   resources :correspondances
