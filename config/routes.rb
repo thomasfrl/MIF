@@ -14,6 +14,8 @@ Rails.application.routes.draw do
   resources :flats
   resources :users
   resources :cities
+  resources :home
+
 
 
 
