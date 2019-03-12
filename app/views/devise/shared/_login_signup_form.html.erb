@@ -57,6 +57,24 @@
                           input_html: { autocomplete: "email",
                           class: "form-control",}%>
                       </div>
+                      <!-- first name -->
+                      <div class="form-group">
+                        <%= f.input :first_name,
+                          required: true,
+                          input_html: { autocomplete: "first name",
+                          class: "form-control",}%>
+                      </div>
+
+
+                      <!-- last name -->
+                      <div class="form-group">
+                        <%= f.input :last_name,
+                          required: true,
+                          input_html: { autocomplete: "last name",
+                          class: "form-control",}%>
+                      </div>
+
+
                       <!-- password -->
                       <div class="form-group">
                         <%= f.input :password,
