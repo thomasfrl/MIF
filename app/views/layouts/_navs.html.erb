@@ -25,10 +25,13 @@
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
               <%= link_to "Messages", conversations_path, class: "dropdown-item"  %>
               <div class="dropdown-divider"></div>
-              <%= link_to "Settings", edit_user_path(current_user.id), class: "dropdown-item"  %>
+              <%= link_to edit_user_path(current_user.id), class: "dropdown-item" do %>
+                <i class="icon-cog fs-10 mr-0 text-primary"></i>
+                Settings
+              <% end %>
               <%= link_to destroy_user_session_path, method: :delete, class: "dropdown-item" do %>
-                <i class="fas fa-sign-out-alt mr-2 text-primary"></i>
-                <span>Disconnect</span>
+                <i class="icon-arrow-right fs-10 mr-0 text-primary"></i>
+                Disconnect
               <% end %>
             </div>
           </li>
