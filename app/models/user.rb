@@ -1,5 +1,10 @@
 class User < ApplicationRecord
-  belongs_to :city
+  # Include default devise modules. Others available are:
+  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :validatable
+
+  belongs_to :city, optional: true
   has_one :flat
 
   has_many :tickets
@@ -20,6 +25,8 @@ class User < ApplicationRecord
 
   has_many :user_languages
   has_many :languages, through: :user_languages
+
+  has_one_attached :avatar
 
 
 end
