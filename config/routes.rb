@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
-  
+
+  get 'quiz/new'
+  get 'quiz/create'
+  get 'quiz/show'
   devise_for :users
   resources :user_languages
   resources :tickets
