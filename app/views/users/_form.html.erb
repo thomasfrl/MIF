@@ -1,52 +1,113 @@
-<%= form_with(model: user, local: true) do |form| %>
-  <% if user.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</h2>
 
-      <ul>
-      <% user.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
+
+<!-- tab settings -->
+<div class="tab-pane" id="demo-2-4" role="tabpanel" aria-labelledby="demo-2-4">
+  <div class="row justify-content-center">
+    <div class="col-md-10 col-lg-8">
+      <%= form_with(model: user, local: true) do |form| %>
+        <% if user.errors.any? %>
+            <div id="error_explanation">
+              <h2><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</h2>
+              <ul>
+              <% user.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+              <% end %>
+              </ul>
+            </div>
+          <% end %>
+
+      <div class="row mb-4">
+        <div class="col">
+          <div class="boxed">
+            <div class="row align-items-center justify-content-between p-3">
+              <div class="col-md-2 pb-2 pb-md-0 text-center">
+                <img src="../../assets/images/demo/user-5.jpg" alt="Avatar" class="avatar avatar-lg rounded">
+              </div>
+              <div class="col-md-5 text-center text-md-left">
+                <h4 class="mb-0"><b>Valerie</b> Doe</h4>
+                <a href="" class="fs-14 link text-primary">Change Avatar</a>
+              </div>
+              <div class="col-md-4 text-center text-md-right mt-1 mt-md-0">
+                <a href="" class="btn btn-primary btn-rounded">Upgrade Plan</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <h5 class="mb-2 fs-20 font-weight-normal">General Information</h5>
+            <div class="form-row">
+              <div class="col">
+                <div class="form-group">
+                  <label for="firstName">First Name</label>
+                  <%= form.text_field :first_name, placeholder: @user.first_name, class: "form-control" %>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-group">
+                  <label for="secondName">Last Name</label>
+                  <%= form.text_field :last_name, placeholder: @user.last_name, class: "form-control" %>
+                </div>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="col">
+                <div class="form-group">
+                  <label for="userDescription">Description</label>
+                  <%= form.text_area :description, placeholder: @user.description, class: "form-control" %>
+                </div>
+              </div>
+            </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <h5 class="mb-2 fs-20 font-weight-normal">Profile Information</h5>
+            <div class="form-row">
+              <div class="col">
+                <div class="form-group">
+                  <label for="userNationality">Nationality</label>
+                  <%= form.text_field :nationality, placeholder: @user.nationality, class: "form-control" %>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-group">
+                  <label for="userAge">Age</label>
+                  <%= form.text_field :age, placeholder: @user.age, class: "form-control" %>
+                </div>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="col">
+                <div class="form-group">
+                  <label for="userCity">City</label>
+                  <div class="input-group">
+
+                    <%= form.collection_select :city_id, City.all,:id,:name%>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="col">
+                <div class="form-group">
+                  <label for="userWelcomeMessage">Welcome Message</label>
+                  <%= form.text_area :welcome_message, placeholder: @user.welcome_message, class: "form-control" %>
+                </div>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="col-3">
+                <%= form.submit "Save changes", class: "btn btn-secondary" %>
+              </div>
+            </div>
+        </div>
+      </div>
       <% end %>
-      </ul>
     </div>
-  <% end %>
-
-  <div class="field">
-    <%= form.label :first_name %>
-    <%= form.text_field :first_name %>
   </div>
-
-  <div class="field">
-    <%= form.label :last_name %>
-    <%= form.text_field :last_name %>
-  </div>
-
-  <div class="field">
-    <%= form.label :description %>
-    <%= form.text_area :description %>
-  </div>
-
-  <div class="field">
-    <%= form.label :age %>
-    <%= form.number_field :age %>
-  </div>
-
-  <div class="field">
-    <%= form.label :welcome_message %>
-    <%= form.text_area :welcome_message %>
-  </div>
-
-  <div class="field">
-    <%= form.label :nationality %>
-    <%= form.text_field :nationality %>
-  </div>
-
-  <div class="field">
-    <%= form.label :city_id %>
-    <%= form.text_field :city_id %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
-<% end %>
+</div>
+<!-- / tab -->
