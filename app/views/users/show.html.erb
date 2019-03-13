@@ -1,1 +1,5 @@
-<%= render "public" %>
+<% if @user.id == current_user.id %>
+  <%= render 'private' %>
+<% else %>
+  <%= render 'public' %>
+<% end %>
