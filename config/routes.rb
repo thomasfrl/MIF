@@ -3,6 +3,11 @@ Rails.application.routes.draw do
   root to: "home#index"
   devise_for :users
 
+
+
+  resources :users, :path=> "friends", only: [:show, :edit, :update] do
+    resources :avatars, only: [:create]
+  end
   resources :user_languages
   resources :tickets
   resources :correspondances

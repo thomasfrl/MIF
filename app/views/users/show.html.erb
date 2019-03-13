@@ -2,7 +2,7 @@
 
 
 <section class="p-0 bg-light">
-  <div class="image image-overlay image-cover" style="background-image:url(../../assets/images/demo/minimal/portfolio-bg-2.jpg)"
+  <div class="image image-overlay image-cover" style="background-image:url('<%=asset_path("cities/#{@user.city.name.downcase}.jpg")%>')"
   data-top-top="transform: translateY(0px);"
   data-top-bottom="transform: translateY(-250px);"></div>
   <div class="container">
@@ -10,7 +10,11 @@
       <div class="col col-md-10 col-lg-8">
         <div class="row align-items-center">
           <div class="col-4 col-lg-3">
-            <img class="mr-3 avatar avatar-xl rounded" src="../../assets/images/demo/user-2.jpg" alt="Generic placeholder image">
+                <%if @user.avatar.attached?%>
+                    <%= image_tag(@user.avatar, :alt => "avatar", class: "avatar avatar-lg rounded") %>
+                <%else%>
+                    <img src="../../assets/images/demo/user-5.jpg" alt="Avatar" class="avatar avatar-lg rounded">
+                <%end%>
           </div>
           <div class="col">
             <div class="row align-items-center">
