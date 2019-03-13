@@ -47,4 +47,8 @@ class User < ApplicationRecord
   def self.from_facebook(auth)
     where()
   end
+  def name
+    self.first_name + " " + self.last_name 
+  end
+
 end

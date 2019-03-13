@@ -1,10 +1,11 @@
 class ConversationsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_conversation, only: [:show, :edit, :update, :destroy]
 
   # GET /conversations
   # GET /conversations.json
   def index
-    @conversations = Conversation.all
+    @conversations = Conversation.all.select{|c| c.participants.include?(current_user)}
   end
 
   # GET /conversations/1

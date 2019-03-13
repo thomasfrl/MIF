@@ -160,5 +160,4 @@ ActiveRecord::Schema.define(version: 2019_03_13_090653) do
   add_foreign_key "tickets", "users"
   add_foreign_key "user_languages", "languages"
   add_foreign_key "user_languages", "users"
-  add_foreign_key "users", "cities"
 end
