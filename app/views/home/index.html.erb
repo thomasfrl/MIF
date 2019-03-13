@@ -1,17 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Single</title>
-    <link rel="stylesheet" href="../../assets/css/vendor.css" />
-    <link rel="stylesheet" href="../../assets/css/style.css" />
-  </head>
-  <body>
 
-    <!-- header -->
-
-    <!-- header -->
 
     <!-- cover -->
     <section class="p-0">
@@ -20,7 +7,7 @@
         data-top-bottom="transform: translateY(250px);">
         <div class="swiper-wrapper">
           <div class="swiper-slide vh-100">
-            <div class="image image-overlay image-zoom" style="background-image:url('/assets/cities/paris.jpg');"></div>
+            <div class="image image-overlay image-zoom" style="background-image:url('<%=asset_path("cities/paris.jpg")%>');"></div>
             <div class="caption">
               <div class="container">
                 <div class="row align-items-center vh-100">
@@ -54,94 +41,29 @@
         <div class="row">
           <div class="col">
             <ul class="masonry row gutter-2">
+              <% @cities.each do |city|%>
               <li class="col-md-6 col-lg-3">
-                <article class="tile">
-                  <div class="tile-image" style="background-image: url('/assets/cities/barcelone.jpg');"></div>
-                  <a href="">
+                <% if city.name == "Paris" %>
+                  <article class="tile">
+                <% end %>
+                <% if city.id.even? %>
+                  <article class="tile tile-long">
+                <% else %>
+                  <% if city.id % 5 == 0 %>
+                    <article class="tile tile-long">
+                  <% end %>
+                  <article class="tile">
+                <% end %>
+                  <div class="tile-image" style="background-image: url('<%=asset_path("cities/#{city.name.downcase}.jpg")%>');"></div>
+                    <%= link_to city_path(city.id) do%>
                     <div class="tile-header">
-                      <h2 class="text-white" style="text-align: center">Barcelone</h2>
-                      <h4 class="text-white" style="text-align: center">600 Miffers</h4>
+                      <h2 class="text-white" style="text-align: center"><%= city.name %></h2>
+                      <h4 class="text-white" style="text-align: center"><strong><%= city.users.count %> miffers </strong></h4>
                     </div>
-                  </a>
+                    <% end %>
                 </article>
               </li>
-              <li class="col-md-6 col-lg-3">
-                <article class="tile tile-long">
-                  <div class="tile-image" style="background-image: url('/assets/cities/berlin.jpg');"></div>
-                  <a href="">
-                    <div class="tile-header">
-                      <h2 class="text-white" style="text-align: center">Berlin</h2>
-                      <h4 class="text-white" style="text-align: center">600 Miffers</h4>
-                    </div>
-                  </a>
-                </article>
-              </li>
-              <li class="col-md-6 col-lg-3">
-                <article class="tile">
-                  <div class="tile-image" style="background-image: url('/assets/cities/londres.jpg');"></div>
-                  <a href="">
-                    <div class="tile-header ">
-                      <h2 class="text-white" style="text-align: center">Londres</h2>
-                      <h4 class="text-white" style="text-align: center">600 Miffers</h4>
-                    </div>
-                  </a>
-                </article>
-              </li>
-              <li class="col-md-6 col-lg-3">
-                <article class="tile tile-long">
-                  <div class="tile-image" style="background-image: url('/assets/cities/lisbonne.jpg');"></div>
-                  <a href="">
-                    <div class="tile-header">
-                      <h2 class="text-white" style="text-align: center">Lisbonne</h2>
-                      <h4 class="text-white" style="text-align: center">600 Miffers</h4>
-                    </div>
-                  </a>
-                </article>
-              </li>
-              <li class="col-md-6 col-lg-3">
-                <article class="tile tile-long">
-                  <div class="tile-image" style="background-image: url('/assets/cities/londres.jpg');"></div>
-                  <a class="wrapper" href="">
-                    <div class="tile-header">
-                      <h2 class="text-white" style="text-align: center">Londres</h2>
-                      <h4 class="text-white" style="text-align: center">600 Miffers</h4>
-                    </div>
-                  </a>
-                </article>
-              </li>
-              <li class="col-md-6 col-lg-3">
-                <article class="tile tile-long">
-                  <div class="tile-image" style="background-image: url('/assets/cities/prague.jpg');"></div>
-                  <a href="">
-                    <div class="tile-header">
-                      <h2 class="text-white" style="text-align: center">Prague</h2>
-                      <h4 class="text-white" style="text-align: center">600 Miffers</h4>
-                    </div>
-                  </a>
-                </article>
-              </li>
-              <li class="col-md-6 col-lg-3">
-                <article class="tile">
-                  <div class="tile-image" style="background-image: url('/assets/cities/copenhague.jpg');"></div>
-                  <a href="">
-                    <div class="tile-header">
-                      <h2 class="text-white" style="text-align: center">Copenhague</h2>
-                      <h4 class="text-white" style="text-align: center">600 Miffers</h4>
-                    </div>
-                  </a>
-                </article>
-              </li>
-              <li class="col-md-6 col-lg-3">
-                <article class="tile">
-                  <div class="tile-image" style="background-image: url('/assets/cities/budapest.jpg');"></div>
-                  <a href="">
-                    <div class="tile-header">
-                      <h2 class="text-white" style="text-align: center">Budapest</h2>
-                      <h4 class="text-white" style="text-align: center">600 Miffers</h4>
-                    </div>
-                  </a>
-                </article>
-              </li>
+              <% end %>
             </ul>
           </div>
         </div>
@@ -149,47 +71,3 @@
     </section>
     <!-- / right sidebar -->
 
-
-    <!-- news -->
-
-    <!-- / news -->
-
-    <!-- footer -->
-    <footer class="bg-dark text-white">
-      <div class="container py-5">
-        <div class="row justify-content-between align-items-center">
-          <div class="col-md-5 text-center text-md-left">
-            <ul class="nav">
-              <li class="nav-item">
-                <a class="nav-link" href="#">Contacts</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">About Us</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Legal Information</a>
-              </li>
-            </ul>
-          </div>
-          <div class="col-md-2 text-center">
-            <img class="logo-sm" src="../../assets/images/demo/logo/logo-light.svg" alt="Logo">
-          </div>
-          <div class="col-md-5 text-center text-md-right">
-            <ul class="socials">
-              <li><a href="" class="icon-facebook fs-20"></a></li>
-              <li><a href="" class="icon-instagram fs-20"></a></li>
-              <li><a href="" class="icon-twitter fs-20"></a></li>
-              <li><a href="" class="icon-linkedin fs-20"></a></li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </footer>
-    <!-- / footer -->
-
-
-
-    <script src="../../assets/js/vendor.js"></script>
-    <script src="../../assets/js/app.js"></script>
-  </body>
-</html>
