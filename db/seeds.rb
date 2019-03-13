@@ -5,6 +5,12 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+def get_random_image
+  image_path_prefix = "app/assets/images/img/"
+  image_files = Dir.glob("#{image_path_prefix}*")
+  image_select = image_files.sample
+  [image_select, image_select.split(image_path_prefix)[1]]
+end
 
 Message.destroy_all
 Conversation.destroy_all
@@ -41,12 +47,14 @@ puts "language created"
 
 
 10.times do
+  img = get_random_image
   i = [1,2,4,7,9,10].sample
   user = User.create!(first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, description: Faker::Lorem.paragraph_by_chars, age: (rand(15)+20), email: "#{Faker::Name.unique.first_name}@yopmail.com", password: "123456", city_id: City.all.sample.id )
-  user.avatar.attach(io: File.open("app/assets/images/img/user-#{i}.jpg"), filename:"user-#{i}.jpg")
+  user.avatar.attach(io: File.open(img[0]), filename: img[1])
 end
+img = get_random_image
 user = User.create!(first_name: "user", last_name: "family", description: Faker::Lorem.paragraph_by_chars, age: (rand(15)+20), email: "user@yopmail.com", password: "123456", city_id: City.all.sample.id )
-user.avatar.attach(io: File.open("app/assets/images/img/user-1.jpg"), filename:"user-1.jpg")
+user.avatar.attach(io: File.open(img[0]), filename: img[1])
 
 puts "User created"
 
