@@ -58,7 +58,7 @@
                   <article class="tile">
                 <% end %>
                   <div class="tile-image" style="background-image: url('<%=asset_path("cities/#{city.name.downcase}.jpg")%>');"></div>
-                    <%= link_to city_path(city.id) do%>
+                    <%= link_to city_path(city) do%>
                     <div class="tile-header">
                       <h2 class="text-white" style="text-align: center"><%= city.name %></h2>
                       <h4 class="text-white" style="text-align: center"><strong><%= city.users.count %> miffers </strong></h4>

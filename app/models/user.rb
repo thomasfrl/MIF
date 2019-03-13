@@ -8,7 +8,7 @@ class User < ApplicationRecord
 
   devise :omniauthable, omniauth_providers: [:facebook]
   
-  validates :user_name, format: {with: /\A[a-zA-Z0-9 _\.]*\z/}, uniqueness: {case_sensitive: false}
+  validates :user_name, format: {with: /\A[a-zA-Z0-9 _\.]*\z/} #, uniqueness: {case_sensitive: false}
   validates :first_name, format: {with: /\A[a-zA-Z0-9 _\.]*\z/}
   validates :last_name, format: {with: /\A[a-zA-Z0-9 _\.]*\z/}
 
