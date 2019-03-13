@@ -5,7 +5,7 @@ class MessagesController < ApplicationController
   # GET /messages.json
   def index
     @conversation = Conversation.find(params[:conversation_id])
-    @messages = Message.where(conversation: @conversation)
+    @messages = Message.order(:created_at).where(conversation: @conversation)
     @other_user = @conversation.other_participant(current_user)
     respond_to do |format|
       format.html{redirect_to root_path }
