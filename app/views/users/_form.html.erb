@@ -21,9 +21,8 @@
                 <h4 class="mb-0"><b><%= @user.first_name%></b> <%= @user.last_name %></h4>
                 <%= form_tag user_avatars_path(@user), multipart: true do %>
                   <%= file_field_tag :avatar %>
-                  <%= submit_tag "uploader l'avatar", class: "text-white" %>
+                  <%= submit_tag "uploader l'avatar", class: "fs-14 link text-primary" %>
                 <% end %>
-                <a href="" class="fs-14 link text-primary">Change Avatar</a>
               </div>
               <div class="col-md-4 text-center text-md-right mt-1 mt-md-0">
                 <a href="" class="btn btn-primary btn-rounded">Upgrade Plan</a>
@@ -34,7 +33,7 @@
       </div>
 
       <div class="row">
-        <%= form_with(model: user, local: true) do |form| %>
+        <%= form_for @user do |form| %>
         <% if user.errors.any? %>
             <div id="error_explanation">
               <h2><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</h2>
@@ -92,12 +91,9 @@
             <div class="form-row">
               <div class="col">
                 <div class="form-group">
-                  <label for="userCity">City</label>
-                  <div class="input-group">
-
-                    <%= form.collection_select :city_id, City.all,:id,:name%>
+                  <%= form.label :city_id %>
+                    <%= collection_select( @user, :city_id, City.all, :id, :name, {}, {:multiple => false} )%>
                   </div>
-                </div>
               </div>
             </div>
             <div class="form-row">
