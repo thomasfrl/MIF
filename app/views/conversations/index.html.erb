@@ -1,24 +1,23 @@
-<div class="col-3">
-  <h1>Conversations</h1>
-  <%= current_user.name %>
-  <div class="row align-items-center justify-content-between">
-    <% @conversations.each do |conversation| %>
-      <% user = conversation.other_participant(current_user) %>
-      <%= link_to conversation_messages_path(conversation) ,remote: true, class: "user-photo"  do %>
-        <div class="user align-items-center">
-          <%if user.avatar.attached?%>
-            <%=image_tag(user.avatar, :alt => "avatar", class: "avatar avatar-lg rounded mr-3")%>
-          <%else%>
-            <%= image_tag("img/user-1.jpg", :alt => "avatar", class: "avatar avatar-lg rounded mr-3") %>
-          <%end%>
-          <div class="media-body">
-            <h5 class="mb-0"><%= user.name %></span>
-            <span class="text-muted"><%= conversation.messages.last.content[0..10] %></span>
-        </div>
-      <% end %>
-    <% end %>
-  </div>
-  <br>
 
+<div class="col-3">
+<div class="container">
+  <% @conversations.each do |conversation| %>
+    <% user = conversation.other_participant(current_user) %>
+    <%= link_to conversation_messages_path(conversation) ,remote: true, class: "user-photo"  do %>
+      <div class="row align-items-center m-2">
+        <%if user.avatar.attached?%>
+          <%=image_tag(user.avatar, :alt => "avatar", class: "avatar avatar-sm rounded mr-3")%>
+        <%else%>
+          <%= image_tag("img/user-1.jpg", :alt => "avatar", class: "avatar avatar-sm rounded mr-3") %>
+        <%end%>
+        <div class="">
+          <h6 class="mb-0"><%= user.name %></h6>
+          <span class="text-muted"><%= conversation.messages.last.content[0..10] + "..." %></span>
+        </div>
+      </div>    
+    <% end %>        
+  <% end %>
+  <br>
   <%= link_to 'New Conversation', new_conversation_path %>
+</div>  
 </div>
