@@ -1,37 +1,21 @@
 <h1>Quiz#show</h1>
 
-<button type="input">Next</button>
-<%lvl1 = []%>
-<%lvl2 = []%>
-<%lvl3 = []%>
-<% @level1.each do |i|%>
-  <%lvl1 << i.question%>
-<%end%>
-<% @level2.each do |i|%>
-  <%lvl2 << i.question%>
-<%end%>
-<% @level3.each do |i|%>
-  <%lvl3 << i.question%>
+
+<% @quizs.level1.sample(5).each do |quiz, index|%>
+  <%=quiz.question%><br>
 <%end%>
 
-<h2>****************************</h2>
-<%5.times do%>
-  <%idlvl = rand(0...lvl1.length) %>
-  <h2><%= lvl1[idlvl] %></h2>
-  <%lvl1.delete_at(idlvl) %>
-  <%a = %><button type="onclick">Next</button>
-  <% %>
-
+<h2>**************************</h2>
+<% @quizs.level2.sample(5).each do |quiz|%>
+  <%=quiz.question%><br>
 <%end%>
-<h2>****************************</h2>
-<%5.times do%>
-  <%idlvl = rand(0...lvl2.length) %>
-  <h2><%= lvl2[idlvl] %></h2>
-  <%lvl2.delete_at(idlvl) %>
+if skip < 5
+<h2>**************************</h2>
+<% @quizs.level3.sample(5).each do |quiz|%>
+  <%=quiz.question%><br>
 <%end%>
-<h2>****************************</h2>
-<%5.times do%>
-  <%idlvl = rand(0...lvl3.length) %>
-  <h2><%= lvl3[idlvl] %></h2>
-  <%lvl3.delete_at(idlvl) %>
-<%end%>
+else
+  <h2>**************************</h2>
+  <% @quizs.level2.sample(5).each do |quiz|%>
+    <%=quiz.question%><br>
+  <%end%>

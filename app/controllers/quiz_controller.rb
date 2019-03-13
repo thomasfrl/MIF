@@ -6,8 +6,13 @@ class QuizController < ApplicationController
   end
 
   def show
-    @level1 = Quiz.where(level: 1)
-    @level2 = Quiz.where(level: 2)
-    @level3 = Quiz.where(level: 3)
+    @quizs = Quiz.all
   end
+
+  def display_question
+  end
+
+  def skip_question
+  end
+
 end
