@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  after_create :set_default_avatar
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   attr_accessor :login
@@ -48,7 +49,10 @@ class User < ApplicationRecord
     where()
   end
   def name
-    self.first_name + " " + self.last_name 
+    self.first_name + " " + self.last_name
   end
 
+  def set_default_avatar
+    self.avatar.attach(io: File.open("app/assets/images/img/nopic.png"), filename:"nopic.png")
+  end
 end
