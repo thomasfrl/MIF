@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::Base
+  include ApplicationHelper
   before_action :configure_devise_parameters, if: :devise_controller?
 
   private
