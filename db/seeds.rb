@@ -21,7 +21,7 @@ City.create(name: "Prague", country: "Czech Republic", zip_code: "100 00")
 City.create(name: "Budapest", country: "Hungary", zip_code: "1007")
 City.create(name: "Paris", country: "France", zip_code: "75000")
 City.create(name: "Roma", country: "Italy", zip_code: "00100")
-City.create(name: "Oslo", country: "Norway", zip_code: "0010")
+City.create(name: "Madrid", country: "Spain", zip_code: "28001")
 
 Language.create(language: "Spanish")
 Language.create(language: "German")
