@@ -33,7 +33,7 @@
       </div>
 
       <div class="row">
-        <%= form_for @user do |form| %>
+        <%= form_with(model: user, local: true, multipart: true) do |form| %>
         <% if user.errors.any? %>
             <div id="error_explanation">
               <h2><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</h2>
@@ -92,7 +92,7 @@
               <div class="col">
                 <div class="form-group">
                   <%= form.label :city_id %>
-                    <%= collection_select( @user, :city_id, City.all, :id, :name, {}, {:multiple => false} )%>
+                  <%= form.collection_select :city_id, City.order(:name),:id,:name%>
                   </div>
               </div>
             </div>
