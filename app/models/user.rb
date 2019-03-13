@@ -43,4 +43,8 @@ class User < ApplicationRecord
       where(conditions.to_hash)      
     end
   end
+
+  def self.from_facebook(auth)
+    where()
+  end
 end
