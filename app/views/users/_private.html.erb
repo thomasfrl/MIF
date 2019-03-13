@@ -10,12 +10,8 @@
       <div class="col col-md-10 col-lg-8">
         <div class="row align-items-center">
           <div class="col-4 col-lg-3">
-                <%if @user.avatar.attached?%>
-                    <%= image_tag(@user.avatar, :alt => "avatar", class: "avatar avatar-xl rounded") %>
-                <%else%>
-                    <img src="../../assets/images/demo/user-5.jpg" alt="Avatar" class="avatar avatar-lg rounded">
-                <%end%>
-          </div>
+              <%= image_tag(@user.avatar, :alt => "avatar", class: "avatar avatar-xl rounded") %>
+
           <div class="col">
             <div class="row align-items-center">
               <div class="col-md-8">
