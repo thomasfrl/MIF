@@ -20,7 +20,8 @@
             <div class="row align-items-center">
               <div class="col-md-8">
                 <h2 class="mb-0"><b><%= @user.first_name %></b> <%= @user.last_name %></h2>
-                <span class="text-muted">Senior Visual Designer</span>
+                <span class="text-muted"><%= @user.age %> years old, <%= @user.city.name%></span> <br>
+                <span class="text-muted">"<%= @user.welcome_message %>"</span>
               </div>
               <div class="col-md-4 text-left text-md-right">
                 <button type="button" class="btn btn-rounded btn-ico btn-white" data-toggle="tooltip" data-placement="top" title="Add Friend"><i class="icon-plus2 fs-20"></i></button>
