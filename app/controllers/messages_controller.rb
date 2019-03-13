@@ -7,6 +7,12 @@ class MessagesController < ApplicationController
     @conversation = Conversation.find(params[:conversation_id])
     @messages = Message.where(conversation: @conversation)
     @other_user = @conversation.other_participant(current_user)
+    respond_to do |format|
+      format.html{redirect_to root_path }
+      format.js{
+        
+      }
+    end
 
   end
 

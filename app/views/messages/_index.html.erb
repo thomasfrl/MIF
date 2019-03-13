@@ -24,5 +24,14 @@
       </div>    
     <% end %>
     <br>
+    <%= form_tag(conversation_messages_path(@conversation), method: "post", class: "form", id: "contact-form", remote: true)  do %>
+        <div class="form-group">
+            <%= text_field_tag :title, nil, class: "form-control", placeholder: "Write a message" %>
+        </div>
+        <div class="text-center">
+            <%= submit_tag("Create task", class: "btn btn-start-order") %>
+        </div>
+    <%end%>
+      
   </div>  
 </div>
