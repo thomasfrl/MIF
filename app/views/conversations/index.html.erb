@@ -3,7 +3,7 @@
 <div class="container">
   <% @conversations.each do |conversation| %>
     <% user = conversation.other_participant(current_user) %>
-    <%= link_to conversation_messages_path(conversation) ,remote: true, class: "user-photo"  do %>
+    <%= link_to conversation_messages_path(conversation) , class: "user-photo"  do %>
       <div class="row align-items-center m-2">
         <%if user.avatar.attached?%>
           <%=image_tag(user.avatar, :alt => "avatar", class: "avatar avatar-sm rounded mr-3")%>

@@ -1,29 +1,28 @@
-<p id="notice"><%= notice %></p>
 
-<h1>Messages</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>User</th>
-      <th>Conversation</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
+<div class="col-9">
+  <div class="container">
     <% @messages.each do |message| %>
-      <tr>
-        <td><%= message.user %></td>
-        <td><%= message.conversation %></td>
-        <td><%= link_to 'Show', message %></td>
-        <td><%= link_to 'Edit', edit_message_path(message) %></td>
-        <td><%= link_to 'Destroy', message, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+      <div class="row align-items-center m-2">
+        <% user = message.user %>
+        <% if user == @other_user %>
+          <div class="col-6">
+            <div class="row justify-content-center text-black">
+              <blockquote class=" blockquote-2 bg-light">
+                <p class="text-muted"><%= message.content %></p>
+              </blockquote>
+            </div>
+          </div>
+        <% else %>
+          <div class="col-6 offset-6">
+            <div class="row justify-content-center text-white">
+              <blockquote class=" blockquote-2 bg-primary">
+                <p class="text-muted"><%= message.content %></p>
+              </blockquote>
+            </div>      
+          </div>
+        <% end %>
+      </div>    
     <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Message', new_message_path %>
+    <br>
+  </div>  
+</div>

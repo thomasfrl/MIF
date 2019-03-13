@@ -4,7 +4,10 @@ class MessagesController < ApplicationController
   # GET /messages
   # GET /messages.json
   def index
-    @messages = Message.all
+    @conversation = Conversation.find(params[:conversation_id])
+    @messages = Message.where(conversation: @conversation)
+    @other_user = @conversation.other_participant(current_user)
+
   end
 
   # GET /messages/1
