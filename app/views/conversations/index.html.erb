@@ -1,7 +1,7 @@
 
 <div class="row">
   <div class="col-3">
-    <div class="container">
+    <div class="container bg-light">
       <% @conversations.each do |conversation| %>
         <% user = conversation.other_participant(current_user) %>
         <%= link_to conversation_messages_path(conversation), remote: true, class: "user-photo"  do %>
@@ -13,7 +13,7 @@
             <%end%>
             <div class="">
               <h6 class="mb-0"><%= user.name %></h6>
-              <span class="text-muted"><%= conversation.messages.last.content[0..10] + "..." %></span>
+              <span class="text-muted"><%= conversation.messages.last.content[0..20] + "..." %></span>
             </div>
           </div>    
         <% end %>        
