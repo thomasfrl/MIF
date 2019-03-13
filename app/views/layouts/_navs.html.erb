@@ -19,12 +19,18 @@
             <%= current_user.first_name %>
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <%= link_to "Messages", conversations_path, class: "dropdown-item"  %>
+              <%= link_to conversations_path, class: "dropdown-item" do %>
+                <i class="fas fa-envelope mr-1 text-primary"></i>
+                Messages
+              <% end %>
               <div class="dropdown-divider"></div>
 
-              <%= link_to "Settings", user_path(current_user.id), class: "dropdown-item"  %>
+              <%= link_to user_path(current_user.id), class: "dropdown-item" do  %>
+                <i class="fas fa-user mr-1 text-primary"></i>
+                Profile
+              <% end %>
               <%= link_to destroy_user_session_path, method: :delete, class: "dropdown-item" do %>
-                <i class="icon-arrow-right fs-10 mr-0 text-primary"></i>
+                <i class="fas fa-sign-out-alt mr-1 text-primary"></i>
                 Disconnect
               <% end %>
             </div>
