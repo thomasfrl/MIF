@@ -1,4 +1,5 @@
-console.log($('#messages'));
-$('#messages').html("<%= j render 'index' %>");
-
+var messages = $('#messages');
+messages.html("<%= j render 'index' %>");
+var listMessage = $('#list_messages');
+listMessage.scrollTop(listMessage.prop('scrollHeight'));
    

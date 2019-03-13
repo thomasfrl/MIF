@@ -1,2 +1,4 @@
-$("#list_messages").append("<%= j render 'create' %>");
-$('#content').val('')
+var listMessage = $('#list_messages');
+listMessage.append("<%= j render 'create' %>");
+$('#content').val('');
+listMessage.scrollTop(listMessage.prop('scrollHeight'));
