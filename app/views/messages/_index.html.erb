@@ -1,35 +1,39 @@
 
 <div class="col-9">
   <div class="container">
-    <% @messages.each do |message| %>
-      <div class="row align-items-center m-2">
-        <% user = message.user %>
-        <% if user == @other_user %>
-          <div class="col-6">
-            <div class="row justify-content-center text-black">
-              <blockquote class=" blockquote-2 bg-light">
-                <p class="text-muted"><%= message.content %></p>
-              </blockquote>
+    <div id="list_messages">
+      <% @messages.each do |message| %>
+        <div class="row align-items-center m-2">
+          <% user = message.user %>
+          <% if user == @other_user %>
+            <div class="col-6">
+              <div class="row justify-content-center text-black">
+                <blockquote class=" blockquote-2 bg-light">
+                  <p class="text-muted"><%= message.content %></p>
+                </blockquote>
+              </div>
             </div>
-          </div>
-        <% else %>
-          <div class="col-6 offset-6">
-            <div class="row justify-content-center text-white">
-              <blockquote class=" blockquote-2 bg-primary">
-                <p class="text-muted"><%= message.content %></p>
-              </blockquote>
-            </div>      
-          </div>
-        <% end %>
-      </div>    
-    <% end %>
+          <% else %>
+            <div class="col-6 offset-6">
+              <div class="row justify-content-center text-white">
+                <blockquote class=" blockquote-2 bg-primary">
+                  <p class="text-muted"><%= message.content %></p>
+                </blockquote>
+              </div>      
+            </div>
+          <% end %>
+        </div>    
+      <% end %>
+    </div>
     <br>
     <%= form_tag(conversation_messages_path(@conversation), method: "post", class: "form", id: "contact-form", remote: true)  do %>
-        <div class="form-group">
-            <%= text_field_tag :title, nil, class: "form-control", placeholder: "Write a message" %>
-        </div>
-        <div class="text-center">
-            <%= submit_tag("Create task", class: "btn btn-start-order") %>
+        <div class="row">
+          <div class="form-group col-10">
+              <%= text_field_tag :content, nil, class: "form-control", placeholder: "Write a message" %>
+          </div>
+          <div class="text-center">
+              <%= submit_tag("Send", class: "btn") %>
+          </div>
         </div>
     <%end%>
       
