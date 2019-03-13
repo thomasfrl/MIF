@@ -13,8 +13,9 @@ Rails.application.routes.draw do
   resources :correspondances
   resources :testifies
   resources :comments
-  resources :messages
-  resources :conversations
+  resources :conversations, only: [:index, :create, :new] do
+    resources :messages, only: [:index, :create]
+  end
   resources :languages
   resources :flats
   resources :users
