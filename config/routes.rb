@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+
   resources :trips
   root to: "home#index"
   devise_for :users, controllers: {
@@ -11,6 +12,7 @@ Rails.application.routes.draw do
   resources :users, :path=> "friends", only: [:show, :edit, :update] do
     resources :avatars, only: [:create]
   end
+
   resources :user_languages
   resources :tickets
   resources :correspondances
