@@ -1,0 +1,12 @@
+<%= link_to conversation_messages_path(@conversation), remote: true, class: "user-photo"  do %>
+    <div class="row align-items-center m-2">
+        <%if @other_user.avatar.attached?%>
+        <%=image_tag(@other_user.avatar, :alt => "avatar", class: "avatar avatar-sm rounded mr-3")%>
+        <%else%>
+        <%= image_tag("img/user-1.jpg", :alt => "avatar", class: "avatar avatar-sm rounded mr-3") %>
+        <%end%>
+        <div class="">
+            <h6 class="mb-0"><%= @other_user.name %></h6>
+        </div>
+    </div>    
+<% end %>        
