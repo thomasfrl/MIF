@@ -9,7 +9,10 @@ RSpec.describe "users/show", type: :view do
       :age => 2,
       :welcome_message => "MyText",
       :nationality => "Nationality",
-      :city => nil
+      :city => 1,
+      :email => "test@yopmail.com",
+      :password => "123456"
+
     ))
   end
 

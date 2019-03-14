@@ -19,4 +19,5 @@ RSpec.describe "tickets/show", type: :view do
     expect(rendered).to match(//)
     expect(rendered).to match(/Status/)
   end
+
 end
