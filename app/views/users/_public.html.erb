@@ -1,3 +1,4 @@
+    <%= render 'correspondances/modal_create' %>
     <section class="p-0 bg-light">
       <div class="image image-overlay image-cover" style="background-image:url('<%=asset_path("cities/#{@user.city.name.downcase}.jpg")%>')"
       data-top-top="transform: translateY(0px);"
@@ -21,7 +22,9 @@
                     <span class="text-muted">"<%= @user.welcome_message %>"</span>
                   </div>
                   <div class="col-md-4 text-left text-md-right">
-                    <button type="button" class="btn btn-rounded btn-ico btn-white" data-toggle="tooltip" data-placement="top" title="Add Friend"><i class="icon-plus2 fs-20"></i></button>
+                    <%= link_to "#", "data-toggle" =>"modal", 'data-target' => '#modal', class: "btn btn-rounded btn-ico btn-white", title: "Add Friend" do %>
+                      <i class="fas fa-plus fa-2x p-1 text-primary"></i>
+                    <% end %>
                   </div>
                 </div>
               </div>

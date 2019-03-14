@@ -9,19 +9,16 @@
       </div>
       <div class="modal-body">
         <%= form_with(model: @correspondance, local: true) do |form| %>
-
-          <div class="field">
-            <%= form.label :user_id %>
-            <%= form.text_field :user_id %>
-          </div>
-
-          <div class="actions">
-            <%= form.submit %>
+          <%= form.hidden_field :user_id, :value => @user.id %>
+          <div class="row">
+            <div class="field col-10">
+              <%= form.text_field :message, placeholder: "Write a message", class: "form-control" %>
+            </div>
+            <%= button_tag(type: 'submit', class: "border-0 bg-white") do %>
+              <i class="fas fa-paper-plane fa-2x  text-primary"></i>
+            <% end %>
           </div>
         <% end %>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
       </div>
     </div>
   </div>
