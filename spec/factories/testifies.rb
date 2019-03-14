@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :testify do
-    user { nil }
+    user
     content { "MyText" }
     accepted { false }
   end

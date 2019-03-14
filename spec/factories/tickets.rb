@@ -3,7 +3,7 @@ FactoryBot.define do
     object { "MyString" }
     category { "MyString" }
     content { "MyText" }
-    user { nil }
+    user
     status { "MyString" }
   end
 end
