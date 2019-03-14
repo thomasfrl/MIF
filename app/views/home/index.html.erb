@@ -13,13 +13,13 @@
                 <div class="row align-items-center vh-100">         
                   <div class="col-lg-8" data-swiper-parallax-y="-100%">
                   
-                    <h1 class="display-5">Come Turn Up with your new penfriend in <br><i class="font-weight-bold" id="typed"></i></h1>
+                    <h1 class="display-4">Come Turn Up with your new penfriend in <br><i class="font-weight-bold" id="typed"></i></h1>
                     <div id="typed-strings">
                       <% @cities.each do |city| %>
                         <p><%= city.name %>.</p>
                       <% end %>
                     </div>
-                    <a href="" class="btn btn-primary btn-rounded px-5">Come Aboard</a>
+                    <%= link_to "Come Aboard, It's free", new_user_session_path, class: "btn btn-primary btn-rounded px-3" %>
                   </div>
                 </div>
               </div>
