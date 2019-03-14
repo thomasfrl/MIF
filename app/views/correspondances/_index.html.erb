@@ -1,7 +1,29 @@
-<h2>Your friends</h2>
-<div class="container bg-white p-4">
+<div class="mb-5">
+	<h2>Received penfriend request</h2>
+	<% @waiting_correspondances.each do |wc| %>
+		<div class="boxed p-2 mb-1 rounded pl-4 pr-4 ">
+			<div class="row align-items-center justify-content-between">
+				<div class="media align-items-center">
+					<%if wc.other_friend(current_user).avatar.attached?%>
+						<%=image_tag(wc.other_friend(current_user).avatar, :alt => "avatar", class: "avatar avatar-lg rounded mr-3")%>
+					<%else%>
+						<%= image_tag("img/user-1.jpg", :alt => "avatar", class: "avatar avatar-lg rounded mr-3") %>
+					<%end%>
+					<div class="media-body">
+						<h5 class="mb-0"><%= wc.other_friend(current_user).name %></h5>
+					</div>
+				</div>
+				<div class="text-md-right"> 
+					<p><%= wc.message %></p> 	
+				</div>
+			</div>
+		</div>
+	<% end %>
+</div>
+<div class="mb-5">
+	<h2>Your friends</h2>
 	<div class="row">
-		<% @correspondances.each do |c| %>
+		<% @validated_correspondances.each do |c| %>
 			<% friend = c.other_friend(current_user) %>
 			<div class="col-md-4">
 				<%= link_to friend, class: "user-photo" do  %>
@@ -24,6 +46,27 @@
 				<% end %>
 			</div>
 		<% end %>
-  </div>
+	</div>
 </div>
 
+<div class="mb-5">
+	<% @refused_correspondances.each do |rc| %>
+		<div class="boxed p-2 mb-1">
+			<div class="row align-items-center justify-content-between">
+				<div class="media align-items-center">
+					<%if rc.other_friend(current_user).avatar.attached?%>
+						<%=image_tag(rc.other_friend(current_user).avatar, :alt => "avatar", class: "avatar avatar-lg rounded mr-3")%>
+					<%else%>
+						<%= image_tag("img/user-1.jpg", :alt => "avatar", class: "avatar avatar-lg rounded mr-3") %>
+					<%end%>
+					<div class="media-body">
+						<h5 class="mb-0"><%= rc.other_friend(current_user).name %></h5>
+					</div>
+				</div>
+				<div class="text-md-right"> 
+					<p><%= rc.message %></p> 
+				</div>
+			</div>
+		</div>
+	<% end %>
+</div>

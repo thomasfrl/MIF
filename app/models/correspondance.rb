@@ -20,6 +20,6 @@ class Correspondance < ApplicationRecord
   def other_friend(current_user)
     f = self.friends
     f.delete(current_user)
-   return f[0]
- end
+    return f[0]
+  end
 end

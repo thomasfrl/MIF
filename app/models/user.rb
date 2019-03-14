@@ -71,4 +71,17 @@ class User < ApplicationRecord
   def correspondances
     self.primary_correspondances +  self.secondary_correspondances
   end
+
+  def validated_correspondances
+    self.primary_correspondances.where(status: "validated") +  self.secondary_correspondances.where(status: "validated")
+  end
+
+  def waiting_correspondances
+    self.primary_correspondances.where(status: "waiting") +  self.secondary_correspondances.where(status: "waiting")
+  end
+
+  def refused_correspondances
+    self.primary_correspondances.where(status: "refused") +  self.secondary_correspondances.where(status: "refused")
+  end
+
 end

@@ -93,7 +93,9 @@ class UsersController < ApplicationController
     end
 
     def correspondances_controller
-      @correspondances = current_user.correspondances
+      @validated_correspondances = current_user.validated_correspondances
+      @waiting_correspondances = current_user.waiting_correspondances
+      @refused_correspondances = current_user.refused_correspondances
       @correspondance = Correspondance.new      
     end
 end
