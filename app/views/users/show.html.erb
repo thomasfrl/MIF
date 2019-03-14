@@ -1,39 +1,5 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>First name:</strong>
-  <%= @user.first_name %>
-</p>
-
-<p>
-  <strong>Last name:</strong>
-  <%= @user.last_name %>
-</p>
-
-<p>
-  <strong>Description:</strong>
-  <%= @user.description %>
-</p>
-
-<p>
-  <strong>Age:</strong>
-  <%= @user.age %>
-</p>
-
-<p>
-  <strong>Welcome message:</strong>
-  <%= @user.welcome_message %>
-</p>
-
-<p>
-  <strong>Nationality:</strong>
-  <%= @user.nationality %>
-</p>
-
-<p>
-  <strong>City:</strong>
-  <%= @user.city %>
-</p>
-
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
+<% if @user.id == current_user.id %>
+  <%= render 'private' %>
+<% else %>
+  <%= render 'public' %>
+<% end %>

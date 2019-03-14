@@ -1,0 +1,41 @@
+<div class="row justify-content-center">
+	<div class="col-md-10 col-lg-8">
+		<div class="mb-3">
+			<h3>Comments received</h3>
+			<% @received_comments.each do |c| %>
+				<blockquote class="blockquote blockquote-2 boxed mb-1">
+					<p><%= c.content %></p>
+					<footer class="blockquote-footer">
+						<div class="media align-items-center">
+							<%if c.author.avatar.attached?%>
+								<%=image_tag(c.author.avatar, :alt => "avatar", class: "avatar avatar-lg rounded mr-3")%>
+							<%else%>
+								<%= image_tag("img/user-1.jpg", :alt => "avatar", class: "avatar avatar-lg rounded mr-3") %>
+							<%end%>
+							<%= c.author.name %>
+						</div>
+					</footer>
+				</blockquote>
+			<% end %>
+		</div>
+
+		<div class="mt-3">
+			<h3>Comments given</h3>
+			<% @sent_comments.each do |c| %>
+				<div class="mb-2">
+					<h3>
+						<%if c.receiver.avatar.attached?%>
+							<%=image_tag(c.receiver.avatar, :alt => "avatar", class: "avatar avatar-lg rounded mr-3")%>
+						<%else%>
+							<%= image_tag("img/user-1.jpg", :alt => "avatar", class: "avatar avatar-lg rounded mr-3") %>
+						<%end%>
+						For <%= c.receiver.name %>
+					</h3>
+					<blockquote class="blockquote blockquote-2 boxed">
+						<p><%= c.content %></p>
+					</blockquote>
+				</div>
+			<% end %>
+		</div>
+	</div>
+</div>

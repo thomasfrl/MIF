@@ -1,9 +1,9 @@
 FactoryBot.define do
   factory :ticket do
-    object { "MyString" }
-    category { "MyString" }
+    object { "Object" }
+    category { "Category" }
     content { "MyText" }
-    user { nil }
-    status { "MyString" }
+    user
+    status { "Status" }
   end
 end

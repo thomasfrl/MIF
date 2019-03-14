@@ -1,29 +1,28 @@
-<p id="notice"><%= notice %></p>
+<div class="container">
+  <div class="row">
+  <% @correspondances.each do |c| %>
+    <% friend = c.other_friend(current_user) %>
+    <div class="col-md-4">
+      <%= link_to friend, class: "user-photo" do  %>
+        <figure class="user user-circle">
+          <%if friend.avatar.attached?%>
+            <%=image_tag(friend.avatar, :alt => "avatar")%>
+          <%else%>
+            <%= image_tag("img/user-1.jpg", :alt => "avatar") %>
+          <%end%>
+          <figcaption class="user-caption">
+            <h4><%= friend.name %></h4>
+            <span>Head of Experience Design</span>
+            <ul class="socials socials-sm bordered">
+              <li><a href="" class="icon-facebook fs-20"></a></li>
+              <li><a href="" class="icon-instagram fs-20"></a></li>
+              <li><a href="" class="icon-twitter fs-20"></a></li>
+            </ul>
+          </figcaption>
+        </figure>
+      <% end %>
+    </div>
+  <% end %>
+  </div>
+</div>
 
-<h1>Correspondances</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>User</th>
-      <th>User</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @correspondances.each do |correspondance| %>
-      <tr>
-        <td><%= correspondance.user %></td>
-        <td><%= correspondance.user %></td>
-        <td><%= link_to 'Show', correspondance %></td>
-        <td><%= link_to 'Edit', edit_correspondance_path(correspondance) %></td>
-        <td><%= link_to 'Destroy', correspondance, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Correspondance', new_correspondance_path %>
