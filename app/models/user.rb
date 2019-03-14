@@ -7,10 +7,10 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   devise :omniauthable, omniauth_providers: [:facebook]
-  
+
   validates :user_name, format: {with: /\A[a-zA-Z0-9 _\.]*\z/} #, uniqueness: {case_sensitive: false}
   validates :first_name, format: {with: /\A[a-zA-Z0-9 _\.]*\z/}
-  validates :last_name, format: {with: /\A[a-zA-Z0-9 _\.]*\z/}
+  #validates :last_name, format: {with: /\A[a-zA-Z0-9 _\.]*\z/}
 
   belongs_to :city, optional: true
   has_one :flat
@@ -41,7 +41,7 @@ class User < ApplicationRecord
     if login = conditions.delete(:login)
       where(conditions.to_hash).where("lower(user_name) = :value OR lower(email) = :value", value:login.downcase).first
     else
-      where(conditions.to_hash)      
+      where(conditions.to_hash)
     end
   end
 
@@ -56,7 +56,7 @@ class User < ApplicationRecord
     self.avatar.attach(io: File.open("app/assets/images/img/nopic.png"), filename:"nopic.png")
   end
 
-  def conversations 
+  def conversations
      self.authored_conversations.to_a << self.received_conversations.to_a
   end
 end
