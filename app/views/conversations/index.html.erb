@@ -25,7 +25,7 @@
               <div class="">
                 <h6 class="mb-0"><%= user.name %></h6>
                 <% unless conversation.messages.empty? %>
-                  <span class="text-muted"><%= conversation.last_update.content[0..20] + "..." %></span>
+                  <span class="text-muted"><%= conversation.last_message.content[0..20] + "..." %></span>
                 <% end %>
               </div>
             </div>    

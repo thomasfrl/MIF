@@ -23,7 +23,7 @@ class ConversationsController < ApplicationController
         end
       end
     else 
-
+      puts "jkjkjjkkjjkkjkjkjkj"*10
     end
   end
 
