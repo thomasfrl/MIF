@@ -93,6 +93,7 @@ class UsersController < ApplicationController
     end
 
     def correspondances_controller
-      @correspondances = current_user.correspondances      
+      @correspondances = current_user.correspondances
+      @correspondance = Correspondance.new      
     end
 end
