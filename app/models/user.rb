@@ -20,7 +20,7 @@ class User < ApplicationRecord
 
   # Conversations
   has_many :authored_conversations, class_name: "Conversation", foreign_key: "author_id"
-  has_many :received_conversations, class_name: "Conversation", foreign_key: "received_id"
+  has_many :received_conversations, class_name: "Conversation", foreign_key: "receiver_id"
   has_many :messages, dependent: :destroy
 
   # Correspondances
@@ -54,5 +54,9 @@ class User < ApplicationRecord
 
   def set_default_avatar
     self.avatar.attach(io: File.open("app/assets/images/img/nopic.png"), filename:"nopic.png")
+  end
+
+  def conversations 
+     self.authored_conversations.to_a << self.received_conversations.to_a
   end
 end
