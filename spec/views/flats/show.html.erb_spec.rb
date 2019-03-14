@@ -2,12 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "flats/show", type: :view do
   before(:each) do
-    @flat = assign(:flat, Flat.create!(
-      :user => nil,
-      :address => "Address",
-      :description => "MyText",
-      :has_wifi => false
-    ))
+    @flat = FactoryBot.create(:flat)
   end
 
   it "renders attributes in <p>" do

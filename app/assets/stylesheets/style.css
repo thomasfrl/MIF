@@ -7202,6 +7202,8 @@ button.bg-red:focus {
   background-color: #f20311 !important; }
 
 .bg-orange {
+
+  
   background-color: #FFAC3F !important; }
 
 a.bg-orange:hover, a.bg-orange:focus,
@@ -14026,7 +14028,7 @@ label {
   background: rgba(255, 255, 255, 0.1);
   color: #fff; }
   .text-white .form-control::placeholder {
-    color: rgba(255, 255, 255, 0.5); }
+    color: rgba(0, 0, 0, 0.5); }
   .text-white .form-control:focus {
     border-color: #fff; }
 
@@ -19904,6 +19906,7 @@ pre[class*="language-"] {
 .badge-outline-orange {
   color: #FFAC3F;
   border: 1px solid #FFAC3F;
+
   background-color: transparent; }
 
 .badge-outline-yellow {

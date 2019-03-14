@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
   # GET /users
@@ -10,9 +11,11 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
-    conversations_controller
     @user = User.find(params[:id])
     @correspondances = User.find(params[:id]).primary_correspondances + User.find(params[:id]).secondary_correspondances
+    conversations_controller
+    comments_controller
+    correspondances_controller
   end
 
   # GET /users/new
@@ -82,5 +85,14 @@ class UsersController < ApplicationController
       @other_user = @conversation.other_participant(current_user)
       @conversation_new = Conversation.new
       @users = User.all.reject{|u| u == current_user}  
+    end
+
+    def comments_controller
+      @sent_comments = current_user.authored_comments
+      @received_comments = current_user.received_comments  
+    end
+
+    def correspondances_controller
+      @correspondances = current_user.correspondances      
     end
 end

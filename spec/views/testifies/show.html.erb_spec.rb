@@ -2,11 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "testifies/show", type: :view do
   before(:each) do
-    @testify = assign(:testify, Testify.create!(
-      :user => nil,
-      :content => "MyText",
-      :accepted => false
-    ))
+    @testify = FactoryBot.create(:testify)
   end
 
   it "renders attributes in <p>" do
