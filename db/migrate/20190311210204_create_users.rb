@@ -9,6 +9,7 @@ class CreateUsers < ActiveRecord::Migration[5.2]
       t.string :nationality
       t.references :city, index: true
 
+
       t.timestamps
     end
   end
