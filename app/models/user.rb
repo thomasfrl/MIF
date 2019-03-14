@@ -29,7 +29,7 @@ class User < ApplicationRecord
 
   # Comments
   has_many :authored_comments, class_name: "Comment", foreign_key: "author_id"
-  has_many :received_comments, class_name: "Comment", foreign_key: "received_id"
+  has_many :received_comments, class_name: "Comment", foreign_key: "receiver_id"
 
   has_many :user_languages
   has_many :languages, through: :user_languages

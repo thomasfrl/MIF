@@ -4,7 +4,8 @@ class CommentsController < ApplicationController
   # GET /comments
   # GET /comments.json
   def index
-    @comments = Comment.all
+    @sent_comments = current_user.authored_comments
+    @received_comments = current_user.received_comments
   end
 
   # GET /comments/1

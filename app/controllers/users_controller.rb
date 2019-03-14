@@ -10,9 +10,9 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
-    conversations_controller
     @user = User.find(params[:id])
     @correspondances = User.find(params[:id]).primary_correspondances + User.find(params[:id]).secondary_correspondances
+    conversations_controller
   end
 
   # GET /users/new

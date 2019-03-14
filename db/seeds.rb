@@ -12,6 +12,8 @@ def get_random_image
   [image_select, image_select.split(image_path_prefix)[1]]
 end
 
+Flat.destroy_all
+Comment.destroy_all
 Message.destroy_all
 Conversation.destroy_all
 Language.destroy_all
@@ -80,8 +82,19 @@ conversations.each do |conv|
 end 
 puts "Message created"
 
+User.all.each do |u|
+  users_except = users.reject{|us| us == u}
+  rand(5).times do
+    receiver = users_except.sample
+    Comment.create!(content: Faker::Lorem.sentence, author: u, receiver: receiver)
+    users_except = users_except.reject{|us| us == receiver}
+  end
+end
+puts "comment created"
+
 75.times do
   correspondance = Correspondance.create!(user_one: User.all.sample, user_two: User.all.sample)
 end
+puts "correspondance created"
 
 puts "Seeding done"
