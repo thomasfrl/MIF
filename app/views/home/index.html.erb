@@ -36,10 +36,51 @@
 
 
     <!-- right sidebar -->
-    <section>
+<div class="container-fluid pt-2">
+  <div class="row">
+    <div class="col">
+      <ul class="masonry row gutter-2">
+        <div class="col-md-6 col-lg-4">
+          <article class="tile">
+            <div class="tile-image" style="background-image: url('<%=asset_path("3cards/logo3.png")%>');"></div>
+            <a href="" class="tile-content">
+              <div class="tile-header">
+                <h3>Quick guide on t  raveling with friends.</h3>
+              </div>
+            </a>
+          </article>
+          </div>
+          <div class="col-md-6 col-lg-4">
+            <article class="tile">
+              <div class="tile-image" style="background-image: url(../../assets/images/demo/image-square-1.jpg)"></div>
+              <a href="" class="tile-content">
+                <div class="tile-header">
+                  <span class="eyebrow mb-1">Design</span>
+                  <h3>Quick guide on traveling with friends.</h3>
+                </div>
+              </a>
+            </article>
+          </div>
+          <div class="col-md-6 col-lg-4">
+            <article class="tile">
+              <div class="tile-image" style="background-image: url(../../assets/images/demo/image-square-1.jpg)"></div>
+              <a href="" class="tile-content">
+                <div class="tile-header">
+                  <span class="eyebrow mb-1">Design</span>
+                  <h3>Quick guide on traveling with friends.</h3>
+                </div>
+              </a>
+            </article>
+          </div>
+        </ul>
+      </div>
+    </div>
+  </div>
+    <section class="pt-2">
       <div class="container-fluid">
         <div class="row">
           <div class="col">
+              <h2 style="text-align: center"><u>Miffer Cities</u></h2>
             <ul class="masonry row gutter-2">
               <% @cities.each do |city|%>
               <li class="col-md-6 col-lg-3">
@@ -70,4 +111,3 @@
       </div>
     </section>
     <!-- / right sidebar -->
-
