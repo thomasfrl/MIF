@@ -16,10 +16,10 @@
                   	<%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
                         <%= f.error_notification %>                      
                       <div class="form-group">
-                        <%= f.input :email,
-					                required: false,
+                        <%= f.input :login,
+					                required: true,
 					                autofocus: true,
-					                input_html: { autocomplete: "email", class: "form-control" } %>
+					                input_html: { autocomplete: "login", class: "form-control" } %>
                         
                       <span style="opacity: 1; left: 392px; top: 151.5px; width: 19px; min-width: 19px; height: 13px; position: absolute; background-image: url(""); background-repeat: no-repeat; background-position: 0px 0px; border: none; display: inline; visibility: visible; z-index: auto;"></span>
                     </div>
@@ -57,6 +57,33 @@
                           input_html: { autocomplete: "email",
                           class: "form-control",}%>
                       </div>
+
+                      <!-- user name -->
+                      <div class="form-group">
+                        <%= f.input :user_name,
+                          required: true,
+                          input_html: { autocomplete: "user name",
+                          class: "form-control",}%>
+                      </div>
+
+                      <!-- first name -->
+                      <div class="form-group">
+                        <%= f.input :first_name,
+                          required: true,
+                          input_html: { autocomplete: "first name",
+                          class: "form-control",}%>
+                      </div>
+
+
+                      <!-- last name -->
+                      <div class="form-group">
+                        <%= f.input :last_name,
+                          required: true,
+                          input_html: { autocomplete: "last name",
+                          class: "form-control",}%>
+                      </div>
+
+
                       <!-- password -->
                       <div class="form-group">
                         <%= f.input :password,

@@ -75,4 +75,5 @@ gem 'jquery-rails'
 gem 'pry'
 gem 'bootstrap', '~> 4.1.3'
 gem 'simple_form'
-
+gem 'omniauth'
+gem 'omniauth-facebook'

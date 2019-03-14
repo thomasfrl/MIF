@@ -4,28 +4,24 @@
 <div class="tab-pane" id="demo-2-4" role="tabpanel" aria-labelledby="demo-2-4">
   <div class="row justify-content-center">
     <div class="col-md-10 col-lg-8">
-      <%= form_with(model: user, local: true) do |form| %>
-        <% if user.errors.any? %>
-            <div id="error_explanation">
-              <h2><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</h2>
-              <ul>
-              <% user.errors.full_messages.each do |message| %>
-                <li><%= message %></li>
-              <% end %>
-              </ul>
-            </div>
-          <% end %>
 
       <div class="row mb-4">
         <div class="col">
           <div class="boxed">
             <div class="row align-items-center justify-content-between p-3">
               <div class="col-md-2 pb-2 pb-md-0 text-center">
-                <img src="../../assets/images/demo/user-5.jpg" alt="Avatar" class="avatar avatar-lg rounded">
+                <%if @user.avatar.attached?%>
+                    <%= image_tag(@user.avatar, :alt => "avatar", class: "avatar avatar-lg rounded") %>
+                <%else%>
+                    <img src="../../assets/images/demo/user-5.jpg" alt="Avatar" class="avatar avatar-lg rounded">
+                <%end%>
               </div>
               <div class="col-md-5 text-center text-md-left">
-                <h4 class="mb-0"><b>Valerie</b> Doe</h4>
-                <a href="" class="fs-14 link text-primary">Change Avatar</a>
+                <h4 class="mb-0"><b><%= @user.first_name%></b> <%= @user.last_name %></h4>
+                <%= form_tag user_avatars_path(@user), multipart: true do %>
+                  <%= file_field_tag :avatar %>
+                  <%= submit_tag "uploader l'avatar", class: "fs-14 link text-primary" %>
+                <% end %>
               </div>
               <div class="col-md-4 text-center text-md-right mt-1 mt-md-0">
                 <a href="" class="btn btn-primary btn-rounded">Upgrade Plan</a>
@@ -36,6 +32,17 @@
       </div>
 
       <div class="row">
+        <%= form_with(model: user, local: true, multipart: true) do |form| %>
+        <% if user.errors.any? %>
+            <div id="error_explanation">
+              <h2><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</h2>
+              <ul>
+              <% user.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+              <% end %>
+              </ul>
+            </div>
+          <% end %>
         <div class="col">
           <h5 class="mb-2 fs-20 font-weight-normal">General Information</h5>
             <div class="form-row">
@@ -83,12 +90,9 @@
             <div class="form-row">
               <div class="col">
                 <div class="form-group">
-                  <label for="userCity">City</label>
-                  <div class="input-group">
-
-                    <%= form.collection_select :city_id, City.all,:id,:name%>
+                  <%= form.label :city_id %>
+                  <%= form.collection_select :city_id, City.order(:name),:id,:name%>
                   </div>
-                </div>
               </div>
             </div>
             <div class="form-row">

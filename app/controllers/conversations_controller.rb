@@ -1,55 +1,47 @@
 class ConversationsController < ApplicationController
-  before_action :set_conversation, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
+  before_action :set_conversation, only: [:destroy]
 
   # GET /conversations
-  # GET /conversations.json
   def index
-    @conversations = Conversation.all
+    @conversations = Conversation.sort_by_last_message.select{|c| c.participants.include?(current_user)}
+    @conversation = @conversations.first
+    @messages = Message.order(:created_at).where(conversation: @conversation)
+    @other_user = @conversation.other_participant(current_user)
+    @conversation_new = Conversation.new
+    @users = User.all.reject{|u| u == current_user}
   end
 
-  # GET /conversations/1
-  # GET /conversations/1.json
-  def show
-  end
-
-  # GET /conversations/new
-  def new
-    @conversation = Conversation.new
-  end
-
-  # GET /conversations/1/edit
-  def edit
-  end
-
-  # POST /conversations
-  # POST /conversations.json
   def create
-    @conversation = Conversation.new(conversation_params)
+    @other_user = User.find(params[:conversation][:receiver_id])
+    @conversation = Conversation.new(receiver: @other_user, author: current_user)
+    if Conversation.where(author: current_user, receiver: @other_user).empty? && Conversation.where(author: @other_user, receiver: current_user).empty?
+      respond_to do |format|
+        if @conversation.save
+          @messages = @conversation.messages
 
-    respond_to do |format|
-      if @conversation.save
-        format.html { redirect_to @conversation, notice: 'Conversation was successfully created.' }
-        format.json { render :show, status: :created, location: @conversation }
+          format.html { redirect_to root_path }
+          format.js {}
+        else
+          format.html { redirect_to root_path}
+          format.js {redirect_to root_path}
+        end
+      end
+    else
+      if Conversation.where(author: current_user, receiver: @other_user).empty?
+        @conversation  = Conversation.where(author: @other_user, receiver: current_user)
       else
-        format.html { render :new }
-        format.json { render json: @conversation.errors, status: :unprocessable_entity }
+        @conversation  = Conversation.where(author: current_user, receiver: @other_user)
+      end
+      @messages = Message.order(:created_at).where(conversation: @conversation)
+
+      respond_to do |format|
+        format.html { redirect_to root_path }
+        format.js{render "messages/index"}
       end
     end
   end
 
-  # PATCH/PUT /conversations/1
-  # PATCH/PUT /conversations/1.json
-  def update
-    respond_to do |format|
-      if @conversation.update(conversation_params)
-        format.html { redirect_to @conversation, notice: 'Conversation was successfully updated.' }
-        format.json { render :show, status: :ok, location: @conversation }
-      else
-        format.html { render :edit }
-        format.json { render json: @conversation.errors, status: :unprocessable_entity }
-      end
-    end
-  end
 
   # DELETE /conversations/1
   # DELETE /conversations/1.json
