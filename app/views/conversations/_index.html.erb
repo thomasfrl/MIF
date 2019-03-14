@@ -4,7 +4,7 @@
       <div class="row">
         <%= f.collection_select :receiver_id, @users,:id,:name, {prompt: "New Conversation"},   {class: "col-auto"} %>
         <%= button_tag(type: 'submit', class: "border-0") do %>
-          <i class="fas fa-plus-circle fa-2x p-1"></i>
+          <i class="fas fa-plus-circle fa-2x p-1 text-primary"></i>
         <% end %>
       </div>
     <% end %>        
