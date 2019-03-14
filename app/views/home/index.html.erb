@@ -1,7 +1,7 @@
 
 
     <!-- cover -->
-    <section class="p-0">
+    <section class="p-0 mb-0">
       <div class="swiper-container text-white"
         data-top-top="transform: translateY(0px);"
         data-top-bottom="transform: translateY(250px);">
@@ -9,21 +9,20 @@
           <div class="swiper-slide vh-100">
             <div class="image image-overlay image-zoom" style="background-image:url(/assets/img/4FriendsTopCity3.jpg)"></div>
             <div class="caption" data-aos="fade-up">
-              <div class="container">
-                <div class="row align-items-center vh-100">
+              <div class="container justify-content-center">
+                <div class="row align-items-center vh-100">         
                   <div class="col-lg-8" data-swiper-parallax-y="-100%">
+                  
                     <h1 class="display-5">Come Turn Up with your new penfriend in <br><i class="font-weight-bold" id="typed"></i></h1>
                     <div id="typed-strings">
                       <% @cities.each do |city| %>
                         <p><%= city.name %>.</p>
                       <% end %>
                     </div>
-                  </div>  
-                  <a href="" class="btn btn-rounded btn-primary px-5">Check Availability</a>
+                    <a href="" class="btn btn-primary btn-rounded px-5">Come Aboard</a>
                   </div>
                 </div>
               </div>
-                </div>
             </div>
           </div>
           <div class="swiper-footer mb-5">
@@ -81,7 +80,7 @@
     
     <div class="row justify-content-center">
           <div class="col-md-8 text-center">
-            <h1 class="display-3">Discover MIF cities</h1>
+            <h1 class="display-3 mb-3">Discover MIF cities</h1>
           </div>
         </div>
       <div class="container-fluid">
