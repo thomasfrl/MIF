@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :flat do
     user
-    address { "MyString" }
+    address { "Address" }
     description { "MyText" }
     has_wifi { false }
   end

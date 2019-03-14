@@ -29,7 +29,6 @@ RSpec.describe User, type: :model do
     end
 
     describe "#password" do
-      it {expect(@user).to validate_presence_of(:encrypted_password)}
       it { expect(@user).to allow_value("TestPassword").for(:password)}
       it { expect(@user).to allow_value("123456test").for(:password)}
       it { expect(@user).to allow_value("test123456").for(:password)}

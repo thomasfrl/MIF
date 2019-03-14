@@ -23,9 +23,5 @@ RSpec.describe Conversation, type: :model do
       expect(@conversation).to be_a(Conversation)
     end
 
-    describe "#content" do
-      it {expect(@conversation).to validate_presence_of(:content)}
-    end
-
   end
 end
