@@ -2,34 +2,32 @@
 	<div class="col-md-10 col-lg-8">
 		<div class="mb-3">
 			<h3>Comments received</h3>
-			<% @received_comments.each do |c| %>
+			<h2><%= @user.first_name %></h2>
+			<% @user.received_comments.each do |c| %>
 				<blockquote class="blockquote blockquote-2 boxed mb-1">
 					<p><%= c.content %></p>
 					<footer class="blockquote-footer">
 						<div class="media align-items-center">
-							<%if c.author.avatar.attached?%>
+							<%= link_to user_path(c.author.id) do  %>
 								<%=image_tag(c.author.avatar, :alt => "avatar", class: "avatar avatar-lg rounded mr-3")%>
-							<%else%>
-								<%= image_tag("img/user-1.jpg", :alt => "avatar", class: "avatar avatar-lg rounded mr-3") %>
-							<%end%>
-							<%= c.author.name %>
+								<%= c.author.name %>
+							<% end %>
 						</div>
 					</footer>
 				</blockquote>
 			<% end %>
 		</div>
 
+<% if @user.id == current_user.id %>
 		<div class="mt-3">
 			<h3>Comments given</h3>
-			<% @sent_comments.each do |c| %>
+			<% @user.authored_comments.each do |c| %>
 				<div class="mb-2">
 					<h3>
-						<%if c.receiver.avatar.attached?%>
+						<%= link_to user_path(c.receiver.id) do  %>
 							<%=image_tag(c.receiver.avatar, :alt => "avatar", class: "avatar avatar-lg rounded mr-3")%>
-						<%else%>
-							<%= image_tag("img/user-1.jpg", :alt => "avatar", class: "avatar avatar-lg rounded mr-3") %>
-						<%end%>
-						For <%= c.receiver.name %>
+							For <%= c.receiver.name %>
+							<% end %>
 					</h3>
 					<blockquote class="blockquote blockquote-2 boxed">
 						<p><%= c.content %></p>
@@ -37,5 +35,6 @@
 				</div>
 			<% end %>
 		</div>
+<% end %>
 	</div>
 </div>
