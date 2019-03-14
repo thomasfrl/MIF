@@ -63,7 +63,10 @@ users.each do |u|
   users_except = users.reject{|us| us == u}
   2.times do
     receiver = users_except.sample
-    Conversation.create!(author: u, receiver: receiver)
+    c = Conversation.new(author: u, receiver: receiver)
+    unless Conversation.find_by(author: receiver,receiver: u)
+      c.save!
+    end
     users_except = users_except.reject{|us| us == receiver}
   end
 end
