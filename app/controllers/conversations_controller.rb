@@ -4,7 +4,7 @@ class ConversationsController < ApplicationController
 
   # GET /conversations
   def index
-    @conversations = Conversation.all.select{|c| c.participants.include?(current_user)}
+    @conversations = Conversation.sort_by_last_message.select{|c| c.participants.include?(current_user)}
     @conversation = Conversation.new
     @users = User.all.reject{|u| u == current_user}
   end

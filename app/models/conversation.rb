@@ -8,11 +8,11 @@ class Conversation < ApplicationRecord
 
   def last_update
     messages = self.messages
-    messages.to_a.sort!{|a,b| a.created_at <=> b.created_at}
+    messages.to_a.sort!{|a,b| a.created_at <=> b.created_at}.last
   end
 
-  def sort_by_last_message
-
+  def self.sort_by_last_message
+    self.all.sort{|a,b| b.last_update.created_at <=> a.last_update.created_at}
   end
 
   def participants
