@@ -54,22 +54,42 @@ paris.picture.attach(io: File.open("app/assets/images/cities/paris.jpg"), filena
 roma.picture.attach(io: File.open("app/assets/images/cities/roma.jpg"), filename:"roma.jpg")
 madrid.picture.attach(io: File.open("app/assets/images/cities/madrid.jpg"), filename:"madrid.jpg")
 
-Language.create(language: "Spanish")
-Language.create(language: "German")
-Language.create(language: "English")
-Language.create(language: "Portuguese")
-Language.create(language: "Czech")
-Language.create(language: "Danish")
-Language.create(language: "French")
-Language.create(language: "Italian")
-Language.create(language: "Hungarian")
-Language.create(language: "Norwegian")
+sp = Language.create(language: "Spanish")
+sp.icon.attach(io: File.open("app/assets/images/flag/espagne.png"), filename:"espagne.png")
+
+sp = Language.create(language: "German")
+sp.icon.attach(io: File.open("app/assets/images/flag/allemagne.png"), filename:"allemagne.png")
+
+sp = Language.create(language: "English")
+sp.icon.attach(io: File.open("app/assets/images/flag/english.png"), filename:"english.png")
+
+sp = Language.create(language: "Portuguese")
+sp.icon.attach(io: File.open("app/assets/images/flag/portugal.png"), filename:"portugal.png")
+
+sp = Language.create(language: "Czech")
+sp.icon.attach(io: File.open("app/assets/images/flag/republique_tcheque.png"), filename:"republique_tcheque.png")
+
+sp = Language.create(language: "Dutch")
+sp.icon.attach(io: File.open("app/assets/images/flag/hollande.png"), filename:"hollande.png")
+
+sp = Language.create(language: "French")
+sp.icon.attach(io: File.open("app/assets/images/flag/france.png"), filename:"france.png")
+
+sp = Language.create(language: "Italian")
+sp.icon.attach(io: File.open("app/assets/images/flag/italie.png"), filename:"italie.png")
+
+sp = Language.create(language: "Hungarian")
+sp.icon.attach(io: File.open("app/assets/images/flag/hongrie.png"), filename:"hongrie.png")
+
+sp = Language.create(language: "Norwegian")
+sp.icon.attach(io: File.open("app/assets/images/flag/norvege.png"), filename:"norvege.png")
+
 puts "language created"
 
 
 
 
-10.times do
+30.times do
   img = get_random_image
   i = [1,2,4,7,9,10].sample
   user = User.create!(first_name: Faker::Name.first_name, last_name: Faker::Name.unique.last_name, description: Faker::Lorem.paragraph_by_chars, age: (rand(15)+20), email: "#{Faker::Name.unique.first_name}@yopmail.com", password: "123456", city_id: City.all.sample.id )
@@ -115,7 +135,7 @@ end
 puts "comment created"
 
 users=  User.all
-75.times do
+150.times do
   u1 =  users.sample
   u2 = users.reject{|us| us == u1}.sample
   correspondance = Correspondance.new(user_one: u1, user_two: u2)

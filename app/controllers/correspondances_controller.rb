@@ -25,15 +25,15 @@ class CorrespondancesController < ApplicationController
   # POST /correspondances
   # POST /correspondances.json
   def create
-    @correspondance = Correspondance.new(correspondance_params)
-
+    other_user = User.find(params[:correspondance][:user_id])
+    @correspondance = Correspondance.new(user_one: current_user, user_two: other_user)
+    message = params[:message] 
+    message == ""? message = "#{current_user.name } ask you to be his penfriend": message
     respond_to do |format|
       if @correspondance.save
-        format.html { redirect_to @correspondance, notice: 'Correspondance was successfully created.' }
-        format.json { render :show, status: :created, location: @correspondance }
+        format.html { redirect_to current_user, notice: 'You have send a new penfrend request' }
       else
-        format.html { render :new }
-        format.json { render json: @correspondance.errors, status: :unprocessable_entity }
+        format.html { redirect_to other_user }
       end
     end
   end
