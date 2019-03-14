@@ -13,11 +13,13 @@ class ConversationsController < ApplicationController
   end
 
   def create
-    @receiver = User.find(params[:conversation][:receiver_id])
-    @conversation = Conversation.new(receiver: @receiver, author: current_user)
-    if Conversation.where(author: current_user, receiver: @receiver).empty? && Conversation.where(author: @receiver, receiver: current_user).empty?
+    @other_user = User.find(params[:conversation][:receiver_id])
+    @conversation = Conversation.new(receiver: @other_user, author: current_user)
+    if Conversation.where(author: current_user, receiver: @other_user).empty? && Conversation.where(author: @other_user, receiver: current_user).empty?
       respond_to do |format|
         if @conversation.save
+          @messages = @conversation.messages
+
           format.html { redirect_to root_path }
           format.js {}
         else
@@ -26,13 +28,12 @@ class ConversationsController < ApplicationController
         end
       end
     else
-      if Conversation.where(author: current_user, receiver: @receiver).empty?
-        @conversation  = Conversation.where(author: @receiver, receiver: current_user)
+      if Conversation.where(author: current_user, receiver: @other_user).empty?
+        @conversation  = Conversation.where(author: @other_user, receiver: current_user)
       else
-        @conversation  = Conversation.where(author: current_user, receiver: @receiver)
+        @conversation  = Conversation.where(author: current_user, receiver: @other_user)
       end
       @messages = Message.order(:created_at).where(conversation: @conversation)
-      @other_user = @receiver
 
       respond_to do |format|
         format.html { redirect_to root_path }
