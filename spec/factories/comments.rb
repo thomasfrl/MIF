@@ -1,7 +1,8 @@
+
 FactoryBot.define do
   factory :comment do
-    user { nil }
-    user { nil }
+    author
+    receiver
     content { "MyText" }
   end
 end

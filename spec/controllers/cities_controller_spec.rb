@@ -44,7 +44,7 @@ RSpec.describe CitiesController, type: :controller do
   describe "GET #index" do
     it "returns a success response" do
       City.create! valid_attributes
-      get :index, params: {}, session: valid_session
+      get :index, params: {first_name: "valid_first_name", last_name: "valid_last_name"}, session: valid_session
       expect(response).to be_successful
     end
   end

@@ -8,9 +8,15 @@ class User < ApplicationRecord
 
   devise :omniauthable, omniauth_providers: [:facebook]
 
-  validates :user_name, format: {with: /\A[a-zA-Z0-9 _\.]*\z/} #, uniqueness: {case_sensitive: false}
-  validates :first_name, format: {with: /\A[a-zA-Z0-9 _\.]*\z/}
-  #validates :last_name, format: {with: /\A[a-zA-Z0-9 _\.]*\z/}
+  validates :user_name,
+    format: {with: /\A[a-zA-Z0-9 _\.]*\z/} #, uniqueness: {case_sensitive: false}
+  validates :first_name,
+    presence: true,
+    format: {with: /\A[a-zA-Z0-9 _\.]*\z/}
+  # validates :last_name,
+  #   presence: true,
+  #   format: {with: /\A[a-zA-Z0-9 _\.]*\z/}
+
 
   belongs_to :city, optional: true
   has_one :flat
@@ -35,6 +41,8 @@ class User < ApplicationRecord
   has_many :languages, through: :user_languages
 
   has_one_attached :avatar
+
+
 
   def self.find_first_by_auth_conditions(warden_conditions)
     conditions = warden_conditions.dup
@@ -61,6 +69,6 @@ class User < ApplicationRecord
   end
 
   def correspondances
-    self.primary_correspondances +  self.secondary_correspondances   
+    self.primary_correspondances +  self.secondary_correspondances
   end
 end

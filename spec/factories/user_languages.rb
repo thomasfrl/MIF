@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :user_language do
-    user { nil }
-    language { nil }
+    user
+    language
   end
 end
