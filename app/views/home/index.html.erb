@@ -10,7 +10,7 @@
             <div class="image image-overlay image-zoom" style="background-image:url(/assets/img/4FriendsTopCity3.jpg)"></div>
             <div class="caption" data-aos="fade-up">
               <div class="container justify-content-center">
-                <div class="row align-items-center vh-100">         
+                <div class="row align-items-center vh-100">
                   <div class="col-lg-8" data-swiper-parallax-y="-100%">
                   <br><br><br><br><br><br><br><br><br><br>
                     <h1 class="display-4" >Travel differently in <br><i class="font-weight-bold" id="typed"></i></h1>
@@ -19,7 +19,11 @@
                         <p><%= city.name %>.</p>
                       <% end %>
                     </div>
-                    <%= link_to "Come Aboard, It's free", new_user_session_path, class: "btn btn-primary btn-rounded px-3" %>
+                    <% if user_signed_in? %>
+                      <%= link_to "Welcome #{current_user.first_name}", user_path(current_user.id), class: "btn btn-primary btn-rounded px-3" %>
+                    <% else %>
+                      <%= link_to "Come Aboard, It's free", new_user_session_path, class: "btn btn-primary btn-rounded px-3" %>
+                    <% end %>
                   </div>
                 </div>
               </div>
@@ -79,7 +83,7 @@
     <!-- right sidebar -->
 
      <section class="bg-light">
-    
+
       <div class="row justify-content-center">
           <div class="col-md-8 text-center">
             <h1 class="display-3 mb-3">Discover MIF cities</h1>
@@ -150,20 +154,7 @@
         <div class="row" data-aos="fade-left" data-aos-delay="500">
           <div class="col">
             <div class="owl-carousel visible" data-items="[3,2,1]" data-margin="20" data-dots="true" data-loop="true" data-center="true">
-              <article class="tile tile-long">
-                <div class="tile-image" style="background-image: url(../assets/img/jean.png)"></div>
-                 <a href="" class="tile-content">
-                  <div class="tile-header on-hover">
-                     <img src="../assets/flag/france.png" alt="flag">
-                  </div>
-                  <div class="tile-footer">
-                    <div class="fixed-bottom text-center">
-                      <span class="eyebrow ">Jean Tirard</span>
-                      <h6>Paris, France</h6>
-                    </div>
-                  </div>
-                </a>
-              </article>
+            <% @users.each do |user| %>
               <article class="tile tile-long">
                 <div class="tile-image" style="background-image: url(../assets/img/flo.png)"></div>
                 <a href="" class="tile-content">
@@ -172,68 +163,13 @@
                   </div>
                   <div class="tile-footer">
                     <div class="fixed-bottom text-center">
-                      <span class="eyebrow">Florent Bilocq</span>
-                      <h6>Rome, Italie</h6>
+                      <span class="eyebrow"><%= user.first_name %> <%= user.last_name %></span>
+                      <h6><%= user.city.name %>, <%= user.city.country %></h6>
                     </div>
                   </div>
                 </a>
               </article>
-              <article class="tile tile-long">
-                <div class="tile-image" style="background-image: url(../assets/img/thom.jpg)"></div>
-                <a href="" class="tile-content">
-                  <div class="tile-header on-hover text-right">
-                     <img src="../assets/flag/allemagne.png" alt="flag">
-                  </div>
-                  <div class="tile-footer">
-                    <div class="fixed-bottom text-center">
-                      <span class="eyebrow">Thomas Feral</span>
-                      <h6>Berlin, Allemagne</h6>
-                    </div>
-                  </div>
-                </a>
-              </article>
-              <article class="tile tile-long">
-                <div class="tile-image" style="background-image: url(../assets/img/jean.png)"></div>
-                 <a href="" class="tile-content">
-                  <div class="tile-header on-hover">
-                     <img src="../assets/flag/france.png" alt="flag">
-                  </div>
-                  <div class="tile-footer">
-                    <div class="fixed-bottom text-center">
-                      <span class="eyebrow">Jean Tirard</span>
-                      <h6>Paris, France</h6>
-                    </div>
-                  </div>
-                </a>
-              </article>
-              <article class="tile tile-long">
-                <div class="tile-image" style="background-image: url(../assets/img/flo.png)"></div>
-                <a href="" class="tile-content">
-                  <div class="tile-header on-hover text-right">
-                     <img src="../assets/flag/italie.png" alt="flag">
-                  </div>
-                  <div class="tile-footer">
-                    <div class="fixed-bottom text-center">
-                      <span class="eyebrow">Florent Bilocq</span>
-                      <h6>Rome, Italie</h6>
-                    </div>
-                  </div>
-                </a>
-              </article>
-                <article class="tile tile-long">
-                <div class="tile-image" style="background-image: url(../assets/img/thom.jpg)"></div>
-                <a href="" class="tile-content">
-                  <div class="tile-header on-hover text-right">
-                     <img src="../assets/flag/allemagne.png" alt="flag">
-                  </div>
-                  <div class="tile-footer">
-                    <div class="fixed-bottom text-center">
-                      <span class="eyebrow">Thomas Feral</span>
-                      <h6>Berlin, Allemagne</h6>
-                    </div>
-                  </div>
-                </a>
-              </article>
+            <% end %>
             </div>
           </div>
         </div>
