@@ -12,7 +12,6 @@ class UsersController < ApplicationController
   # GET /users/1.json
   def show
     @user = User.find(params[:id])
-    @correspondances = User.find(params[:id]).primary_correspondances + User.find(params[:id]).secondary_correspondances
     conversations_controller
     comments_controller
     correspondances_controller
@@ -93,8 +92,10 @@ class UsersController < ApplicationController
     end
 
     def correspondances_controller
+      @correspondances = current_user.correspondances
       @validated_correspondances = current_user.validated_correspondances
-      @waiting_correspondances = current_user.waiting_correspondances
+      @sent_correspondances = current_user.sent_correspondances
+      @received_correspondances = current_user.waiting_correspondances
       @refused_correspondances = current_user.refused_correspondances
       @correspondance = Correspondance.new      
     end

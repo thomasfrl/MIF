@@ -139,7 +139,7 @@ users=  User.all
   status = ["waiting", "refused", "validated"].sample
   u1 =  users.sample
   u2 = users.reject{|us| us == u1}.sample
-  correspondance = Correspondance.new(user_one: u1, user_two: u2, status: status, message: Faker::Lorem.sentence)
+  correspondance = Correspondance.new(creator: u1, acceptor: u2, status: status, message: Faker::Lorem.sentence)
   unless Correspondance.already_contain?(correspondance)
     correspondance.save!
   end

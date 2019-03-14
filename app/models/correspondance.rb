@@ -1,16 +1,16 @@
 class Correspondance < ApplicationRecord
-  belongs_to :user_one, class_name: "User"
-  belongs_to :user_two, class_name: "User"
+  belongs_to :creator, class_name: "User"
+  belongs_to :acceptor, class_name: "User"
   has_many :trip
   validates :status, inclusion: { in: ["waiting", "validated", "refused"], message: "%{value} is not a valid status"}
   #validates :message, length: { in: 6..30 }
   def friends
-    [self.user_one, self.user_two]
+    [self.creator, self.acceptor]
   end
 
   def self.already_contain?(correspondance)
     self.all.each do |c|
-      if (c.user_one == correspondance.user_one && c.user_two == correspondance.user_two) || (c.user_one == correspondance.user_two && c.user_two == correspondance.user_one)
+      if (c.creator == correspondance.creator && c.acceptor == correspondance.acceptor) || (c.creator == correspondance.acceptor && c.acceptor == correspondance.creator)
         return true
       end
     end
