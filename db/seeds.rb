@@ -61,7 +61,7 @@ puts "User created"
 users=  User.all
 users.each do |u|
   users_except = users.reject{|us| us == u}
-  5.times do
+  2.times do
     receiver = users_except.sample
     Conversation.create!(author: u, receiver: receiver)
     users_except = users_except.reject{|us| us == receiver}

@@ -5,19 +5,25 @@ class ConversationsController < ApplicationController
   # GET /conversations
   def index
     @conversations = Conversation.all.select{|c| c.participants.include?(current_user)}
+    @conversation = Conversation.new
+    @users = User.all.reject{|u| u == current_user}
   end
 
   def create
-    @conversation = Conversation.new(conversation_params)
-
-    respond_to do |format|
-      if @conversation.save
-        format.html { redirect_to root_path }
-        format.js {}
-      else
-        format.html { render root_path}
-        format.js {}
+    @receiver = User.find(params[:conversation][:receiver_id])
+    @conversation = Conversation.new(receiver: @receiver, author: current_user)
+    if Conversation.where(author: current_user, receiver: @receiver).empty? && Conversation.where(author: @receiver, receiver: current_user).empty?
+      respond_to do |format|
+        if @conversation.save
+          format.html { redirect_to root_path }
+          format.js {}
+        else
+          format.html { redirect_to root_path}
+          format.js {redirect_to root_path}
+        end
       end
+    else 
+
     end
   end
 

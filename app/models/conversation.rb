@@ -6,6 +6,15 @@ class Conversation < ApplicationRecord
 
   has_many :messages, dependent: :destroy
 
+  def last_update
+    messages = self.messages
+    messages.to_a.sort!{|a,b| a.created_at <=> b.created_at}
+  end
+
+  def sort_by_last_message
+
+  end
+
   def participants
     [self.author, self.receiver]
   end

@@ -1,14 +1,18 @@
-
+<br>
+<br>
+<br>
 <div class="row">
   <div class="col-3">
     <div class="container bg-light" style="height: 40em;overflow: auto;">
-      <%= link_to new_conversation_path, remote: true do %>
-        <div class="row align-items-center m-2">
-          <i class="fas fa-plus-circle fa-2x p-1"></i>
-          <p>New Conversation</p>
-        </div>      
-      <% end %>
-      <div id="conversation">
+      <%= form_for(@conversation, remote: true) do |f| %>
+        <div class="row">
+          <%= f.collection_select :receiver_id, @users,:id,:name, {prompt: "New Conversation"},   {class: "col-auto"} %>
+          <%= button_tag(type: 'submit', class: "border-0") do %>
+            <i class="fas fa-plus-circle fa-2x p-1"></i>
+          <% end %>
+        </div>
+      <% end %>        
+      <div id="conversations">
         <% @conversations.each do |conversation| %>
           <% user = conversation.other_participant(current_user) %>
           <%= link_to conversation_messages_path(conversation), remote: true, class: "user-photo"  do %>
@@ -20,7 +24,9 @@
               <%end%>
               <div class="">
                 <h6 class="mb-0"><%= user.name %></h6>
-                <span class="text-muted"><%= conversation.messages.last.content[0..20] + "..." %></span>
+                <% unless conversation.messages.empty? %>
+                  <span class="text-muted"><%= conversation.messages.last.content[0..20] + "..." %></span>
+                <% end %>
               </div>
             </div>    
           <% end %>        
