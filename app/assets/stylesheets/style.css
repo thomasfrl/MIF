@@ -14026,7 +14026,7 @@ label {
   background: rgba(255, 255, 255, 0.1);
   color: #fff; }
   .text-white .form-control::placeholder {
-    color: rgba(255, 255, 255, 0.5); }
+    color: rgba(0, 0, 0, 0.5); }
   .text-white .form-control:focus {
     border-color: #fff; }
 

@@ -1,6 +1,8 @@
 FactoryBot.define do
   factory :message do
-    user { nil }
-    conversation { nil }
+    user
+    conversation
+    content { 'test' }
+    read { false }
   end
 end

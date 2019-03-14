@@ -1,121 +1,41 @@
 <div class="row justify-content-center">
 	<div class="col-md-10 col-lg-8">
-
-		<div class="row gutter-2">
-			<div class="col-md-6">
-				<div class="card">
-					<div class="card-header mb-3">
-						<div class="row">
-							<div class="col-6">
-								<img src="../../assets/images/demo/logo/logo-2.png" alt="Image">
-							</div>
+		<div class="mb-3">
+			<h3>Comments received</h3>
+			<% @received_comments.each do |c| %>
+				<blockquote class="blockquote blockquote-2 boxed mb-1">
+					<p><%= c.content %></p>
+					<footer class="blockquote-footer">
+						<div class="media align-items-center">
+							<%if c.author.avatar.attached?%>
+								<%=image_tag(c.author.avatar, :alt => "avatar", class: "avatar avatar-lg rounded mr-3")%>
+							<%else%>
+								<%= image_tag("img/user-1.jpg", :alt => "avatar", class: "avatar avatar-lg rounded mr-3") %>
+							<%end%>
+							<%= c.author.name %>
 						</div>
-					</div>
-					<div class="card-body">
-						<h3 class="fs-20 font-weight-normal">Project Title</h3>
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-					</div>
-					<div class="card-footer separator-top pt-3">
-						<div class="row align-items-center">
-							<div class="col-8">
-								<ul class="user-list">
-									<li><img src="../../assets/images/demo/user-1.jpg" alt="" data-toggle="tooltip" data-placement="top" title="John Doe"></li>
-									<li><img src="../../assets/images/demo/user-4.jpg" alt="" data-toggle="tooltip" data-placement="top" title="Valerie Lucien"></li>
-									<li><img src="../../assets/images/demo/user-5.jpg" alt="" data-toggle="tooltip" data-placement="top" title="Ann Campbel"></li>
-								</ul>
-							</div>
-							<div class="col-4 text-right">
-								<div class="dropdown">
-									<a class="btn btn-ico btn-outline-light text-dark rounded btn-sm" href="#" role="button" id="dropdownMenuLink-8" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-										<i class="icon-more-vertical fs-22"></i>
-									</a>
+					</footer>
+				</blockquote>
+			<% end %>
+		</div>
 
-									<div class="dropdown-menu" aria-labelledby="dropdownMenuLink-8">
-										<a class="dropdown-item" href="#">Make Primary</a>
-										<a class="dropdown-item" href="#">Remove</a>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
+		<div class="mt-3">
+			<h3>Comments given</h3>
+			<% @sent_comments.each do |c| %>
+				<div class="mb-2">
+					<h3>
+						<%if c.receiver.avatar.attached?%>
+							<%=image_tag(c.receiver.avatar, :alt => "avatar", class: "avatar avatar-lg rounded mr-3")%>
+						<%else%>
+							<%= image_tag("img/user-1.jpg", :alt => "avatar", class: "avatar avatar-lg rounded mr-3") %>
+						<%end%>
+						For <%= c.receiver.name %>
+					</h3>
+					<blockquote class="blockquote blockquote-2 boxed">
+						<p><%= c.content %></p>
+					</blockquote>
 				</div>
-			</div>
-			<div class="col-md-6">
-				<div class="card">
-					<div class="card-header mb-3">
-						<div class="row">
-							<div class="col-6">
-								<img src="../../assets/images/demo/logo/logo-3.png" alt="Image">
-							</div>
-						</div>
-					</div>
-					<div class="card-body">
-						<h3 class="fs-20 font-weight-normal">Project Title</h3>
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-					</div>
-					<div class="card-footer separator-top pt-3">
-						<div class="row align-items-center">
-							<div class="col-8">
-								<ul class="user-list">
-									<li><img src="../../assets/images/demo/user-1.jpg" alt="" data-toggle="tooltip" data-placement="top" title="John Doe"></li>
-									<li><img src="../../assets/images/demo/user-4.jpg" alt="" data-toggle="tooltip" data-placement="top" title="Valerie Lucien"></li>
-									<li><img src="../../assets/images/demo/user-5.jpg" alt="" data-toggle="tooltip" data-placement="top" title="Ann Campbel"></li>
-								</ul>
-							</div>
-							<div class="col-4 text-right">
-								<div class="dropdown">
-									<a class="btn btn-ico btn-outline-light text-dark rounded btn-sm" href="#" role="button" id="dropdownMenuLink-9" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-										<i class="icon-more-vertical fs-22"></i>
-									</a>
-
-									<div class="dropdown-menu" aria-labelledby="dropdownMenuLink-9">
-										<a class="dropdown-item" href="#">Make Primary</a>
-										<a class="dropdown-item" href="#">Remove</a>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="col-md-6">
-				<div class="card">
-					<div class="card-header mb-3">
-						<div class="row">
-							<div class="col-6">
-								<img src="../../assets/images/demo/logo/logo-5.png" alt="Image">
-							</div>
-						</div>
-					</div>
-					<div class="card-body">
-						<h3 class="fs-20 font-weight-normal">Project Title</h3>
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-					</div>
-					<div class="card-footer separator-top pt-3">
-						<div class="row align-items-center">
-							<div class="col-8">
-								<ul class="user-list">
-									<li><img src="../../assets/images/demo/user-1.jpg" alt="" data-toggle="tooltip" data-placement="top" title="John Doe"></li>
-									<li><img src="../../assets/images/demo/user-4.jpg" alt="" data-toggle="tooltip" data-placement="top" title="Valerie Lucien"></li>
-									<li><img src="../../assets/images/demo/user-5.jpg" alt="" data-toggle="tooltip" data-placement="top" title="Ann Campbel"></li>
-								</ul>
-							</div>
-							<div class="col-4 text-right">
-								<div class="dropdown">
-									<a class="btn btn-ico btn-outline-light text-dark rounded btn-sm" href="#" role="button" id="dropdownMenuLink-10" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-										<i class="icon-more-vertical fs-22"></i>
-									</a>
-
-									<div class="dropdown-menu" aria-labelledby="dropdownMenuLink-10">
-										<a class="dropdown-item" href="#">Make Primary</a>
-										<a class="dropdown-item" href="#">Remove</a>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
+			<% end %>
 		</div>
 	</div>
 </div>

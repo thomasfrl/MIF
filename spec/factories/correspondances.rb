@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :correspondance do
-    user { nil }
-    user { nil }
+    user_one
+    user_two
   end
 end
