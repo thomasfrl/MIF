@@ -26,9 +26,10 @@ class CorrespondancesController < ApplicationController
   # POST /correspondances.json
   def create
     other_user = User.find(params[:correspondance][:user_id])
-    @correspondance = Correspondance.new(user_one: current_user, user_two: other_user)
-    message = params[:message] 
+    @correspondance = Correspondance.new(creator: current_user, acceptor: other_user)
+    message = params[:correspondance][:message]
     message == ""? message = "#{current_user.name } ask you to be his penfriend": message
+    @correspondance.message = message
     respond_to do |format|
       if @correspondance.save
         format.html { redirect_to current_user, notice: 'You have send a new penfrend request' }

@@ -30,8 +30,8 @@ class User < ApplicationRecord
   has_many :messages, dependent: :destroy
 
   # Correspondances
-  has_many :primary_correspondances, class_name: "Correspondance", foreign_key: "user_one_id"
-  has_many :secondary_correspondances, class_name: "Correspondance", foreign_key: "user_two_id"
+  has_many :created_correspondances, class_name: "Correspondance", foreign_key: "creator_id"
+  has_many :received_correspondances, class_name: "Correspondance", foreign_key: "acceptor_id"
 
   # Comments
   has_many :authored_comments, class_name: "Comment", foreign_key: "author_id"
@@ -69,6 +69,23 @@ class User < ApplicationRecord
   end
 
   def correspondances
-    self.primary_correspondances +  self.secondary_correspondances
+    self.created_correspondances +  self.received_correspondances
   end
+
+  def validated_correspondances
+    self.created_correspondances.where(status: "validated") +  self.received_correspondances.where(status: "validated")
+  end
+
+  def sent_correspondances
+    self.created_correspondances.where(status: "waiting")
+  end
+
+  def waiting_correspondances
+    self.received_correspondances.where(status: "waiting")
+  end
+
+  def refused_correspondances
+    self.created_correspondances.where(status: "refused") +  self.received_correspondances.where(status: "refused")
+  end
+
 end

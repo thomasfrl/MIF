@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_14_210613) do
+ActiveRecord::Schema.define(version: 2019_03_14_225729) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -65,14 +65,14 @@ ActiveRecord::Schema.define(version: 2019_03_14_210613) do
   end
 
   create_table "correspondances", force: :cascade do |t|
-    t.bigint "user_one_id"
-    t.bigint "user_two_id"
+    t.bigint "creator_id"
+    t.bigint "acceptor_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "status", default: "waiting"
     t.string "message"
-    t.index ["user_one_id"], name: "index_correspondances_on_user_one_id"
-    t.index ["user_two_id"], name: "index_correspondances_on_user_two_id"
+    t.index ["acceptor_id"], name: "index_correspondances_on_acceptor_id"
+    t.index ["creator_id"], name: "index_correspondances_on_creator_id"
   end
 
   create_table "flats", force: :cascade do |t|
