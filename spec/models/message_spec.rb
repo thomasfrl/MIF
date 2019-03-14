@@ -14,6 +14,12 @@ RSpec.describe Message, type: :model do
     it { is_expected.to have_db_column(:read).of_type(:boolean) }
   end
 
+
+  describe 'Associations' do
+    it { is_expected.to belong_to(:user) }
+    it { is_expected.to belong_to(:conversation) }
+  end
+
   context "validation" do
     it "is valid with valide attributes" do
       expect(@message).to be_a(Message)

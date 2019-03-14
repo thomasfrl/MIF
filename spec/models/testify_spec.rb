@@ -14,6 +14,10 @@ RSpec.describe Testify, type: :model do
     it { is_expected.to have_db_column(:accepted).of_type(:boolean) }
   end
 
+  describe 'Associations' do
+    it { is_expected.to belong_to(:user) }
+  end
+
   context "validation" do
     it "is valid with valide attributes" do
       expect(@testify).to be_a(Testify)

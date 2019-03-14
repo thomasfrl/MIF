@@ -1,6 +1,11 @@
 require 'rails_helper'
 
 RSpec.describe Flat, type: :model do
+  before(:each) do
+    @flat = FactoryBot.create(:flat)
+  end
+
+
   describe 'Database' do
     subject(:new_flat) { described_class.new }
 

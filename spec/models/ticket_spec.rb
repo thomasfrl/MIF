@@ -16,6 +16,11 @@ RSpec.describe Ticket, type: :model do
     it { is_expected.to have_db_column(:status).of_type(:string) }
   end
 
+
+  describe 'Associations' do
+    it { is_expected.to belong_to(:user) }
+  end
+
   context "validation" do
     it "is valid with valide attributes" do
       expect(@ticket).to be_a(Ticket)

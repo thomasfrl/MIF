@@ -13,6 +13,12 @@ RSpec.describe Correspondance, type: :model do
     it { is_expected.to have_db_column(:user_two_id).of_type(:integer) }
   end
 
+
+  describe 'Associations' do
+    it { is_expected.to belong_to(:user_one) }
+    it { is_expected.to belong_to(:user_two) }
+  end
+
   context "validation" do
     it "is valid with valid attributes" do
       expect(@correspondance).to be_a(Correspondance)

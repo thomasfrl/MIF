@@ -16,6 +16,12 @@ RSpec.describe Comment, type: :model do
 
   end
 
+
+  describe 'Associations' do
+    it { is_expected.to belong_to(:author) }
+    it { is_expected.to belong_to(:receiver) }
+  end
+
   context "validation" do
     it "is valid with valide attributes" do
       expect(@comment).to be_a(Comment)
