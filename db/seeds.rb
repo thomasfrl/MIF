@@ -22,16 +22,26 @@ User.destroy_all
 City.destroy_all
 
 
-barcelone = City.create(name: "Barcelone", country: "Spain", zip_code: "08001")
-berlin = City.create(name: "Berlin", country: "Germany", zip_code: "10115")
-london =  City.create(name: "London", country: "England", zip_code: "")
-lisbon = City.create(name: "Lisbon", country: "Portugal", zip_code: "1000")
-copenhagen =City.create(name: "Copenhagen", country: "Denmark", zip_code: "1050")
-prague = City.create(name: "Prague", country: "Czech Republic", zip_code: "100 00")
-budapest = City.create(name: "Budapest", country: "Hungary", zip_code: "1007")
-paris = City.create(name: "Paris", country: "France", zip_code: "75000")
-roma = City.create(name: "Roma", country: "Italy", zip_code: "00100")
-madrid = City.create(name: "Madrid", country: "Spain", zip_code: "28001")
+barcelone = City.create!(name: "Barcelone", country: "Spain", zip_code: "08001")
+puts "Barcelone created"
+berlin = City.create!(name: "Berlin", country: "Germany", zip_code: "10115")
+puts "Berlin created"
+london =  City.create!(name: "London", country: "England", zip_code: "WC2N 5DU")
+puts "London created"
+lisbon = City.create!(name: "Lisbon", country: "Portugal", zip_code: "1000")
+puts "Lisbon created"
+copenhagen =City.create!(name: "Copenhagen", country: "Denmark", zip_code: "1050")
+puts "Copenhagen created"
+prague = City.create!(name: "Prague", country: "Czech Republic", zip_code: "100 00")
+puts "Prague created"
+budapest = City.create!(name: "Budapest", country: "Hungary", zip_code: "1007")
+puts "Budapest created"
+paris = City.create!(name: "Paris", country: "France", zip_code: "75000")
+puts "Paris created"
+roma = City.create!(name: "Roma", country: "Italy", zip_code: "00100")
+puts "Roma created"
+madrid = City.create!(name: "Madrid", country: "Spain", zip_code: "28001")
+puts "Madrid created"
 
 barcelone.picture.attach(io: File.open("app/assets/images/cities/barcelone.jpg"), filename:"barcelone.jpg")
 berlin.picture.attach(io: File.open("app/assets/images/cities/berlin.jpg"), filename:"berlin.jpg")
