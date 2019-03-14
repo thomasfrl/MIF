@@ -17,7 +17,7 @@ class User < ApplicationRecord
 
   has_many :tickets
   has_many :testifies
-
+  has_many :trips, foreign_key: "host_id"
   # Conversations
   has_many :authored_conversations, class_name: "Conversation", foreign_key: "author_id"
   has_many :received_conversations, class_name: "Conversation", foreign_key: "receiver_id"

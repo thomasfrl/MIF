@@ -75,7 +75,7 @@ puts "Conversation created"
 conversations = Conversation.all
 conversations.each do |conv|
   10.times do
-    Message.create!(user: conv.participants.sample, conversation: conv, content: Faker::Lorem.paragraph_by_chars )
+    Message.create!(user: conv.participants.sample, conversation: conv, content: Faker::Lorem.sentence )
   end
 end 
 puts "Message created"
