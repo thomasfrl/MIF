@@ -34,11 +34,12 @@
     <div class="row justify-content-center">
       <div class="col col-md-10 col-lg-8">
         <div class="nav nav-tabs mb-1">
-          <a class="nav-item nav-link active" data-toggle="tab" href="#demo-2-1">Friends</a>
-          <a class="nav-item nav-link" data-toggle="tab" href="#demo-2-2">My trips</a>
-          <a class="nav-item nav-link" data-toggle="tab" href="#demo-2-3">Comments</a>
-          <a class="nav-item nav-link" data-toggle="tab" href="#demo-2-4">My profile</a>
-          <a class="nav-item nav-link" data-toggle="tab" href="#demo-2-5">My flat</a>
+          <a class="nav-item nav-link active" data-toggle="tab" href="#demo-2-1">My conversations</a>
+          <a class="nav-item nav-link" data-toggle="tab" href="#demo-2-2">My Friends</a>
+          <a class="nav-item nav-link" data-toggle="tab" href="#demo-2-3">My trips</a>
+          <a class="nav-item nav-link" data-toggle="tab" href="#demo-2-4">Comments</a>
+          <a class="nav-item nav-link" data-toggle="tab" href="#demo-2-5">My profile</a>
+          <a class="nav-item nav-link" data-toggle="tab" href="#demo-2-6">My flat</a>
         </div>
       </div>
     </div>
@@ -68,15 +69,27 @@
       </div>
       <!-- / tab conversations -->
 
-
-      <!-- tab connections -->
+      <!-- tab friends -->
       <div class="tab-pane" id="demo-2-2" role="tabpanel" aria-labelledby="demo-2-2">
+        <div class="row justify-content-center">
+          <div class="col-md-10 col-lg-8">
+            <div class="row mb-1">
+              <%= render "correspondances/index" %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- / tab -->
+
+
+      <!-- tab trips -->
+      <div class="tab-pane" id="demo-2-3" role="tabpanel" aria-labelledby="demo-2-3">
         <%= render "trips/index" %>
       </div>
       <!-- / tab -->
 
       <!-- tab comments -->
-      <div class="tab-pane" id="demo-2-3" role="tabpanel" aria-labelledby="demo-2-3">
+      <div class="tab-pane" id="demo-2-4" role="tabpanel" aria-labelledby="demo-2-4">
         <%= render "comments/index" %>
       </div>
       <!-- / tab -->

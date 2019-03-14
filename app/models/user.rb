@@ -59,4 +59,8 @@ class User < ApplicationRecord
   def conversations 
      self.authored_conversations.to_a << self.received_conversations.to_a
   end
+
+  def correspondances
+    self.primary_correspondances +  self.secondary_correspondances   
+  end
 end

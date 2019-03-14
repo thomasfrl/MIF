@@ -1,26 +1,37 @@
-<br>
-<br>
-<br>
-<br>
-<br>
-<% @received_comments.each do |c| %>
-  <div class="boxed p-2 mb-1">
-    <div class="row align-items-center justify-content-between">
-      <div class="col-10">
+<section>
+  <h3>Comments received</h3>
+  <% @received_comments.each do |c| %>
+    <blockquote class="blockquote blockquote-2 boxed">
+      <p><%= c.content %></p>
+      <footer class="blockquote-footer">
         <div class="media align-items-center">
           <%if c.author.avatar.attached?%>
             <%=image_tag(c.author.avatar, :alt => "avatar", class: "avatar avatar-lg rounded mr-3")%>
           <%else%>
             <%= image_tag("img/user-1.jpg", :alt => "avatar", class: "avatar avatar-lg rounded mr-3") %>
           <%end%>
-          <div class="media-body">
-            <h5 class="mb-0"><%= c.author.name %></h5>
-          </div>
+          <%= c.author.name %>
         </div>
-      </div>
-      <div class="col-2 text-md-right"> 
-        <p>c.content</p> 
-      </div>
+      </footer>
+    </blockquote>
+  <% end %>
+</section>
+
+<section>
+  <h3>Comments given</h3>
+  <% @sent_comments.each do |c| %>
+    <div class="mb-2">
+      <h3>
+        <%if c.receiver.avatar.attached?%>
+          <%=image_tag(c.receiver.avatar, :alt => "avatar", class: "avatar avatar-lg rounded mr-3")%>
+        <%else%>
+          <%= image_tag("img/user-1.jpg", :alt => "avatar", class: "avatar avatar-lg rounded mr-3") %>
+        <%end%>
+        For <%= c.receiver.name %>
+      </h3>
+      <blockquote class="blockquote blockquote-2 boxed">
+        <p><%= c.content %></p>
+      </blockquote>
     </div>
-  </div>
-<% end %>
+  <% end %>
+</section>
