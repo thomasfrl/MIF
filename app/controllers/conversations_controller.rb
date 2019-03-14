@@ -5,7 +5,10 @@ class ConversationsController < ApplicationController
   # GET /conversations
   def index
     @conversations = Conversation.sort_by_last_message.select{|c| c.participants.include?(current_user)}
-    @conversation = Conversation.new
+    @conversation = @conversations.first
+    @messages = Message.order(:created_at).where(conversation: @conversation)
+    @other_user = @conversation.other_participant(current_user)
+    @conversation_new = Conversation.new
     @users = User.all.reject{|u| u == current_user}
   end
 
@@ -22,8 +25,19 @@ class ConversationsController < ApplicationController
           format.js {redirect_to root_path}
         end
       end
-    else 
-      puts "jkjkjjkkjjkkjkjkjkj"*10
+    else
+      if Conversation.where(author: current_user, receiver: @receiver).empty?
+        @conversation  = Conversation.where(author: @receiver, receiver: current_user)
+      else
+        @conversation  = Conversation.where(author: current_user, receiver: @receiver)
+      end
+      @messages = Message.order(:created_at).where(conversation: @conversation)
+      @other_user = @receiver
+
+      respond_to do |format|
+        format.html { redirect_to root_path }
+        format.js{render "messages/index"}
+      end
     end
   end
 
