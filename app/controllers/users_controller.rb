@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
   # GET /users
@@ -12,6 +13,9 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @correspondances = User.find(params[:id]).primary_correspondances + User.find(params[:id]).secondary_correspondances
+    conversations_controller
+    comments_controller
+    correspondances_controller
   end
 
   # GET /users/new
@@ -72,5 +76,23 @@ class UsersController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
       params.require(:user).permit(:first_name, :last_name, :description, :age, :welcome_message, :city_id, :nationality)
+    end
+
+    def conversations_controller
+      @conversations = Conversation.sort_by_last_message.select{|c| c.participants.include?(current_user)}
+      @conversation = @conversations.first
+      @messages = Message.order(:created_at).where(conversation: @conversation)
+      @other_user = @conversation.other_participant(current_user)
+      @conversation_new = Conversation.new
+      @users = User.all.reject{|u| u == current_user}  
+    end
+
+    def comments_controller
+      @sent_comments = current_user.authored_comments
+      @received_comments = current_user.received_comments  
+    end
+
+    def correspondances_controller
+      @correspondances = current_user.correspondances      
     end
 end

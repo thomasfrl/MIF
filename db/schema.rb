@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_13_090653) do
+ActiveRecord::Schema.define(version: 2019_03_14_134948) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -121,6 +121,17 @@ ActiveRecord::Schema.define(version: 2019_03_13_090653) do
     t.index ["user_id"], name: "index_tickets_on_user_id"
   end
 
+  create_table "trips", force: :cascade do |t|
+    t.bigint "correspondance_id"
+    t.bigint "host_id"
+    t.integer "duration"
+    t.datetime "start_date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["correspondance_id"], name: "index_trips_on_correspondance_id"
+    t.index ["host_id"], name: "index_trips_on_host_id"
+  end
+
   create_table "user_languages", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "language_id"
@@ -158,6 +169,7 @@ ActiveRecord::Schema.define(version: 2019_03_13_090653) do
   add_foreign_key "messages", "users"
   add_foreign_key "testifies", "users"
   add_foreign_key "tickets", "users"
+  add_foreign_key "trips", "correspondances"
   add_foreign_key "user_languages", "languages"
   add_foreign_key "user_languages", "users"
   add_foreign_key "users", "cities"

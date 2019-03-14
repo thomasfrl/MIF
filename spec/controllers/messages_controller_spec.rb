@@ -57,13 +57,6 @@ RSpec.describe MessagesController, type: :controller do
     end
   end
 
-  describe "GET #new" do
-    it "returns a success response" do
-      get :new, params: {}, session: valid_session
-      expect(response).to be_successful
-    end
-  end
-
   describe "GET #edit" do
     it "returns a success response" do
       message = Message.create! valid_attributes
