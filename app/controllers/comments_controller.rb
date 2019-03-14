@@ -1,10 +1,12 @@
 class CommentsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_comment, only: [:show, :edit, :update, :destroy]
 
   # GET /comments
   # GET /comments.json
   def index
-    @comments = Comment.all
+    @sent_comments = current_user.authored_comments
+    @received_comments = current_user.received_comments
   end
 
   # GET /comments/1

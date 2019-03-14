@@ -8,22 +8,22 @@ class User < ApplicationRecord
 
   devise :omniauthable, omniauth_providers: [:facebook]
 
-
   validates :user_name,
     format: {with: /\A[a-zA-Z0-9 _\.]*\z/} #, uniqueness: {case_sensitive: false}
   validates :first_name,
     presence: true,
     format: {with: /\A[a-zA-Z0-9 _\.]*\z/}
-  validates :last_name,
-    presence: true,
-    format: {with: /\A[a-zA-Z0-9 _\.]*\z/}
+  # validates :last_name,
+  #   presence: true,
+  #   format: {with: /\A[a-zA-Z0-9 _\.]*\z/}
+
 
   belongs_to :city, optional: true
   has_one :flat
 
   has_many :tickets
   has_many :testifies
-
+  has_many :trips, foreign_key: "host_id"
   # Conversations
   has_many :authored_conversations, class_name: "Conversation", foreign_key: "author_id"
   has_many :received_conversations, class_name: "Conversation", foreign_key: "receiver_id"
@@ -35,7 +35,7 @@ class User < ApplicationRecord
 
   # Comments
   has_many :authored_comments, class_name: "Comment", foreign_key: "author_id"
-  has_many :received_comments, class_name: "Comment", foreign_key: "received_id"
+  has_many :received_comments, class_name: "Comment", foreign_key: "receiver_id"
 
   has_many :user_languages
   has_many :languages, through: :user_languages
@@ -66,5 +66,9 @@ class User < ApplicationRecord
 
   def conversations
      self.authored_conversations.to_a << self.received_conversations.to_a
+  end
+
+  def correspondances
+    self.primary_correspondances +  self.secondary_correspondances
   end
 end

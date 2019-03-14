@@ -1,0 +1,29 @@
+<div class="container bg-white p-4">
+	<h2 class="text-center">Your friends</h2>
+	<div class="row">
+		<% @correspondances.each do |c| %>
+			<% friend = c.other_friend(current_user) %>
+			<div class="col-md-4">
+				<%= link_to friend, class: "user-photo" do  %>
+					<figure class="user user-circle">
+						<%if friend.avatar.attached?%>
+							<%=image_tag(friend.avatar, :alt => "avatar")%>
+						<%else%>
+							<%= image_tag("img/user-1.jpg", :alt => "avatar") %>
+						<%end%>
+						<figcaption class="user-caption">
+							<h4><%= friend.name %></h4>
+							<span>Head of Experience Design</span>
+							<ul class="socials socials-sm bordered">
+								<li><a href="" class="icon-facebook fs-20"></a></li>
+								<li><a href="" class="icon-instagram fs-20"></a></li>
+								<li><a href="" class="icon-twitter fs-20"></a></li>
+							</ul>
+						</figcaption>
+					</figure>
+				<% end %>
+			</div>
+		<% end %>
+  </div>
+</div>
+

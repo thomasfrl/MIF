@@ -1,10 +1,11 @@
 class CorrespondancesController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_correspondance, only: [:show, :edit, :update, :destroy]
 
   # GET /correspondances
   # GET /correspondances.json
   def index
-    @correspondances = Correspondance.all
+    @correspondances = current_user.correspondances
   end
 
   # GET /correspondances/1

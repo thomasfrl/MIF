@@ -12,6 +12,8 @@ def get_random_image
   [image_select, image_select.split(image_path_prefix)[1]]
 end
 
+Flat.destroy_all
+Comment.destroy_all
 Message.destroy_all
 Conversation.destroy_all
 Language.destroy_all
@@ -46,10 +48,10 @@ puts "language created"
 
 
 
-10.times do
+100.times do
   img = get_random_image
   i = [1,2,4,7,9,10].sample
-  user = User.create!(first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, description: Faker::Lorem.paragraph_by_chars, age: (rand(15)+20), email: "#{Faker::Name.unique.first_name}@yopmail.com", password: "123456", city_id: City.all.sample.id )
+  user = User.create!(first_name: Faker::Name.first_name, last_name: Faker::Name.unique.last_name, description: Faker::Lorem.paragraph_by_chars, age: (rand(15)+20), email: "#{Faker::Name.unique.first_name}@yopmail.com", password: "123456", city_id: City.all.sample.id )
   user.avatar.attach(io: File.open(img[0]), filename: img[1])
 end
 img = get_random_image
@@ -75,13 +77,24 @@ puts "Conversation created"
 conversations = Conversation.all
 conversations.each do |conv|
   10.times do
-    Message.create!(user: conv.participants.sample, conversation: conv, content: Faker::Lorem.paragraph_by_chars )
+    Message.create!(user: conv.participants.sample, conversation: conv, content: Faker::Lorem.sentence )
   end
-end 
+end
 puts "Message created"
+
+User.all.each do |u|
+  users_except = users.reject{|us| us == u}
+  rand(5).times do
+    receiver = users_except.sample
+    Comment.create!(content: Faker::Lorem.sentence, author: u, receiver: receiver)
+    users_except = users_except.reject{|us| us == receiver}
+  end
+end
+puts "comment created"
 
 75.times do
   correspondance = Correspondance.create!(user_one: User.all.sample, user_two: User.all.sample)
 end
+puts "correspondance created"
 
 puts "Seeding done"
