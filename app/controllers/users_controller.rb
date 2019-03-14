@@ -10,6 +10,7 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
+    conversations_controller
     @user = User.find(params[:id])
     @correspondances = User.find(params[:id]).primary_correspondances + User.find(params[:id]).secondary_correspondances
   end
@@ -72,5 +73,14 @@ class UsersController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
       params.require(:user).permit(:first_name, :last_name, :description, :age, :welcome_message, :city_id, :nationality)
+    end
+
+    def conversations_controller
+      @conversations = Conversation.sort_by_last_message.select{|c| c.participants.include?(current_user)}
+      @conversation = @conversations.first
+      @messages = Message.order(:created_at).where(conversation: @conversation)
+      @other_user = @conversation.other_participant(current_user)
+      @conversation_new = Conversation.new
+      @users = User.all.reject{|u| u == current_user}  
     end
 end
