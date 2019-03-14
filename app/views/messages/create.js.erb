@@ -2,3 +2,8 @@ var listMessage = $('#list_messages');
 listMessage.append("<%= j render 'create' %>");
 $('#content').val('');
 listMessage.scrollTop(listMessage.prop('scrollHeight'));
+
+var conv = $('#conv<%=@conversation.id%>');
+var text = $('#conv<%=@conversation.id%> .text-muted');
+text.html("<%=@message.content[0..20] + "..."%>")
+conv.detach().prependTo('#conversations')

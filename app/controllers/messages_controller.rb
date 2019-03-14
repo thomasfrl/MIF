@@ -18,6 +18,7 @@ class MessagesController < ApplicationController
   # POST /messages
   # POST /messages.json
   def create
+    @conversation = Conversation.find(params[:conversation_id])
     @message = Message.new(user: current_user, conversation_id: params[:conversation_id], content: params[:content])
     respond_to do |format|
       if @message.save

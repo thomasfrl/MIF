@@ -15,7 +15,7 @@
       <div id="conversations">
         <% @conversations.each do |conversation| %>
           <% user = conversation.other_participant(current_user) %>
-          <div id="conv">
+          <div id="conv<%= conversation.id %>">
             <%= link_to conversation_messages_path(conversation), remote: true, class: "user-photo"  do %>
               <div class="row align-items-center m-2">
                 <%if user.avatar.attached?%>
@@ -27,6 +27,8 @@
                   <h6 class="mb-0"><%= user.name %></h6>
                   <% unless conversation.messages.empty? %>
                     <span class="text-muted"><%= conversation.last_message.content[0..20] + "..." %></span>
+                  <% else %>
+                    <span class="text-muted"></span>
                   <% end %>
                 </div>
               </div>    
