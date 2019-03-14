@@ -29,7 +29,7 @@ class User < ApplicationRecord
 
   # Comments
   has_many :authored_comments, class_name: "Comment", foreign_key: "author_id"
-  has_many :received_comments, class_name: "Comment", foreign_key: "received_id"
+  has_many :received_comments, class_name: "Comment", foreign_key: "receiver_id"
 
   has_many :user_languages
   has_many :languages, through: :user_languages
@@ -58,5 +58,9 @@ class User < ApplicationRecord
 
   def conversations 
      self.authored_conversations.to_a << self.received_conversations.to_a
+  end
+
+  def correspondances
+    self.primary_correspondances +  self.secondary_correspondances   
   end
 end
