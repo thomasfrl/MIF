@@ -10,11 +10,10 @@ class Correspondance < ApplicationRecord
   def self.already_contain?(correspondance)
     self.all.each do |c|
       if (c.user_one == correspondance.user_one && c.user_two == correspondance.user_two) || (c.user_one == correspondance.user_two && c.user_two == correspondance.user_one)
-        true
-      else
-        false
+        return true
       end
     end
+    return false
   end
 
   def other_friend(current_user)

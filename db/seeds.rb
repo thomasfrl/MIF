@@ -48,7 +48,7 @@ puts "language created"
 
 
 
-100.times do
+10.times do
   img = get_random_image
   i = [1,2,4,7,9,10].sample
   user = User.create!(first_name: Faker::Name.first_name, last_name: Faker::Name.unique.last_name, description: Faker::Lorem.paragraph_by_chars, age: (rand(15)+20), email: "#{Faker::Name.unique.first_name}@yopmail.com", password: "123456", city_id: City.all.sample.id )
@@ -82,6 +82,7 @@ conversations.each do |conv|
 end
 puts "Message created"
 
+users=  User.all
 User.all.each do |u|
   users_except = users.reject{|us| us == u}
   rand(5).times do
@@ -92,8 +93,14 @@ User.all.each do |u|
 end
 puts "comment created"
 
+users=  User.all
 75.times do
-  correspondance = Correspondance.create!(user_one: User.all.sample, user_two: User.all.sample)
+  u1 =  users.sample
+  u2 = users.reject{|us| us == u1}.sample
+  correspondance = Correspondance.new(user_one: u1, user_two: u2)
+  unless Correspondance.already_contain?(correspondance)
+    correspondance.save!
+  end
 end
 puts "correspondance created"
 
