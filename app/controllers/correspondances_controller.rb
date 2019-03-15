@@ -17,7 +17,6 @@ class CorrespondancesController < ApplicationController
     @correspondance.message = message
     respond_to do |format|
       if @correspondance.save
-        @conversation = Conversation.new(receiver: other_user, author: current_user)
         format.html { redirect_to current_user, notice: 'You have send a new penfriend request' }
       else
         flash[:danger] = "Failure of request of a new penfriend"
@@ -34,7 +33,13 @@ class CorrespondancesController < ApplicationController
       status = "refused"
     end
     if @correspondance.update(status: status)
-      redirect_to current_user, notice: 'Success of modification of correspondance status'
+      if status == "validated"
+        other_user = @correspondance.other_friend(current_user)
+        @conversation = Conversation.create(receiver: other_user, author: current_user)
+        redirect_to current_user, notice: 'Success of acceptance of correspondance status'
+      elsif status == "refused"
+        redirect_to current_user, notice: 'Success of refusal of correspondance status'
+      end 
     else 
       flash[:danger] = 'Failure of modification of correspondance status.'
       redirect_to current_user
