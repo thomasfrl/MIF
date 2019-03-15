@@ -38,6 +38,31 @@
               <% end %>
             </div>
           </li>
+        <% if user_signed_in? %>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" id="navbarDropdown-1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fas fa-bell fa-lg mr-1 text-primary"></i>
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+
+                <% if @received_correspondances.empty? %>
+                  <p class="dropdown-item">You don't have any received penfriend request </p>
+                <% else %>
+                  <% @received_correspondances.each do |correspondance| %>
+                    <% friend = correspondance.other_friend(current_user) %>
+                      <div class="dropdown-item">
+
+                          <%= link_to friend.name, user_path(friend.id), class: "col-6" %>
+                          <%= link_to "<i class='fas fa-check-circle fa-lg '></i>".html_safe, correspondance_path(correspondance, :update => true), class: "text-green", method: :put  %>
+                          <%= link_to "<i class='fas fa-times-circle fa-lg '></i>".html_safe, correspondance_path(correspondance, :update => false), class: "text-red", method: :put  %>
+
+                      </div>
+                  <% end %>
+                <% end %>
+
+            </div>
+          </li>
+        <% end %>
         </ul>
       <% else %>
         <ul class="navbar-nav align-items-center mr-0">
