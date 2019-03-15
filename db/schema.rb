@@ -177,5 +177,4 @@ ActiveRecord::Schema.define(version: 2019_03_14_225729) do
   add_foreign_key "trips", "correspondances"
   add_foreign_key "user_languages", "languages"
   add_foreign_key "user_languages", "users"
-  add_foreign_key "users", "cities"
 end
