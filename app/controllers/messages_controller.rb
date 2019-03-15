@@ -1,22 +1,20 @@
 class MessagesController < ApplicationController
   before_action :authenticate_user!
+  before_action :participant?, only: [:create, :index]
+  before_action :in_a_correspondance?, only: [:create, :index]
 
   # GET /messages
-  # GET /messages.json
   def index
     @conversation = Conversation.find(params[:conversation_id])
     @messages = Message.order(:created_at).where(conversation: @conversation)
     @other_user = @conversation.other_participant(current_user)
     respond_to do |format|
       format.html{redirect_to root_path }
-      format.js{
-
-      }
+      format.js{}
     end
-
   end
+
   # POST /messages
-  # POST /messages.json
   def create
     @conversation = Conversation.find(params[:conversation_id])
     @message = Message.new(user: current_user, conversation_id: params[:conversation_id], content: params[:content])
@@ -33,10 +31,26 @@ class MessagesController < ApplicationController
 
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_message
-      @message = Message.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
+  def participant?
+    conversation = Conversation.find(params[:conversation_id])
+    unless conversation.participants.include?(current_user) 
+      flash[:danger] = "not possible to show messages because your are not participant to this conversation"
+      redirect_to current_user
+    end
+  end
+  def in_a_correspondance?
+    conversation = Conversation.find(params[:conversation_id])
+    user1 = conversation.author
+    user2 = conversation.receiver
+    if Correspondance.select(user1, user2)
+      unless Correspondance.select(user1, user2).status == "validated"
+        flash[:danger] = "not possible to show messages because the correspondance is not validated"
+        redirect_to current_user
+      end
+    else
+      flash[:danger] = "not possible to show messages because there is no correspondance"
+      redirect_to current_user
+    end
+  end
 end
