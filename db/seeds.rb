@@ -13,7 +13,6 @@ def get_random_image
 end
 
 Flat.destroy_all
-Comment.destroy_all
 Message.destroy_all
 Conversation.destroy_all
 Language.destroy_all
@@ -150,5 +149,17 @@ User.all.each do |u|
 end
 puts "comment created"
 
+
+10.times do
+  img = get_random_image
+  i = [1,2,4,7,9,10].sample
+  flat = Flat.create!(user_id: User.all.sample.id, description: Faker::Lorem.paragraph_by_chars, address: Faker::Address.street_address)
+  flat.main_picture.attach(io: File.open(img[0]), filename: img[1])
+  img = get_random_image
+  flat.other_pictures.attach(io: File.open(img[0]), filename: img[1])
+  img = get_random_image
+  flat.other_pictures.attach(io: File.open(img[0]), filename: img[1])
+end
+puts "Flat created"
 
 puts "Seeding done"
