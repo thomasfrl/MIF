@@ -88,7 +88,8 @@ class UsersController < ApplicationController
 
     def comments_controller
       @sent_comments = current_user.authored_comments
-      @received_comments = current_user.received_comments  
+      @received_comments = current_user.received_comments
+      @comment = Comment.new  
     end
 
     def correspondances_controller
