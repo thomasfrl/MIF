@@ -101,18 +101,34 @@ user.avatar.attach(io: File.open(img[0]), filename: img[1])
 
 puts "User created"
 
+# users=  User.all
+# users.each do |u|
+#   users_except = users.reject{|us| us == u}
+#   2.times do
+#     receiver = users_except.sample
+#     c = Conversation.new(author: u, receiver: receiver)
+#     unless Conversation.find_by(author: receiver,receiver: u)
+#       c.save!
+#     end
+#     users_except = users_except.reject{|us| us == receiver}
+#   end
+# end
+
 users=  User.all
-users.each do |u|
-  users_except = users.reject{|us| us == u}
-  2.times do
-    receiver = users_except.sample
-    c = Conversation.new(author: u, receiver: receiver)
-    unless Conversation.find_by(author: receiver,receiver: u)
-      c.save!
+150.times do
+  status = ["waiting", "refused", "validated"].sample
+  u1 =  users.sample
+  u2 = users.reject{|us| us == u1}.sample
+  correspondance = Correspondance.new(creator: u1, acceptor: u2, status: status, message: Faker::Lorem.sentence)
+  unless Correspondance.already_contain?(correspondance)
+    correspondance.save!
+    if status == "validated"
+      Conversation.create!(author: u1, receiver: u2)
     end
-    users_except = users_except.reject{|us| us == receiver}
   end
 end
+puts "correspondance created"
+
 puts "Conversation created"
 
 conversations = Conversation.all
@@ -134,16 +150,5 @@ User.all.each do |u|
 end
 puts "comment created"
 
-users=  User.all
-150.times do
-  status = ["waiting", "refused", "validated"].sample
-  u1 =  users.sample
-  u2 = users.reject{|us| us == u1}.sample
-  correspondance = Correspondance.new(creator: u1, acceptor: u2, status: status, message: Faker::Lorem.sentence)
-  unless Correspondance.already_contain?(correspondance)
-    correspondance.save!
-  end
-end
-puts "correspondance created"
 
 puts "Seeding done"
