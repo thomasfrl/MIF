@@ -45,7 +45,6 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/1
   # PATCH/PUT /users/1.json
   def update
-    binding.pry
     respond_to do |format|
       if @user.update(user_params)
         format.html { redirect_to user_path(current_user.id), notice: 'User was successfully updated.' }

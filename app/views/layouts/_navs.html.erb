@@ -49,8 +49,8 @@
             <% end %>
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-
-                <% if @received_correspondances.empty? %>
+            
+                <% if @received_correspondances == nil %>
                   <p class="dropdown-item">You don't have any received penfriend request </p>
                 <% else %>
                   <% @received_correspondances.each do |correspondance| %>

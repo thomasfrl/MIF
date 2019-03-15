@@ -17,8 +17,6 @@ class CommentsController < ApplicationController
 
     respond_to do |format|
       if @comment.save
-        binding.pry
-
         format.html { redirect_to other_user, notice: 'Comment was successfully created.' }
       else
 

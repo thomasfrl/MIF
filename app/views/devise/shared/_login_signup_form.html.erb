@@ -83,6 +83,11 @@
                           class: "form-control",}%>
                       </div>
 
+                      <!-- city -->
+                      <div class="form-group">
+                        <%= f.collection_select :city_id, City.order(:name),:id,:name, class: "form-control"%>
+                      </div>
+
 
                       <!-- password -->
                       <div class="form-group">

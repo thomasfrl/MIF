@@ -17,4 +17,4 @@
 //= require rails-ujs
 //= require activestorage
 //= require_tree .
-// require alert_message
+//= require alert_message
