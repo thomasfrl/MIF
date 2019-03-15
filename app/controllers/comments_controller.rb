@@ -1,5 +1,6 @@
 class CommentsController < ApplicationController
   before_action :authenticate_user!
+  before_action :correspondance_validated, only: [:create]
 
   # GET /comments
   def index
@@ -30,6 +31,23 @@ class CommentsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to comments_url, notice: 'Comment was successfully destroyed.' }
       format.json { head :no_content }
+    end
+  end
+
+  private
+
+  def correspondance_validated?
+    other_user = User.find(params[:comment][:user_id])
+    c = Correspondance.select(current_user, other_user)
+    if c == false
+      flash[:danger] = "not possible to leave comment if you are not in a correspondance"
+      redirect_to current_user
+    elsif c.status == "waiting"
+      flash[:danger] = "You can not leave a comment if the correspondance is not validated"
+      redirect_to current_user
+    elsif c.status == "refused"
+      flash[:danger] = "You can not leave a comment if the correspondance is refused"
+      redirect_to current_user
     end
   end
 
