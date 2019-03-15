@@ -79,9 +79,11 @@ class UsersController < ApplicationController
 
     def conversations_controller
       @conversations = Conversation.sort_by_last_message.select{|c| c.participants.include?(current_user)}
-      @conversation = @conversations.first
-      @messages = Message.order(:created_at).where(conversation: @conversation)
-      @other_user = @conversation.other_participant(current_user)
+      unless @conversations.empty?
+        @conversation = @conversations.first
+        @messages = Message.order(:created_at).where(conversation: @conversation)
+        @other_user = @conversation.other_participant(current_user)
+      end
       @conversation_new = Conversation.new
       @users = User.all.reject{|u| u == current_user}  
     end
