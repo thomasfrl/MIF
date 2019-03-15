@@ -42,18 +42,18 @@
           <li class="nav-item dropdown">
             <a class="nav-link" id="navbarDropdown-1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 
-            <% if @received_correspondances != nil %>
-              <span class="badge badge-pill badge-primary text-white"><i class="fas fa-bell fa-lg mr-1"></i><strong><%= @received_correspondances.count %></strong></span>
+            <% if current_user.waiting_correspondances != nil %>
+              <span class="badge badge-pill badge-primary text-white"><i class="fas fa-bell fa-lg mr-1"></i><strong><%= current_user.waiting_correspondances.count %></strong></span>
             <% else %>
               <span class="badge badge-pill badge-primary text-white"><i class="fas fa-bell fa-lg mr-1"></i></span>
             <% end %>
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
 
-                <% if @received_correspondances.empty? %>
+                <% if current_user.waiting_correspondances.empty? %>
                   <p class="dropdown-item">You don't have any received penfriend request </p>
                 <% else %>
-                  <% @received_correspondances.each do |correspondance| %>
+                  <% current_user.waiting_correspondances.each do |correspondance| %>
                     <% friend = correspondance.other_friend(current_user) %>
                       <div class="dropdown-item">
 
