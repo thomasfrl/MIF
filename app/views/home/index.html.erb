@@ -41,43 +41,50 @@
         </div>
       </div>
     </section>
+     <!-- cover -->
 
-    <!-- / presentation -->
-
-    <section class=" bg-primary">
-    <div class="container">
-      <div class="row justify-content-between">
-        <div class="col-12 col-lg-12">
-          <div class="row">
-            <div class="col-lg-10 text-white">
-              <h2>For us, discovering a culture with a local is <b>the best experience ever!</b> </h2>
+     <!-- presentation -->
+    <section class="section-lg bg-primary">
+      <div class="container">
+        <div class="row text-center text-lg-left text-white">
+          <div class="col-12 col-lg-9">
+            <div class="row">
+              <div class="col-lg-8">
+                <h2>For us, discovering a culture with a local is <b>the best experience ever!</b>.</h2>
+              </div>
+            </div>
+            <div class="row gutter-0 bg-blue">
+              <div class="col-sm-6 col-lg-4" data-aos="fade-up" data-aos-anchor-placement="bottom-bottom">
+                <div class="bordered rising p-3">
+                <i class="fas fa-user-friends fa-4x text-pink"></i>
+                  <h4 class="mb-0">Friends</h4>
+                  <p>Match with people from other cities with common interests.</p>
+                </div>
+              </div>
+              <div class="col-sm-6 col-lg-4" data-aos="fade-up" data-aos-anchor-placement="bottom-bottom" data-aos-delay="150">
+                <div class="bordered rising p-3">
+                   <i class="fas fa-comments fa-4x text-pink"></i>
+                  <h4 class="mb-0">Chat</h4>
+                  <p>Talk with him, get friend and plan an exchange</p>
+                </div>
+              </div>
+               <div class="col-sm-6 col-lg-4" data-aos="fade-up" data-aos-anchor-placement="bottom-bottom" data-aos-delay="300">
+                <div class="bordered rising p-3">
+                  <i class="fas fa-plane-departure fa-4x text-pink"></i>
+                  <h4 class="mb-0">Travel</h4>
+                  <p>Welcome him to your home and visit him !</p>
+                </div>
+              </div>
             </div>
           </div>
-          <div class="row gutter-0">
-            <div class="col-sm-6 col-lg-4 aos-init aos-animate" data-aos="fade-up">
-              <div class="bordered rising p-3 bg-white">
-                <i class="fas fa-user-friends fa-4x text-orange"></i>
-                <p>Match with people from other cities with common interests </p>
-              </div>
-            </div>
-            <div class="col-sm-6 col-lg-4 aos-init aos-animate" data-aos="fade-up" data-aos-delay="150">
-              <div class="bordered rising p-3 bg-white">
-                <i class="fas fa-comments fa-4x text-orange" ></i>
-                <p>Talk with him, get friend and plan an exchange</p>
-              </div>
-            </div>
-            <div class="col-sm-6 col-lg-4 aos-init aos-animate" data-aos="fade-up" data-aos-delay="300">
-              <div class="bordered rising p-3 bg-white">
-              <i class="fas fa-plane-departure fa-4x text-orange"></i>
-                <p>Welcome him to your home and visit him ! This is all about sharing and traveling </p>
-              </div>
-            </div>
+          <div class="col-12 col-lg-3 presentation presentation-responsive">
+            <img class="left-25 vertical-align" src="../assets/img/miffer.png" alt="Image">
           </div>
         </div>
-
       </div>
-    </div>
-  </section>
+    </section>
+    <!-- / presentation -->
+
 
 
     <!-- right sidebar -->
@@ -85,15 +92,14 @@
      <section class="bg-light">
 
       <div class="row justify-content-center">
-          <div class="col-md-8 text-center">
-            <h1 class="display-3 mb-3">Discover MIF cities</h1>
+         <div class="container gallery">
+        <div class="row justify-content-center">
+          <div class="col-md-6 text-center">
+            <h2><b>Discover</b> our cities.</h2>
+            <p>Select the city of your dreams and discover all the miffers who live there.</p>
           </div>
-        </div>
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col">
-              <h2 style="text-align: center"><u>Miffer Cities</u></h2>
-            <ul class="masonry row gutter-2">
+        </div>            
+        <ul class="masonry row gutter-2">
               <% @cities.each do |city|%>
               <li class="col-md-6 col-lg-3">
                 <% if city.name == "Paris" %>
@@ -118,6 +124,11 @@
               </li>
               <% end %>
             </ul>
+            <div class="row">
+          <div class="col text-center">
+            <button type="button" class="btn btn-rounded btn-with-ico btn-primary">View All Cities <i class="icon-chevron-right2 fs-24"></i></button>
+          </div>
+        </div>
           </div>
         </div>
       </div>
@@ -125,20 +136,17 @@
     <!-- / right sidebar -->
 
 
-         <!-- profil carousel -->
-         <section class="bg-light">
-         <div class="row justify-content-center">
-          <div class="col-md-6 text-center">
-            <span class="eyebrow d-block mb-1 text-primary">Meet Him</span>
-          </div>
-        </div>
-    <section class="section-decorated-bottom pt-0">
+       
+
+
+      <!-- features -->
+    <section class="bg-orange section-decorated-bottom">
       <div class="decorated-bottom text-light">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 40"  preserveAspectRatio="none">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 40"  preserveAspectRatio="none">  
           <path d="">
-            <animate
-              attributeName="d"
-              begin="0s"
+            <animate 
+              attributeName="d" 
+              begin="0s" 
               dur="5s"
               repeatCount="indefinite"
               values="
@@ -149,33 +157,160 @@
           </path>
         </svg>
       </div>
-      <div class="container-fluid" style="max-width:650px">
+      <div class="container">
+        <div class="row align-items-center justify-content-between">
+          <div class="col-md-7">
+            <ul class="masonry row gutter-2" data-columns="2">
+              <li class="col-md-6 text-white" data-aos="fade-up">
+                <div class="bordered p-4 bg-pink">
+                  <i class="icon-weather_sun fs-50 mb-2 text-blue"></i>
+                  <h4>Weather</h4>
+                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor</p>
+                </div>
+              </li>
+              <li class="col-md-6 mt-5 text-white" data-aos="fade-up">
+                <div class="bordered p-4 bg-pink">                 
+                 <i class="icon-basic_globe fs-50 mb-2 text-blue"></i>
+                  <h4>Savings</h4>
+                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor</p>
+                </div>
+              </li>
+              <li class="col-md-6 text-white" data-aos="fade-up">
+                <div class="bordered p-4 bg-pink">
+                  <i class="icon-ecommerce_cart_content fs-50 mb-2 text-blue"></i>
+                  <h4>Shopping</h4>
+                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor</p>
+                </div>
+              </li>
+              <li class="col-md-6 text-white" data-aos="fade-up">
+                <div class="bordered p-4 bg-pink">
+                  <i class="icon-basic_clockwise fs-50 mb-2 text-blue"></i>
+                  <h4>Quick</h4>
+                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor</p>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div class="col-md-4 text-white">
+            <h2><b>Exclusive offers</b> from our partner hotels.</h2>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- / features -->
 
-        <div class="row" data-aos="fade-left" data-aos-delay="500">
-          <div class="col">
-            <div class="owl-carousel visible" data-items="[3,2,1]" data-margin="20" data-dots="true" data-loop="true" data-center="true">
-            <% @users.each do |user| %>
-              <article class="tile tile-long">
-                <div class="tile-image" style="background-image: url(../assets/img/flo.png)"></div>
-                <a href="" class="tile-content">
-                  <div class="tile-header on-hover text-right">
-                     <img src="../assets/flag/italie.png" alt="flag">
-                  </div>
-                  <div class="tile-footer">
-                    <div class="fixed-bottom text-center">
-                      <span class="eyebrow"><%= user.first_name %> <%= user.last_name %></span>
-                      <h6><%= user.city.name %>, <%= user.city.country %></h6>
-                    </div>
-                  </div>
-                </a>
-              </article>
-            <% end %>
+
+    <!-- presentation -->
+    <section class="bg-light">
+      <div class="container">
+        <div class="row align-items-center justify-content-center presentation-container">
+          <div class="col-8 col-md-6 col-lg-4" data-aos="zoom-in">
+            <div class="presentation-circle">
+              <figure style="background-image: url('../assets/cities/prague.jpg')"></figure>
+            </div>
+          </div>
+          <div class="col-lg-5 col-md-6 pl-md-7 text-center text-md-left">
+            <span class="eyebrow text-primary mb-1">Special for you</span>
+            <h3 class="h2">Amazing Trip</h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit consequuntur, voluptas repellendus.</p>
+          </div>
+        </div>
+        <div class="row align-items-center justify-content-center presentation-container">
+          <div class="col-md-6 col-lg-5 pr-md-7 text-center text-md-right">
+            <span class="eyebrow text-primary mb-1">Special for you</span>
+            <h3 class="h2">Friends For Life</h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit consequuntur, voluptas repellendus</p>
+          </div>
+          <div class="col-8 col-md-6 col-lg-4" data-aos="zoom-in">
+            <div class="presentation-circle with-delay">
+              <figure style="background-image: url('../assets/img/picnic.jpg')"></figure>
             </div>
           </div>
         </div>
       </div>
     </section>
-    <!-- / profil carousel -->
+    <!-- / presentation -->
+
+    <!-- featured carousel -->
+    <section class="bg-light pb-0">
+      <div class="container-fluid">
+        <div class="row" data-aos="fade-up">
+          <div class="col">
+            <div class="gallery">
+              <div class="gallery-container">
+                <div class="swiper-wrapper">
+                  <div class="swiper-slide">
+                    <div class="image image-zoom image-overlay-dark" style="background-image:url('../assets/img/picnic.jpg')">
+                    </div>
+                    <div class="caption text-white" data-swiper-parallax="-100%">
+                      <div class="container">
+                        <div class="row align-items-center justify-content-center vh-50">
+                          <div class="col text-center">
+                            <span class="eyebrow">Join The Community</span>
+                            <h1 class="display-3">The miffers are waiting for you.</h1>
+                            <a href="" class="btn btn-outline-white btn-rounded">Sign Up</a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="swiper-slide">
+                    <div class="image image-overlay-dark image-scrolling" style="background-image:url('../assets/cities/amsterdam.jpg')"
+                    data--100-bottom-top="transform: translateY(0%);" 
+                    data-top-bottom="transform: translateY(25%);">
+                    </div>
+                    <div class="caption text-white" data-swiper-parallax="-100%">
+                      <div class="container">
+                        <div class="row align-items-center vh-75">
+                          <div class="col-md-8 col-lg-6">
+                            <span class="eyebrow">Travel</span>
+                            <h1 class="display-3 mb-1">Discover Europe</h1>
+                            <p>Stay with locals and meet other travelers Live a authentic experience</p>
+                            <a href="" class="btn btn-white btn-rounded mt-2 px-5">Go</a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="swiper-slide">
+                    <div class="image image-overlay-dark image-scrolling" style="background-image:url('../assets/img/PicNicNewYork.jpg')"
+                    data--100-bottom-top="transform: translateY(0%);" 
+                    data-top-bottom="transform: translateY(25%);">
+                    </div>
+                    <div class="container">
+        <div class="row justify-content-center align-items-center">
+          <div class="col-md-8 col-lg-6 text-center text-white text-shadow">
+            <span class="eyebrow mb-1">More Questions ?</span>
+            <h2 class="display-4">Ask our <b>live support</b> via chat or phone</h2>
+            <a href="" class="btn btn-white btn-rounded px-4">Contact</a>
+          </div>
+        </div>
+      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="gallery-thumbs">
+                <div class="swiper-wrapper">
+                  <div class="swiper-slide">
+                    <h5>Joins Us</h5>
+                  </div>
+                  <div class="swiper-slide">
+                    <h5>Go On An Adventure</h5>
+                  </div>
+                  <div class="swiper-slide">
+                    <h5>Ask Your Question</h5>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- / featured carousel -->
+
+
 
     <!-- testimonials -->
     <section class="bg-primary text-white separator-top">
