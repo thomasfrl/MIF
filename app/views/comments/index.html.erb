@@ -1,31 +1,38 @@
-<p id="notice"><%= notice %></p>
 
-<h1>Comments</h1>
+<section>
+  <h3>Comments received</h3>
+  <% @received_comments.each do |c| %>
+    <blockquote class="blockquote blockquote-2 boxed">
+      <p><%= c.content %></p>
+      <footer class="blockquote-footer">
+        <div class="media align-items-center">
+          <%if c.author.avatar.attached?%>
+            <%=image_tag(c.author.avatar, :alt => "avatar", class: "avatar avatar-lg rounded mr-3")%>
+          <%else%>
+            <%= image_tag("img/user-1.jpg", :alt => "avatar", class: "avatar avatar-lg rounded mr-3") %>
+          <%end%>
+          <%= c.author.name %>
+        </div>
+      </footer>
+    </blockquote>
+  <% end %>
+</section>
 
-<table>
-  <thead>
-    <tr>
-      <th>User</th>
-      <th>User</th>
-      <th>Content</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @comments.each do |comment| %>
-      <tr>
-        <td><%= comment.user %></td>
-        <td><%= comment.user %></td>
-        <td><%= comment.content %></td>
-        <td><%= link_to 'Show', comment %></td>
-        <td><%= link_to 'Edit', edit_comment_path(comment) %></td>
-        <td><%= link_to 'Destroy', comment, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Comment', new_comment_path %>
+<section>
+  <h3>Comments given</h3>
+  <% @sent_comments.each do |c| %>
+    <div class="mb-2">
+      <h3>
+        <%if c.receiver.avatar.attached?%>
+          <%=image_tag(c.receiver.avatar, :alt => "avatar", class: "avatar avatar-lg rounded mr-3")%>
+        <%else%>
+          <%= image_tag("img/user-1.jpg", :alt => "avatar", class: "avatar avatar-lg rounded mr-3") %>
+        <%end%>
+        For <%= c.receiver.name %>
+      </h3>
+      <blockquote class="blockquote blockquote-2 boxed">
+        <p><%= c.content %></p>
+      </blockquote>
+    </div>
+  <% end %>
+</section>

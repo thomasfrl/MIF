@@ -1,6 +1,12 @@
 Rails.application.routes.draw do
 
+
+  resources :trips
   root to: "home#index"
+  get 'home/about_us', to: "home#about_us"
+  get 'home/contact', to: "home#contact"
+  get 'home/team', to: "home#team"
+
   devise_for :users, controllers: {
     omniauth_callbacks: "users/omniauth_callbacks"
   }
@@ -10,6 +16,7 @@ Rails.application.routes.draw do
   resources :users, :path=> "friends", only: [:show, :edit, :update] do
     resources :avatars, only: [:create]
   end
+
   resources :user_languages
   resources :tickets
   resources :correspondances

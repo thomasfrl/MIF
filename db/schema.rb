@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_13_134851) do
+ActiveRecord::Schema.define(version: 2019_03_14_225729) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -42,6 +42,7 @@ ActiveRecord::Schema.define(version: 2019_03_13_134851) do
     t.string "zip_code"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "description"
   end
 
   create_table "comments", force: :cascade do |t|
@@ -64,12 +65,14 @@ ActiveRecord::Schema.define(version: 2019_03_13_134851) do
   end
 
   create_table "correspondances", force: :cascade do |t|
-    t.bigint "user_one_id"
-    t.bigint "user_two_id"
+    t.bigint "creator_id"
+    t.bigint "acceptor_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["user_one_id"], name: "index_correspondances_on_user_one_id"
-    t.index ["user_two_id"], name: "index_correspondances_on_user_two_id"
+    t.string "status", default: "waiting"
+    t.string "message"
+    t.index ["acceptor_id"], name: "index_correspondances_on_acceptor_id"
+    t.index ["creator_id"], name: "index_correspondances_on_creator_id"
   end
 
   create_table "flats", force: :cascade do |t|
@@ -137,6 +140,17 @@ ActiveRecord::Schema.define(version: 2019_03_13_134851) do
     t.index ["user_id"], name: "index_tickets_on_user_id"
   end
 
+  create_table "trips", force: :cascade do |t|
+    t.bigint "correspondance_id"
+    t.bigint "host_id"
+    t.integer "duration"
+    t.datetime "start_date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["correspondance_id"], name: "index_trips_on_correspondance_id"
+    t.index ["host_id"], name: "index_trips_on_host_id"
+  end
+
   create_table "user_languages", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "language_id"
@@ -162,6 +176,8 @@ ActiveRecord::Schema.define(version: 2019_03_13_134851) do
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
     t.string "user_name"
+    t.boolean "is_admin", default: false
+    t.string "status", default: "waiting"
     t.index ["city_id"], name: "index_users_on_city_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
@@ -175,6 +191,7 @@ ActiveRecord::Schema.define(version: 2019_03_13_134851) do
   add_foreign_key "messages", "users"
   add_foreign_key "testifies", "users"
   add_foreign_key "tickets", "users"
+  add_foreign_key "trips", "correspondances"
   add_foreign_key "user_languages", "languages"
   add_foreign_key "user_languages", "users"
   add_foreign_key "users", "cities"

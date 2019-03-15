@@ -2,11 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "testifies/edit", type: :view do
   before(:each) do
-    @testify = assign(:testify, Testify.create!(
-      :user => nil,
-      :content => "MyText",
-      :accepted => false
-    ))
+    @testify = FactoryBot.create(:testify)
   end
 
   it "renders the edit testify form" do
@@ -14,11 +10,9 @@ RSpec.describe "testifies/edit", type: :view do
 
     assert_select "form[action=?][method=?]", testify_path(@testify), "post" do
 
-      assert_select "input[name=?]", "testify[user_id]"
 
       assert_select "textarea[name=?]", "testify[content]"
 
-      assert_select "input[name=?]", "testify[accepted]"
     end
   end
 end
