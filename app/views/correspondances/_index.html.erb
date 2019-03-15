@@ -1,7 +1,7 @@
 <div class="mb-5">
 	<h2>Received penfriend request</h2>
 	<% if @received_correspondances.empty? %>
-		<p>You don't have any received penfriend request </p> 	
+		<p>You don't have any received penfriend request </p>
 	<% else %>
 		<% @received_correspondances.each do |correspondance| %>
 			<% friend = correspondance.other_friend(current_user) %>
@@ -10,14 +10,10 @@
 					<div class="media align-items-center">
 						<%= link_to friend do %>
 							<div class="row">
-								<%if friend.avatar.attached?%>
 									<%=image_tag(friend.avatar, :alt => "avatar", class: "avatar avatar-lg rounded mr-3")%>
-								<%else%>
-									<%= image_tag("img/user-1.jpg", :alt => "avatar", class: "avatar avatar-lg rounded mr-3") %>
-								<%end%>
 								<div class="media-body">
 									<h5 class="mb-0"><%= friend.name %></h5>
-									<p>View profil</p>	
+									<p>View profil</p>
 								</div>
 							</div>
 						<% end %>
@@ -26,7 +22,7 @@
 					<div>
 						<%= link_to "Accept", correspondance_path(correspondance, :update => true), class: "btn-success p-1", method: :put  %>
 						<%= link_to "Refuse", correspondance_path(correspondance, :update => false), class: "btn-danger p-1", method: :put  %>
-					</div> 				
+					</div>
 				</div>
 			</div>
 		<% end %>
@@ -36,7 +32,7 @@
 <div class="mb-5">
 	<h2>Sent penfriend request <small> waiting for answer </small></h2>
 	<% if @sent_correspondances.empty? %>
-		<p>You don't have any sent penfriend request </p> 	
+		<p>You don't have any sent penfriend request </p>
 	<% else %>
 		<% @sent_correspondances.each do |correspondance| %>
 			<% friend = correspondance.other_friend(current_user) %>
@@ -45,14 +41,10 @@
 					<div class="media align-items-center">
 						<%= link_to friend do %>
 							<div class="row">
-								<%if friend.avatar.attached?%>
 									<%=image_tag(friend.avatar, :alt => "avatar", class: "avatar avatar-lg rounded mr-3")%>
-								<%else%>
-									<%= image_tag("img/user-1.jpg", :alt => "avatar", class: "avatar avatar-lg rounded mr-3") %>
-								<%end%>
 								<div class="media-body">
 									<h5 class="mb-0"><%= friend.name %></h5>
-									<p>View profil</p>	
+									<p>View profil</p>
 								</div>
 							</div>
 						<% end %>
@@ -67,7 +59,7 @@
 <div class="mb-5">
 	<h2>Your friends</h2>
 	<% if @validated_correspondances.empty? %>
-		<p>You don't have any validated penfriend </p> 	
+		<p>You don't have any validated penfriend </p>
 	<% else %>
 		<div class="row">
 			<% @validated_correspondances.each do |c| %>
@@ -75,11 +67,7 @@
 				<div class="col-md-4">
 					<%= link_to friend, class: "user-photo" do  %>
 						<figure class="user user-circle">
-							<%if friend.avatar.attached?%>
 								<%=image_tag(friend.avatar, :alt => "avatar")%>
-							<%else%>
-								<%= image_tag("img/user-1.jpg", :alt => "avatar") %>
-							<%end%>
 							<figcaption class="user-caption">
 								<h4><%= friend.name %></h4>
 								<span>Head of Experience Design</span>
@@ -100,7 +88,7 @@
 <div class="mb-5">
 	<h2>Refused penfriend request</h2>
 	<% if @refused_correspondances.empty? %>
-		<p>You don't have any refused penfriend </p> 	
+		<p>You don't have any refused penfriend </p>
 	<% else %>
 		<% @refused_correspondances.each do |correspondance| %>
 			<% friend = correspondance.other_friend(current_user) %>
@@ -109,14 +97,10 @@
 					<div class="media align-items-center">
 						<%= link_to friend do %>
 							<div class="row">
-								<%if friend.avatar.attached?%>
 									<%=image_tag(friend.avatar, :alt => "avatar", class: "avatar avatar-lg rounded mr-3")%>
-								<%else%>
-									<%= image_tag("img/user-1.jpg", :alt => "avatar", class: "avatar avatar-lg rounded mr-3") %>
-								<%end%>
 								<div class="media-body">
 									<h5 class="mb-0"><%= friend.name %></h5>
-									<p>View profil</p>	
+									<p>View profil</p>
 								</div>
 							</div>
 						<% end %>
