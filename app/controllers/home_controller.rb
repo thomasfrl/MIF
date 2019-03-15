@@ -7,6 +7,15 @@ class HomeController < ApplicationController
 
   end
 
+  def about_us
+  end
+
+  def contact
+  end
+  
+  def team
+  end
+
   private
 
   def random_user
