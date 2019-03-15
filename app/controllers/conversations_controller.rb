@@ -14,6 +14,7 @@ class ConversationsController < ApplicationController
 
   #IMPORTANT!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
   #IL FAUDRA SUPPRIMER CETTE MÉTHODE ET PEUT ETRE TOUTES CELLES EN DESSSOUS
+  #MAIS PAS TOUT DE SUITE
   #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
   def create
     @other_user = User.find(params[:conversation][:receiver_id])
