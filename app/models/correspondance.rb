@@ -17,6 +17,15 @@ class Correspondance < ApplicationRecord
     return false
   end
 
+  def self.already_exist?(user1,user2)
+    self.all.each do |c|
+      if (c.creator == user1 && c.acceptor == user2) || (c.creator == user2 && c.acceptor == user1)
+        return true
+      end
+    end
+    return false
+  end
+
   def other_friend(current_user)
     f = self.friends
     f.delete(current_user)
