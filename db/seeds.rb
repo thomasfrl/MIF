@@ -53,9 +53,9 @@ paris.picture.attach(io: File.open("app/assets/images/cities/paris.jpg"), filena
 roma.picture.attach(io: File.open("app/assets/images/cities/roma.jpg"), filename:"roma.jpg")
 madrid.picture.attach(io: File.open("app/assets/images/cities/madrid.jpg"), filename:"madrid.jpg")
 
-sp = Language.create(language: "Spanish")
+sp = Language.create!(language: "Spanish")
 sp.icon.attach(io: File.open("app/assets/images/flag/espagne.png"), filename:"espagne.png")
-
+binding.pry
 sp = Language.create(language: "German")
 sp.icon.attach(io: File.open("app/assets/images/flag/allemagne.png"), filename:"allemagne.png")
 
