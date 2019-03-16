@@ -1,6 +1,6 @@
 class CommentsController < ApplicationController
   before_action :authenticate_user!
-  before_action :correspondance_validated, only: [:create]
+  before_action :correspondance_validated?, only: [:create]
 
   # GET /comments
   def index
@@ -14,12 +14,14 @@ class CommentsController < ApplicationController
     other_user = User.find(params[:comment][:user_id])
     content = params[:comment][:content]
     @comment = Comment.new(author: current_user, receiver: other_user, content: content)
+
     respond_to do |format|
       if @comment.save
-        format.html { redirect_to current_user, notice: 'Comment was successfully created.' }
+        format.html { redirect_to other_user, notice: 'Comment was successfully created.' }
       else
+
         flash[:danger] =  'Comment was not created.'
-        format.html { redirect_to current_user }
+        format.html { redirect_to other_user }
       end
     end
   end

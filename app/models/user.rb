@@ -16,7 +16,7 @@ class User < ApplicationRecord
   # validates :last_name,
   #   presence: true,
   #   format: {with: /\A[a-zA-Z0-9 _\.]*\z/}
-
+  validates :city_id, presence: true
 
   belongs_to :city, optional: true
   has_one :flat
