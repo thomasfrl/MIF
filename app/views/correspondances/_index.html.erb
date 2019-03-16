@@ -1,11 +1,40 @@
 
 <div class="nav nav-pills mb-2 lavalamp"><div class="lavalamp-object ease" style="transition-duration: 0.2s; width: 124.109px; height: 45px; transform: translate(268.406px, 0px);"></div>
-  <a class="nav-item nav-link lavalamp-item" data-toggle="tab" href="#demo-1-1" style="z-index: 5; position: relative;">Received penfriend request</a>
-  <a class="nav-item nav-link lavalamp-item" data-toggle="tab" href="#demo-1-2" style="z-index: 5; position: relative;">Sent penfriend request <small> waiting for answer </small></a>
-  <a class="nav-item nav-link lavalamp-item active show" data-toggle="tab" href="#demo-1-3" style="z-index: 5; position: relative;">Third Tab</a>
+	<a class="nav-item nav-link lavalamp-item" data-toggle="tab" href="#demo-1-1" style="z-index: 5; position: relative;">Friends</a>
+  <a class="nav-item nav-link lavalamp-item" data-toggle="tab" href="#demo-1-2" style="z-index: 5; position: relative;">Received penfriend request</a>
+  <a class="nav-item nav-link lavalamp-item" data-toggle="tab" href="#demo-1-3" style="z-index: 5; position: relative;">pending penfriend request</a>
+  <a class="nav-item nav-link lavalamp-item active show" data-toggle="tab" href="#demo-1-4" style="z-index: 5; position: relative;">Refused penfriend request</a>
 </div>
 <div class="tab-content" id="demo-1">
-  <div class="tab-pane" id="demo-1-1" role="tabpanel" aria-labelledby="demo-1-1">
+	<div class="tab-pane active show" id="demo-1-1" role="tabpanel" aria-labelledby="demo-1-1">
+	 		<h2 class="text-center">Your friends</h2>
+	<% if @validated_correspondances.empty? %>
+		<p>You don't have any validated penfriend </p>
+	<% else %>
+		<div class="row">
+			<% @validated_correspondances.each do |c| %>
+				<% friend = c.other_friend(current_user) %>
+				<div class="col-md-4">
+					<%= link_to friend, class: "user-photo" do  %>
+						<figure class="user user-circle">
+								<%=image_tag(friend.avatar, :alt => "avatar")%>
+							<figcaption class="user-caption">
+								<h4><%= friend.name %></h4>
+								<span>Head of Experience Design</span>
+								<ul class="socials socials-sm bordered">
+									<li><a href="" class="icon-facebook fs-20"></a></li>
+									<li><a href="" class="icon-instagram fs-20"></a></li>
+									<li><a href="" class="icon-twitter fs-20"></a></li>
+								</ul>
+							</figcaption>
+						</figure>
+					<% end %>
+				</div>
+			<% end %>
+		</div>
+	<% end %>
+  </div>
+  <div class="tab-pane" id="demo-1-2" role="tabpanel" aria-labelledby="demo-1-2">
    	<% if @received_correspondances.empty? %>
 			<p>You don't have any received penfriend request </p>
 		<% else %>
@@ -34,7 +63,7 @@
 			<% end %>
 		<% end %>
   </div>
-  <div class="tab-pane" id="demo-1-2" role="tabpanel" aria-labelledby="demo-1-2">
+  <div class="tab-pane" id="demo-1-3" role="tabpanel" aria-labelledby="demo-1-3">
    	<% if @sent_correspondances.empty? %>
 			<p>You don't have any sent penfriend request </p>
 		<% else %>
@@ -59,7 +88,7 @@
 			<% end %>
 		<% end %>
   </div>
-  <div class="tab-pane active show" id="demo-1-3" role="tabpanel" aria-labelledby="demo-1-3">
+  <div class="tab-pane active show" id="demo-1-4" role="tabpanel" aria-labelledby="demo-1-4">
     	<% if @refused_correspondances.empty? %>
 				<p>You don't have any refused penfriend </p>
 			<% else %>
@@ -84,6 +113,8 @@
 				<% end %>
 			<% end %>
   </div>
+
+
 </div>
 
 
