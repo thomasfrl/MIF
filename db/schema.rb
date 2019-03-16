@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_14_225729) do
+ActiveRecord::Schema.define(version: 2019_03_16_003447) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -87,19 +87,8 @@ ActiveRecord::Schema.define(version: 2019_03_14_225729) do
 
   create_table "languages", force: :cascade do |t|
     t.string "language"
-    t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_languages_on_user_id"
-  end
-
-  create_table "matchmaking_results", force: :cascade do |t|
-    t.bigint "user_id"
-    t.integer "party_animal", default: 0
-    t.integer "people_person", default: 0
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_matchmaking_results_on_user_id"
   end
 
   create_table "messages", force: :cascade do |t|
@@ -111,13 +100,6 @@ ActiveRecord::Schema.define(version: 2019_03_14_225729) do
     t.datetime "updated_at", null: false
     t.index ["conversation_id"], name: "index_messages_on_conversation_id"
     t.index ["user_id"], name: "index_messages_on_user_id"
-  end
-
-  create_table "quizzes", force: :cascade do |t|
-    t.text "question"
-    t.integer "level"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "testifies", force: :cascade do |t|
@@ -185,8 +167,6 @@ ActiveRecord::Schema.define(version: 2019_03_14_225729) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "flats", "users"
-  add_foreign_key "languages", "users"
-  add_foreign_key "matchmaking_results", "users"
   add_foreign_key "messages", "conversations"
   add_foreign_key "messages", "users"
   add_foreign_key "testifies", "users"
@@ -194,4 +174,5 @@ ActiveRecord::Schema.define(version: 2019_03_14_225729) do
   add_foreign_key "trips", "correspondances"
   add_foreign_key "user_languages", "languages"
   add_foreign_key "user_languages", "users"
+  add_foreign_key "users", "cities"
 end

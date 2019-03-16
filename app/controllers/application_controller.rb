@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
 
   private
   def configure_devise_parameters
-    devise_parameter_sanitizer.permit(:sign_up){|u| u.permit(:first_name, :last_name, :email, :password, :password_confirmation, :user_name)}
+    devise_parameter_sanitizer.permit(:sign_up){|u| u.permit(:first_name, :last_name, :email, :password, :password_confirmation, :user_name, :city_id)}
   end
 
   def correspondances_controller
