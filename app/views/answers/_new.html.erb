@@ -1,3 +1,12 @@
+<% if defined?(@previews_question) %>
+    <p>Previews question : </p>
+    <p><%= @previews_question %></p>
+    <p>Your friend answered : </p>
+    <p><%= @previews_answer %></p>
+    <hr>
+
+<% end %>
+
 <%= @quiz.question %>
 <%= form_for @answer,url: conversation_answers_path(@conversation), remote: true  do |form| %>
     <%= form.text_area :content, placeholder: "your answer", class: "form-control" %>

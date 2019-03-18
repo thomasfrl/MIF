@@ -2,7 +2,7 @@ class AnswersController < ApplicationController
   before_action :authenticate_user!
   before_action :set_env
   before_action :good_user
-  #before_action :already_answered?
+  before_action :already_answered?
 
   def create
     @answer = Answer.new(author: current_user, content: params[:answer][:content] )
@@ -17,7 +17,6 @@ class AnswersController < ApplicationController
           format.js{render "wait"}
         end
       else
-        @answer = Answer.new
         set_env
         respond_to do |format|
           format.html{}
@@ -31,7 +30,6 @@ class AnswersController < ApplicationController
   end
 
   def new
-    @answer = Answer.new
     respond_to do |format|
       format.html{}
       format.js{}
@@ -57,8 +55,20 @@ class AnswersController < ApplicationController
 
   def set_env
     @conversation = Conversation.find(params[:conversation_id])
-    @quiz_conv = QuizConv.find_by(conversation: @conversation, index: @conversation.iteration_quiz.to_i)
+    @quiz_conv = @conversation.quiz_conv
     @quiz = @quiz_conv.quiz
+    @answer = Answer.new
+    iteration = @conversation.iteration_quiz.to_i
+    if iteration >= 1
+      previews_quiz = @conversation.previews_quiz
+      @previews_question = previews_quiz.question
+      previews_answers = QuizConv.find_by(conversation: @conversation, index: iteration - 1 ).answers
+      previews_answers.each do |answer|
+        if answer.author != current_user
+          @previews_answer = answer.content
+        end
+      end
+    end
   end
 
   def good_user
@@ -70,7 +80,6 @@ class AnswersController < ApplicationController
         }
         format.js{render "wait"}
       end
-
     end
   end
 end
