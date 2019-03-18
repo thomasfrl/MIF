@@ -5,4 +5,9 @@ class Answer < ApplicationRecord
   def quiz
     self.quiz_conv.quiz
   end
+
+  def conversation
+    self.quiz_conv.conversation
+  end
+
 end
