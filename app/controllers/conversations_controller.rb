@@ -12,6 +12,10 @@ class ConversationsController < ApplicationController
     @users = User.all.reject{|u| u == current_user}
   end
 
+  #IMPORTANT!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  #IL FAUDRA SUPPRIMER CETTE MÉTHODE ET PEUT ETRE TOUTES CELLES EN DESSSOUS
+  #MAIS PAS TOUT DE SUITE
+  #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
   def create
     @other_user = User.find(params[:conversation][:receiver_id])
     @conversation = Conversation.new(receiver: @other_user, author: current_user)

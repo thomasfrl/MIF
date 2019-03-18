@@ -10,6 +10,7 @@ class FlatsController < ApplicationController
   # GET /flats/1
   # GET /flats/1.json
   def show
+    @flat = Flat.find(params[:id])
   end
 
   # GET /flats/new

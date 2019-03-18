@@ -1,13 +1,15 @@
 <div class="col-3">
   <div class="container bg-white" style="height: 42em;overflow: auto;">
-    <%= form_for(@conversation_new, remote: true) do |f| %>
-      <div class="row">
-        <%= f.collection_select :receiver_id, @users,:id,:name, {prompt: "New Conversation"},   {class: "col-auto"} %>
-        <%= button_tag(type: 'submit', class: "border-0") do %>
-          <i class="fas fa-plus-circle fa-2x p-1 text-primary"></i>
-        <% end %>
-      </div>
-    <% end %>        
+    <% if false %>
+      <%= form_for(@conversation_new, remote: true) do |f| %>
+        <div class="row">
+          <%= f.collection_select :receiver_id, @users,:id,:name, {prompt: "New Conversation"},   {class: "col-auto"} %>
+          <%= button_tag(type: 'submit', class: "border-0") do %>
+            <i class="fas fa-plus-circle fa-2x p-1 text-primary"></i>
+          <% end %>
+        </div>
+      <% end %>        
+    <% end %>
     <div id="conversations">
       <% @conversations.each do |conversation| %>
         <% user = conversation.other_participant(current_user) %>

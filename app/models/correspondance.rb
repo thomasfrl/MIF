@@ -26,6 +26,18 @@ class Correspondance < ApplicationRecord
     return false
   end
 
+  def self.select(user1, user2)
+    if self.already_exist?(user1,user2)
+      if self.where(creator: user1, acceptor: user2).empty?
+        return self.where(creator: user2, acceptor: user1).first
+      else
+        return self.where(creator: user1, acceptor: user2).first
+      end
+    else
+      return false
+    end
+  end
+
   def other_friend(current_user)
     f = self.friends
     f.delete(current_user)

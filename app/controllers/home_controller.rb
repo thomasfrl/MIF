@@ -2,9 +2,19 @@ class HomeController < ApplicationController
     before_action :random_user
 
   def index
-    @cities = City.all
+    @cities = City.all.slice(0...8)
     @random_cities = City.all.sample
+    flash[:notice] = "Tell a friend about us"
 
+  end
+
+  def about_us
+  end
+
+  def contact
+  end
+  
+  def team
   end
 
   private

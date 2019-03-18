@@ -38,15 +38,46 @@
               <% end %>
             </div>
           </li>
+        <% if user_signed_in? %>
+          <li class="nav-item dropdown">
+            <a class="nav-link" id="navbarDropdown-1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
+            <% if @received_correspondances != nil %>
+              <span class="badge badge-pill badge-primary text-white"><i class="fas fa-bell fa-lg mr-1"></i><strong><%= @received_correspondances.count %></strong></span>
+            <% else %>
+              <span class="badge badge-pill badge-primary text-white"><i class="fas fa-bell fa-lg mr-1"></i></span>
+            <% end %>
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            
+                <% if @received_correspondances == nil %>
+                  <p class="dropdown-item">You don't have any received penfriend request </p>
+                <% else %>
+                  <% @received_correspondances.each do |correspondance| %>
+                    <% friend = correspondance.other_friend(current_user) %>
+                      <div class="dropdown-item">
+
+                          <%= link_to friend.name, user_path(friend.id), class: "col-6" %>
+                          <%= link_to "<i class='fas fa-check-circle fa-lg '></i>".html_safe, correspondance_path(correspondance, :update => true), class: "text-green mr-1", method: :put  %>
+                          <%= link_to "<i class='fas fa-times-circle fa-lg '></i>".html_safe, correspondance_path(correspondance, :update => false), class: "text-red", method: :put  %>
+
+                      </div>
+                    <div class="dropdown-divider"></div>
+                  <% end %>
+                <% end %>
+
+            </div>
+          </li>
+        <% end %>
         </ul>
       <% else %>
         <ul class="navbar-nav align-items-center mr-0">
           <li class="nav-item">
             <%= link_to "Login", new_user_session_path, class: "nav-link" %>
-          </li class="nav-item">
+          </li>
             <li class="nav-item">
             <%= link_to "Login via facebook", user_facebook_omniauth_authorize_path, class: "nav-link" %>
-          </li class="nav-item">
+          </li>
 
           <li>
             <%= link_to "Sign up", new_user_registration_path, class: "nav-link"  %>

@@ -1,4 +1,6 @@
     <%= render 'correspondances/modal_create' %>
+    <%= render 'comments/modal_create' %>
+
     <section class="p-0 bg-light">
       <div class="image image-overlay image-cover" style="background-image:url('<%=asset_path("cities/#{@user.city.name.downcase}.jpg")%>')"
       data-top-top="transform: translateY(0px);"
@@ -22,8 +24,22 @@
                     <span class="text-muted">"<%= @user.welcome_message %>"</span>
                   </div>
                   <div class="col-md-4 text-left text-md-right">
-                    <%= link_to "#", "data-toggle" =>"modal", 'data-target' => '#modal', class: "btn btn-rounded btn-ico btn-white", title: "Add Friend" do %>
-                      <i class="fas fa-plus fa-2x p-1 text-primary"></i>
+                    <% correspondance = Correspondance.select(current_user, @user) %>
+                    <% if !correspondance %>
+                      <%= link_to "#", "data-toggle" =>"modal", 'data-target' => '#modal_correspondances', class: "btn btn-rounded btn-ico btn-white", title: "Add Friend" do %>
+                        Ask to be your friend<i class="fas fa-plus fa-2x p-1 text-primary"></i>
+                      <% end %>
+                    <% elsif correspondance.status == "waiting" && correspondance.creator == current_user %>
+                      <p>Correspondance waiting for validation</p>
+                    <% elsif correspondance.status == "waiting" && correspondance.creator == @user %>
+                      <%= link_to "Accept", correspondance_path(correspondance, :update => true), class: "btn-success p-1", method: :put  %>
+                      <%= link_to "Refuse", correspondance_path(correspondance, :update => false), class: "btn-danger p-1", method: :put  %>
+                    <% elsif correspondance.status == "validated"%>
+                      <%= link_to "#", "data-toggle" =>"modal", 'data-target' => '#modal_comments', class: "btn btn-rounded btn-ico btn-white", title: "Add Friend" do %>
+                        Leave a comment<i class="fas fa-plus fa-2x p-1 text-primary"></i>
+                      <% end %>
+                    <% elsif correspondance.status == "refused"%>
+                      <p>Friendship refused</p> 
                     <% end %>
                   </div>
                 </div>
@@ -119,6 +135,7 @@
                   </div>
                 </div>
                 <!-- / post -->
+
 
                 <div class="row mb-1">
                   <div class="col">
