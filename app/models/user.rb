@@ -37,7 +37,7 @@ class User < ApplicationRecord
   has_many :authored_comments, class_name: "Comment", foreign_key: "author_id"
   has_many :received_comments, class_name: "Comment", foreign_key: "receiver_id"
 
-  has_many :user_languages
+  has_many :user_languages, dependent: :destroy
   has_many :languages, through: :user_languages
 
   has_one_attached :avatar

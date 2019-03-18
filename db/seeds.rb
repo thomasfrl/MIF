@@ -12,6 +12,7 @@ def get_random_image
   [image_select, image_select.split(image_path_prefix)[1]]
 end
 
+UserLanguage.destroy_all
 Flat.destroy_all
 Message.destroy_all
 Conversation.destroy_all
@@ -100,8 +101,17 @@ user.avatar.attach(io: File.open(img[0]), filename: img[1])
 
 puts "User created"
 
-# users=  User.all
-# users.each do |u|
+
+users=  User.all
+users.each do |u|
+  languages = Language.all
+  rand(1..4).times do
+    l = languages.sample
+    u.languages << l
+    languages.reject{|la| la == l}
+  end
+
+end
 #   users_except = users.reject{|us| us == u}
 #   2.times do
 #     receiver = users_except.sample
@@ -112,6 +122,9 @@ puts "User created"
 #     users_except = users_except.reject{|us| us == receiver}
 #   end
 # end
+
+puts "language association created"
+
 
 users=  User.all
 150.times do
