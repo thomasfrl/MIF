@@ -5,6 +5,24 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+def get_random_image
+  image_path_prefix = "app/assets/images/img/"
+  image_files = Dir.glob("#{image_path_prefix}*")
+  image_select = image_files.sample
+  [image_select, image_select.split(image_path_prefix)[1]]
+end
+
+Answer.destroy_all
+Quiz.destroy_all
+UserLanguage.destroy_all
+Flat.destroy_all
+Message.destroy_all
+Conversation.destroy_all
+Language.destroy_all
+Correspondance.destroy_all
+User.destroy_all
+City.destroy_all
+
 Quiz.create( question:"Did you had a pet when you where a child?", level:1)
 Quiz.create( question:"Where did you grow up?", level:1)
 Quiz.create( question:"If you could take a plane tomorrow to go anywhere, what would be your destination?", level:1)
@@ -77,22 +95,7 @@ Quiz.create( question:"Who was the most insane person you ever know and why?", l
 Quiz.create( question:"Which movie make you cry every single time and which part of this movie?", level:3)
 Quiz.create( question:"If you add to choose one : sex or food ?", level:3)
 
-def get_random_image
-  image_path_prefix = "app/assets/images/img/"
-  image_files = Dir.glob("#{image_path_prefix}*")
-  image_select = image_files.sample
-  [image_select, image_select.split(image_path_prefix)[1]]
-end
-
-UserLanguage.destroy_all
-Flat.destroy_all
-Message.destroy_all
-Conversation.destroy_all
-Language.destroy_all
-Correspondance.destroy_all
-User.destroy_all
-City.destroy_all
-
+puts "Quiz create"
 
 barcelone = City.create!(name: "Barcelone", country: "Spain", zip_code: "08001")
 puts "Barcelone created"
@@ -207,13 +210,23 @@ users=  User.all
   unless Correspondance.already_contain?(correspondance)
     correspondance.save!
     if status == "validated"
-      Conversation.create!(author: u1, receiver: u2)
+      conv = Conversation.create!(author: u1, receiver: u2)
+      quizs = Quiz.all
+      quizs.level1.sample(5).each do |quiz|
+        conv.quizzes << quiz
+      end
+      quizs.level2.sample(5).each do |quiz|
+        conv.quizzes << quiz
+      end
+      quizs.level3.sample(5).each do |quiz|
+        conv.quizzes << quiz
+      end
     end
   end
 end
 puts "correspondance created"
-
 puts "Conversation created"
+puts "QuizConv create"
 
 conversations = Conversation.all
 conversations.each do |conv|

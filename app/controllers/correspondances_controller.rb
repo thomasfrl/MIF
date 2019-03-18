@@ -36,6 +36,16 @@ class CorrespondancesController < ApplicationController
       if status == "validated"
         other_user = @correspondance.other_friend(current_user)
         @conversation = Conversation.create(receiver: other_user, author: current_user)
+        quizs = Quiz.all
+        quizs.level1.sample(5).each do |quiz|
+          @conversation.quizzes << quiz
+        end
+        quizs.level2.sample(5).each do |quiz|
+          @conversation.quizzes << quiz
+        end
+        quizs.level3.sample(5).each do |quiz|
+          @conversation.quizzes << quiz
+        end
         redirect_to current_user, notice: 'Success of acceptance of correspondance status'
       elsif status == "refused"
         redirect_to current_user, notice: 'Success of refusal of correspondance status'
