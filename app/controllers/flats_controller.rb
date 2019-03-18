@@ -43,7 +43,8 @@ class FlatsController < ApplicationController
   def update
     respond_to do |format|
       if @flat.update(flat_params)
-        format.html { redirect_to @flat, notice: 'Flat was successfully updated.' }
+        @flat.pictures.attach(params[:main_picture])
+        format.html { redirect_to current_user, notice: 'Flat was successfully updated.' }
         format.json { render :show, status: :ok, location: @flat }
       else
         format.html { render :edit }
@@ -60,6 +61,11 @@ class FlatsController < ApplicationController
       format.html { redirect_to flats_url, notice: 'Flat was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def destroy_img(pic)
+    pic.purge
+
   end
 
   private

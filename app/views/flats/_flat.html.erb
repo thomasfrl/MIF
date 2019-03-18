@@ -1,5 +1,5 @@
 
-<div class="container">
+<div class="container col-9">
         <div class="row">
           
         </div>
@@ -32,7 +32,7 @@
   
   
   <!-- post -->
-<%if @flat.main_picture.attached? || @flat.other_pictures.attached?%>
+<%if @flat.pictures.attached?%>
 <div class="container">  
 <div class="row mb-1">
     <div class="col">
@@ -41,15 +41,10 @@
         </div>
         <div class="card-body overflow-hidden">
           <div class="owl-carousel gallery visible" data-items="[3,4]" data-margin="0.2" data-nav="true">
-          <%if @flat.main_picture.attached?%>
-            <figure class="photo">
-              <%= image_tag @flat.main_picture, :style => "height: 250px ;width: 200px ;margin: 10px;"%>
-            </figure>
-            <%end%>
-            <%if @flat.other_pictures.attached?%>
-                <% (0...@flat.other_pictures.count).each do |pic|%>
+            <%if @flat.pictures.attached?%>
+                <% (0...@flat.pictures.count).each do |pic|%>
                   <figure class="photo">
-                    <%= image_tag @flat.other_pictures[pic], :style => "height: 250px ;width: 200px ;margin: 10px;"%>
+                    <%= image_tag @flat.pictures[pic], :style => "height: 250px ;width: 200px ;margin: 10px;"%>
                   </figure>
             <%end%>
           <%end%>

@@ -27,6 +27,7 @@ class UsersController < ApplicationController
 
   # GET /users/1/edit
   def edit
+    @languages = Language.all
   end
 
   # POST /users
