@@ -27,7 +27,6 @@ Rails.application.routes.draw do
   end
   resources :languages
   resources :flats
-  resources :users
   resources :cities
   resources :home
 
