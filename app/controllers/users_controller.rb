@@ -14,6 +14,7 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @languages = Language.all
+    @flat = @user.flat
     conversations_controller
     comments_controller
     correspondances_controller
