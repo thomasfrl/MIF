@@ -12,6 +12,7 @@ def get_random_image
   [image_select, image_select.split(image_path_prefix)[1]]
 end
 
+UserLanguage.destroy_all
 Flat.destroy_all
 Message.destroy_all
 Conversation.destroy_all
@@ -55,32 +56,32 @@ madrid.picture.attach(io: File.open("app/assets/images/cities/madrid.jpg"), file
 
 sp = Language.create!(language: "Spanish")
 sp.icon.attach(io: File.open("app/assets/images/flag/espagne.png"), filename:"espagne.png")
-binding.pry
-sp = Language.create(language: "German")
+
+sp = Language.create!(language: "German")
 sp.icon.attach(io: File.open("app/assets/images/flag/allemagne.png"), filename:"allemagne.png")
 
-sp = Language.create(language: "English")
+sp = Language.create!(language: "English")
 sp.icon.attach(io: File.open("app/assets/images/flag/english.png"), filename:"english.png")
 
-sp = Language.create(language: "Portuguese")
+sp = Language.create!(language: "Portuguese")
 sp.icon.attach(io: File.open("app/assets/images/flag/portugal.png"), filename:"portugal.png")
 
-sp = Language.create(language: "Czech")
+sp = Language.create!(language: "Czech")
 sp.icon.attach(io: File.open("app/assets/images/flag/republique_tcheque.png"), filename:"republique_tcheque.png")
 
-sp = Language.create(language: "Dutch")
+sp = Language.create!(language: "Dutch")
 sp.icon.attach(io: File.open("app/assets/images/flag/hollande.png"), filename:"hollande.png")
 
-sp = Language.create(language: "French")
+sp = Language.create!(language: "French")
 sp.icon.attach(io: File.open("app/assets/images/flag/france.png"), filename:"france.png")
 
-sp = Language.create(language: "Italian")
+sp = Language.create!(language: "Italian")
 sp.icon.attach(io: File.open("app/assets/images/flag/italie.png"), filename:"italie.png")
 
-sp = Language.create(language: "Hungarian")
+sp = Language.create!(language: "Hungarian")
 sp.icon.attach(io: File.open("app/assets/images/flag/hongrie.png"), filename:"hongrie.png")
 
-sp = Language.create(language: "Norwegian")
+sp = Language.create!(language: "Norwegian")
 sp.icon.attach(io: File.open("app/assets/images/flag/norvege.png"), filename:"norvege.png")
 
 puts "language created"
@@ -100,8 +101,17 @@ user.avatar.attach(io: File.open(img[0]), filename: img[1])
 
 puts "User created"
 
-# users=  User.all
-# users.each do |u|
+
+users=  User.all
+users.each do |u|
+  languages = Language.all
+  rand(1..4).times do
+    l = languages.sample
+    u.languages << l
+    languages.reject{|la| la == l}
+  end
+
+end
 #   users_except = users.reject{|us| us == u}
 #   2.times do
 #     receiver = users_except.sample
@@ -112,6 +122,9 @@ puts "User created"
 #     users_except = users_except.reject{|us| us == receiver}
 #   end
 # end
+
+puts "language association created"
+
 
 users=  User.all
 150.times do

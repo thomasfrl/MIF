@@ -101,6 +101,21 @@
                 </div>
               </div>
             </div>
+            
+            <%= label_tag "Languages spoken" %>
+            <div class="form-row">
+              <div class="col">
+                <div class="form-group row ">
+                  <% @languages.each do |language| %>
+                    <div class="p-1">
+                      <% @user.languages.include?(language)? checked = true : checked = false %>
+                      <%= check_box_tag("language_ids[]" , language.id, checked, id: "language_ids_#{language.id}") %>
+                      <%= label_tag language.language %>
+                    </div>  
+                  <% end %>
+                </div>
+              </div>
+            </div>
             <div class="form-row">
               <div class="col-3">
                 <%= form.submit "Save changes", class: "btn btn-secondary mb-5" %>
@@ -109,6 +124,12 @@
           </div>
         </div>
       <% end %>
+      
+
+      
+      
+
+
     </div>
   </div>
 </div>
