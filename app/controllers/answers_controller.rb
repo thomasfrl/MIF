@@ -8,9 +8,8 @@ class AnswersController < ApplicationController
     @answer = Answer.new(author: current_user, content: params[:answer][:content] )
     @answer.quiz_conv = @quiz_conv
     if @answer.save
-      flash.now[:notice] = "Answer taken into account"
       i = @conversation.iteration_quiz
-      @conversation.update(iteration_quiz: i+=0.5)
+      @conversation.update(iteration_quiz: i + 0.5)
       c = Conversation.find(params[:conversation_id])
       if c.iteration_quiz.to_i == i.to_i 
         respond_to do |format|
@@ -18,6 +17,7 @@ class AnswersController < ApplicationController
           format.js{render "wait"}
         end
       else
+        @answer = Answer.new
         set_env
         respond_to do |format|
           format.html{}
