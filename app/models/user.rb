@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  after_create :welcome_send
   after_create :set_default_avatar
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
@@ -86,6 +87,10 @@ class User < ApplicationRecord
 
   def refused_correspondances
     self.created_correspondances.where(status: "refused") +  self.received_correspondances.where(status: "refused")
+  end
+
+  def welcome_send
+    UserMailer.welcome_email(self).deliver_now
   end
 
 end
