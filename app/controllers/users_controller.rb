@@ -100,21 +100,14 @@ class UsersController < ApplicationController
         @other_user = @conversation.other_participant(current_user)
       end
       @conversation_new = Conversation.new
-      @users = User.all.reject{|u| u == current_user}  
+      @users = User.all.reject{|u| u == current_user}
     end
 
     def comments_controller
       @sent_comments = current_user.authored_comments
       @received_comments = current_user.received_comments
-      @comment = Comment.new  
+      @comment = Comment.new
     end
 
-    def correspondances_controller
-      @correspondances = current_user.correspondances
-      @validated_correspondances = current_user.validated_correspondances
-      @sent_correspondances = current_user.sent_correspondances
-      @received_correspondances = current_user.waiting_correspondances
-      @refused_correspondances = current_user.refused_correspondances
-      @correspondance = Correspondance.new      
-    end
+
 end
