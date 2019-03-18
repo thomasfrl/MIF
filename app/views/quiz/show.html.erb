@@ -9,13 +9,8 @@
 <% @quizs.level2.sample(5).each do |quiz|%>
   <%=quiz.question%><br>
 <%end%>
-if skip < 5
+
 <h2>**************************</h2>
 <% @quizs.level3.sample(5).each do |quiz|%>
   <%=quiz.question%><br>
 <%end%>
-else
-  <h2>**************************</h2>
-  <% @quizs.level2.sample(5).each do |quiz|%>
-    <%=quiz.question%><br>
-  <%end%>

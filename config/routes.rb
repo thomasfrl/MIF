@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  get 'answers/create'
+  get 'answers/show'
   get 'quiz/new'
   get 'quiz/create'
   get 'quiz/show'

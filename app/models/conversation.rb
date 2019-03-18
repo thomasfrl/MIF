@@ -5,6 +5,7 @@ class Conversation < ApplicationRecord
   belongs_to :receiver, class_name: "User"
 
   has_many :messages, dependent: :destroy
+  has_many :answers, dependent: :destroy
 
   def last_message
     messages = self.messages

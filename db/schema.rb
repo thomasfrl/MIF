@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_16_003447) do
+ActiveRecord::Schema.define(version: 2019_03_18_133404) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,6 +34,18 @@ ActiveRecord::Schema.define(version: 2019_03_16_003447) do
     t.string "checksum", null: false
     t.datetime "created_at", null: false
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
+  end
+
+  create_table "answers", force: :cascade do |t|
+    t.bigint "conversation_id"
+    t.bigint "quiz_id"
+    t.text "content"
+    t.bigint "author_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["author_id"], name: "index_answers_on_author_id"
+    t.index ["conversation_id"], name: "index_answers_on_conversation_id"
+    t.index ["quiz_id"], name: "index_answers_on_quiz_id"
   end
 
   create_table "cities", force: :cascade do |t|
@@ -89,6 +101,15 @@ ActiveRecord::Schema.define(version: 2019_03_16_003447) do
     t.string "language"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "matchmaking_results", force: :cascade do |t|
+    t.bigint "user_id"
+    t.integer "party_animal", default: 0
+    t.integer "people_person", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_matchmaking_results_on_user_id"
   end
 
   create_table "messages", force: :cascade do |t|
@@ -173,7 +194,10 @@ ActiveRecord::Schema.define(version: 2019_03_16_003447) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "answers", "conversations"
+  add_foreign_key "answers", "quizzes"
   add_foreign_key "flats", "users"
+  add_foreign_key "matchmaking_results", "users"
   add_foreign_key "messages", "conversations"
   add_foreign_key "messages", "users"
   add_foreign_key "testifies", "users"
