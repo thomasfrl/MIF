@@ -171,8 +171,13 @@ puts "language created"
   user.avatar.attach(io: File.open(img[0]), filename: img[1])
 end
 img = get_random_image
-user = User.create!(first_name: "user", last_name: "family", description: Faker::Lorem.paragraph_by_chars, age: (rand(15)+20), email: "user@yopmail.com", password: "123456", city_id: City.all.sample.id )
+user = User.create!(first_name: "user", last_name: "family", description: Faker::Lorem.paragraph_by_chars, age: (rand(15)+20), email: "user1@yopmail.com", password: "123456", city_id: City.all.sample.id )
 user.avatar.attach(io: File.open(img[0]), filename: img[1])
+
+img = get_random_image
+user = User.create!(first_name: "user", last_name: "family", description: Faker::Lorem.paragraph_by_chars, age: (rand(15)+20), email: "user2@yopmail.com", password: "123456", city_id: City.all.sample.id )
+user.avatar.attach(io: File.open(img[0]), filename: img[1])
+
 
 puts "User created"
 
@@ -212,14 +217,18 @@ users=  User.all
     if status == "validated"
       conv = Conversation.create!(author: u1, receiver: u2)
       quizs = Quiz.all
+      i = 0
       quizs.level1.sample(5).each do |quiz|
-        conv.quizzes << quiz
+        QuizConv.create!(conversation: conv, quiz: quiz, index:i)
+        i += 1
       end
       quizs.level2.sample(5).each do |quiz|
-        conv.quizzes << quiz
+        QuizConv.create!(conversation: conv, quiz: quiz, index:i)
+        i += 1
       end
       quizs.level3.sample(5).each do |quiz|
-        conv.quizzes << quiz
+        QuizConv.create!(conversation: conv, quiz: quiz, index:i)
+        i += 1
       end
     end
   end

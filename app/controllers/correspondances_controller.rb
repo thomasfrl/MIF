@@ -37,14 +37,18 @@ class CorrespondancesController < ApplicationController
         other_user = @correspondance.other_friend(current_user)
         @conversation = Conversation.create(receiver: other_user, author: current_user)
         quizs = Quiz.all
+        i = 0
         quizs.level1.sample(5).each do |quiz|
-          @conversation.quizzes << quiz
+          QuizConv.create(conversation: @conversation, quiz: quiz, index:i)
+          i += 1
         end
         quizs.level2.sample(5).each do |quiz|
-          @conversation.quizzes << quiz
+          QuizConv.create(conversation: @conversation, quiz: quiz, index:i)
+          i += 1
         end
         quizs.level3.sample(5).each do |quiz|
-          @conversation.quizzes << quiz
+          QuizConv.create(conversation: @conversation, quiz: quiz, index:i)
+          i += 1
         end
         redirect_to current_user, notice: 'Success of acceptance of correspondance status'
       elsif status == "refused"
