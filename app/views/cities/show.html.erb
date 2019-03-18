@@ -33,7 +33,7 @@
           <div class="col text-shadow">
             <div class="row gutter-1">
               <div class="form-group col-md-5">
-                <%#<input type="email" class="form-control-lg form-control text-black" id="inputEmail4" placeholder="City" style="background-color: white;">%>
+                <input type="email" class="form-control-lg form-control text-black" id="inputEmail4" placeholder="City" style="background-color: white;">
                 <%= form_tag({controller: "cities", action: "show"}, method: "get") do %>
                 <%= text_field_tag(:name, "City", id: "inputEmail4", style: "background-color: white;", class: "form-control-lg form-control text-black") %>
               </div>
@@ -56,7 +56,7 @@
         <div class="row justify-content-center">
           <div class="col-md-6 text-center">
             <span class="eyebrow d-block mb-1 text-primary">Miffers in <%=@city.name%></span>
-            <p class="lead text-black">We have a very complex matching algorithm to provide you the profiles with the most things in common with you.</p>
+            <p class="lead text-black"><%=@city.description%></p>
           </div>
         </div>
         <div class="row gutter-0">

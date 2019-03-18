@@ -22,25 +22,25 @@ User.destroy_all
 City.destroy_all
 
 
-barcelone = City.create!(name: "Barcelone", country: "Spain", zip_code: "08001", description: " ")
+barcelone = City.create!(name: "Barcelone", country: "Spain", zip_code: "08001", description: "The city of creation: Mode, Art, Design, Music")
 puts "Barcelone created"
-berlin = City.create!(name: "Berlin", country: "Germany", zip_code: "10115" description: " ")
+berlin = City.create!(name: "Berlin", country: "Germany", zip_code: "10115", description: " ")
 puts "Berlin created"
-london =  City.create!(name: "London", country: "England", zip_code: "WC2N 5DU")
+london =  City.create!(name: "London", country: "England", zip_code: "WC2N 5DU", description: " ")
 puts "London created"
-lisbon = City.create!(name: "Lisbon", country: "Portugal", zip_code: "1000")
+lisbon = City.create!(name: "Lisbon", country: "Portugal", zip_code: "1000", description: " ")
 puts "Lisbon created"
-copenhagen =City.create!(name: "Copenhagen", country: "Denmark", zip_code: "1050")
+copenhagen =City.create!(name: "Copenhagen", country: "Denmark", zip_code: "1050", description: " ")
 puts "Copenhagen created"
-prague = City.create!(name: "Prague", country: "Czech Republic", zip_code: "100 00")
+prague = City.create!(name: "Prague", country: "Czech Republic", zip_code: "100 00", description: " ")
 puts "Prague created"
-budapest = City.create!(name: "Budapest", country: "Hungary", zip_code: "1007")
+budapest = City.create!(name: "Budapest", country: "Hungary", zip_code: "1007", description: " ")
 puts "Budapest created"
-paris = City.create!(name: "Paris", country: "France", zip_code: "75000")
+paris = City.create!(name: "Paris", country: "France", zip_code: "75000", description: " ")
 puts "Paris created"
-roma = City.create!(name: "Roma", country: "Italy", zip_code: "00100")
+roma = City.create!(name: "Roma", country: "Italy", zip_code: "00100", description: " ")
 puts "Roma created"
-madrid = City.create!(name: "Madrid", country: "Spain", zip_code: "28001")
+madrid = City.create!(name: "Madrid", country: "Spain", zip_code: "28001",  description: " ")
 puts "Madrid created"
 
 barcelone.picture.attach(io: File.open("app/assets/images/cities/barcelone.jpg"), filename:"barcelone.jpg")
