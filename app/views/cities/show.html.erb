@@ -32,15 +32,13 @@
         <div class="row align-items-center">
           <div class="col text-shadow">
             <div class="row gutter-1">
-              <div class="form-group col-md-5">
-                <%#<input type="email" class="form-control-lg form-control text-black" id="inputEmail4" placeholder="City" style="background-color: white;">%>
-                <%= form_tag({controller: "cities", action: "show"}, method: "get") do %>
-                <%= text_field_tag(:name, "City", id: "inputEmail4", style: "background-color: white;", class: "form-control-lg form-control text-black") %>
+              <div class="col-md-5">
+                <%= link_to cities_path, class:"btn btn-rounded btn-with-ico btn-primary" do %>
+                  View All Cities <i class="icon-chevron-right2 fs-24"></i>
+                <%end%>
               </div>
-              <div class="form-group col-md-2">
-                <%= submit_tag("Search", class: "btn btn-lg btn-block btn-primary") %>
+              <div class="col-md-2">
               </div>
-              <% end %>
             </div>
             <h1 class="font-weight-bold"><%= @city.name.slice(0,1).capitalize + @city.name.slice(1..-1) %></h1>
             <h2 class="mb-0"><%= @city.country.capitalize %></h2>
@@ -64,11 +62,11 @@
             <% if count == 1 %>
               <div class="col-md-4">
             <% else %>
-              <div class="col-md-4" data-aos="fade-up" data-aos-delay="<%= count * 100 %>">
+              <div class="col-md-4" style="border-radius: 30px;" data-aos="fade-up" data-aos-delay="<%= count * 100 %>">
             <% end %>
-                <figure class="user">
+                <figure class="user m-1" style="border-radius: 5px;">
                   <%= link_to user_path(user.id), :class => "user-photo" do%>
-                    <%= image_tag(user.avatar, :alt => "avatar", style: "max-width: 450px", class: "") %>
+                    <%= image_tag(user.avatar, :alt => "avatar", style: "max-width: 450px", class: "", size: "420x420") %>
                   <figcaption class="user-caption">
                     <h4><%= user.first_name + user.last_name %></h4>
                     <ul class="text-white">
