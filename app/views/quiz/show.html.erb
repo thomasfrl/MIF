@@ -1,0 +1,16 @@
+<h1>Quiz#show</h1>
+
+
+<% @quizs.level1.sample(5).each do |quiz, index|%>
+  <%=quiz.question%><br>
+<%end%>
+
+<h2>**************************</h2>
+<% @quizs.level2.sample(5).each do |quiz|%>
+  <%=quiz.question%><br>
+<%end%>
+
+<h2>**************************</h2>
+<% @quizs.level3.sample(5).each do |quiz|%>
+  <%=quiz.question%><br>
+<%end%>

@@ -33,6 +33,9 @@ class User < ApplicationRecord
   has_many :created_correspondances, class_name: "Correspondance", foreign_key: "creator_id"
   has_many :received_correspondances, class_name: "Correspondance", foreign_key: "acceptor_id"
 
+  # Quiz
+  has_many :answers, foreign_key: "author_id", dependent: :destroy
+
   # Comments
   has_many :authored_comments, class_name: "Comment", foreign_key: "author_id"
   has_many :received_comments, class_name: "Comment", foreign_key: "receiver_id"
