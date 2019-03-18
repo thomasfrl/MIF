@@ -1,7 +1,5 @@
 Rails.application.routes.draw do
 
-  get 'answers/create'
-  get 'answers/show'
   get 'quiz/new'
   get 'quiz/create'
   get 'quiz/show'
@@ -17,7 +15,7 @@ Rails.application.routes.draw do
   }
 
 
-
+  
   resources :users, :path=> "friends", only: [:show, :edit, :update] do
     resources :avatars, only: [:create]
   end
@@ -29,6 +27,7 @@ Rails.application.routes.draw do
   resources :comments
   resources :conversations, only: [:index, :create, :new] do
     resources :messages, only: [:index, :create]
+    resources :answers, only: [:new]
   end
   resources :languages
   resources :flats

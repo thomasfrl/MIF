@@ -2,6 +2,7 @@ class AnswersController < ApplicationController
   def create
   end
 
-  def show
+  def new
+
   end
 end
