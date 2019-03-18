@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!
+  before_action :good_user, only: [:update]
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
   # GET /users
@@ -12,6 +13,7 @@ class UsersController < ApplicationController
   # GET /users/1.json
   def show
     @user = User.find(params[:id])
+    @languages = Language.all
     conversations_controller
     comments_controller
     correspondances_controller
@@ -46,6 +48,14 @@ class UsersController < ApplicationController
   def update
     respond_to do |format|
       if @user.update(user_params)
+        UserLanguage.where(user: current_user).destroy_all
+        unless params[:language_ids].nil? 
+          params[:language_ids].each do |id|
+            if Language.exists?(id)
+              @user.languages << Language.find(id)
+            end
+          end 
+        end
         format.html { redirect_to user_path(current_user.id), notice: 'User was successfully updated.' }
         format.json { render :edit, status: :ok, location: @user }
       else
@@ -66,6 +76,12 @@ class UsersController < ApplicationController
   end
 
   private
+    def good_user
+      if current_user != User.find(params[:id])
+        flash[:danger] = "You can not modify the profile of another user"
+        redirect_to root_path
+      end
+    end
     # Use callbacks to share common setup or constraints between actions.
     def set_user
       @user = User.find(current_user.id)

@@ -55,32 +55,32 @@ madrid.picture.attach(io: File.open("app/assets/images/cities/madrid.jpg"), file
 
 sp = Language.create!(language: "Spanish")
 sp.icon.attach(io: File.open("app/assets/images/flag/espagne.png"), filename:"espagne.png")
-binding.pry
-sp = Language.create(language: "German")
+
+sp = Language.create!(language: "German")
 sp.icon.attach(io: File.open("app/assets/images/flag/allemagne.png"), filename:"allemagne.png")
 
-sp = Language.create(language: "English")
+sp = Language.create!(language: "English")
 sp.icon.attach(io: File.open("app/assets/images/flag/english.png"), filename:"english.png")
 
-sp = Language.create(language: "Portuguese")
+sp = Language.create!(language: "Portuguese")
 sp.icon.attach(io: File.open("app/assets/images/flag/portugal.png"), filename:"portugal.png")
 
-sp = Language.create(language: "Czech")
+sp = Language.create!(language: "Czech")
 sp.icon.attach(io: File.open("app/assets/images/flag/republique_tcheque.png"), filename:"republique_tcheque.png")
 
-sp = Language.create(language: "Dutch")
+sp = Language.create!(language: "Dutch")
 sp.icon.attach(io: File.open("app/assets/images/flag/hollande.png"), filename:"hollande.png")
 
-sp = Language.create(language: "French")
+sp = Language.create!(language: "French")
 sp.icon.attach(io: File.open("app/assets/images/flag/france.png"), filename:"france.png")
 
-sp = Language.create(language: "Italian")
+sp = Language.create!(language: "Italian")
 sp.icon.attach(io: File.open("app/assets/images/flag/italie.png"), filename:"italie.png")
 
-sp = Language.create(language: "Hungarian")
+sp = Language.create!(language: "Hungarian")
 sp.icon.attach(io: File.open("app/assets/images/flag/hongrie.png"), filename:"hongrie.png")
 
-sp = Language.create(language: "Norwegian")
+sp = Language.create!(language: "Norwegian")
 sp.icon.attach(io: File.open("app/assets/images/flag/norvege.png"), filename:"norvege.png")
 
 puts "language created"
