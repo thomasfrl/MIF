@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   include ApplicationHelper
   before_action :configure_devise_parameters, if: :devise_controller?
-  before_action :correspondances_controller
+  before_action :correspondances_controller, if: :user_signed_in?
 
   private
   def configure_devise_parameters
