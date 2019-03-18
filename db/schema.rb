@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_18_144235) do
+ActiveRecord::Schema.define(version: 2019_03_18_155556) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,6 +34,16 @@ ActiveRecord::Schema.define(version: 2019_03_18_144235) do
     t.string "checksum", null: false
     t.datetime "created_at", null: false
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
+  end
+
+  create_table "answers", force: :cascade do |t|
+    t.bigint "quiz_conv_id"
+    t.text "content"
+    t.bigint "author_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["author_id"], name: "index_answers_on_author_id"
+    t.index ["quiz_conv_id"], name: "index_answers_on_quiz_conv_id"
   end
 
   create_table "cities", force: :cascade do |t|
@@ -60,6 +70,7 @@ ActiveRecord::Schema.define(version: 2019_03_18_144235) do
     t.bigint "receiver_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.float "iteration_quiz", default: 0.0
     t.index ["author_id"], name: "index_conversations_on_author_id"
     t.index ["receiver_id"], name: "index_conversations_on_receiver_id"
   end
@@ -183,6 +194,7 @@ ActiveRecord::Schema.define(version: 2019_03_18_144235) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "answers", "quiz_convs"
   add_foreign_key "flats", "users"
   add_foreign_key "messages", "conversations"
   add_foreign_key "messages", "users"
