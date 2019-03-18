@@ -102,8 +102,7 @@ user.avatar.attach(io: File.open(img[0]), filename: img[1])
 puts "User created"
 
 
-users=  User.all
-users.each do |u|
+User.all.each do |u|
   languages = Language.all
   rand(1..4).times do
     l = languages.sample
@@ -151,7 +150,6 @@ conversations.each do |conv|
 end
 puts "Message created"
 
-users=  User.all
 User.all.each do |u|
   users_except = users.reject{|us| us == u}
   rand(5).times do
@@ -163,10 +161,9 @@ end
 puts "comment created"
 
 
-10.times do
+User.all.each do |u|
   img = get_random_image
-  i = [1,2,4,7,9,10].sample
-  flat = Flat.create!(user_id: User.all.sample.id, description: Faker::Lorem.paragraph_by_chars, address: Faker::Address.street_address)
+  flat = Flat.create!(user: u, description: Faker::Lorem.paragraph_by_chars, address: Faker::Address.street_address)
   flat.main_picture.attach(io: File.open(img[0]), filename: img[1])
   img = get_random_image
   flat.other_pictures.attach(io: File.open(img[0]), filename: img[1])
