@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
 
+  get 'quiz/new'
+  get 'quiz/create'
+  get 'quiz/show'
 
   resources :trips
   root to: "home#index"
@@ -12,7 +15,7 @@ Rails.application.routes.draw do
   }
 
 
-
+  
   resources :users, :path=> "friends", only: [:show, :edit, :update] do
     resources :avatars, only: [:create]
   end
@@ -24,6 +27,7 @@ Rails.application.routes.draw do
   resources :comments
   resources :conversations, only: [:index, :create, :new] do
     resources :messages, only: [:index, :create]
+    resources :answers, only: [:new, :create]
   end
   resources :languages
   resources :flats

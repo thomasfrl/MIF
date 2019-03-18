@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  after_create :create_flat
   after_create :set_default_avatar
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
@@ -32,6 +33,9 @@ class User < ApplicationRecord
   # Correspondances
   has_many :created_correspondances, class_name: "Correspondance", foreign_key: "creator_id"
   has_many :received_correspondances, class_name: "Correspondance", foreign_key: "acceptor_id"
+
+  # Quiz
+  has_many :answers, foreign_key: "author_id", dependent: :destroy
 
   # Comments
   has_many :authored_comments, class_name: "Comment", foreign_key: "author_id"
@@ -86,6 +90,11 @@ class User < ApplicationRecord
 
   def refused_correspondances
     self.created_correspondances.where(status: "refused") +  self.received_correspondances.where(status: "refused")
+  end
+
+  private
+  def create_flat
+    Flat.create(user: User.last)
   end
 
 end
