@@ -1,74 +1,56 @@
 class MessagesController < ApplicationController
-  before_action :set_message, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
+  before_action :participant?, only: [:create, :index]
+  before_action :in_a_correspondance?, only: [:create, :index]
 
   # GET /messages
-  # GET /messages.json
   def index
-    @messages = Message.all
-  end
-
-  # GET /messages/1
-  # GET /messages/1.json
-  def show
-  end
-
-  # GET /messages/new
-  def new
-    @message = Message.new
-  end
-
-  # GET /messages/1/edit
-  def edit
+    @conversation = Conversation.find(params[:conversation_id])
+    @messages = Message.order(:created_at).where(conversation: @conversation)
+    @other_user = @conversation.other_participant(current_user)
+    respond_to do |format|
+      format.html{redirect_to root_path }
+      format.js{}
+    end
   end
 
   # POST /messages
-  # POST /messages.json
   def create
-    @message = Message.new(message_params)
-
+    @conversation = Conversation.find(params[:conversation_id])
+    @message = Message.new(user: current_user, conversation_id: params[:conversation_id], content: params[:content])
     respond_to do |format|
       if @message.save
-        format.html { redirect_to @message, notice: 'Message was successfully created.' }
-        format.json { render :show, status: :created, location: @message }
+        format.html { redirect_to root_path }
+        format.js {}
       else
-        format.html { render :new }
-        format.json { render json: @message.errors, status: :unprocessable_entity }
+        format.html { render root_path }
+        format.js {}
       end
     end
   end
 
-  # PATCH/PUT /messages/1
-  # PATCH/PUT /messages/1.json
-  def update
-    respond_to do |format|
-      if @message.update(message_params)
-        format.html { redirect_to @message, notice: 'Message was successfully updated.' }
-        format.json { render :show, status: :ok, location: @message }
-      else
-        format.html { render :edit }
-        format.json { render json: @message.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # DELETE /messages/1
-  # DELETE /messages/1.json
-  def destroy
-    @message.destroy
-    respond_to do |format|
-      format.html { redirect_to messages_url, notice: 'Message was successfully destroyed.' }
-      format.json { head :no_content }
-    end
-  end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_message
-      @message = Message.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def message_params
-      params.require(:message).permit(:user_id, :conversation_id)
+  def participant?
+    conversation = Conversation.find(params[:conversation_id])
+    unless conversation.participants.include?(current_user) 
+      flash[:danger] = "not possible to show messages because your are not participant to this conversation"
+      redirect_to current_user
     end
+  end
+  def in_a_correspondance?
+    conversation = Conversation.find(params[:conversation_id])
+    user1 = conversation.author
+    user2 = conversation.receiver
+    if Correspondance.select(user1, user2)
+      unless Correspondance.select(user1, user2).status == "validated"
+        flash[:danger] = "not possible to show messages because the correspondance is not validated"
+        redirect_to current_user
+      end
+    else
+      flash[:danger] = "not possible to show messages because there is no correspondance"
+      redirect_to current_user
+    end
+  end
 end

@@ -1,3 +1,5 @@
 class Language < ApplicationRecord
-  belongs_to :user
+  has_many :user_languages, dependent: :destroy
+  has_many :users, through: :user_languages
+  has_one_attached :icon
 end

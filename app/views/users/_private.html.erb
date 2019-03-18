@@ -1,0 +1,104 @@
+<section class="p-0 bg-light">
+  <div class="image image-overlay image-cover" style="background-image:url('<%=asset_path("cities/#{@user.city.name.downcase}.jpg")%>')"
+    data-top-top="transform: translateY(0px);"
+    data-top-bottom="transform: translateY(-250px);"></div>
+    <div class="container">
+      <div class="row justify-content-center align-items-end vh-50 mb-5">
+        <div class="col col-md-10 col-lg-8">
+          <div class="row align-items-center">
+            <div class="col-4 col-lg-3">
+              <%= image_tag(@user.avatar, :alt => "avatar", class: "avatar avatar-xl rounded") %>
+            </div>
+            <div class="col">
+              <div class="row align-items-center">
+                <div class="col-md-8">
+                  <h2 class="mb-0"><b><%= @user.first_name %></b> <%= @user.last_name %></h2>
+                  <span class="text-muted"><%= @user.age %> years old, <%= @user.city.name%></span> <br>
+                  <span class="text-muted">"<%= @user.welcome_message %>"</span>
+                </div>
+                <div class="col-md-4 text-left text-md-right">
+                  <button type="button" class="btn btn-rounded btn-ico btn-white" data-toggle="tooltip" data-placement="top" title="Add Friend"><i class="icon-plus2 fs-20"></i></button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="bg-light p-0">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col col-md-10 col-lg-8">
+        <div class="nav nav-tabs mb-1">
+          <a class="nav-item nav-link active" data-toggle="tab" href="#demo-2-1">My conversations</a>
+          <a class="nav-item nav-link" data-toggle="tab" href="#demo-2-2">My Friends</a>
+          <a class="nav-item nav-link" data-toggle="tab" href="#demo-2-3">My trips</a>
+          <a class="nav-item nav-link" data-toggle="tab" href="#demo-2-4">Comments</a>
+          <a class="nav-item nav-link" data-toggle="tab" href="#demo-2-5">My profile</a>
+          <a class="nav-item nav-link" data-toggle="tab" href="#demo-2-6">My flat</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- stats -->
+<%= render "user_stat" %>
+<!-- / stats -->
+
+
+
+<div class="bg-light pt-2">
+
+  <div class="container">
+    <div class="tab-content" id="demo-2">
+
+      <!-- tab conversations -->
+      <div class="tab-pane show active" id="demo-2-1" role="tabpanel" aria-labelledby="demo-2-1">
+        <div class="row justify-content-center">
+          <div class="col-md-10 col-lg-8">
+            <div class="row mb-1">
+              <%= render "conversations/index" %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- / tab conversations -->
+
+      <!-- tab friends -->
+      <div class="tab-pane" id="demo-2-2" role="tabpanel" aria-labelledby="demo-2-2">
+        <div class="row justify-content-center">
+          <div class="col col-md-10 col-lg-8">
+              <%= render "correspondances/index" %>
+          </div>
+        </div>
+      </div>
+      <!-- / tab -->
+
+
+      <!-- tab trips -->
+      <div class="tab-pane" id="demo-2-3" role="tabpanel" aria-labelledby="demo-2-3">
+        <%= render "trips/index" %>
+      </div>
+      <!-- / tab -->
+
+      <!-- tab comments -->
+      <div class="tab-pane" id="demo-2-4" role="tabpanel" aria-labelledby="demo-2-4">
+        <%= render "comments/index" %>
+      </div>
+      <!-- / tab -->
+
+      <!-- tab settings -->
+      <%= render 'form', user: @user %>
+      <!-- / tab -->
+    </div>
+  </div>
+</div>
+
+<!-- footer -->
+<%= render "footer" %>
+<!-- / footer -->

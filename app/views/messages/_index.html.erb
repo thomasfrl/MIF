@@ -1,0 +1,68 @@
+<%  if @other_user %>
+  <div class="boxed p-2 mb-1">
+    <div class="row align-items-center justify-content-between">
+      <div class="col-10">
+        <div class="media align-items-center">
+          <%if @other_user.avatar.attached?%>
+            <%=image_tag(@other_user.avatar, :alt => "avatar", class: "avatar avatar-lg rounded mr-3")%>
+          <%else%>
+            <%= image_tag("img/user-1.jpg", :alt => "avatar", class: "avatar avatar-lg rounded mr-3") %>
+          <%end%>
+          <div class="media-body">
+            <h5 class="mb-0"><%= @other_user.name %></h5>
+            <%= link_to  @other_user do %>
+              <span class="text-muted">View profile</span>
+            <% end %>
+          </div>
+        </div>
+      </div>
+      <div class="col-2 text-md-right"> 
+        <%= link_to root_path, class: "btn btn-ico btn-outline-light text-dark rounded btn-sm" do  %>
+            <i class="icon-more-vertical fs-22"></i>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <div id="list_messages" class="bg-white" style="height: 30em;overflow: auto;">
+    <% @messages.each do |message| %>
+      <div class="row  m-2">
+        <% user = message.user %>
+        <% if user == @other_user %>
+          <div class="col-6">
+            <div class="row  text-black">
+              <blockquote class="bg-light rounded">
+                <p class="text-muted text-center p-2"><%= message.content %></p>
+              </blockquote>
+            </div>
+          </div>
+        <% else %>
+          <div class="col-6 offset-6">
+            <div class="row justify-content-end text-white">
+              <blockquote class="bg-primary rounded">
+                <p class="text-muted text-center p-2"><%= message.content %></p>
+              </blockquote>
+            </div>      
+          </div>
+        <% end %>
+      </div>    
+    <% end %>
+  </div>
+  <br>
+  <%= form_tag(conversation_messages_path(@conversation), method: "post", class: "form mb-5", id: "contact-form", remote: true)  do %>
+      <div class="row">
+        <div class="form-group col-10">
+            <%= text_field_tag :content, nil, class: "form-control", placeholder: "Write a message" %>
+        </div>
+        <div class="text-center">
+            <%= submit_tag("Send", class: "btn") %>
+        </div>
+      </div>
+  <%end%>
+<% else %>
+<div class="boxed mb-5">
+  <div class="container bg-white" style="height: 42em;">
+  </div>
+</div>
+<% end %>
+

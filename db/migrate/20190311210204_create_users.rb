@@ -7,7 +7,8 @@ class CreateUsers < ActiveRecord::Migration[5.2]
       t.integer :age
       t.text :welcome_message
       t.string :nationality
-      t.references :city, foreign_key: true
+      t.references :city, index: true
+
 
       t.timestamps
     end

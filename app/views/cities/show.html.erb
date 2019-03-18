@@ -1,19 +1,87 @@
-<p id="notice"><%= notice %></p>
+<% if false %>
+<section>
+  <div class="container-fluid pt-2">
+    <div class="row">
+      <div class="col">
+        <ul class="masonry row gutter-2">
+          <% @city.users.each do |user|%>
+          <li class="col-md-6 col-lg-2">
+              <article class="tile">
+                <div class="tile-image" style="background-color: grey;"></div>
+                <div class="tile-header">
+                  <h2 class="text-black" style="text-align: center"><%= user.first_name %></h2>
+                </div>
+            </article>
+          </li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+<% end %>
 
-<p>
-  <strong>Name:</strong>
-  <%= @city.name %>
-</p>
 
-<p>
-  <strong>Country:</strong>
-  <%= @city.country %>
-</p>
 
-<p>
-  <strong>Zip code:</strong>
-  <%= @city.zip_code %>
-</p>
+    <!-- cover -->
+    <section class="hero hero-with-header text-white"
+      data-top-top="transform: translateY(0px);"
+      data-top-bottom="transform: translateY(250px);">
+      <%= image_tag(@city.picture, :alt => "avatar", class: "image image-overlay image-blur", style: "transform: scale(1.1);") %>
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col text-shadow">
+            <div class="row gutter-1">
+              <div class="form-group col-md-5">
+                <%#<input type="email" class="form-control-lg form-control text-black" id="inputEmail4" placeholder="City" style="background-color: white;">%>
+                <%= form_tag({controller: "cities", action: "show"}, method: "get") do %>
+                <%= text_field_tag(:name, "City", id: "inputEmail4", style: "background-color: white;", class: "form-control-lg form-control text-black") %>
+              </div>
+              <div class="form-group col-md-2">
+                <%= submit_tag("Search", class: "btn btn-lg btn-block btn-primary") %>
+              </div>
+              <% end %>
+            </div>
+            <h1 class="font-weight-bold"><%= @city.name.slice(0,1).capitalize + @city.name.slice(1..-1) %></h1>
+            <h2 class="mb-0"><%= @city.country.capitalize %></h2>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- / cover -->
 
-<%= link_to 'Edit', edit_city_path(@city) %> |
-<%= link_to 'Back', cities_path %>
+    <!-- team -->
+    <section class="bg-white">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-md-6 text-center">
+            <span class="eyebrow d-block mb-1 text-primary">Miffers in <%=@city.name%></span>
+            <p class="lead text-black">We have a very complex matching algorithm to provide you the profiles with the most things in common with you.</p>
+          </div>
+        </div>
+        <div class="row gutter-0">
+          <% @city.users.each_with_index do |user,count| %>
+            <% if count == 1 %>
+              <div class="col-md-4">
+            <% else %>
+              <div class="col-md-4" data-aos="fade-up" data-aos-delay="<%= count * 100 %>">
+            <% end %>
+                <figure class="user">
+                  <%= link_to user_path(user.id), :class => "user-photo" do%>
+                    <%= image_tag(user.avatar, :alt => "avatar", style: "max-width: 450px", class: "") %>
+                  <figcaption class="user-caption">
+                    <h4><%= user.first_name + user.last_name %></h4>
+                    <ul class="text-white">
+                      <li><%= user.nationality %></li>
+                      <li><%= user.age %></li>
+                      <li><%= user.welcome_message %></li>
+                    </ul>
+                  </figcaption>
+                  <%end%>
+                </figure>
+              </div>
+          <% end %>
+        </div>
+      </div>
+    </section>
+    <!-- / team -->

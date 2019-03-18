@@ -73,6 +73,8 @@ gem 'devise'
 gem "aws-sdk-s3", require: false
 gem 'jquery-rails'
 gem 'pry'
-gem "font-awesome-rails"
 gem 'bootstrap', '~> 4.1.3'
 gem 'simple_form'
+gem 'omniauth'
+gem 'omniauth-facebook'
+gem 'alert_message'

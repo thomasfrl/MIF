@@ -2,13 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "tickets/show", type: :view do
   before(:each) do
-    @ticket = assign(:ticket, Ticket.create!(
-      :object => "Object",
-      :category => "Category",
-      :content => "MyText",
-      :user => nil,
-      :status => "Status"
-    ))
+    @ticket = FactoryBot.create(:ticket)
   end
 
   it "renders attributes in <p>" do
@@ -19,4 +13,5 @@ RSpec.describe "tickets/show", type: :view do
     expect(rendered).to match(//)
     expect(rendered).to match(/Status/)
   end
+
 end
