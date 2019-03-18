@@ -72,7 +72,7 @@
       <!-- tab friends -->
       <div class="tab-pane" id="demo-2-2" role="tabpanel" aria-labelledby="demo-2-2">
         <div class="row justify-content-center">
-          <div class="col-md-10 col-lg-8">
+          <div class="col col-md-10 col-lg-8">
               <%= render "correspondances/index" %>
           </div>
         </div>
@@ -95,6 +95,13 @@
       <!-- tab settings -->
       <%= render 'form', user: @user %>
       <!-- / tab -->
+
+      <!-- tab flat -->
+      <div class="tab-pane" id="demo-2-6" role="tabpanel" aria-labelledby="demo-2-6">
+        <%= render "flats/flat" %>
+      </div>
+      <!-- / tab -->
+
     </div>
   </div>
 </div>

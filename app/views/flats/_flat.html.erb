@@ -1,0 +1,64 @@
+<br><br><br><br><br><br><br><br><br><br><br>
+<div class="container">
+        <div class="row">
+          
+        </div>
+        <div class="row gutter-2 gutter-lg-4">
+          <div class="col-md-6 col-lg-4">
+            <div class="media align-items-center mb-2">
+            <i class="fas text-primary fa-3x mr-3 fa-users"></i>
+              <div class="media-body">
+                <h5 class="fs-25 font-weight-bold">X place(s)</h5>
+              </div>
+            </div>
+            </div>
+          <div class="col-md-6 col-lg-4">
+            <div class="media align-items-center mb-2">
+            <i class="fas text-primary fa-3x mr-3 fa-bed"></i>
+              <div class="media-body">
+                <h5 class="fs-25 font-weight-bold">Bed/Couch</h5>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-4">
+            <div class="media align-items-center mb-2">
+            <i class="fas text-primary fa-3x mr-3 fa-home"></i>
+              <div class="media-body">
+                <h5 class="fs-25 font-weight-bold">Living/Bed room</h5>
+              </div>
+            </div>
+          </div>
+</div>
+  
+  
+  <!-- post -->
+<%if @flat.main_picture.attached? || @flat.other_pictures.attached?%>
+<div class="container">  
+<div class="row mb-1">
+    <div class="col">
+      <article class="card">
+        <div class="card-header text-center">
+        </div>
+        <div class="card-body overflow-hidden">
+          <div class="owl-carousel gallery visible" data-items="[3,4]" data-margin="0.2" data-nav="true">
+          <%if @flat.main_picture.attached?%>
+            <figure class="photo">
+              <%= image_tag @flat.main_picture, :style => "height: 250px ;width: 200px ;margin: 10px;"%>
+            </figure>
+            <%end%>
+            <%if @flat.other_pictures.attached?%>
+                <% (0...@flat.other_pictures.count).each do |pic|%>
+                  <figure class="photo">
+                    <%= image_tag @flat.other_pictures[pic], :style => "height: 250px ;width: 200px ;margin: 10px;"%>
+                  </figure>
+            <%end%>
+          <%end%>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+  <%else%>
+  <%end%>
+  </div>
+  <!-- / post -->

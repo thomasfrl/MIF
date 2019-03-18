@@ -57,6 +57,7 @@ GEM
       tzinfo (~> 1.1)
     addressable (2.6.0)
       public_suffix (>= 2.0.2, < 4.0)
+    alert_message (1.1.8)
     archive-zip (0.12.0)
       io-like (~> 0.3.0)
     arel (9.0.0)
@@ -327,6 +328,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  alert_message
   aws-sdk-s3
   bootsnap (>= 1.1.0)
   bootstrap (~> 4.1.3)
