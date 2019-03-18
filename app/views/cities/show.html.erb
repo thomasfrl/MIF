@@ -35,7 +35,7 @@
               <div class="form-group col-md-5">
                 <%#<input type="email" class="form-control-lg form-control text-black" id="inputEmail4" placeholder="City" style="background-color: white;">%>
                 <%= form_tag({controller: "cities", action: "show"}, method: "get") do %>
-                <%= text_field_tag(:q, "City", id: "inputEmail4", style: "background-color: white;", class: "form-control-lg form-control text-black") %>
+                <%= text_field_tag(:name, "City", id: "inputEmail4", style: "background-color: white;", class: "form-control-lg form-control text-black") %>
               </div>
               <div class="form-group col-md-2">
                 <%= submit_tag("Search", class: "btn btn-lg btn-block btn-primary") %>
