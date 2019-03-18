@@ -2,15 +2,28 @@ class AnswersController < ApplicationController
   before_action :authenticate_user!
   before_action :set_env
   before_action :good_user
-  before_action :already_answered?
+  #before_action :already_answered?
 
   def create
     @answer = Answer.new(author: current_user, content: params[:answer][:content] )
     @answer.quiz_conv = @quiz_conv
     if @answer.save
-      flash[:notice] = "Answer taken into account"
-      @conversation.iteration_quiz += 0.5
-      redirect_to current_user
+      flash.now[:notice] = "Answer taken into account"
+      i = @conversation.iteration_quiz
+      @conversation.update(iteration_quiz: i+=0.5)
+      c = Conversation.find(params[:conversation_id])
+      if c.iteration_quiz.to_i == i.to_i 
+        respond_to do |format|
+          format.html{}
+          format.js{render "wait"}
+        end
+      else
+        set_env
+        respond_to do |format|
+          format.html{}
+          format.js{render "new"}
+        end
+      end
     else 
       flash[:danger] = "Problem with your answer. It was not registred"
       redirect_to current_user
@@ -19,6 +32,10 @@ class AnswersController < ApplicationController
 
   def new
     @answer = Answer.new
+    respond_to do |format|
+      format.html{}
+      format.js{}
+    end
   end
 
   private
@@ -28,8 +45,11 @@ class AnswersController < ApplicationController
     unless answers.empty?
       answers.each do |a|
         if a.author == current_user
-          flash[:danger] = "you have already answer the question"
-          redirect_to root_path
+          format.html{
+            flash[:danger] = "you have already answer the question"
+            redirect_to root_path    
+          }
+          format.js{render "wait"}
         end
       end
     end
@@ -43,8 +63,14 @@ class AnswersController < ApplicationController
 
   def good_user
     unless @conversation.participants.include?(current_user)
-      flash[:danger] = "not possible to make a quiz with someone you don't have any conversation"
-      redirect_to root_path
+      respond_to do |format|
+        format.html{
+          flash[:danger] = "not possible to make a quiz with someone you don't have any conversation"
+          redirect_to root_path    
+        }
+        format.js{render "wait"}
+      end
+
     end
   end
 end

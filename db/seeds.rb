@@ -257,7 +257,8 @@ puts "comment created"
 
 User.all.each do |u|
   img = get_random_image
-  flat = Flat.create!(user: u, description: Faker::Lorem.paragraph_by_chars, address: Faker::Address.street_address)
+  flat = Flat.find_by(user: u)
+  flat.update(description: Faker::Lorem.paragraph_by_chars, address: Faker::Address.street_address)
   flat.main_picture.attach(io: File.open(img[0]), filename: img[1])
   img = get_random_image
   flat.other_pictures.attach(io: File.open(img[0]), filename: img[1])
