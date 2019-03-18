@@ -42,7 +42,7 @@
       </div>
     </section>
      <!-- cover -->
-                        
+
      <!-- presentation -->
     <section class="section-lg bg-primary">
       <div class="container">
@@ -124,7 +124,9 @@
             </ul>
             <div class="row">
           <div class="col text-center">
-            <button type="button" class="btn btn-rounded btn-with-ico btn-primary">View All Cities <i class="icon-chevron-right2 fs-24"></i></button>
+            <%= link_to cities_path, class:"btn btn-rounded btn-with-ico btn-primary" do %>
+              View All Cities <i class="icon-chevron-right2 fs-24"></i>
+            <%end%>
           </div>
         </div>
           </div>
