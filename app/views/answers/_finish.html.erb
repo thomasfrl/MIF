@@ -1,0 +1,10 @@
+<p>The game is now finished</p>
+<p>The results : </p>
+
+<% @quizzes.each do |quiz| %>
+  <p><%= quiz.question %></p> 
+  <% answers = QuizConv.find_by(conversation: @conversation, quiz: quiz ).answers %>
+  <p>Your answer : <%= answers.find_by(author: current_user).content %></p>
+  <p>His/her answer : <%= answers.find_by(author: @other_user).content %></p>
+  <hr>
+<% end %>

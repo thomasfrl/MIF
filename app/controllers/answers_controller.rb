@@ -1,7 +1,8 @@
 class AnswersController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_env
   before_action :good_user
+  before_action :set_env
+  before_action :finish?
   before_action :already_answered?
 
   def create
@@ -43,26 +44,41 @@ class AnswersController < ApplicationController
     unless answers.empty?
       answers.each do |a|
         if a.author == current_user
-          format.html{
-            flash[:danger] = "you have already answer the question"
-            redirect_to root_path    
-          }
-          format.js{render "wait"}
+          respond_to do |format|
+            format.html{
+              flash[:danger] = "you have already answer the question"
+              redirect_to root_path    
+            }
+            format.js{render "wait"}
+          end
         end
       end
     end
   end 
 
+  def finish?
+    if @iteration >= 14
+      @quizzes = @conversation.quizzes
+      @other_user = @conversation.other_participant(current_user)
+      respond_to do |format|
+        format.html{
+          flash[:danger] = "the game is finish"
+          redirect_to root_path    
+        }
+        format.js{render "finish"}
+      end
+    end
+  end
+
   def set_env
-    @conversation = Conversation.find(params[:conversation_id])
     @quiz_conv = @conversation.quiz_conv
     @quiz = @quiz_conv.quiz
     @answer = Answer.new
-    iteration = @conversation.iteration_quiz.to_i
-    if iteration >= 1
+    @iteration = @conversation.iteration_quiz.to_i
+    if @iteration >= 1
       previews_quiz = @conversation.previews_quiz
       @previews_question = previews_quiz.question
-      previews_answers = QuizConv.find_by(conversation: @conversation, index: iteration - 1 ).answers
+      previews_answers = QuizConv.find_by(conversation: @conversation, index: @iteration - 1 ).answers
       previews_answers.each do |answer|
         if answer.author != current_user
           @previews_answer = answer.content
@@ -72,6 +88,7 @@ class AnswersController < ApplicationController
   end
 
   def good_user
+    @conversation = Conversation.find(params[:conversation_id])
     unless @conversation.participants.include?(current_user)
       respond_to do |format|
         format.html{
