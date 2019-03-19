@@ -4,7 +4,7 @@ class HomeController < ApplicationController
   def index
     @cities = City.all.slice(0...8)
     @random_cities = City.all.sample
-    flash[:notice] = "Tell a friend about us"
+    
 
   end
 

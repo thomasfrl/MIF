@@ -43,7 +43,8 @@ class FlatsController < ApplicationController
   def update
     respond_to do |format|
       if @flat.update(flat_params)
-        format.html { redirect_to @flat, notice: 'Flat was successfully updated.' }
+        @flat.pictures.attach(params[:pictures])
+        format.html { redirect_to edit_flat_path(@flat), notice: 'Flat was successfully updated.' }
         format.json { render :show, status: :ok, location: @flat }
       else
         format.html { render :edit }
@@ -61,6 +62,8 @@ class FlatsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+
 
   private
     # Use callbacks to share common setup or constraints between actions.

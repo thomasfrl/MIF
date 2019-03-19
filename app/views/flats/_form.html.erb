@@ -1,4 +1,4 @@
-<%= form_with(model: flat, local: true) do |form| %>
+<%= form_with(model: flat, local: true, multipart: true) do |form| %>
   <% if flat.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(flat.errors.count, "error") %> prohibited this flat from being saved:</h2>
@@ -10,11 +10,6 @@
       </ul>
     </div>
   <% end %>
-
-  <div class="field">
-    <%= form.label :user_id %>
-    <%= form.text_field :user_id %>
-  </div>
 
   <div class="field">
     <%= form.label :address %>
@@ -30,6 +25,20 @@
     <%= form.label :has_wifi %>
     <%= form.check_box :has_wifi %>
   </div>
+
+  <% flat.pictures.each do |pic| %>
+    <%= image_tag pic, :style => "height: 250px ;width: 200px ;margin: 10px;"%>
+    <%= file_field_tag :pic %>
+    <%= link_to 'Delete', flat_flat_picture_path(flat,:pic => pic), :method => :delete, :data => {:confirm => 'Are you sure?'}   %>
+    <br>
+  <%end%>
+
+  <%= form_tag flat_flat_picture_path(flat), multipart: true do %>
+    <%= file_field_tag :pictures %>
+    <%= submit_tag "uploader l'avatar", class: "fs-14 link text-primary" %>
+  <% end %>
+
+
 
   <div class="actions">
     <%= form.submit %>

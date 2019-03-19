@@ -58,6 +58,8 @@
             <div class="nav nav-tabs mb-1">
               <a class="nav-item nav-link active" data-toggle="tab" href="#demo-2-1">Profile</a>
               <a class="nav-item nav-link" data-toggle="tab" href="#demo-2-2">Comments</a>
+              <a class="nav-item nav-link" data-toggle="tab" href="#demo-2-3">Flat</a>
+              
             </div>
           </div>
         </div>
@@ -159,6 +161,10 @@
           <!-- tab connections -->
           <div class="tab-pane" id="demo-2-2" role="tabpanel" aria-labelledby="demo-2-2">
             <%= render "comments/index" %>
+          </div>
+          
+          <div class="tab-pane" id="demo-2-3" role="tabpanel" aria-labelledby="demo-2-3">
+          <%= render "flats/flat" %>
           </div>
         </div>
     </div>

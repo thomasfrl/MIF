@@ -15,7 +15,7 @@ Rails.application.routes.draw do
     omniauth_callbacks: "users/omniauth_callbacks"
   }
 
-
+  
   
   resources :users do
     resources :avatars, only: [:create]
@@ -31,7 +31,9 @@ Rails.application.routes.draw do
     resources :answers, only: [:new, :create]
   end
   resources :languages
-  resources :flats
+  resources :flats do
+    resources :flat_pictures
+  end
   resources :users
   resources :cities
   resources :home
