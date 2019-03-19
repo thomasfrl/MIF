@@ -94,14 +94,13 @@ class User < ApplicationRecord
     self.created_correspondances.where(status: "refused") +  self.received_correspondances.where(status: "refused")
   end
 
-<<<<<<< HEAD
   def welcome_send
     UserMailer.welcome_email(self).deliver_now
-=======
+  end
+
   private
   def create_flat
     Flat.create(user: User.last)
->>>>>>> 3e13a3bdefd0234f0529549da17e40a1cdae3217
   end
 
 end
