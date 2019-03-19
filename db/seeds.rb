@@ -105,25 +105,25 @@ Quiz.create( question:"If you add to choose one : sex or food ?", level:3)
 
 puts "Quiz create"
 
-barcelone = City.create!(name: "Barcelone", country: "Spain", zip_code: "08001", description: "")
+barcelone = City.create!(name: "Barcelone", country: "Spain", zip_code: "08001", description: "Allow me to state here how much I love Barcelona , an admirable city, a city full of life, intense, a port open to the past and future.  Le Corbusier")
 puts "Barcelone created"
-berlin = City.create!(name: "Berlin", country: "Germany", zip_code: "10115", description: "The city of creation: Mode, Art, Design, Music")
+berlin = City.create!(name: "Berlin", country: "Germany", zip_code: "10115", description: "The city of creation: Mode, Art, Design, Music. All free men, wherever they may live, are citizens of Berlin. And therefore, as a free man, I take pride in the words, ‘Ich bin ein Berliner! John Kennedy ")
 puts "Berlin created"
-london =  City.create!(name: "London", country: "England", zip_code: "WC2N 5DU", description: " ")
+london =  City.create!(name: "London", country: "England", zip_code: "WC2N 5DU", description: "when a man is tired of London, he is tired of life. Samuel Johnson")
 puts "London created"
-lisbon = City.create!(name: "Lisbon", country: "Portugal", zip_code: "1000", description: " ")
+lisbon = City.create!(name: "Lisbon", country: "Portugal", zip_code: "1000", description: "“By day Lisbon has a naive theatrical quality that enchants and captivates, but by night it is a fairy-tale city, descending over lighted terraces to the sea, like a woman in festive garments going down to meet her dark lover.” Erich Maria Remarque")
 puts "Lisbon created"
-copenhagen =City.create!(name: "Copenhagen", country: "Denmark", zip_code: "1050", description: " ")
+copenhagen =City.create!(name: "Copenhagen", country: "Denmark", zip_code: "1050", description: "The city somehow manages to combine a very zippy vibe, thanks to its cultural and nightlife offerings, with a holiday-resort-style chill, due to its small size and some of the most laid-back people you’re likely to meet.")
 puts "Copenhagen created"
-prague = City.create!(name: "Prague", country: "Czech Republic", zip_code: "100 00", description: " ")
+prague = City.create!(name: "Prague", country: "Czech Republic", zip_code: "100 00", description: "Prague is a living and breathing enigma; old and dirty but somehow unimaginably graceful. And the Beer? The best of Europe for 50 cent.")
 puts "Prague created"
-budapest = City.create!(name: "Budapest", country: "Hungary", zip_code: "1007", description: " ")
+budapest = City.create!(name: "Budapest", country: "Hungary", zip_code: "1007", description: "In Budapest, you’ll find experiences like nothing else in Europe: Feel your stress ebb away as you soak in hundred-degree water, surrounded by opulent Baroque domes…and by Speedo- and bikini-clad Hungarians. Ogle some of Europe’s most richly decorated interiors, which echo a proud little nation’s bygone glory days. Rick Steves")
 puts "Budapest created"
-paris = City.create!(name: "Paris", country: "France", zip_code: "75000", description: " ")
+paris = City.create!(name: "Paris", country: "France", zip_code: "75000", description: "A walk about Paris will provide lessons in history, beauty, and in the point of Life. -Thomas Jefferson")
 puts "Paris created"
-roma = City.create!(name: "Roma", country: "Italy", zip_code: "00100", description: " ")
+roma = City.create!(name: "Roma", country: "Italy", zip_code: "00100", description: "The beauty of the Eternal City, the chaos, the mismatch of elegance and decay that is around every corner. If we could be reborn wherever we chose, how crowded Rome would be.")
 puts "Roma created"
-madrid = City.create!(name: "Madrid", country: "Spain", zip_code: "28001",  description: " ")
+madrid = City.create!(name: "Madrid", country: "Spain", zip_code: "28001",  description: "God worked six days, and rested on the seventh: Madrilenos rest the six,and on the seventh... go to the bullfight. H O'Shea")
 puts "Madrid created"
 
 barcelone.picture.attach(io: File.open("app/assets/images/cities/barcelone.jpg"), filename:"barcelone.jpg")
