@@ -22,9 +22,9 @@ User.destroy_all
 City.destroy_all
 
 
-barcelone = City.create!(name: "Barcelone", country: "Spain", zip_code: "08001", description: "The city of creation: Mode, Art, Design, Music")
+barcelone = City.create!(name: "Barcelone", country: "Spain", zip_code: "08001", description: "")
 puts "Barcelone created"
-berlin = City.create!(name: "Berlin", country: "Germany", zip_code: "10115", description: " ")
+berlin = City.create!(name: "Berlin", country: "Germany", zip_code: "10115", description: "The city of creation: Mode, Art, Design, Music")
 puts "Berlin created"
 london =  City.create!(name: "London", country: "England", zip_code: "WC2N 5DU", description: " ")
 puts "London created"
