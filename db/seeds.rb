@@ -26,7 +26,7 @@ barcelone = City.create!(name: "Barcelone", country: "Spain", zip_code: "08001",
 puts "Barcelone created"
 berlin = City.create!(name: "Berlin", country: "Germany", zip_code: "10115", description: "The city of creation: Mode, Art, Design, Music. All free men, wherever they may live, are citizens of Berlin. And therefore, as a free man, I take pride in the words, ‘Ich bin ein Berliner!’ ")
 puts "Berlin created"
-london =  City.create!(name: "London", country: "England", zip_code: "WC2N 5DU", description: " ")
+london =  City.create!(name: "London", country: "England", zip_code: "WC2N 5DU", description: "when a man is tired of London, he is tired of life. Samuel Johnson")
 puts "London created"
 lisbon = City.create!(name: "Lisbon", country: "Portugal", zip_code: "1000", description: " ")
 puts "Lisbon created"
