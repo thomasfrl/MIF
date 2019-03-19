@@ -12,6 +12,7 @@ def get_random_image
   [image_select, image_select.split(image_path_prefix)[1]]
 end
 
+Preference.destroy_all
 Answer.destroy_all
 Quiz.destroy_all
 UserLanguage.destroy_all

@@ -1,10 +1,5 @@
 Rails.application.routes.draw do
 
-  get 'user_preferences/create'
-  get 'quiz/new'
-  get 'quiz/create'
-  get 'quiz/show'
-
   resources :trips
   root to: "home#index"
   get 'home/about_us', to: "home#about_us"
