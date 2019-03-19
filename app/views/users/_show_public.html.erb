@@ -31,5 +31,15 @@
 			</article>
 		</div>
 
+    <div class="container"> 
+			<label>Languages spoken</label>
+      <div>
+        <% @user.languages.each do |l| %>
+          <%= image_tag l.icon, alt: l.language%>
+        <% end %>      
+      </div>
+		</div>
+
+
 	</div>
 </div>
