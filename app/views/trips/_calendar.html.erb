@@ -1,0 +1,13 @@
+<%= month_calendar trips: @trips do |date, trips| %>
+  <%= date.day %>
+
+  <% @trips.each do |trip| %>
+    <% if trip.start_date == date %>
+        <div class="text-center">
+          <%= trip.correspondance.acceptor.first_name %>
+        </div>
+
+    <% end %>
+  <% end %>
+<% end %>
+<%= @trips.first.start_date %>

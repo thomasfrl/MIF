@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!
-  before_action :validated_user?
+  # before_action :validated_user?
   before_action :good_user, only: [:update]
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
@@ -16,6 +16,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @languages = Language.all
     @flat = @user.flat
+    @trips = current_user.trips
     conversations_controller
     comments_controller
     correspondances_controller

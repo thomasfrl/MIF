@@ -79,3 +79,4 @@ gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'alert_message'
 gem 'dotenv-rails'
+gem "simple_calendar", "~> 2.0"

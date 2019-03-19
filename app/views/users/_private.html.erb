@@ -82,7 +82,10 @@
 
       <!-- tab trips -->
       <div class="tab-pane" id="demo-2-3" role="tabpanel" aria-labelledby="demo-2-3">
-        <%= render "trips/index" %>
+        <div class="w-75 m-auto" id="trips_calendar">
+          <%= render partial: "trips/calendar", locals: {trips: @trips} %>
+        </div>
+
       </div>
       <!-- / tab -->
 
