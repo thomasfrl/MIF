@@ -64,8 +64,11 @@
             <div class="nav nav-tabs mb-1">
               <a class="nav-item nav-link active" data-toggle="tab" href="#demo-2-1">Profile</a>
               <a class="nav-item nav-link" data-toggle="tab" href="#demo-2-2">Comments</a>
-              <a class="nav-item nav-link" data-toggle="tab" href="#demo-2-3">Flat</a>
-              
+              <% if correspondance %>
+                <% if correspondance.status == "validated" %>
+                  <a class="nav-item nav-link" data-toggle="tab" href="#demo-2-3">Flat</a>
+                <% end %>
+              <% end %>
             </div>
           </div>
         </div>
@@ -91,9 +94,14 @@
             <%= render "comments/index" %>
           </div>
           
-          <div class="tab-pane" id="demo-2-3" role="tabpanel" aria-labelledby="demo-2-3">
-          <%= render "flats/flat" %>
-          </div>
+          
+          <% if correspondance %>
+            <% if correspondance.status == "validated" %>
+              <div class="tab-pane" id="demo-2-3" role="tabpanel" aria-labelledby="demo-2-3">
+                <%= render "flats/flat" %>
+              </div>
+            <% end %>
+          <% end %>   
         </div>
-    </div>
-</section>
+      </div>
+    </section>

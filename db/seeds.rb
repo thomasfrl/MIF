@@ -18,6 +18,14 @@ def get_random_image_flat
   [image_select, image_select.split(image_path_prefix)[1]]
 end
 
+def get_random_image_user
+  image_path_prefix = "app/assets/images/img/user_picture/"
+  image_files = Dir.glob("#{image_path_prefix}*")
+  image_select = image_files.sample
+  [image_select, image_select.split(image_path_prefix)[1]]
+end
+
+
 
 Preference.destroy_all
 Answer.destroy_all
@@ -192,16 +200,21 @@ puts "preferences created"
 30.times do
   img = get_random_image_avatar
   i = [1,2,4,7,9,10].sample
-  user = User.create!(first_name: Faker::Name.first_name, last_name: Faker::Name.unique.last_name, description: Faker::Lorem.paragraph_by_chars, age: (rand(15)+20), email: "#{Faker::Name.unique.first_name}@yopmail.com", password: "123456", city_id: City.all.sample.id )
+  user = User.create!(first_name: Faker::Name.first_name, last_name: Faker::Name.unique.last_name, description: Faker::Lorem.paragraph_by_chars, age: (rand(15)+20), email: "#{Faker::Name.unique.first_name}@yopmail.com", password: "123456", city_id: City.all.sample.id, welcome_message: Faker::Lorem.sentence, nationality: Faker::Nation.nationality )
   user.avatar.attach(io: File.open(img[0]), filename: img[1])
+  3.times do
+    img = get_random_image_user
+    user.pictures.attach(io: File.open(img[0]), filename: img[1])
+  end
+
 end
 img = get_random_image_avatar
-user = User.create!(first_name: "jean", last_name: "effe", description: Faker::Lorem.paragraph_by_chars, age: (rand(15)+20), email: "user1@yopmail.com", password: "123456", city_id: City.all.sample.id )
+user = User.create!(first_name: "jean", last_name: "effe", description: Faker::Lorem.paragraph_by_chars, age: (rand(15)+20), email: "user1@yopmail.com", password: "123456", city_id: City.all.sample.id, welcome_message: Faker::Lorem.sentence, nationality: Faker::Nation.nationality )
 user.avatar.attach(io: File.open(img[0]), filename: img[1])
 
 img = get_random_image_avatar
-user = User.create!(first_name: "flo", last_name: "bobo", description: Faker::Lorem.paragraph_by_chars, age: (rand(15)+20), email: "user2@yopmail.com", password: "123456", city_id: City.all.sample.id )
-user.avatar.attach(io: File.open(img[0]), filename: img[1])
+user = User.create!(first_name: "flo", last_name: "bobo", description: Faker::Lorem.paragraph_by_chars, age: (rand(15)+20), email: "user2@yopmail.com", password: "123456", city_id: City.all.sample.id, welcome_message: Faker::Lorem.sentence, nationality: Faker::Nation.nationality )
+user.pictures.attach(io: File.open(img[0]), filename: img[1])
 
 
 puts "User created"
