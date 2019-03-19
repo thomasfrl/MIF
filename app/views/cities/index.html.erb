@@ -1,31 +1,41 @@
-<p id="notice"><%= notice %></p>
-
-<h1>Cities</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Country</th>
-      <th>Zip code</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @cities.each do |city| %>
-      <tr>
-        <td><%= city.name %></td>
-        <td><%= city.country %></td>
-        <td><%= city.zip_code %></td>
-        <td><%= link_to 'Show', city %></td>
-        <td><%= link_to 'Edit', edit_city_path(city) %></td>
-        <td><%= link_to 'Destroy', city, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New City', new_city_path %>
+  <section class="hero hero-with-header text-white"
+    data-top-top="transform: translateY(0px);"
+    data-top-bottom="transform: translateY(250px);">
+    <%= image_tag(@cities.sample.picture, :alt => "avatar", class: "image image-overlay image-blur", style: "transform: scale(1.1);", size: "2000x1600") %>
+    <section class="bg-light">
+     <div class="row justify-content-center ">
+        <div class="container gallery">
+       <div class="row justify-content-center">
+         <div class="col-md-6 text-center">
+           <h2><b>Discover</b> our cities.</h2>
+           <p>Select the city of your dreams and discover all the miffers who live there.</p>
+         </div>
+       </div>
+       <ul class="masonry row gutter-2">
+             <% @cities.each do |city|%>
+             <li class="col-md-6 col-lg-3">
+               <% if city.name == "Paris" %>
+                 <article class="tile">
+               <% end %>
+               <% if city.id.even? %>
+                 <article class="tile tile-long">
+               <% else %>
+                 <% if city.id % 5 == 0 %>
+                   <article class="tile tile-long">
+                 <% end %>
+                 <article class="tile">
+               <% end %>
+                 <div class="tile-image" style="background-image: url('<%=asset_path("cities/#{city.name.downcase}.jpg")%>');"></div>
+                   <%= link_to city_path(city) do%>
+                   <div class="tile-header">
+                     <h2 class="text-white" style="text-align: center"><%= city.name %></h2>
+                     <h4 class="text-white" style="text-align: center"><strong><%= city.users.count %> miffers </strong></h4>
+                   </div>
+                   <% end %>
+               </article>
+             </li>
+             <% end %>
+           </ul>
+          </div
+        </section>
+      </section>

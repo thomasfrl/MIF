@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_18_133404) do
+ActiveRecord::Schema.define(version: 2019_03_18_155556) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -37,15 +37,23 @@ ActiveRecord::Schema.define(version: 2019_03_18_133404) do
   end
 
   create_table "answers", force: :cascade do |t|
+<<<<<<< HEAD
     t.bigint "conversation_id"
     t.bigint "quiz_id"
+=======
+    t.bigint "quiz_conv_id"
+>>>>>>> 3e13a3bdefd0234f0529549da17e40a1cdae3217
     t.text "content"
     t.bigint "author_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["author_id"], name: "index_answers_on_author_id"
+<<<<<<< HEAD
     t.index ["conversation_id"], name: "index_answers_on_conversation_id"
     t.index ["quiz_id"], name: "index_answers_on_quiz_id"
+=======
+    t.index ["quiz_conv_id"], name: "index_answers_on_quiz_conv_id"
+>>>>>>> 3e13a3bdefd0234f0529549da17e40a1cdae3217
   end
 
   create_table "cities", force: :cascade do |t|
@@ -72,6 +80,7 @@ ActiveRecord::Schema.define(version: 2019_03_18_133404) do
     t.bigint "receiver_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.float "iteration_quiz", default: 0.0
     t.index ["author_id"], name: "index_conversations_on_author_id"
     t.index ["receiver_id"], name: "index_conversations_on_receiver_id"
   end
@@ -123,6 +132,19 @@ ActiveRecord::Schema.define(version: 2019_03_18_133404) do
     t.index ["user_id"], name: "index_messages_on_user_id"
   end
 
+<<<<<<< HEAD
+=======
+  create_table "quiz_convs", force: :cascade do |t|
+    t.bigint "quiz_id"
+    t.bigint "conversation_id"
+    t.integer "index"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["conversation_id"], name: "index_quiz_convs_on_conversation_id"
+    t.index ["quiz_id"], name: "index_quiz_convs_on_quiz_id"
+  end
+
+>>>>>>> 3e13a3bdefd0234f0529549da17e40a1cdae3217
   create_table "quizzes", force: :cascade do |t|
     t.text "question"
     t.integer "level"
@@ -194,12 +216,18 @@ ActiveRecord::Schema.define(version: 2019_03_18_133404) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+<<<<<<< HEAD
   add_foreign_key "answers", "conversations"
   add_foreign_key "answers", "quizzes"
+=======
+  add_foreign_key "answers", "quiz_convs"
+>>>>>>> 3e13a3bdefd0234f0529549da17e40a1cdae3217
   add_foreign_key "flats", "users"
   add_foreign_key "matchmaking_results", "users"
   add_foreign_key "messages", "conversations"
   add_foreign_key "messages", "users"
+  add_foreign_key "quiz_convs", "conversations"
+  add_foreign_key "quiz_convs", "quizzes"
   add_foreign_key "testifies", "users"
   add_foreign_key "tickets", "users"
   add_foreign_key "trips", "correspondances"
