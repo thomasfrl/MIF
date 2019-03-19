@@ -17,8 +17,8 @@
         </div>
       </div>
       <div class="col-2 text-md-right"> 
-        <%= link_to root_path, class: "btn btn-ico btn-outline-light text-dark rounded btn-sm" do  %>
-            <i class="icon-more-vertical fs-22"></i>
+        <%= link_to new_conversation_answer_path(@conversation),  {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal_answer' , class: "btn btn-ico btn-outline-light text-dark rounded btn-sm"} do  %>
+            <i class="fas fa-plus-circle fa-2x p-1 text-primary"></i>
         <% end %>
       </div>
     </div>

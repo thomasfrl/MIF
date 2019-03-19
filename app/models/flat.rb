@@ -1,5 +1,4 @@
 class Flat < ApplicationRecord
   belongs_to :user
-  has_one_attached :main_picture
-  has_many_attached :other_pictures
+  has_many_attached :pictures
 end

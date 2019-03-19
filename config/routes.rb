@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
 
-
   resources :trips
   root to: "home#index"
   get 'home/about_us', to: "home#about_us"
@@ -11,9 +10,9 @@ Rails.application.routes.draw do
     omniauth_callbacks: "users/omniauth_callbacks"
   }
 
-
-
-  resources :users, :path=> "friends", only: [:show, :edit, :update] do
+  
+  
+  resources :users do
     resources :avatars, only: [:create]
   end
 
@@ -24,12 +23,16 @@ Rails.application.routes.draw do
   resources :comments
   resources :conversations, only: [:index, :create, :new] do
     resources :messages, only: [:index, :create]
+    resources :answers, only: [:new, :create]
   end
   resources :languages
-  resources :flats
+  resources :flats do
+    resources :flat_pictures
+  end
   resources :users
   resources :cities
   resources :home
+  resources :user_preferences, only: [:create, :new]
 
 
 

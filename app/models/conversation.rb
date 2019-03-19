@@ -5,6 +5,8 @@ class Conversation < ApplicationRecord
   belongs_to :receiver, class_name: "User"
 
   has_many :messages, dependent: :destroy
+  has_many :quiz_convs, dependent: :destroy
+  has_many :quizzes, through: :quiz_convs
 
   def last_message
     messages = self.messages
@@ -35,4 +37,16 @@ class Conversation < ApplicationRecord
      p.delete(current_user)
     return p[0]
   end
+
+  def quiz_conv
+    QuizConv.find_by(conversation: self, index: self.iteration_quiz.to_i)
+  end
+
+  def quiz
+    QuizConv.find_by(conversation: self, index: self.iteration_quiz.to_i).quiz
+  end
+  def previews_quiz
+    QuizConv.find_by(conversation: self, index: self.iteration_quiz.to_i-1).quiz
+  end
+
 end

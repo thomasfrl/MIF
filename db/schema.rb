@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_16_003447) do
+ActiveRecord::Schema.define(version: 2019_03_19_095046) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,6 +34,16 @@ ActiveRecord::Schema.define(version: 2019_03_16_003447) do
     t.string "checksum", null: false
     t.datetime "created_at", null: false
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
+  end
+
+  create_table "answers", force: :cascade do |t|
+    t.bigint "quiz_conv_id"
+    t.text "content"
+    t.bigint "author_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["author_id"], name: "index_answers_on_author_id"
+    t.index ["quiz_conv_id"], name: "index_answers_on_quiz_conv_id"
   end
 
   create_table "cities", force: :cascade do |t|
@@ -60,6 +70,7 @@ ActiveRecord::Schema.define(version: 2019_03_16_003447) do
     t.bigint "receiver_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.float "iteration_quiz", default: 0.0
     t.index ["author_id"], name: "index_conversations_on_author_id"
     t.index ["receiver_id"], name: "index_conversations_on_receiver_id"
   end
@@ -102,6 +113,29 @@ ActiveRecord::Schema.define(version: 2019_03_16_003447) do
     t.index ["user_id"], name: "index_messages_on_user_id"
   end
 
+  create_table "preferences", force: :cascade do |t|
+    t.string "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "quiz_convs", force: :cascade do |t|
+    t.bigint "quiz_id"
+    t.bigint "conversation_id"
+    t.integer "index"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["conversation_id"], name: "index_quiz_convs_on_conversation_id"
+    t.index ["quiz_id"], name: "index_quiz_convs_on_quiz_id"
+  end
+
+  create_table "quizzes", force: :cascade do |t|
+    t.text "question"
+    t.integer "level"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "testifies", force: :cascade do |t|
     t.bigint "user_id"
     t.text "content"
@@ -142,6 +176,16 @@ ActiveRecord::Schema.define(version: 2019_03_16_003447) do
     t.index ["user_id"], name: "index_user_languages_on_user_id"
   end
 
+  create_table "user_preferences", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "preference_id"
+    t.integer "position"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["preference_id"], name: "index_user_preferences_on_preference_id"
+    t.index ["user_id"], name: "index_user_preferences_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "first_name"
     t.string "last_name"
@@ -166,13 +210,18 @@ ActiveRecord::Schema.define(version: 2019_03_16_003447) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "answers", "quiz_convs"
   add_foreign_key "flats", "users"
   add_foreign_key "messages", "conversations"
   add_foreign_key "messages", "users"
+  add_foreign_key "quiz_convs", "conversations"
+  add_foreign_key "quiz_convs", "quizzes"
   add_foreign_key "testifies", "users"
   add_foreign_key "tickets", "users"
   add_foreign_key "trips", "correspondances"
   add_foreign_key "user_languages", "languages"
   add_foreign_key "user_languages", "users"
+  add_foreign_key "user_preferences", "preferences"
+  add_foreign_key "user_preferences", "users"
   add_foreign_key "users", "cities"
 end
