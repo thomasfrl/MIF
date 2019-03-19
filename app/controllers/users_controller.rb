@@ -29,6 +29,7 @@ class UsersController < ApplicationController
 
   # GET /users/1/edit
   def edit
+    @languages = Language.all
   end
 
   # POST /users
@@ -62,6 +63,7 @@ class UsersController < ApplicationController
         format.html { redirect_to user_path(current_user.id), notice: 'User was successfully updated.' }
         format.json { render :edit, status: :ok, location: @user }
       else
+        flash.now[:danger] = "User was not successfully updated"
         format.html { render :edit }
         format.json { render json: @user.errors, status: :unprocessable_entity }
       end

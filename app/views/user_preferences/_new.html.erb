@@ -1,0 +1,25 @@
+<div class="container">
+	<%= form_tag(user_preferences_path) do |f| %>
+		<ul>
+			<h3>Please select the 5 stuff you prefere doing when your visiting a city and order it form 1 to 5</h3>
+			<% @preferences.each_with_index do |preference, i| %>
+				<% if i <=13 %>
+					<li class="row align-items-center">
+						<p class= "col-6"><%= preference.description %></p>
+						<%= check_box_tag("preference_ids[]" , preference.id, false, id: "preference_ids_#{preference.id}") %>
+						<div class="col-3"><%= number_field_tag("position_ids[]", within: 1..5, disabled: true) %></div>			
+					</li>
+				<% else %>
+					<% if i == 14 %>
+						<h3>Please select the budget you have when traveling</h3>
+					<% end %>
+					<li class="row align-items-center justify-content-between">
+						<p><%= preference.description %></p>
+						<%= radio_button("preference", "budget", preference.id, class: "pr-5 mr-5") %>
+					</li>
+				<% end %>
+			<% end %>
+			<%= submit_tag "Post" %>
+		</ul>
+	<% end %>
+</div>
