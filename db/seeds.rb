@@ -97,25 +97,25 @@ Quiz.create( question:"If you add to choose one : sex or food ?", level:3)
 
 puts "Quiz create"
 
-barcelone = City.create!(name: "Barcelone", country: "Spain", zip_code: "08001")
+barcelone = City.create!(name: "Barcelone", country: "Spain", zip_code: "08001", description: "")
 puts "Barcelone created"
-berlin = City.create!(name: "Berlin", country: "Germany", zip_code: "10115")
+berlin = City.create!(name: "Berlin", country: "Germany", zip_code: "10115", description: "The city of creation: Mode, Art, Design, Music")
 puts "Berlin created"
-london =  City.create!(name: "London", country: "England", zip_code: "WC2N 5DU")
+london =  City.create!(name: "London", country: "England", zip_code: "WC2N 5DU", description: " ")
 puts "London created"
-lisbon = City.create!(name: "Lisbon", country: "Portugal", zip_code: "1000")
+lisbon = City.create!(name: "Lisbon", country: "Portugal", zip_code: "1000", description: " ")
 puts "Lisbon created"
-copenhagen =City.create!(name: "Copenhagen", country: "Denmark", zip_code: "1050")
+copenhagen =City.create!(name: "Copenhagen", country: "Denmark", zip_code: "1050", description: " ")
 puts "Copenhagen created"
-prague = City.create!(name: "Prague", country: "Czech Republic", zip_code: "100 00")
+prague = City.create!(name: "Prague", country: "Czech Republic", zip_code: "100 00", description: " ")
 puts "Prague created"
-budapest = City.create!(name: "Budapest", country: "Hungary", zip_code: "1007")
+budapest = City.create!(name: "Budapest", country: "Hungary", zip_code: "1007", description: " ")
 puts "Budapest created"
-paris = City.create!(name: "Paris", country: "France", zip_code: "75000")
+paris = City.create!(name: "Paris", country: "France", zip_code: "75000", description: " ")
 puts "Paris created"
-roma = City.create!(name: "Roma", country: "Italy", zip_code: "00100")
+roma = City.create!(name: "Roma", country: "Italy", zip_code: "00100", description: " ")
 puts "Roma created"
-madrid = City.create!(name: "Madrid", country: "Spain", zip_code: "28001")
+madrid = City.create!(name: "Madrid", country: "Spain", zip_code: "28001",  description: " ")
 puts "Madrid created"
 
 barcelone.picture.attach(io: File.open("app/assets/images/cities/barcelone.jpg"), filename:"barcelone.jpg")
@@ -161,6 +161,23 @@ sp.icon.attach(io: File.open("app/assets/images/flag/norvege.png"), filename:"no
 
 puts "language created"
 
+Preference.create!(description: "Have some drink till the dawn")
+Preference.create!(description: "Meet friends of my Host")
+Preference.create!(description: "Dance all night long with electronic music")
+Preference.create!(description: "Running in the city")
+Preference.create!(description: "Visit Museum")
+Preference.create!(description: "Typical local Restaurant")
+Preference.create!(description: "Visit museum")
+Preference.create!(description: "Play music in da street")
+Preference.create!(description: "Concert with local music")
+Preference.create!(description: "Chilling in a parc")
+Preference.create!(description: "Smoking salad")
+Preference.create!(description: "Skating the city")
+Preference.create!(description: "Biking the city")
+Preference.create!(description: "Just walking and seeing the culture")
+Preference.create!(description: "Less than 100€ ")
+Preference.create!(description: "Between 100€ and 200€")
+Preference.create!(description: "I don't care till i'm having fun")
 
 
 
