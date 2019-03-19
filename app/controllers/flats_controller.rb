@@ -43,8 +43,8 @@ class FlatsController < ApplicationController
   def update
     respond_to do |format|
       if @flat.update(flat_params)
-        @flat.pictures.attach(params[:main_picture])
-        format.html { redirect_to current_user, notice: 'Flat was successfully updated.' }
+        @flat.pictures.attach(params[:pictures])
+        format.html { redirect_to edit_flat_path(@flat), notice: 'Flat was successfully updated.' }
         format.json { render :show, status: :ok, location: @flat }
       else
         format.html { render :edit }
@@ -63,10 +63,7 @@ class FlatsController < ApplicationController
     end
   end
 
-  def destroy_img(pic)
-    pic.purge
 
-  end
 
   private
     # Use callbacks to share common setup or constraints between actions.

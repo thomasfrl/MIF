@@ -29,13 +29,14 @@
   <% flat.pictures.each do |pic| %>
     <%= image_tag pic, :style => "height: 250px ;width: 200px ;margin: 10px;"%>
     <%= file_field_tag :pic %>
-    <%= link_to 'Remove', destroy_img(pic)
-    method: :delete,
-      data: { confirm: 'Are you sure?' } %>
-    <% end %>
-
+    <%= link_to 'Delete', flat_flat_picture_path(flat,:pic => pic), :method => :delete, :data => {:confirm => 'Are you sure?'}   %>
     <br>
   <%end%>
+
+  <%= form_tag flat_flat_picture_path(flat), multipart: true do %>
+    <%= file_field_tag :pictures %>
+    <%= submit_tag "uploader l'avatar", class: "fs-14 link text-primary" %>
+  <% end %>
 
 
 
