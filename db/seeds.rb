@@ -22,9 +22,9 @@ User.destroy_all
 City.destroy_all
 
 
-barcelone = City.create!(name: "Barcelone", country: "Spain", zip_code: "08001", description: "Allow me to state here how much I love Barcelona , an admirable city, a city full of life, intense, a port open to the past and future. – Le Corbusie")
+barcelone = City.create!(name: "Barcelone", country: "Spain", zip_code: "08001", description: "Allow me to state here how much I love Barcelona , an admirable city, a city full of life, intense, a port open to the past and future.  Le Corbusier")
 puts "Barcelone created"
-berlin = City.create!(name: "Berlin", country: "Germany", zip_code: "10115", description: "The city of creation: Mode, Art, Design, Music")
+berlin = City.create!(name: "Berlin", country: "Germany", zip_code: "10115", description: "The city of creation: Mode, Art, Design, Music. All free men, wherever they may live, are citizens of Berlin. And therefore, as a free man, I take pride in the words, ‘Ich bin ein Berliner!’ ")
 puts "Berlin created"
 london =  City.create!(name: "London", country: "England", zip_code: "WC2N 5DU", description: " ")
 puts "London created"
@@ -34,7 +34,7 @@ copenhagen =City.create!(name: "Copenhagen", country: "Denmark", zip_code: "1050
 puts "Copenhagen created"
 prague = City.create!(name: "Prague", country: "Czech Republic", zip_code: "100 00", description: " ")
 puts "Prague created"
-budapest = City.create!(name: "Budapest", country: "Hungary", zip_code: "1007", description: " ")
+budapest = City.create!(name: "Budapest", country: "Hungary", zip_code: "1007", description: "In Budapest, you’ll find experiences like nothing else in Europe: Feel your stress ebb away as you soak in hundred-degree water, surrounded by opulent Baroque domes…and by Speedo- and bikini-clad Hungarians. Ogle some of Europe’s most richly decorated interiors, which echo a proud little nation’s bygone glory days. Rick Steves")
 puts "Budapest created"
 paris = City.create!(name: "Paris", country: "France", zip_code: "75000", description: "A walk about Paris will provide lessons in history, beauty, and in the point of Life. -Thomas Jefferson")
 puts "Paris created"
