@@ -2,12 +2,16 @@
   <%= date.day %>
 
   <% @trips.each do |trip| %>
-    <% if trip.start_date == date %>
+      <% if trip.start_date == date %>
+      <% if trip.host == current_user %>
+        <div class="text-center">
+          Hosting <%= trip.correspondance.acceptor.first_name %>
+        </div>
+      <% else %>
         <div class="text-center">
           <%= trip.correspondance.acceptor.first_name %>
         </div>
-
+      <% end %>
     <% end %>
   <% end %>
-<% end %>
-<%= @trips.first.start_date %>
+<%end%>

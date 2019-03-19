@@ -1,3 +1,43 @@
+
+<div class="col">
+  <div class="nav nav-pills mb-2 lavalamp"><div class="lavalamp-object ease" style="transition-duration: 0.2s; width: 121.234px; height: 45px; transform: translate(0px, 0px);"></div>
+    <a class="nav-item nav-link active lavalamp-item" data-toggle="tab" href="#demo-1-1" style="z-index: 5; position: relative;">Hosted trips</a>
+    <a class="nav-item nav-link lavalamp-item" data-toggle="tab" href="#demo-1-2" style="z-index: 5; position: relative;">Second Tab</a>
+  </div>
+  <div class="tab-content" id="demo-1">
+    <div class="tab-pane show active" id="demo-1-1" role="tabpanel" aria-labelledby="demo-1-1">
+    <div class="col">
+      <table class="table table-lined">
+        <thead>
+          <tr >
+            <th scope="col">City</th>
+            <th scope="col">Start date</th>
+            <th scope="col">Duration</th>
+            <th scope="col">Miffer</th>
+          </tr>
+        </thead>
+      <tbody>
+     <% @trips.each do |trip|%>
+      <% if trip.host == current_user %>
+          <tr>
+            <th scope="row" style="background-image: url('<%=asset_path("cities/#{@user.city.name.downcase}.jpg")%>');"><%= trip.host.city.name %></th>
+            <td><%= trip.start_date %></td>
+            <td><%= trip.duration %></td>
+            <td><%= trip.correspondance.acceptor.first_name %> <%= trip.correspondance.acceptor.last_name %></td>
+          </tr>
+        <% end %>
+     <% end %>
+       </tbody>
+      </table>
+      </div>
+    </div>
+    <div class="tab-pane" id="demo-1-2" role="tabpanel" aria-labelledby="demo-1-2">
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Placeat unde veniam qui dicta exercitationem deserunt vel suscipit quas sequi at inventore perferendis aperiam nisi itaque necessitatibus, saepe molestiae iste, accusamus.</p>
+    </div>
+
+  </div>
+</div>
+
 <div id="trips_calendar">
   <%= render partial: "trips/calendar", locals: {trips: @trips} %>
 </div>
