@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   
   resources :users do
     resources :avatars, only: [:create]
+    resources :user_pictures, only: [:create, :destroy]
   end
 
   resources :user_languages
@@ -27,7 +28,7 @@ Rails.application.routes.draw do
   end
   resources :languages
   resources :flats do
-    resources :flat_pictures
+    resources :flat_pictures, only: [:create, :destroy]
   end
   resources :users
   resources :cities
