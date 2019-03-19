@@ -46,7 +46,8 @@ class User < ApplicationRecord
 
   has_one_attached :avatar
 
-
+  has_many :user_preferences, dependent: :destroy
+  has_many :preferences, through: :user_preferences
 
   def self.find_first_by_auth_conditions(warden_conditions)
     conditions = warden_conditions.dup

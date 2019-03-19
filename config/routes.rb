@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  get 'user_preferences/create'
   get 'quiz/new'
   get 'quiz/create'
   get 'quiz/show'
@@ -16,7 +17,7 @@ Rails.application.routes.draw do
 
   
   
-  resources :users, :path=> "friends", only: [:show, :edit, :update] do
+  resources :users do
     resources :avatars, only: [:create]
   end
 
@@ -36,6 +37,7 @@ Rails.application.routes.draw do
   resources :users
   resources :cities
   resources :home
+  resources :user_preferences, only: [:create, :new]
 
 
 
