@@ -17,7 +17,7 @@ Rails.application.routes.draw do
 
 
   
-  resources :users, :path=> "friends", only: [:show, :edit, :update] do
+  resources :users do
     resources :avatars, only: [:create]
   end
 
