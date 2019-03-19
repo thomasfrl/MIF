@@ -1,5 +1,7 @@
 <div class="col-3">
   <div class="container bg-white" style="height: 42em;overflow: auto;">
+
+
     <% if false %>
       <%= form_for(@conversation_new, remote: true) do |f| %>
         <div class="row">
@@ -10,6 +12,9 @@
         </div>
       <% end %>        
     <% end %>
+
+
+    
     <div id="conversations">
       <% @conversations.each do |conversation| %>
         <% user = conversation.other_participant(current_user) %>

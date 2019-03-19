@@ -1,5 +1,6 @@
 class User < ApplicationRecord
   # after_create :welcome_send
+  after_create :create_flat
 
   after_create :set_default_avatar
   # Include default devise modules. Others available are:
@@ -34,6 +35,9 @@ class User < ApplicationRecord
   # Correspondances
   has_many :created_correspondances, class_name: "Correspondance", foreign_key: "creator_id"
   has_many :received_correspondances, class_name: "Correspondance", foreign_key: "acceptor_id"
+
+  # Quiz
+  has_many :answers, foreign_key: "author_id", dependent: :destroy
 
   # Comments
   has_many :authored_comments, class_name: "Comment", foreign_key: "author_id"
@@ -90,8 +94,14 @@ class User < ApplicationRecord
     self.created_correspondances.where(status: "refused") +  self.received_correspondances.where(status: "refused")
   end
 
+<<<<<<< HEAD
   def welcome_send
     UserMailer.welcome_email(self).deliver_now
+=======
+  private
+  def create_flat
+    Flat.create(user: User.last)
+>>>>>>> 3e13a3bdefd0234f0529549da17e40a1cdae3217
   end
 
 end
