@@ -1,4 +1,5 @@
 class FlatsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_flat, only: [:show, :edit, :update, :destroy]
 
   # GET /flats
@@ -30,7 +31,6 @@ class FlatsController < ApplicationController
     respond_to do |format|
       if @flat.save
         format.html { redirect_to @flat, notice: 'Flat was successfully created.' }
-        format.json { render :show, status: :created, location: @flat }
       else
         format.html { render :new }
         format.json { render json: @flat.errors, status: :unprocessable_entity }
@@ -39,16 +39,12 @@ class FlatsController < ApplicationController
   end
 
   # PATCH/PUT /flats/1
-  # PATCH/PUT /flats/1.json
   def update
     respond_to do |format|
       if @flat.update(flat_params)
-        @flat.pictures.attach(params[:pictures])
-        format.html { redirect_to edit_flat_path(@flat), notice: 'Flat was successfully updated.' }
-        format.json { render :show, status: :ok, location: @flat }
+        format.html { redirect_to current_user, notice: 'Flat was successfully updated.' }
       else
-        format.html { render :edit }
-        format.json { render json: @flat.errors, status: :unprocessable_entity }
+        format.html { redirect_to :current_user }
       end
     end
   end

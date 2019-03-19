@@ -19,7 +19,7 @@
                 <h4 class="mb-0"><b><%= @user.first_name%></b> <%= @user.last_name %></h4>
                 <%= form_tag user_avatars_path(@user), multipart: true do %>
                   <%= file_field_tag :avatar %>
-                  <%= submit_tag "uploader l'avatar", class: "fs-14 link text-primary" %>
+                  <%= submit_tag "Upload avatar", class: "fs-14 link text-primary" %>
                 <% end %>
               </div>
               <div class="col-md-4 text-center text-md-right mt-1 mt-md-0">

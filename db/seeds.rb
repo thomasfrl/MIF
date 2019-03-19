@@ -274,9 +274,12 @@ puts "comment created"
 
 
 User.all.each do |u|
+  sleep = ["Bed", "Couch"].sample
+  place = rand(1..3)
+  room = ["Living-room", "Bed-room"].sample
   img = get_random_image
   flat = Flat.find_by(user: u)
-  flat.update(description: Faker::Lorem.paragraph_by_chars, address: Faker::Address.street_address)
+  flat.update(description: Faker::Lorem.paragraph_by_chars, address: Faker::Address.street_address, sleep: sleep, place: place, room: room)
   flat.pictures.attach(io: File.open(img[0]), filename: img[1])
   img = get_random_image
   flat.pictures.attach(io: File.open(img[0]), filename: img[1])
