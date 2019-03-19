@@ -179,7 +179,7 @@ Preference.create!(description: "Less than 100€ ")
 Preference.create!(description: "Between 100€ and 200€")
 Preference.create!(description: "I don't care till i'm having fun")
 
-
+puts "preferences created"
 
 30.times do
   img = get_random_image
