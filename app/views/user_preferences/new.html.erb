@@ -1,0 +1,23 @@
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<div class="container">
+	<div class="row">
+		<div class="col-6">
+			<ul>
+				<% @preferences.each do |preference| %>
+					<p><%= preference.description %></p>
+				<% end %>
+			</ul>
+		</div>
+		<div class="col-6">
+			<%= form_for(@user_preference) do |f| %>
+				<%= f.number_field :position, placeholder: "position", in: 1..5, class: "form-control" %>
+			<% end %>
+		</div>
+	</div>
+</div>
+

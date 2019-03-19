@@ -179,6 +179,7 @@ ActiveRecord::Schema.define(version: 2019_03_19_095046) do
   create_table "user_preferences", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "preference_id"
+    t.integer "position"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["preference_id"], name: "index_user_preferences_on_preference_id"

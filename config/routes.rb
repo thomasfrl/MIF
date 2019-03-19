@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  get 'user_preferences/create'
   get 'quiz/new'
   get 'quiz/create'
   get 'quiz/show'
@@ -34,6 +35,7 @@ Rails.application.routes.draw do
   resources :users
   resources :cities
   resources :home
+  resources :user_preferences, only: [:create, :new]
 
 
 
