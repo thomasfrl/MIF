@@ -14,20 +14,9 @@
 			<div class="row">
 				<% @validated_correspondances.each do |c| %>
 					<% friend = c.other_friend(current_user) %>
-					<div class="col-md-4">
+					<div class="col-md-6">
 						<%= link_to friend, class: "user-photo" do  %>
-							<figure class="user user-circle">
-									<%=image_tag(friend.avatar, :alt => "avatar")%>
-								<figcaption class="user-caption">
-									<h4><%= friend.name %></h4>
-									<span>Head of Experience Design</span>
-									<ul class="socials socials-sm bordered">
-										<li><a href="" class="icon-facebook fs-20"></a></li>
-										<li><a href="" class="icon-instagram fs-20"></a></li>
-										<li><a href="" class="icon-twitter fs-20"></a></li>
-									</ul>
-								</figcaption>
-							</figure>
+							<%= render partial: "users/user_card", locals: {user: friend} %>
 						<% end %>
 					</div>
 				<% end %>
