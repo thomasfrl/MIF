@@ -66,7 +66,7 @@
       </div>
     </section>
 
-
+    <%= render "user_stat" %>
 
     <section class="bg-light pt-2">
 
@@ -75,85 +75,7 @@
 
           <!-- tab info -->
           <div class="tab-pane show active" id="demo-2-1" role="tabpanel" aria-labelledby="demo-2-1">
-            <div class="row justify-content-center">
-              <div class="col-md-10 col-lg-8">
-
-                <!-- stats -->
-                <div class="row gutter-1 mb-2">
-                  <div class="col-6 col-md-4 col-lg-3">
-                    <div class="equal">
-                      <div class="boxed bg-primary text-white">
-                        <div class="equal-header">
-                          <b class="h2">89</b>
-                        </div>
-                        <div class="equal-footer">
-                          <span class="text-muted">Tokens</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-6 col-md-4 col-lg-3">
-                    <div class="equal">
-                      <div class="boxed">
-                        <div class="equal-header">
-                          <b class="h2"><%= @correspondances.count %></b>
-                        </div>
-                        <div class="equal-footer">
-                          <span class="text-muted">Correspondances</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <!-- / stats -->
-
-                <!-- post -->
-                <div class="row mb-1">
-                  <div class="col">
-                    <article class="card">
-                      <div class="card-header text-center">
-                        <h2><%= @user.first_name %>'s diaporama</h2>
-                      </div>
-                      <div class="card-body overflow-hidden">
-                        <div class="owl-carousel gallery visible" data-items="[2,2]" data-margin="10" data-nav="true">
-                          <figure class="photo">
-                            <a href="/assets/cities/barcelone.jpg" title="Image title">
-                              <img src="/assets/cities/barcelone.jpg" alt="Image">
-                            </a>
-                          </figure>
-                          <figure class="photo">
-                            <a href="/assets/cities/london.jpg" title="Image title">
-                              <img src="/assets/cities/london.jpg" alt="Image">
-                            </a>
-                          </figure>
-                          <figure class="photo">
-                            <a href="/assets/cities/paris.jpg" title="Image title">
-                              <img src="/assets/cities/paris.jpg" alt="Image">
-                            </a>
-                          </figure>
-                        </div>
-                      </div>
-                    </article>
-                  </div>
-                </div>
-                <!-- / post -->
-
-
-                <div class="row mb-1">
-                  <div class="col">
-                    <article class="card">
-                      <div class="card-header text-center">
-                          <h2><%= @user.first_name%>'s description</h2>
-                      </div>
-                      <div class="card-body overflow-hidden">
-                       <h3 class="text-decorated text-decorated--paddin"><%= @user.description %></h3>
-                      </div>
-                    </article>
-                  </div>
-                </div>
-
-              </div>
-            </div>
+            <%= render "show_public" %>
           </div>
           <!-- / tab -->
 

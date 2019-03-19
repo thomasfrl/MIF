@@ -7,32 +7,32 @@
 </div>
 <div class="tab-content" id="demo-1">
 	<div class="tab-pane active show" id="demo-1-1" role="tabpanel" aria-labelledby="demo-1-1">
-	 		<h2 class="text-center">Your friends</h2>
-	<% if @validated_correspondances.empty? %>
-		<p>You don't have any validated penfriend </p>
-	<% else %>
-		<div class="row">
-			<% @validated_correspondances.each do |c| %>
-				<% friend = c.other_friend(current_user) %>
-				<div class="col-md-4">
-					<%= link_to friend, class: "user-photo" do  %>
-						<figure class="user user-circle">
-								<%=image_tag(friend.avatar, :alt => "avatar")%>
-							<figcaption class="user-caption">
-								<h4><%= friend.name %></h4>
-								<span>Head of Experience Design</span>
-								<ul class="socials socials-sm bordered">
-									<li><a href="" class="icon-facebook fs-20"></a></li>
-									<li><a href="" class="icon-instagram fs-20"></a></li>
-									<li><a href="" class="icon-twitter fs-20"></a></li>
-								</ul>
-							</figcaption>
-						</figure>
-					<% end %>
-				</div>
-			<% end %>
-		</div>
-	<% end %>
+		<h2 class="text-center">Your friends</h2>
+		<% if @validated_correspondances.empty? %>
+			<p>You don't have any validated penfriend </p>
+		<% else %>
+			<div class="row">
+				<% @validated_correspondances.each do |c| %>
+					<% friend = c.other_friend(current_user) %>
+					<div class="col-md-4">
+						<%= link_to friend, class: "user-photo" do  %>
+							<figure class="user user-circle">
+									<%=image_tag(friend.avatar, :alt => "avatar")%>
+								<figcaption class="user-caption">
+									<h4><%= friend.name %></h4>
+									<span>Head of Experience Design</span>
+									<ul class="socials socials-sm bordered">
+										<li><a href="" class="icon-facebook fs-20"></a></li>
+										<li><a href="" class="icon-instagram fs-20"></a></li>
+										<li><a href="" class="icon-twitter fs-20"></a></li>
+									</ul>
+								</figcaption>
+							</figure>
+						<% end %>
+					</div>
+				<% end %>
+			</div>
+		<% end %>
   </div>
   <div class="tab-pane" id="demo-1-2" role="tabpanel" aria-labelledby="demo-1-2">
    	<% if @received_correspondances.empty? %>
