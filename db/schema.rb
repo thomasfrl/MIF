@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_18_155556) do
+ActiveRecord::Schema.define(version: 2019_03_19_095046) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -113,6 +113,12 @@ ActiveRecord::Schema.define(version: 2019_03_18_155556) do
     t.index ["user_id"], name: "index_messages_on_user_id"
   end
 
+  create_table "preferences", force: :cascade do |t|
+    t.string "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "quiz_convs", force: :cascade do |t|
     t.bigint "quiz_id"
     t.bigint "conversation_id"
@@ -170,6 +176,15 @@ ActiveRecord::Schema.define(version: 2019_03_18_155556) do
     t.index ["user_id"], name: "index_user_languages_on_user_id"
   end
 
+  create_table "user_preferences", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "preference_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["preference_id"], name: "index_user_preferences_on_preference_id"
+    t.index ["user_id"], name: "index_user_preferences_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "first_name"
     t.string "last_name"
@@ -205,5 +220,7 @@ ActiveRecord::Schema.define(version: 2019_03_18_155556) do
   add_foreign_key "trips", "correspondances"
   add_foreign_key "user_languages", "languages"
   add_foreign_key "user_languages", "users"
+  add_foreign_key "user_preferences", "preferences"
+  add_foreign_key "user_preferences", "users"
   add_foreign_key "users", "cities"
 end
