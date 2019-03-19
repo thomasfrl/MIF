@@ -161,6 +161,23 @@ sp.icon.attach(io: File.open("app/assets/images/flag/norvege.png"), filename:"no
 
 puts "language created"
 
+Preference.create!(description: "Have some drink till the dawn")
+Preference.create!(description: "Meet friends of my Host")
+Preference.create!(description: "Dance all night long with electronic music")
+Preference.create!(description: "Running in the city")
+Preference.create!(description: "Visit Museum")
+Preference.create!(description: "Typical local Restaurant")
+Preference.create!(description: "Visit museum")
+Preference.create!(description: "Play music in da street")
+Preference.create!(description: "Concert with local music")
+Preference.create!(description: "Chilling in a parc")
+Preference.create!(description: "Smoking salad")
+Preference.create!(description: "Skating the city")
+Preference.create!(description: "Biking the city")
+Preference.create!(description: "Just walking and seeing the culture")
+Preference.create!(description: "Less than 100€ ")
+Preference.create!(description: "Between 100€ and 200€")
+Preference.create!(description: "I don't care till i'm having fun")
 
 
 
