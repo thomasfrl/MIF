@@ -36,7 +36,7 @@ prague = City.create!(name: "Prague", country: "Czech Republic", zip_code: "100 
 puts "Prague created"
 budapest = City.create!(name: "Budapest", country: "Hungary", zip_code: "1007", description: " ")
 puts "Budapest created"
-paris = City.create!(name: "Paris", country: "France", zip_code: "75000", description: " ")
+paris = City.create!(name: "Paris", country: "France", zip_code: "75000", description: "A walk about Paris will provide lessons in history, beauty, and in the point of Life. -Thomas Jefferson")
 puts "Paris created"
 roma = City.create!(name: "Roma", country: "Italy", zip_code: "00100", description: " ")
 puts "Roma created"
