@@ -5,7 +5,7 @@
 
       <table>
         <thead>
-          <tr><th colspan="4"><h2>Update</h2></th></tr>
+          <tr><th colspan="7"><h2>Update</h2></th></tr>
           <tr>
             <th>Name</th>
             <th>Country</th>
@@ -17,23 +17,26 @@
         </thead>
 
         <tbody>
-          <% @languages.each do |language| %>
-            <%= form_with(model: language, url: admins_language_path(language) , multipart: true) do |form| %>
+          <% @cities.each do |city| %>
+            <%= form_with(model: city, url: admins_city_path(city) , multipart: true) do |form| %>
               <tr>
-                <td><%= form.text_field :language %></td>
+                <td><%= form.text_field :name %></td>
+                <td><%= form.text_field :country %></td>
+                <td><%= form.text_field :zip_code %></td>
+                <td><%= form.text_area :description %></td>							
                 <td>
-                  <%= image_tag language.icon, style: "width: 2rem" %>
+                  <%= image_tag city.icon, style: "width: 2rem" %>
                   <%= file_field_tag :icon %>            
                 </td>
                 <td><%= form.submit "Update" %></td>
-                <td><%= link_to 'Destroy', admins_language_path(language), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+                <td><%= link_to 'Destroy', admins_city_path(city), method: :delete, data: { confirm: 'Are you sure?' } %></td>
               </tr>
               <tr>
-                <% if language.errors.any? %>
+                <% if city.errors.any? %>
                   <div id="error_explanation">
-                    <h2><%= pluralize(language.errors.count, "error") %> prohibited this language from being saved:</h2>
+                    <h2><%= pluralize(city.errors.count, "error") %> prohibited this city from being saved:</h2>
                     <ul>
-                      <% language.errors.full_messages.each do |message| %>
+                      <% city.errors.full_messages.each do |message| %>
                         <li><%= message %></li>
                       <% end %>
                     </ul>
@@ -44,27 +47,30 @@
           <% end %>
         </tbody>
         <thead>
-          <tr><th colspan="4"><h2 class="pt-5">Create</th></tr>
+          <tr><th colspan="7"><h2>Update</h2></th></tr>
           <tr>
-            <th>Language</th>
-            <th>Icon</th>
+            <th>Name</th>
+            <th>Country</th>
+            <th>Zip code</th>
+            <th>Description</th>
+            <th>Picture</th>
             <th colspan="2"></th>
           </tr>
         </thead>
-          <%= form_with(model: @language_new, url: admins_languages_path , local: true, multipart: true) do |form| %>
+          <%= form_with(model: @city_new, url: admins_cities_path , local: true, multipart: true) do |form| %>
             <tr>
-              <td><%= form.text_field :language %></td>
+              <td><%= form.text_field :city %></td>
               <td>
                 <%= file_field_tag :icon %>            
               </td>
               <td><%= form.submit "Create" %></td>
             </tr>
             <tr>
-              <% if @language_new.errors.any? %>
+              <% if @city_new.errors.any? %>
                 <div id="error_explanation">
-                  <h2><%= pluralize(@language_new.errors.count, "error") %> prohibited this language from being saved:</h2>
+                  <h2><%= pluralize(@city_new.errors.count, "error") %> prohibited this city from being saved:</h2>
                   <ul>
-                    <% @language_new.errors.full_messages.each do |message| %>
+                    <% @city_new.errors.full_messages.each do |message| %>
                       <li><%= message %></li>
                     <% end %>
                   </ul>
