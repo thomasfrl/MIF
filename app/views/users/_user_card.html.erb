@@ -1,0 +1,18 @@
+<figure class="user m-1" style="border-radius: 5px;">
+	<%= link_to user_path(user.id), :class => "user-photo" do%>
+		<%= image_tag(user.avatar, :alt => "avatar", style: "max-width: 450px", class: "", size: "420x420") %>
+	<figcaption class="user-caption">
+		<h4><%= user.name %></h4>
+		<ul class="text-white">
+			<li><%= user.nationality %></li>
+			<li><%= user.age %> years old</li>
+			<li><%= user.welcome_message %></li>
+			<li>
+				<% user.languages.each do |l| %>
+          <%= image_tag l.icon, alt: l.language%>
+        <% end %>      
+			</li>
+		</ul>
+	</figcaption>
+	<%end%>
+</figure>
