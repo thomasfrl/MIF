@@ -1,64 +1,76 @@
-<h1>Languages</h1>
-  <table>
-    <thead>
-      <tr>
-        <th>Language</th>
-        <th>Icon</th>
-        <th colspan="2"></th>
-      </tr>
-    </thead>
+<div class="row justify-content-center mt-5 mb-5">
+  <div class="col-8">
+    <h1 class="text-center mt-5">Languages</h1>
+    <div class="row justify-content-center">
 
-    <tbody>
-      <tr><td>Update</td></tr>
-      <% @languages.each do |language| %>
-        <%= form_with(model: language, url: admins_language_path(language) , multipart: true) do |form| %>
+      <table>
+        <thead>
+          <tr><th colspan="4"><h2>Update</h2></th></tr>
           <tr>
-            <td><%= form.text_field :language %></td>
-            <td>
-              <%= image_tag language.icon, style: "width: 2rem" %>
-              <%= file_field_tag :icon %>            
-            </td>
-            <td><%= form.submit "Update" %></td>
-            <td><%= link_to 'Destroy', admins_language_path(language), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            <th>Language</th>
+            <th>Icon</th>
+            <th colspan="2"></th>
           </tr>
+        </thead>
+
+        <tbody>
+          <% @languages.each do |language| %>
+            <%= form_with(model: language, url: admins_language_path(language) , multipart: true) do |form| %>
+              <tr>
+                <td><%= form.text_field :language %></td>
+                <td>
+                  <%= image_tag language.icon, style: "width: 2rem" %>
+                  <%= file_field_tag :icon %>            
+                </td>
+                <td><%= form.submit "Update" %></td>
+                <td><%= link_to 'Destroy', admins_language_path(language), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+              </tr>
+              <tr>
+                <% if language.errors.any? %>
+                  <div id="error_explanation">
+                    <h2><%= pluralize(language.errors.count, "error") %> prohibited this language from being saved:</h2>
+                    <ul>
+                      <% language.errors.full_messages.each do |message| %>
+                        <li><%= message %></li>
+                      <% end %>
+                    </ul>
+                  </div>
+                <% end %>        
+              </tr>
+            <% end %>
+          <% end %>
+        </tbody>
+        <thead>
+          <tr><th colspan="4"><h2 class="pt-5">Create</th></tr>
           <tr>
-            <% if language.errors.any? %>
-              <div id="error_explanation">
-                <h2><%= pluralize(language.errors.count, "error") %> prohibited this language from being saved:</h2>
-                <ul>
-                  <% language.errors.full_messages.each do |message| %>
-                    <li><%= message %></li>
-                  <% end %>
-                </ul>
-              </div>
-            <% end %>        
+            <th>Language</th>
+            <th>Icon</th>
+            <th colspan="2"></th>
           </tr>
-        <% end %>
-      <% end %>
-
-      <tr><td>Create</td></tr>
-      <%= form_with(model: @language_new, url: admins_languages_path , local: true, multipart: true) do |form| %>
-        <tr>
-          <td><%= form.text_field :language %></td>
-          <td>
-            <%= file_field_tag :icon %>            
-          </td>
-          <td><%= form.submit "Create" %></td>
-        </tr>
-        <tr>
-          <% if @language_new.errors.any? %>
-            <div id="error_explanation">
-              <h2><%= pluralize(@language_new.errors.count, "error") %> prohibited this language from being saved:</h2>
-              <ul>
-                <% @language_new.errors.full_messages.each do |message| %>
-                  <li><%= message %></li>
-                <% end %>
-              </ul>
-            </div>
-          <% end %>        
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
-<br>
-
+        </thead>
+          <%= form_with(model: @language_new, url: admins_languages_path , local: true, multipart: true) do |form| %>
+            <tr>
+              <td><%= form.text_field :language %></td>
+              <td>
+                <%= file_field_tag :icon %>            
+              </td>
+              <td><%= form.submit "Create" %></td>
+            </tr>
+            <tr>
+              <% if @language_new.errors.any? %>
+                <div id="error_explanation">
+                  <h2><%= pluralize(@language_new.errors.count, "error") %> prohibited this language from being saved:</h2>
+                  <ul>
+                    <% @language_new.errors.full_messages.each do |message| %>
+                      <li><%= message %></li>
+                    <% end %>
+                  </ul>
+                </div>
+              <% end %>        
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

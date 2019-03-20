@@ -8,31 +8,27 @@ class Admins::LanguagesController < ApplicationController
   end
 
   # POST /languages
-  # def create
-  #   @language = Language.new(language_params)
-
-  #   respond_to do |format|
-  #     if @language.save
-  #       if defined? params[:icon]
-  #         @language.icon.attach(params[:icon])
-  #       else
-  #         @language.icon.attach(io: File.open("app/assets/images/flag/default.png"), filename:"default.png")
-  #       end
-  #       format.html { redirect_to admins_languages_path, notice: 'Language was successfully created.' }
-  #     else
-  #       flash[:danger] =  'Language was not successfully created.'
-  #       @languages = Language.all
-  #       #format.html { render partial: "admins/languages", locals: {@language_new: @language} }
-  #     end
-  #   end
-  # end
+  def create
+    @language = Language.new(language_params)
+    if @language.save
+      if ! params[:icon].nil?
+        @language.icon.attach(params[:icon])
+      else
+        @language.icon.attach(io: File.open("app/assets/images/flag/default.png"), filename:"default.png")
+      end
+      redirect_to admins_languages_path, notice: 'Language was successfully created.' 
+    else
+      flash[:danger] =  'Language was not successfully created.'
+      redirect_to admins_languages_path 
+    end
+  end
 
   # PATCH/PUT /languages/1
   def update
     if @language.update(language_params)
-      # if defined? params[:icon]
-      #   @language.icon.attach(params[:icon])
-      # end
+      if ! params[:icon].nil?
+        @language.icon.attach(params[:icon])
+      end
       redirect_to admins_languages_path, notice: 'Language was successfully updated.'
     else
       flash[:danger] =  'Language was not successfully updated.'
