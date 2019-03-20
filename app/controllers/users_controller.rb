@@ -11,7 +11,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @languages = Language.all
     @flat = @user.flat
-    trips_controller
+    trips_validated
     conversations_controller
     comments_controller
     correspondances_controller
@@ -76,11 +76,17 @@ class UsersController < ApplicationController
       params.require(:user).permit(:first_name, :last_name, :description, :age, :welcome_message, :city_id, :nationality)
     end
 
-    def trips_controller
+    def trips_validated
       @correspondances = current_user.correspondances
-      @trips = []
+      @all_trips = []
       @correspondances.each do |c|
-        @trips += c.trips
+          @all_trips += c.trips
+      end
+      @trips = []
+      @all_trips.each do |trip|
+        if trip.validated == true
+          @trips << trip
+        end
       end
     end
 
