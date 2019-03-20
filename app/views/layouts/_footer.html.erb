@@ -41,10 +41,18 @@
             </div>
             <div class="col-md-5 text-center text-md-right">
               <ul class="socials">
-                <li><a href="" class="icon-facebook fs-20"></a></li>
-                <li><a href="" class="icon-instagram fs-20"></a></li>
-                <li><a href="" class="icon-twitter fs-20"></a></li>
-                <li><a href="" class="icon-linkedin fs-20"></a></li>
+                <%= link_to home_not_found_path do %>
+                         <i class="fab fa-facebook-f"></i>
+                       <% end %>
+                <%= link_to home_not_found_path do %>
+                        <i class="fab fa-instagram"></i>
+                       <% end %>
+                <%= link_to home_not_found_path do %>
+                        <i class="fab fa-github"></i>
+                       <% end %>
+                <%= link_to home_not_found_path do %>
+                        <i class="fab fa-linkedin-in"></i>
+                       <% end %>
               </ul>
             </div>
           </div>
