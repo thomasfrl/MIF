@@ -1,18 +1,21 @@
 
 <div class="col text-center">
   <div class="nav nav-pills mb-2 lavalamp"><div class="lavalamp-object ease" style="transition-duration: 0.2s; width: 121.234px; height: 45px; transform: translate(0px, 0px);"></div>
-    <a class="nav-item nav-link active lavalamp-item" data-toggle="tab" href="#demo-1-1" style="z-index: 5; position: relative;">Hosted trips</a>
-    <a class="nav-item nav-link lavalamp-item" data-toggle="tab" href="#demo-1-2" style="z-index: 5; position: relative;">Second Tab</a>
+    <a class="nav-item nav-link active lavalamp-item" data-toggle="tab" href="#trip-1-1" style="z-index: 5; position: relative;">Hosted trips</a>
+    <a class="nav-item nav-link lavalamp-item" data-toggle="tab" href="#trip-1-2" style="z-index: 5; position: relative;">Trips done</a>
   </div>
-  <div class="tab-content" id="demo-1">
-    <div class="tab-pane show active" id="demo-1-1" role="tabpanel" aria-labelledby="demo-1-1">
+  <div class="tab-content" id="trip-1">
+    <% if @trips.empty?%>
+      <p>You don't have any trips done yet</p>
+    <% else %>
+    <div class="tab-pane show active" id="trip-1-1" role="tabpanel" aria-labelledby="trip-1-1">
     <div class="col">
       <table class="table table-lined">
         <thead>
           <tr >
             <th scope="col">City</th>
             <th scope="col">Start date</th>
-            <th scope="col">Duration</th>
+            <th scope="col">End date</th>
             <th scope="col">Miffer</th>
           </tr>
         </thead>
@@ -22,7 +25,7 @@
           <tr style="background-image: url('<%=asset_path("cities/#{@user.city.name.downcase}.jpg")%>');">
             <th scope="row"><%= trip.host.city.name %></th>
             <td><%= trip.start_date.to_date %></td>
-            <td><%= trip.duration %></td>
+            <td><%= trip.end_date.to_date %></td>
             <td><%= trip.correspondance.other_friend(current_user).first_name %> <%= trip.correspondance.other_friend(current_user).last_name  %></td>
           </tr>
         <% end %>
@@ -30,14 +33,42 @@
        </tbody>
       </table>
       </div>
+      <% end %>
     </div>
-    <div class="tab-pane" id="demo-1-2" role="tabpanel" aria-labelledby="demo-1-2">
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Placeat unde veniam qui dicta exercitationem deserunt vel suscipit quas sequi at inventore perferendis aperiam nisi itaque necessitatibus, saepe molestiae iste, accusamus.</p>
-    </div>
-
+    <div class="tab-pane" id="trip-1-2" role="tabpanel" aria-labelledby="trip-1-2">
+    <% if @trips.empty?%>
+      <p>You don't have any trips done yet</p>
+    <% else %>
+      <div class="col">
+      <table class="table table-lined">
+        <thead>
+          <tr >
+            <th scope="col">City</th>
+            <th scope="col">Start date</th>
+            <th scope="col">End date</th>
+            <th scope="col">Miffer</th>
+          </tr>
+        </thead>
+      <tbody>
+     <% @trips.each do |trip|%>
+      <% if trip.end_date < Time.now %>
+          <tr style="background-image: url('<%=asset_path("cities/#{@user.city.name.downcase}.jpg")%>');">
+            <th scope="row"><%= trip.host.city.name %></th>
+            <td><%= trip.start_date.to_date %></td>
+            <td><%= trip.end_date.to_date %></td>
+            <td><%= trip.correspondance.other_friend(current_user).first_name %> <%= trip.correspondance.other_friend(current_user).last_name  %></td>
+          </tr>
+        <% end %>
+     <% end %>
+       </tbody>
+      </table>
+      </div>
+    <% end %>
   </div>
 </div>
 
-<div id="trips_calendar">
+
+
+<div id="trips_calendar" class="mt-10">
   <%= render partial: "trips/calendar", locals: {trips: @trips} %>
 </div>
