@@ -28,7 +28,6 @@ Rails.application.routes.draw do
     resources :answers, only: [:new, :create]
   end
 
-  resources :languages
   
   resources :flats do
     resources :flat_pictures, only: [:create, :destroy]
