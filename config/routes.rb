@@ -27,9 +27,9 @@ Rails.application.routes.draw do
   end
   resources :languages
 
-
-  resources :flats
-
+  resources :flats do
+    resources :flat_pictures, only: [:create, :destroy]
+  end
   resources :cities
   resources :user_preferences, only: [:create, :new]
 
