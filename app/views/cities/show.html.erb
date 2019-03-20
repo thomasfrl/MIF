@@ -29,19 +29,16 @@
       <div class="row justify-content-left align-items-end vh-50 mb-5">
         <div class="col col-md-10 col-lg-8">
           <div class="row align-items-left">
-            <div class="col">
+            <div class="col mt-25">
               <div class="row align-items-left">
                 <div class="col-md-8">
                   <h1 class="mb-0"><b><%= @city.name.slice(0,1).capitalize + @city.name.slice(1..-1) %></h1>
                   <h2 class="mb-0 text-black"><%= @city.country.capitalize %></h2>
-                  <div class="col-md-5 justify-content">
+                  <div>
                       <%= link_to cities_path, class:"btn btn-rounded btn-with-ico btn-primary" do %>
                         View All Cities <i class="icon-chevron-right2 fs-24"></i>
                       <%end%>
                     </div>
-                </div>
-                <div class="col-md-4 text-left text-md-right">
-                  
                 </div>
               </div>
             </div>
@@ -56,7 +53,7 @@
     <!-- / cover -->
 
     <!-- team -->
-    <section class="bg-white">
+    <section class="bg-light">
       <div class="container">
         <div class="row justify-content-center">
           <div class="col-md-6 text-center">
