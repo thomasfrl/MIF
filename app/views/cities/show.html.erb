@@ -21,40 +21,43 @@
 </section>
 <% end %>
 
-
-
-    <!-- cover -->
-    <section class="hero hero-with-header text-white"
-      data-top-top="transform: translateY(0px);"
-      data-top-bottom="transform: translateY(250px);">
-      <%= image_tag(@city.picture, :alt => "avatar", class: "image image-overlay image-blur", style: "transform: scale(1.1);") %>
-      <div class="container">
-        <div class="row align-items-center">
-          <div class="col text-shadow">
-            <div class="row gutter-1">
-              <div class="col-md-5">
-                <%= link_to cities_path, class:"btn btn-rounded btn-with-ico btn-primary" do %>
-                  View All Cities <i class="icon-chevron-right2 fs-24"></i>
-                <%end%>
-              </div>
-              <div class="col-md-2">
+<section class="p-0 bg-light">
+  <div class="image image-overlay image-cover" style="background-image:url(<%=rails_blob_url(@city.picture)%>)"  
+    data-top-top="transform: translateY(0px);"
+    data-top-bottom="transform: translateY(-250px);"></div>
+    <div class="container">
+      <div class="row justify-content-left align-items-end vh-50 mb-5">
+        <div class="col col-md-10 col-lg-8">
+          <div class="row align-items-left">
+            <div class="col mt-25">
+              <div class="row align-items-left">
+                <div class="col-md-8">
+                  <h1 class="mb-0"><b><%= @city.name.slice(0,1).capitalize + @city.name.slice(1..-1) %></h1>
+                  <h2 class="mb-0 text-black"><%= @city.country.capitalize %></h2>
+                  <div>
+                      <%= link_to cities_path, class:"btn btn-rounded btn-with-ico btn-primary" do %>
+                        View All Cities <i class="icon-chevron-right2 fs-24"></i>
+                      <%end%>
+                    </div>
+                </div>
               </div>
             </div>
-            <h1 class="font-weight-bold"><%= @city.name.slice(0,1).capitalize + @city.name.slice(1..-1) %></h1>
-            <h2 class="mb-0"><%= @city.country.capitalize %></h2>
           </div>
         </div>
       </div>
-    </section>
+    </div>
+  </div>
+</section>
+
+    <!-- cover -->
     <!-- / cover -->
 
     <!-- team -->
-    <section class="bg-white">
+    <section class="bg-light">
       <div class="container">
         <div class="row justify-content-center">
           <div class="col-md-6 text-center">
-            <span class="eyebrow d-block mb-1 text-primary">Miffers in <%=@city.name%></span>
-            <p class="lead text-black"> <%=@city.description%> </p>
+          <p class="lead text-black"> <%=@city.description%> </p>
           </div>
         </div>
         <div class="row gutter-0">
