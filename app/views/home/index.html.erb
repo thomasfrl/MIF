@@ -7,7 +7,7 @@
         data-top-bottom="transform: translateY(250px);">
         <div class="swiper-wrapper">
           <div class="swiper-slide vh-100">
-            <div class="image image-overlay image-zoom" style="background-image:url(/assets/img/4FriendsTopCity3.jpg)"></div>
+            <div class="image image-overlay image-zoom" style="background-image:url('<%=asset_path("img/4FriendsTopCity3.jpg")%>')"></div>
             <div class="caption" data-aos="fade-up">
               <div class="container justify-content-center">
                 <div class="row align-items-center vh-100">
@@ -111,7 +111,7 @@
                   <% end %>
                   <article class="tile">
                 <% end %>
-                  <div class="tile-image" style="background-image: url('<%=asset_path("cities/#{city.name.downcase}.jpg")%>');"></div>
+                  <div class="tile-image" style="background-image: url(<%=rails_blob_url(city.picture)%>);"></div>
                     <%= link_to city_path(city) do%>
                     <div class="tile-header">
                       <h2 class="text-white" style="text-align: center"><%= city.name %></h2>

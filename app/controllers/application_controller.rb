@@ -16,5 +16,4 @@ class ApplicationController < ActionController::Base
     @refused_correspondances = current_user.refused_correspondances
     @correspondance = Correspondance.new
   end
-
 end

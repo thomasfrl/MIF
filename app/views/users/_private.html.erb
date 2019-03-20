@@ -1,5 +1,5 @@
 <section class="p-0 bg-light">
-  <div class="image image-overlay image-cover" style="background-image:url('<%=asset_path("cities/#{@user.city.name.downcase}.jpg")%>')"
+  <div class="image image-overlay image-cover" style="background-image:url(<%=rails_blob_url(@user.city.picture)%>)"  
     data-top-top="transform: translateY(0px);"
     data-top-bottom="transform: translateY(-250px);"></div>
     <div class="container">
