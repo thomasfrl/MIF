@@ -24,6 +24,7 @@ Rails.application.routes.draw do
   resources :conversations, only: [:index, :create, :new] do
     resources :messages, only: [:index, :create]
     resources :answers, only: [:new, :create]
+    resources :trips, only: [:new, :create]
   end
   resources :languages
 

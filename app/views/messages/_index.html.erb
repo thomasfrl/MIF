@@ -16,8 +16,9 @@
           </div>
         </div>
       </div>
+
       <div class="col-2 p-0">
-        <%= link_to new_trip_path do  %>
+        <%= link_to new_trip_path(@conversation), {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal_'} do  %>
           <i class="fas fa-plane fa-lg text-primary mr-2"></i>
         <% end %>
         <%= link_to new_conversation_answer_path(@conversation),  {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal_answer'} do  %>

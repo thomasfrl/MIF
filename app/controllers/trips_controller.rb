@@ -16,6 +16,11 @@ class TripsController < ApplicationController
   # GET /trips/new
   def new
     @trip = Trip.new
+    respond_to do |format|
+      format.html{}
+      format.js{}
+    end
+
   end
 
   # GET /trips/1/edit
@@ -30,7 +35,7 @@ class TripsController < ApplicationController
     respond_to do |format|
       if @trip.save
         format.html { redirect_to @trip, notice: 'Trip was successfully created.' }
-        format.json { render :show, status: :created, location: @trip }
+        format.js { render :show, status: :created, location: @trip }
       else
         format.html { render :new }
         format.json { render json: @trip.errors, status: :unprocessable_entity }
