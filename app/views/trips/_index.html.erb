@@ -1,195 +1,74 @@
-<div class="row justify-content-center">
-	<div class="col-md-10 col-lg-8">
-		<div class="row gutter-1">
-			<div class="col-md-4">
-				<figure class="user">
-					<a href="" class="user-photo">
-						<img src="../../assets/images/demo/user-1.jpg" alt="Avatar">
-					</a>
-					<figcaption class="user-caption">
-						<h4>John Doe</h4>
-						<span>Senior Designer</span>
-						<ul class="socials bordered">
-							<li><a href="" class="icon-facebook fs-20"></a></li>
-							<li><a href="" class="icon-instagram fs-20"></a></li>
-							<li><a href="" class="icon-twitter fs-20"></a></li>
-						</ul>
-					</figcaption>
-				</figure>
-			</div>
-			<div class="col-md-4">
-				<figure class="user">
-					<a href="" class="user-photo">
-						<img src="../../assets/images/demo/user-2.jpg" alt="Avatar">
-					</a>
-					<figcaption class="user-caption">
-						<h4>James Doe</h4>
-						<span>Senior Designer</span>
-						<ul class="socials bordered">
-							<li><a href="" class="icon-facebook fs-20"></a></li>
-							<li><a href="" class="icon-instagram fs-20"></a></li>
-							<li><a href="" class="icon-twitter fs-20"></a></li>
-						</ul>
-					</figcaption>
-				</figure>
-			</div>
-			<div class="col-md-4">
-				<figure class="user">
-					<a href="" class="user-photo">
-						<img src="../../assets/images/demo/user-3.jpg" alt="Avatar">
-					</a>
-					<figcaption class="user-caption">
-						<h4>Valerie Doe</h4>
-						<span>Senior Designer</span>
-						<ul class="socials bordered">
-							<li><a href="" class="icon-facebook fs-20"></a></li>
-							<li><a href="" class="icon-instagram fs-20"></a></li>
-							<li><a href="" class="icon-twitter fs-20"></a></li>
-						</ul>
-					</figcaption>
-				</figure>
-			</div>
-		</div>
-	</div>
+
+<div class="col text-center">
+  <div class="nav nav-pills mb-2 lavalamp"><div class="lavalamp-object ease" style="transition-duration: 0.2s; width: 121.234px; height: 45px; transform: translate(0px, 0px);"></div>
+    <a class="nav-item nav-link active lavalamp-item" data-toggle="tab" href="#trip-1-1" style="z-index: 5; position: relative;">Hosted trips</a>
+    <a class="nav-item nav-link lavalamp-item" data-toggle="tab" href="#trip-1-2" style="z-index: 5; position: relative;">Trips done</a>
+  </div>
+  <div class="tab-content" id="trip-1">
+    <% if @trips.empty?%>
+      <p>You don't have any trips done yet</p>
+    <% else %>
+    <div class="tab-pane show active" id="trip-1-1" role="tabpanel" aria-labelledby="trip-1-1">
+    <div class="col">
+      <table class="table table-lined">
+        <thead>
+          <tr >
+            <th scope="col">City</th>
+            <th scope="col">Start date</th>
+            <th scope="col">End date</th>
+            <th scope="col">Miffer</th>
+          </tr>
+        </thead>
+      <tbody>
+     <% @trips.each do |trip|%>
+      <% if trip.host == current_user %>
+          <tr style="background-image: url('<%=asset_path("cities/#{@user.city.name.downcase}.jpg")%>');">
+            <th scope="row"><%= trip.host.city.name %></th>
+            <td><%= trip.start_date.to_date %></td>
+            <td><%= trip.end_date.to_date %></td>
+            <td><%= trip.correspondance.other_friend(current_user).first_name %> <%= trip.correspondance.other_friend(current_user).last_name  %></td>
+          </tr>
+        <% end %>
+     <% end %>
+       </tbody>
+      </table>
+      </div>
+      <% end %>
+    </div>
+    <div class="tab-pane" id="trip-1-2" role="tabpanel" aria-labelledby="trip-1-2">
+    <% if @trips.empty?%>
+      <p>You don't have any trips done yet</p>
+    <% else %>
+      <div class="col">
+      <table class="table table-lined">
+        <thead>
+          <tr >
+            <th scope="col">City</th>
+            <th scope="col">Start date</th>
+            <th scope="col">End date</th>
+            <th scope="col">Miffer</th>
+          </tr>
+        </thead>
+      <tbody>
+     <% @trips.each do |trip|%>
+      <% if trip.end_date < Time.now %>
+          <tr style="background-image: url('<%=asset_path("cities/#{@user.city.name.downcase}.jpg")%>');">
+            <th scope="row"><%= trip.host.city.name %></th>
+            <td><%= trip.start_date.to_date %></td>
+            <td><%= trip.end_date.to_date %></td>
+            <td><%= trip.correspondance.other_friend(current_user).first_name %> <%= trip.correspondance.other_friend(current_user).last_name  %></td>
+          </tr>
+        <% end %>
+     <% end %>
+       </tbody>
+      </table>
+      </div>
+    <% end %>
+  </div>
 </div>
-<div class="row justify-content-center">
-	<div class="col-md-10 col-lg-8">
-		<div class="row gutter-1">
-			<div class="col-12">
-				<div class="boxed p-2">
-					<div class="row align-items-center justify-content-between">
-						<div class="col-10">
-							<div class="media align-items-center">
-								<img src="../../assets/images/demo/user-5.jpg" alt="Avatar" class="avatar avatar-lg rounded mr-3">
-								<div class="media-body">
-									<h5 class="mb-0">Nicole Doe</h5>
-									<span class="text-muted">Senior UI Designer</span>
-								</div>
-							</div>
-						</div>
-						<div class="col-2 text-md-right">
-							<div class="dropdown">
-								<a class="btn btn-ico btn-outline-light text-dark rounded btn-sm" href="#" role="button" id="dropdownMenuLink-3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-									<i class="icon-more-vertical fs-22"></i>
-								</a>
 
-								<div class="dropdown-menu" aria-labelledby="dropdownMenuLink-3">
-									<a class="dropdown-item" href="#">Make Primary</a>
-									<a class="dropdown-item" href="#">Remove</a>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="col-12">
-				<div class="boxed p-2">
-					<div class="row align-items-center justify-content-between">
-						<div class="col-10">
-							<div class="media align-items-center">
-								<img src="../../assets/images/demo/user-2.jpg" alt="Avatar" class="avatar avatar-lg rounded mr-3">
-								<div class="media-body">
-									<h5 class="mb-0">James Doe</h5>
-									<span class="text-muted">Senior UI Designer</span>
-								</div>
-							</div>
-						</div>
-						<div class="col-2 text-md-right">
-							<div class="dropdown">
-								<a class="btn btn-ico btn-outline-light text-dark rounded btn-sm" href="#" role="button" id="dropdownMenuLink-4" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-									<i class="icon-more-vertical fs-22"></i>
-								</a>
 
-								<div class="dropdown-menu" aria-labelledby="dropdownMenuLink-4">
-									<a class="dropdown-item" href="#">Make Primary</a>
-									<a class="dropdown-item" href="#">Remove</a>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="col-12">
-				<div class="boxed p-2">
-					<div class="row align-items-center justify-content-between">
-						<div class="col-10">
-							<div class="media align-items-center">
-								<img src="../../assets/images/demo/user-3.jpg" alt="Avatar" class="avatar avatar-lg rounded mr-3">
-								<div class="media-body">
-									<h5 class="mb-0">Violet Doe</h5>
-									<span class="text-muted">Senior UI Designer</span>
-								</div>
-							</div>
-						</div>
-						<div class="col-2 text-md-right">
-							<div class="dropdown">
-								<a class="btn btn-ico btn-outline-light text-dark rounded btn-sm" href="#" role="button" id="dropdownMenuLink-5" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-									<i class="icon-more-vertical fs-22"></i>
-								</a>
 
-								<div class="dropdown-menu" aria-labelledby="dropdownMenuLink-5">
-									<a class="dropdown-item" href="#">Make Primary</a>
-									<a class="dropdown-item" href="#">Remove</a>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="col-12">
-				<div class="boxed p-2">
-					<div class="row align-items-center justify-content-between">
-						<div class="col-10">
-							<div class="media align-items-center">
-								<img src="../../assets/images/demo/user-4.jpg" alt="Avatar" class="avatar avatar-lg rounded mr-3">
-								<div class="media-body">
-									<h5 class="mb-0">Valerie Doe</h5>
-									<span class="text-muted">Senior UI Designer</span>
-								</div>
-							</div>
-						</div>
-						<div class="col-2 text-md-right">
-							<div class="dropdown">
-								<a class="btn btn-ico btn-outline-light text-dark rounded btn-sm" href="#" role="button" id="dropdownMenuLink-6" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-									<i class="icon-more-vertical fs-22"></i>
-								</a>
-
-								<div class="dropdown-menu" aria-labelledby="dropdownMenuLink-6">
-									<a class="dropdown-item" href="#">Make Primary</a>
-									<a class="dropdown-item" href="#">Remove</a>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="col-12">
-				<div class="boxed p-2">
-					<div class="row align-items-center justify-content-between">
-						<div class="col-10">
-							<div class="media align-items-center">
-								<img src="../../assets/images/demo/user-6.jpg" alt="Avatar" class="avatar avatar-lg rounded mr-3">
-								<div class="media-body">
-									<h5 class="mb-0">Nick Doe</h5>
-									<span class="text-muted">Senior UI Designer</span>
-								</div>
-							</div>
-						</div>
-						<div class="col-2 text-md-right">
-							<div class="dropdown">
-								<a class="btn btn-ico btn-outline-light text-dark rounded btn-sm" href="#" role="button" id="dropdownMenuLink-7" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-									<i class="icon-more-vertical fs-22"></i>
-								</a>
-
-								<div class="dropdown-menu" aria-labelledby="dropdownMenuLink-7">
-									<a class="dropdown-item" href="#">Make Primary</a>
-									<a class="dropdown-item" href="#">Remove</a>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+<div id="trips_calendar" class="mt-10">
+  <%= render partial: "trips/calendar", locals: {trips: @trips} %>
 </div>
