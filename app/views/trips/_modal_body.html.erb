@@ -1,0 +1,12 @@
+<%= form_with(model: @trip, local: true) do |form| %>
+  <%= form.hidden_field :correspondance_id, :value => current_user.id %>
+  <div class="row">
+    <div class="field col-10">
+      <%= form.text_field :start_date, placeholder: "Write a message", class: "form-control" %>
+    </div>
+    <%= button_tag(type: 'submit', class: "border-0 bg-white") do %>
+      <i class="fas fa-paper-plane fa-2x  text-primary"></i>
+    <% end %>
+  </div>
+<% end %>
+<p> <%= @correspondance  %></p>

@@ -16,6 +16,7 @@ class TripsController < ApplicationController
   # GET /trips/new
   def new
     @trip = Trip.new
+    @conversation = Conversation.find(params[:conversation_id])
     respond_to do |format|
       format.html{}
       format.js{}
