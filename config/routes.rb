@@ -19,12 +19,15 @@ Rails.application.routes.draw do
   end
 
   resources :tickets
+
+
   resources :correspondances
   resources :comments
   resources :conversations, only: [:index, :create, :new] do
     resources :messages, only: [:index, :create]
     resources :answers, only: [:new, :create]
   end
+
   resources :languages
   
   resources :flats do
@@ -33,6 +36,11 @@ Rails.application.routes.draw do
   resources :cities
   resources :user_preferences, only: [:create, :new]
 
+  namespace :admins do
+    resources :users, only: [:index, :update]
+    resources :cities, except: [:show, :edit, :new]
+    resources :languages, except: [:show, :edit, :new]
+  end
 
 
 
