@@ -6,15 +6,16 @@
       <%= form_for(@conversation_new, remote: true) do |f| %>
         <div class="row">
           <%= f.collection_select :receiver_id, @users,:id,:name, {prompt: "New Conversation"},   {class: "col-auto"} %>
+
           <%= button_tag(type: 'submit', class: "border-0") do %>
-            <i class="fas fa-plus-circle fa-2x p-1 text-primary"></i>
+            <i class="fas fa-plus-circle fa-2x text-primary"></i>
           <% end %>
         </div>
-      <% end %>        
+      <% end %>
     <% end %>
 
 
-    
+
     <div id="conversations">
       <% @conversations.each do |conversation| %>
         <% user = conversation.other_participant(current_user) %>
@@ -34,17 +35,17 @@
                   <span class="text-muted"></span>
                 <% end %>
               </div>
-            </div>    
+            </div>
           <% end %>
-        </div>        
+        </div>
       <% end %>
     </div>
     <br>
-  </div>  
+  </div>
 </div>
 
 <div id="messages" class="col-9">
-  <%= render "messages/index"%> 
+  <%= render "messages/index"%>
 </div>
 
 <script>
