@@ -11,7 +11,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @languages = Language.all
     @flat = @user.flat
-    @trips = current_user.trips
+    trips_controller
     conversations_controller
     comments_controller
     correspondances_controller
@@ -74,6 +74,14 @@ class UsersController < ApplicationController
 
     def user_params
       params.require(:user).permit(:first_name, :last_name, :description, :age, :welcome_message, :city_id, :nationality)
+    end
+
+    def trips_controller
+      @correspondances = current_user.correspondances
+      @trips = []
+      @correspondances.each do |c|
+        @trips += c.trips
+      end
     end
 
     def conversations_controller

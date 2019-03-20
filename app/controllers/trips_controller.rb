@@ -4,7 +4,11 @@ class TripsController < ApplicationController
   # GET /trips
   # GET /trips.json
   def index
-    @trips = current_user.trips
+    @correspondances = current_user.correspondances
+    @trips = []
+    @correspondances.each do |c|
+      @trips << c.trips
+    end
     @visitor = current_user
   end
 
@@ -16,7 +20,9 @@ class TripsController < ApplicationController
   # GET /trips/new
   def new
     @trip = Trip.new
+
     @conversation = Conversation.find(params[:conversation_id])
+    @correspondance = Correspondance.select(current_user, @conversation.other_participant(current_user))
     respond_to do |format|
       format.html{}
       format.js{}
@@ -35,10 +41,10 @@ class TripsController < ApplicationController
 
     respond_to do |format|
       if @trip.save
-        format.html { redirect_to @trip, notice: 'Trip was successfully created.' }
-        format.js { render :show, status: :created, location: @trip }
+        format.html { redirect_to current_user, notice: 'Trip was successfully created.' }
+        format.json { render :show, status: :created, location: @trip }
       else
-        format.html { render :new }
+        format.html { redirect_to current_user, notice: "Trip can't be created" }
         format.json { render json: @trip.errors, status: :unprocessable_entity }
       end
     end

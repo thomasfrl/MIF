@@ -1,12 +1,21 @@
 <%= form_with(model: @trip, local: true) do |form| %>
-  <%= form.hidden_field :correspondance_id, :value => current_user.id %>
+  <%= form.hidden_field :correspondance_id, :value => @correspondance.id %>
   <div class="row">
     <div class="field col-10">
-      <%= form.text_field :start_date, placeholder: "Write a message", class: "form-control" %>
+      <%= form.label "Start date" %>
+      <%= form.date_field :start_date, value: Date.today, class: "form-control", min: Date.today %>
+      <%= form.label "Duration (days)" %>
+      <%= form.number_field :duration, placeholder: "Write a message", class: "form-control", min: 1 %>
+
+          <div class="field">
+            <label for="flatSleep">Host</label> <br>
+            <%= form.radio_button :host_id, current_user.id %> <%= current_user.name %> <br>
+            <%= form.radio_button :host_id, @correspondance.other_friend(current_user).id %> <%= @correspondance.other_friend(current_user).name %> <br>
+          </div>
+
     </div>
     <%= button_tag(type: 'submit', class: "border-0 bg-white") do %>
       <i class="fas fa-paper-plane fa-2x  text-primary"></i>
     <% end %>
   </div>
 <% end %>
-<p> <%= @correspondance  %></p>

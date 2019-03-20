@@ -23,15 +23,13 @@
         </thead>
       <tbody>
       <% @trips.each do |trip|%>
-        <% if trip.start_date.to_date < Time.now.to_date %>
-            <tr style="background-image: url('<%=asset_path("cities/#{@user.city.name.downcase}.jpg")%>');">
+        <% if trip.start_date.to_date > Time.now.to_date %>
+            <tr style="background-image: url('<%=asset_path("cities/#{trip.host.city.name.downcase}.jpg")%>');">
               <th scope="row"><%= trip.host.city.name %></th>
               <td><%= trip.start_date.to_date %></td>
               <td><%= trip.end_date.to_date %></td>
               <td><%= trip.correspondance.other_friend(current_user).first_name %> <%= trip.correspondance.other_friend(current_user).last_name  %></td>
             </tr>
-        <% else %>
-         <p>No coming trips</p>
         <% end %>
       <% end %>
        </tbody>
