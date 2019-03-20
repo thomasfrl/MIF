@@ -49,6 +49,9 @@
     <!-- / cover -->
 
     <!-- team -->
+
+    <% @city.users.each_with_index do |user,index| %>
+    <% if current_user.user_preferences
     <section class="bg-white">
       <div class="container">
         <div class="row justify-content-center">
