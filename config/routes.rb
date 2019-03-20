@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   get 'home/about_us', to: "home#about_us"
   get 'home/contact', to: "home#contact"
   get 'home/team', to: "home#team"
+  get 'home/not_found', to: "home#not_found"
 
   devise_for :users, controllers: {
     omniauth_callbacks: "users/omniauth_callbacks"
@@ -17,22 +18,19 @@ Rails.application.routes.draw do
     resources :user_pictures, only: [:create, :destroy]
   end
 
-  resources :user_languages
   resources :tickets
   resources :correspondances
-  resources :testifies
   resources :comments
   resources :conversations, only: [:index, :create, :new] do
     resources :messages, only: [:index, :create]
     resources :answers, only: [:new, :create]
   end
   resources :languages
+  
   resources :flats do
     resources :flat_pictures, only: [:create, :destroy]
   end
-  resources :users
   resources :cities
-  resources :home
   resources :user_preferences, only: [:create, :new]
 
 

@@ -17,6 +17,10 @@ class HomeController < ApplicationController
   def team
   end
 
+  def not_found
+    render "404"
+  end
+
   private
 
   def random_user
