@@ -36,7 +36,7 @@ Rails.application.routes.draw do
 
   namespace :admins do
     resources :users, only: [:index, :update]
-    resources :cities, except: [:show, :edit, :new]
+    resources :cities, except: [:show, :edit, :new, :destroy]
     resources :languages, except: [:show, :edit, :new]
   end
 
