@@ -1,6 +1,5 @@
-class UsersController < ApplicationController
+class Admins::UsersController < ApplicationController
   before_action :authenticate_user!
-  # before_action :validated_user?
   before_action :good_user, only: [:update]
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
@@ -16,7 +15,6 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @languages = Language.all
     @flat = @user.flat
-    @trips = current_user.trips
     conversations_controller
     comments_controller
     correspondances_controller
@@ -53,12 +51,12 @@ class UsersController < ApplicationController
     respond_to do |format|
       if @user.update(user_params)
         UserLanguage.where(user: current_user).destroy_all
-        unless params[:language_ids].nil?
+        unless params[:language_ids].nil? 
           params[:language_ids].each do |id|
             if Language.exists?(id)
               @user.languages << Language.find(id)
             end
-          end
+          end 
         end
         format.html { redirect_to user_path(current_user.id), notice: 'User was successfully updated.' }
         format.json { render :edit, status: :ok, location: @user }
@@ -87,11 +85,12 @@ class UsersController < ApplicationController
         redirect_to root_path
       end
     end
-
+    # Use callbacks to share common setup or constraints between actions.
     def set_user
       @user = User.find(current_user.id)
     end
 
+    # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
       params.require(:user).permit(:first_name, :last_name, :description, :age, :welcome_message, :city_id, :nationality)
     end

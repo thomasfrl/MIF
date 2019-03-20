@@ -83,3 +83,5 @@ gem 'omniauth-facebook'
 gem 'alert_message'
 gem "mini_magick"
 gem 'rubysl-open-uri'
+gem 'dotenv-rails'
+gem "simple_calendar", "~> 2.0"
