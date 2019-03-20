@@ -1,5 +1,5 @@
 
-<div class="col">
+<div class="col text-center">
   <div class="nav nav-pills mb-2 lavalamp"><div class="lavalamp-object ease" style="transition-duration: 0.2s; width: 121.234px; height: 45px; transform: translate(0px, 0px);"></div>
     <a class="nav-item nav-link active lavalamp-item" data-toggle="tab" href="#demo-1-1" style="z-index: 5; position: relative;">Hosted trips</a>
     <a class="nav-item nav-link lavalamp-item" data-toggle="tab" href="#demo-1-2" style="z-index: 5; position: relative;">Second Tab</a>
@@ -19,11 +19,11 @@
       <tbody>
      <% @trips.each do |trip|%>
       <% if trip.host == current_user %>
-          <tr>
-            <th scope="row" style="background-image: url('<%=asset_path("cities/#{@user.city.name.downcase}.jpg")%>');"><%= trip.host.city.name %></th>
-            <td><%= trip.start_date %></td>
+          <tr style="background-image: url('<%=asset_path("cities/#{@user.city.name.downcase}.jpg")%>');">
+            <th scope="row"><%= trip.host.city.name %></th>
+            <td><%= trip.start_date.to_date %></td>
             <td><%= trip.duration %></td>
-            <td><%= trip.correspondance.acceptor.first_name %> <%= trip.correspondance.acceptor.last_name %></td>
+            <td><%= trip.correspondance.other_friend(current_user).first_name %> <%= trip.correspondance.other_friend(current_user).last_name  %></td>
           </tr>
         <% end %>
      <% end %>

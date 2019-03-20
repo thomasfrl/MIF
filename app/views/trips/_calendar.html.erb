@@ -5,11 +5,11 @@
       <% if trip.start_date == date %>
       <% if trip.host == current_user %>
         <div class="text-center">
-          Hosting <%= trip.correspondance.acceptor.first_name %>
+          Hosting <%= trip.correspondance.other_friend(current_user).first_name %>
         </div>
       <% else %>
         <div class="text-center">
-          <%= trip.correspondance.acceptor.first_name %>
+          <%= trip.correspondance.other_friend(current_user).first_name %>
         </div>
       <% end %>
     <% end %>
