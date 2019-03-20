@@ -1,6 +1,5 @@
-class Admins::UsersController < ApplicationController
+class Admins::UsersController < Admins::ApplicationController
   before_action :authenticate_user!
-  before_action :good_user, only: [:update]
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
   # GET /users

@@ -1,4 +1,4 @@
-class Admins::LanguagesController < ApplicationController
+class Admins::LanguagesController < Admins::ApplicationController
   before_action :set_language, only: [:update, :destroy]
 
   # GET /languages

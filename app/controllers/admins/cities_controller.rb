@@ -1,4 +1,4 @@
-class Admins::CitiesController < ApplicationController
+class Admins::CitiesController < Admins::ApplicationController
   before_action :set_city, only: [:update]
 
   # GET /cities
