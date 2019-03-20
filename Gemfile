@@ -3,6 +3,8 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.5.1'
 
+
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.2.2'
 # Use postgresql as the database for Active Record
@@ -51,6 +53,7 @@ group :development do
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'letter_opener'
+  
 
 end
 
@@ -78,5 +81,7 @@ gem 'simple_form'
 gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'alert_message'
+gem "mini_magick"
+gem 'rubysl-open-uri'
 gem 'dotenv-rails'
 gem "simple_calendar", "~> 2.0"
