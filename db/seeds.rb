@@ -224,13 +224,25 @@ puts "language association created"
 
 
 User.all.each do |u|
-  preferences = Preference.all
+  pref_except = Preference.all
   1.upto(5) do |i|
-    p = preferences.uniq.sample
+    p = pref_except.sample
     userpreferences = UserPreference.new(user: u, preference: p, position: i)
     userpreferences.save!
+    pref_except = pref_except.reject{|pref| pref == p}
   end
 end
+#   arraystock = []
+#   u.user_preferences.each do |f|
+#     arraystock << f
+#   end
+#   u.user_preferences.each do |x|
+#     while x == arraystock[0] || arraystock[1] || arraystock[2] || arraystock[3] || arraystock[4]
+#       x = preferences.uniq.sample
+#       x.save!
+#     end
+#   end
+# end
 
 # arraystock = []
 # iteratordemerde = 0

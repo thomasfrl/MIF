@@ -12,6 +12,31 @@ class CitiesController < ApplicationController
   def show
     @city = City.find(params[:id])
     @cities = City.all
+    def matchmaking(contender)
+      arrayuser = []
+      arraycontender = []
+      value = 0
+      current_user.user_preferences.each do |userpref|
+        arrayuser << userpref
+      end
+
+      contender.user_preferences.each do |contenderpref|
+        arraycontender << contenderpref
+      end
+
+      if arraycontender.include? arrayuser[0] && arraycontender.include? arrayuser[1] && arraycontender.include? arrayuser[2] && arraycontender.include? arrayuser[3] && arraycontender.include? arrayuser[4]
+        value = 5
+      elsif arraycontender.include? arrayuser[0] && arraycontender.include? arrayuser[1] && arraycontender.include? arrayuser[2] && arraycontender.include? arrayuser[3]
+        value = 4
+      elsif arraycontender.include? arrayuser[0] && arraycontender.include? arrayuser[1] && arraycontender.include? arrayuser[2]
+        value = 3
+      elsif arraycontender.include? arrayuser[0] && arraycontender.include? arrayuser[1]
+        value = 2
+      elsif arraycontender.include? arrayuser[0]
+        value = 1
+      end
+      return value
+    end
   end
 
   # GET /cities/new
