@@ -27,7 +27,7 @@
     <section class="hero hero-with-header text-white"
       data-top-top="transform: translateY(0px);"
       data-top-bottom="transform: translateY(250px);">
-      <%= image_tag(@city.picture, :alt => "avatar", class: "image image-overlay image-blur", style: "transform: scale(1.1);") %>
+      <%= image_tag(@city.picture, :alt => "avatar", class: "image image-overlay image-cover") %>
       <div class="container">
         <div class="row align-items-center">
           <div class="col text-shadow">
@@ -40,8 +40,10 @@
               <div class="col-md-2">
               </div>
             </div>
-            <h1 class="font-weight-bold"><%= @city.name.slice(0,1).capitalize + @city.name.slice(1..-1) %></h1>
-            <h2 class="mb-0"><%= @city.country.capitalize %></h2>
+            <h1 class="font-weight-bold text-black" data-top-top="transform: translateY(0px);"
+            data-top-bottom="transform: translateY(-250px);"><%= @city.name.slice(0,1).capitalize + @city.name.slice(1..-1) %>
+            </h1>
+            <h2 class="mb-0 text-black"><%= @city.country.capitalize %></h2>
           </div>
         </div>
       </div>
@@ -53,8 +55,7 @@
       <div class="container">
         <div class="row justify-content-center">
           <div class="col-md-6 text-center">
-            <span class="eyebrow d-block mb-1 text-primary">Miffers in <%=@city.name%></span>
-            <p class="lead text-black"> <%=@city.description%> </p>
+          <p class="lead text-black"> <%=@city.description%> </p>
           </div>
         </div>
         <div class="row gutter-0">
