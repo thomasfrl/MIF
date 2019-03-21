@@ -1,0 +1,31 @@
+<% if @trips.empty?%>
+      <p>You don't have any trips hosted yet</p>
+    <% else %>
+    <div class="col">
+      <table class="table table-lined">
+        <thead>
+          <tr >
+            <th scope="col">City</th>
+            <th scope="col">Start date</th>
+            <th scope="col">End date</th>
+            <th scope="col">Miffer</th>
+            <th scope="col"><i class="fas fa-sort fa-lg"></i></th>
+          </tr>
+        </thead>
+      <tbody>
+      <% @trips.each do |trip|%>
+        <% if trip.host == current_user %>
+            <tr>
+              <th scope="row"><%= trip.host.city.name %></th>
+              <td><%= trip.start_date.to_date %></td>
+              <td><%= trip.end_date.to_date %></td>
+              <td><%= trip.correspondance.other_friend(current_user).first_name %> <%= trip.correspondance.other_friend(current_user).last_name  %></td>
+              <td><%= link_to "<i class='fas fa-times fa-lg '></i>".html_safe, trip_path(trip), class: "text-grey delete_trip", method: :delete, data: { confirm: 'Are you sure?' }, :remote => true  %>
+                </td>
+            </tr>
+        <% end %>
+      <% end %>
+       </tbody>
+      </table>
+      </div>
+    <% end %>

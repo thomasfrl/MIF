@@ -53,13 +53,18 @@ class TripsController < ApplicationController
   # PATCH/PUT /trips/1
   # PATCH/PUT /trips/1.json
   def update
+    @trip = Trip.find(params[:id])
+    if params[:update]
+      validated = true
+    end
     respond_to do |format|
-      if @trip.update(trip_params)
-        format.html { redirect_to @trip, notice: 'Trip was successfully updated.' }
-        format.json { render :show, status: :ok, location: @trip }
+      if @trip.update(validated: validated)
+        if validated == true
+          format.js { render :layout => false , notice: 'Success of acceptance of correspondance status' }
       else
-        format.html { render :edit }
-        format.json { render json: @trip.errors, status: :unprocessable_entity }
+        flash[:danger] = 'Failure of modification of correspondance status.'
+        redirect_to current_user
+        end
       end
     end
   end
@@ -67,10 +72,11 @@ class TripsController < ApplicationController
   # DELETE /trips/1
   # DELETE /trips/1.json
   def destroy
+    @trip = Trip.find(params[:id])
     @trip.destroy
     respond_to do |format|
-      format.html { redirect_to trips_url, notice: 'Trip was successfully destroyed.' }
-      format.json { head :no_content }
+      format.html {}
+      format.js   { render :layout => false }
     end
   end
 
@@ -82,6 +88,6 @@ class TripsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def trip_params
-      params.require(:trip).permit(:correspondance_id, :host_id, :duration, :start_date)
+      params.require(:trip).permit(:correspondance_id, :host_id, :duration, :start_date, :validated)
     end
 end

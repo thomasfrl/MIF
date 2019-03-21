@@ -46,9 +46,10 @@ class User < ApplicationRecord
   has_many :user_languages, dependent: :destroy
   has_many :languages, through: :user_languages
 
+
   has_one_attached :avatar, dependent: :destroy
   has_many_attached :pictures, dependent: :destroy
-  
+
   has_many :user_preferences, dependent: :destroy
   has_many :preferences, through: :user_preferences
   
