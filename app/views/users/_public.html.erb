@@ -10,11 +10,7 @@
           <div class="col col-md-10 col-lg-8">
             <div class="row align-items-center">
               <div class="col-4 col-lg-3">
-                <%if @user.avatar.attached?%>
-                    <%= image_tag(@user.avatar, :alt => "avatar", class: "avatar avatar-xl rounded") %>
-                <%else%>
-                    <img src="/assets/img/nopic.png" alt="Avatar" class="avatar avatar-xl rounded">
-                <%end%>
+                <%= image_tag(@user.avatar, :alt => "avatar", class: "avatar avatar-xl rounded") %>
               </div>
               <div class="col">
                 <div class="row align-items-center">
@@ -24,27 +20,26 @@
                     <span class="text-muted">"<%= @user.welcome_message %>"</span>
                   </div>
                   <div class="col-md-4 text-left text-md-right">
-                    <% correspondance = Correspondance.select(current_user, @user) %>
-                    <% if !correspondance %>
+                    <% if !@correspondance %>
                       <div class="row align-items-center "> 
                         <p class="text-black mb-0">Ask to be your friend  </p>
                         <%= link_to "#", "data-toggle" =>"modal", 'data-target' => '#modal_correspondances', title: "Add Friend" do %>
                           <i class="btn btn-rounded btn-ico btn-white"><i class="fas fa-plus fa-2x p-1 text-primary"></i></i> 
                         <% end %>
                       </div>
-                    <% elsif correspondance.status == "waiting" && correspondance.creator == current_user %>
+                    <% elsif @correspondance.status == "waiting" && @correspondance.creator == current_user %>
                       <p>Correspondance waiting for validation</p>
-                    <% elsif correspondance.status == "waiting" && correspondance.creator == @user %>
-                      <%= link_to "Accept", correspondance_path(correspondance, :update => true), class: "btn-success p-1", method: :put  %>
-                      <%= link_to "Refuse", correspondance_path(correspondance, :update => false), class: "btn-danger p-1", method: :put  %>
-                    <% elsif correspondance.status == "validated"%>
+                    <% elsif @correspondance.status == "waiting" && @correspondance.creator == @user %>
+                      <%= link_to "Accept", correspondance_path(@correspondance, :update => true), class: "btn-success p-1", method: :put  %>
+                      <%= link_to "Refuse", correspondance_path(@correspondance, :update => false), class: "btn-danger p-1", method: :put  %>
+                    <% elsif @correspondance.status == "validated"%>
                       <div class="row align-items-center "> 
                         <p class="text-black mb-0">Leave a comment  </p>
                         <%= link_to "#", "data-toggle" =>"modal", 'data-target' => '#modal_comments', class: "btn btn-rounded btn-ico btn-white", title: "Add Friend" do %>
                           <i class="fas fa-plus fa-2x p-1 text-primary"></i>
                         <% end %>
                       </div>
-                    <% elsif correspondance.status == "refused"%>
+                    <% elsif @correspondance.status == "refused"%>
                       <p>Friendship refused</p> 
                     <% end %>
                   </div>
@@ -64,8 +59,8 @@
             <div class="nav nav-tabs mb-1">
               <%= link_to "Profile", user_path(@user), remote: true, class: "nav-item nav-link"   %>
               <%= link_to "Comments", user_comments_path(@user), remote: true, class: "nav-item nav-link"   %>
-              <% if correspondance %>
-                <% if correspondance.status == "validated" %>
+              <% if @correspondance %>
+                <% if @correspondance.status == "validated" %>
                   <%= link_to "Flat", flat_path(@user.flat), remote: true, class: "nav-item nav-link"   %>
                 <% end %>
               <% end %>

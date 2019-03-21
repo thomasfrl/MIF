@@ -8,6 +8,10 @@ class UsersController < ApplicationController
   # GET /users/1
   def show
     @user = User.find(params[:id])
+    @validated_correspondances = @user.validated_correspondances
+    @correspondance_new = Correspondance.new
+    @correspondance = Correspondance.select(current_user, @user)
+
     respond_to do |format|
       format.html {}
       format.js {render "show_user"}
