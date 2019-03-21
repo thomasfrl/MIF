@@ -14,8 +14,8 @@ class Admins::UsersController < Admins::ApplicationController
       if @user.update(user_params)
         format.html { redirect_to admins_users_path, notice: 'User was successfully updated.' }
       else
-        flash.now[:danger] = "User was not successfully updated"
-        format.html { redirect_to admins_users_path, notice: 'User was not successfully updated.' }
+        flash[:danger] = "User was not successfully updated"
+        format.html { redirect_to admins_users_path }
       end
     end
   end

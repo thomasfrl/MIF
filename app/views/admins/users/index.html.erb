@@ -31,7 +31,7 @@
                 <td><%= user.nationality %></td>
                 <td><%= user.city.name %></td>
                 <td><%= user.email %></td>
-                <td><%= form.text_field :status %></td>
+                <td><%= form.text_field :status, onchange: "if ($('#user_status').val() != 'validated' && $('#user_status').val() != 'waiting' && $('#user_status').val() != 'banned') { alert('The status cannot be different than waiting, banned or validated !'); }" %></td>
                 <td><%= form.check_box :is_admin , {}, "true", "false"%></td>
                 <td><%= link_to 'Show', user %></td>
                 <td><%= form.submit "Update" %></td>
