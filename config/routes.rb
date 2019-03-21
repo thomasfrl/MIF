@@ -39,6 +39,8 @@ Rails.application.routes.draw do
     resources :users, only: [:index, :update]
     resources :cities, except: [:show, :edit, :new, :destroy]
     resources :languages, except: [:show, :edit, :new]
+    root to: "admins#index"
+
   end
 
 
