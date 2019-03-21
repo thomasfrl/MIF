@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  #after_create :welcome_send
+  # after_create :welcome_send
   after_create :create_flat
   after_create :set_default_avatar
 
@@ -52,7 +52,7 @@ class User < ApplicationRecord
 
   has_many :user_preferences, dependent: :destroy
   has_many :preferences, through: :user_preferences
-  
+
   #attr_accessor :login
 
   # def self.find_first_by_auth_conditions(warden_conditions)
@@ -67,7 +67,7 @@ class User < ApplicationRecord
   # def self.from_facebook(auth)
   #   where()
   # end
-  
+
   def name
     self.first_name + " " + self.last_name
   end
