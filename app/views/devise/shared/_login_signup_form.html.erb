@@ -1,102 +1,33 @@
-<div class="viewport">
-  <div class="container">
-    <div class="row justify-content-center align-items-center vh-100">
-      <div class="col-md-6 col-lg-5">
-        <div class="accordion-group accordion-group-portal" data-accordion-group="">
-          <!-- LOGIN -->
-          <div class="accordion" data-accordion="">
-            <div class="accordion-control" data-control="">
-              <h5>Se connecter</h5>
-            </div>
-            <div class="accordion-content" data-content="" style="transition: max-height 300ms ease 0s; max-height: 0px; overflow: hidden;">
-              <div class="accordion-content-wrapper">
-                <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-                  <%= f.error_notification %>                      
-                  <div class="form-group">
-                    <%= f.input :login,
-                      required: true,
-                      autofocus: true,
-                      input_html: { autocomplete: "login", class: "form-control" } %>  
-                    <span style="opacity: 1; left: 392px; top: 151.5px; width: 19px; min-width: 19px; height: 13px; position: absolute; background-image: url(''); background-repeat: no-repeat; background-position: 0px 0px; border: none; display: inline; visibility: visible; z-index: auto;"></span>
-                  </div>
-                  <div class="form-group">
-                    <%= f.input :password,
-                      required: false,
-                      input_html: { autocomplete: "current-password", class: "form-control"  } %>
-                    <span style="opacity: 1; left: 392px; top: 249.5px; width: 19px; min-width: 19px; height: 13px; position: absolute; background-image: url(''); background-repeat: no-repeat; background-position: 0px 0px; border: none; display: inline; visibility: visible; z-index: auto;"></span>
-                  </div>
-                  <%= f.input :remember_me, as: :boolean if devise_mapping.rememberable? %>
-                  <%= f.button :submit, "Se connecter", class: "btn btn-primary btn-block" %>
-                <% end %>
-              </div>
+<% @session ||= "" %>
+<% @session2 ||= "" %>
+<% @regist ||= "" %>
+<% @regist ||= "" %>
+
+<div class="row justify-content-center align-items-center mt-5 pt-5">
+  <div class="col-md-6 col-lg-5">
+    <section class="bg-light pt-5">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col col-md-10 col-lg-8">
+            <div class="nav nav-tabs mb-1">
+              <a class="nav-item nav-link <%=@session%> " data-toggle="tab" href="#demo-2-1">Sign in</a>
+              <a class="nav-item nav-link <%=@regist%>" data-toggle="tab" href="#demo-2-2">Sign up</a>
             </div>
           </div>
-
-
-          <!-- SIGNUP -->
-          <div class="accordion open" data-accordion="">
-            <div class="accordion-control" data-control="">
-              <h5>Créer un compte</h5>
+        </div>
+      </div>
+    </section>
+    <div class="bg-light pb-5 pt-2">
+      <div class="container">
+        <div class="tab-content" id="demo-2">
+          <div class="tab-pane <%=@session2%>" id="demo-2-1" role="tabpanel" aria-labelledby="demo-2-1">
+            <div class="w-75 m-auto">
+              <%= render "devise/shared/login" %>
             </div>
-            <div class="accordion-content" data-content="" style="max-height: 382px; overflow: hidden; transition: max-height 300ms ease 0s;">
-              <div class="accordion-content-wrapper">
-                <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-                  <%= f.error_notification %>
-                  <!-- email -->
-                  <div class="form-group">
-                    <%= f.input :email,
-                      required: true,
-                      autofocus: true,
-                      input_html: { autocomplete: "email",
-                      class: "form-control",}%>
-                  </div>
-
-                  <!-- user name -->
-                  <div class="form-group">
-                    <%= f.input :user_name,
-                      required: true,
-                      input_html: { autocomplete: "user name",
-                      class: "form-control",}%>
-                  </div>
-
-                  <!-- first name -->
-                  <div class="form-group">
-                    <%= f.input :first_name,
-                      required: true,
-                      input_html: { autocomplete: "first name",
-                      class: "form-control",}%>
-                  </div>
-
-                  <!-- last name -->
-                  <div class="form-group">
-                    <%= f.input :last_name,
-                      required: true,
-                      input_html: { autocomplete: "last name",
-                      class: "form-control",}%>
-                  </div>
-
-                  <!-- city -->
-                  <div class="form-group">
-                    <%= f.collection_select :city_id, City.order(:name),:id,:name%>  
-                  </div>
-
-                  <!-- password -->
-                  <div class="form-group">
-                    <%= f.input :password,
-                      required: true,
-                      hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length),
-                      input_html: { autocomplete: "new-password", class: "form-control" } %>
-                  </div>
-
-                  <div class="form-group">
-                      <%= f.input :password_confirmation,
-                        required: true,
-                        input_html: { autocomplete: "new-password", class: "form-control" } %>
-                  </div>
-
-                  <%= f.button :submit, "Créer un compte", class: "btn btn-primary btn-block" %>
-                <% end %>
-              </div>
+          </div>
+          <div class="tab-pane <%=@regist2%>" id="demo-2-2" role="tabpanel" aria-labelledby="demo-2-2">
+            <div class="w-75 m-auto">
+              <%= render "devise/shared/signup" %>
             </div>
           </div>
         </div>
