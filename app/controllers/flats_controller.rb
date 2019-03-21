@@ -10,6 +10,7 @@ class FlatsController < ApplicationController
 
   # GET /flats/1/edit
   def edit
+    @flat = current_user.flat
   end
 
   # POST /flats

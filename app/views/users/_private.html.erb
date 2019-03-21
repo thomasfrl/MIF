@@ -35,11 +35,11 @@
       <div class="col col-md-10 col-lg-8">
         <div class="nav nav-tabs mb-1">
           <%= link_to "My conversations", conversations_path, remote: true, class: "nav-item nav-link"   %>
-          <a class="nav-item nav-link" data-toggle="tab" href="#demo-2-2">My Friends</a>
+          <%= link_to "My friends", correspondances_path, remote: true, class: "nav-item nav-link"   %>
           <a class="nav-item nav-link" data-toggle="tab" href="#demo-2-3">My trips</a>
           <%= link_to "Comments", user_comments_path(@user), remote: true, class: "nav-item nav-link"   %>
           <%= link_to "My profil", edit_user_path(current_user), remote: true, class: "nav-item nav-link"   %>
-          <a class="nav-item nav-link" data-toggle="tab" href="#demo-2-6">My flat</a>
+          <%= link_to "My flat", edit_flat_path(current_user.flat), remote: true, class: "nav-item nav-link"   %>
         </div>
       </div>
     </div>
@@ -57,19 +57,8 @@
   <div class="container">
     <div class="tab-content" id="demo-2">
 
-      <!-- tab conversations -->
         <div id="tab"></div>
-      <!-- / tab conversations -->
 
-      <!-- tab friends -->
-      <div class="tab-pane" id="demo-2-2" role="tabpanel" aria-labelledby="demo-2-2">
-        <div class="row justify-content-center">
-          <div class="col col-md-10 col-lg-8">
-              <%= render "correspondances/index" %>
-          </div>
-        </div>
-      </div>
-      <!-- / tab -->
 
 
       <!-- tab trips -->
@@ -89,9 +78,6 @@
       <!-- / tab -->
 
       <!-- tab flat -->
-      <div class="tab-pane" id="demo-2-6" role="tabpanel" aria-labelledby="demo-2-6">
-        <%= render "flats/flat_edit" %>
-      </div>
       <!-- / tab -->
 
     </div>

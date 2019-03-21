@@ -5,7 +5,7 @@ class CorrespondancesController < ApplicationController
 
   # GET /correspondances
   def index
-    @correspondances = current_user.correspondances
+    correspondances_controller
   end
 
   # POST /correspondances

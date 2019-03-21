@@ -1,12 +1,12 @@
 <div class="row justify-content-center">
 	<div class="col-md-10 col-lg-8">
     <h4 class="mb-2 fs-20 font-weight-normal">General Information</h4>
-    <%= form_with(model: flat, local: true) do |form| %>
-      <% if flat.errors.any? %>
+    <%= form_with(model: @flat, local: true) do |form| %>
+      <% if @flat.errors.any? %>
         <div id="error_explanation">
-          <h2><%= pluralize(flat.errors.count, "error") %> prohibited this flat from being saved:</h2>
+          <h2><%= pluralize(@flat.errors.count, "error") %> prohibited this flat from being saved:</h2>
           <ul>
-          <% flat.errors.full_messages.each do |message| %>
+          <% @flat.errors.full_messages.each do |message| %>
             <li><%= message %></li>
           <% end %>
           </ul>
@@ -56,19 +56,19 @@
     <h4 class="mb-2 fs-20 font-weight-normal">Pictures Information</h4>
     <p><%= label_tag "Delete pictures" %></p> 
     <div class="row ">
-      <% flat.pictures.each do |pic| %>
+      <% @flat.pictures.each do |pic| %>
         <div class="col-md-4">
           <figure>
             <%=image_tag(pic, :alt => "picture")%>
             <figcaption class="user-caption">
-              <%= link_to 'Delete', flat_flat_picture_path(flat,:pic => pic), :method => :delete, :data => {:confirm => 'Are you sure?'}, class: "btn btn-secondary m-auto"  %>
+              <%= link_to 'Delete', flat_flat_picture_path(@flat,:pic => pic), :method => :delete, :data => {:confirm => 'Are you sure?'}, class: "btn btn-secondary m-auto"  %>
             </figcaption>
           </figure>
         </div>
       <%end%>
     </div>
 
-    <%= form_tag flat_flat_pictures_path(flat.id), multipart: true do %>
+    <%= form_tag flat_flat_pictures_path(@flat), multipart: true do %>
       <p><%= label_tag "Add a new picture" %></p> 
       <%= file_field_tag :pictures %> <br><br>
       <%= submit_tag "Upload picture", class: "btn btn-secondary mb-5" %>
