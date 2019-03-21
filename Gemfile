@@ -85,3 +85,4 @@ gem "mini_magick"
 gem 'rubysl-open-uri'
 gem 'dotenv-rails'
 gem "simple_calendar", "~> 2.0"
+gem 'open-weather-api'
