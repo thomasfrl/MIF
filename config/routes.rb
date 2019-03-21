@@ -30,7 +30,9 @@ Rails.application.routes.draw do
   resources :flats, except: [:destroy, :index, :new] do
     resources :flat_pictures, only: [:create, :destroy]
   end
+  
   resources :cities, only: [:show, :index]
+
   resources :user_preferences, only: [:create, :new]
 
   namespace :admins do

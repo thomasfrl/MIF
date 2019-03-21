@@ -1,41 +1,46 @@
-<p id="notice"><%= notice %></p>
 
-<h1>Users</h1>
+<div class="row justify-content-center mt-5 mb-5">
+  <div class="col-8">
+    <h1 class="text-center mt-5">Users</h1>
+    <div class="row justify-content-center">
+      <table>
+        <thead>
+          <tr>
+            <th>First name</th>
+            <th>Last name</th>
+            <th>Age</th>
+            <th>Welcome message</th>
+            <th>Nationality</th>
+            <th>City</th>
+            <th>Email</th>
+            <th>status</th>
+            <th>Is admin?</th>
 
+            <th colspan="2"></th>
+          </tr>
+        </thead>
 
-
-<table>
-  <thead>
-    <tr>
-      <th>First name</th>
-      <th>Last name</th>
-      <th>Description</th>
-      <th>Age</th>
-      <th>Welcome message</th>
-      <th>Nationality</th>
-      <th>City</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @users.each do |user| %>
-      <tr>
-        <td><%= user.first_name %></td>
-        <td><%= user.last_name %></td>
-        <td><%= user.description %></td>
-        <td><%= user.age %></td>
-        <td><%= user.welcome_message %></td>
-        <td><%= user.nationality %></td>
-        <td><%= user.city %></td>
-        <td><%= link_to 'Show', user %></td>
-        <td><%= link_to 'Edit', edit_user_path(user) %></td>
-        <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New User', new_user_path %>
+        <tbody>
+          <% @users.each do |user| %>
+            <%= form_with(model: user, url: admins_user_path(user) ,local: true) do |form| %>
+              <tr class="mb-1">
+                <td><%= user.first_name %></td>
+                <td><%= user.last_name %></td>
+                <td><%= user.age %></td>
+                <td><%= user.welcome_message %></td>
+                <td><%= user.nationality %></td>
+                <td><%= user.city.name %></td>
+                <td><%= user.email %></td>
+                <td><%= form.text_field :status %></td>
+                <td><%= form.check_box :is_admin , {}, "true", "false"%></td>
+                <td><%= link_to 'Show', user %></td>
+                <td><%= form.submit "Update" %></td>
+              </tr>
+            <% end %>
+            <br>  
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
