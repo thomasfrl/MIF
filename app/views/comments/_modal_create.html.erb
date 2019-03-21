@@ -8,8 +8,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <%= form_with(model: @comment, local: true) do |form| %>
-          <%= form.hidden_field :user_id, :value => @user.id %>
+        <%= form_with(model: @comment, url: user_comments_path(@user) , local: true) do |form| %>
           <div class="row">
             <div class="field col-10">
               <%= form.text_field :content, placeholder: "Write a comment", class: "form-control" %>

@@ -5,11 +5,20 @@ class FlatsController < ApplicationController
   # GET /flats/1
   def show
     @flat = Flat.find(params[:id])
+    respond_to do |format|
+      format.html { redirect_to current_user}
+      format.js {}
+    end
   end
 
 
   # GET /flats/1/edit
   def edit
+    @flat = current_user.flat
+    respond_to do |format|
+      format.html { redirect_to current_user}
+      format.js {}
+    end
   end
 
   # POST /flats

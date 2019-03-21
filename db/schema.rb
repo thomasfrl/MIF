@@ -165,6 +165,7 @@ ActiveRecord::Schema.define(version: 2019_03_21_053036) do
     t.datetime "start_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "validated", default: false
     t.index ["correspondance_id"], name: "index_trips_on_correspondance_id"
     t.index ["host_id"], name: "index_trips_on_host_id"
   end

@@ -16,15 +16,16 @@ Rails.application.routes.draw do
   resources :users, only: [:update, :show, :edit, :index] do
     resources :avatars, only: [:create]
     resources :user_pictures, only: [:create, :destroy]
+    resources :comments, only: [:index, :create]
   end
 
 
   resources :correspondances, except: [:show, :edit, :new]
-  resources :comments, only: [:index, :create]
 
   resources :conversations, only: [:index] do
     resources :messages, only: [:index, :create]
     resources :answers, only: [:new, :create]
+    resources :trips, only: [:new, :create]
   end
 
   resources :flats, except: [:destroy, :index, :new] do
