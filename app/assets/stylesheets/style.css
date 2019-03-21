@@ -19,7 +19,7 @@
   --teal: #20c997;
   --cyan: #17a2b8;
   --white: #fff;
-  --gray: #555;
+  --gray: #BCC9DC;
   --gray-dark: #333;
   --dark-blue: #3FB3FF;
   --transparent-white: rgba(255, 255, 255, 0.2);
@@ -7250,7 +7250,7 @@ button.bg-white:focus {
   background-color: #e6e6e6 !important; }
 
 .bg-gray {
-  background-color: #555 !important; }
+  background-color: #EFEEF3 !important; }
 
 a.bg-gray:hover, a.bg-gray:focus,
 button.bg-gray:hover,
@@ -7503,7 +7503,7 @@ a.text-rss:hover, a.text-rss:focus {
   color: #d54d0d !important; }
 
 .text-black {
-  color: #000 !important; }
+  color: #000000 !important; }
 
 .m-25 {
   margin: 25% !important; }
