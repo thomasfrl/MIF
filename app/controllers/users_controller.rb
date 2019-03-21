@@ -8,12 +8,11 @@ class UsersController < ApplicationController
   # GET /users/1
   def show
     @user = User.find(params[:id])
-    @trips = current_user.trips
-
     respond_to do |format|
       format.html {}
       format.js {render "show_user"}
     end
+    trips_controller
   end
 
 
@@ -79,22 +78,11 @@ class UsersController < ApplicationController
       params.require(:user).permit(:first_name, :last_name, :description, :age, :welcome_message, :city_id, :nationality)
     end
 
-    def conversations_controller
-      @conversations = Conversation.sort_by_last_message.select{|c| c.participants.include?(current_user)}
-      unless @conversations.empty?
-        @conversation = @conversations.first
-        @messages = Message.order(:created_at).where(conversation: @conversation)
-        @other_user = @conversation.other_participant(current_user)
+    def trips_controller
+      @correspondances = current_user.correspondances
+      @trips = []
+      @correspondances.each do |c|
+        @trips += c.trips
       end
-      @conversation_new = Conversation.new
-      @users = User.all.reject{|u| u == current_user}
     end
-
-    def comments_controller
-      @sent_comments = current_user.authored_comments
-      @received_comments = current_user.received_comments
-      @comment = Comment.new
-    end
-
-
 end

@@ -10,7 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 2019_03_21_053036) do
+=======
+ActiveRecord::Schema.define(version: 2019_03_20_163055) do
+>>>>>>> 7907ff81260b19135dc8012eabb97cfa238e4255
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -165,6 +169,7 @@ ActiveRecord::Schema.define(version: 2019_03_21_053036) do
     t.datetime "start_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "validated", default: false
     t.index ["correspondance_id"], name: "index_trips_on_correspondance_id"
     t.index ["host_id"], name: "index_trips_on_host_id"
   end

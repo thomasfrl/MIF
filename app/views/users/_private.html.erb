@@ -16,9 +16,6 @@
                   <span class="text-muted"><%= @user.age %> years old, <%= @user.city.name%></span> <br>
                   <span class="text-muted">"<%= @user.welcome_message %>"</span>
                 </div>
-                <div class="col-md-4 text-left text-md-right">
-                  <button type="button" class="btn btn-rounded btn-ico btn-primary" data-toggle="tooltip" data-placement="top" title="Add Friend"><i class="fas fa-plus"></i></button>
-                </div>
               </div>
             </div>
           </div>
@@ -63,22 +60,12 @@
 
       <!-- tab trips -->
       <div class="tab-pane" id="demo-2-3" role="tabpanel" aria-labelledby="demo-2-3">
-        <div class="w-75 m-auto" id="trips_calendar">
-          <%= render partial: "trips/index", locals: {trips: @trips} %>
+        <div class="w-75 m-auto">
+          <%= render "trips/index", locals: {trips: @trips} %>
         </div>
-
       </div>
       <!-- / tab -->
 
-      <!-- tab comments -->
-      <div id="comments"></div>
-      <!-- / tab -->
-
-      <!-- tab settings -->
-      <!-- / tab -->
-
-      <!-- tab flat -->
-      <!-- / tab -->
 
     </div>
   </div>
@@ -89,3 +76,4 @@
 <!-- / footer -->
 <%= render "answers/modal_new" %>
 <%= render "user_preferences/modal_new" %>
+<%= render "trips/modal_trips" %>
