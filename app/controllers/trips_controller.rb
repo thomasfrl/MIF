@@ -56,28 +56,27 @@ class TripsController < ApplicationController
     @trip = Trip.find(params[:id])
     if params[:update]
       validated = true
-    elsif
-      validated = nil
     end
-    if @trip.update(validated: validated)
-      if validated == true
-        redirect_to current_user, notice: 'Success of acceptance of correspondance status'
-      elsif validated == nil
-        redirect_to current_user, notice: 'Success of refusal of correspondance status'
+    respond_to do |format|
+      if @trip.update(validated: validated)
+        if validated == true
+          format.js { render :layout => false , notice: 'Success of acceptance of correspondance status' }
+      else
+        flash[:danger] = 'Failure of modification of correspondance status.'
+        redirect_to current_user
+        end
       end
-    else
-      flash[:danger] = 'Failure of modification of correspondance status.'
-      redirect_to current_user
     end
   end
 
   # DELETE /trips/1
   # DELETE /trips/1.json
   def destroy
+    @trip = Trip.find(params[:id])
     @trip.destroy
     respond_to do |format|
-      format.html { redirect_to user_path(current_user, anchor: '#demo-2-3'), notice: 'Trip was successfully deleted.' }
-      format.json { head :no_content }
+      format.html {}
+      format.js   { render :layout => false }
     end
   end
 

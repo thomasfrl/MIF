@@ -9,11 +9,6 @@ class ApplicationController < ActionController::Base
   end
 
   def correspondances_controller
-    @correspondances = current_user.correspondances
-    @validated_correspondances = current_user.validated_correspondances
-    @sent_correspondances = current_user.sent_correspondances
     @received_correspondances = current_user.waiting_correspondances
-    @refused_correspondances = current_user.refused_correspondances
-    @correspondance = Correspondance.new
   end
 end

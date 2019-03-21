@@ -5,7 +5,14 @@ class CorrespondancesController < ApplicationController
 
   # GET /correspondances
   def index
-    @correspondances = current_user.correspondances
+    @validated_correspondances = current_user.validated_correspondances
+    @sent_correspondances = current_user.sent_correspondances
+    @received_correspondances = current_user.waiting_correspondances
+    @refused_correspondances = current_user.refused_correspondances
+    respond_to do |format|
+      format.html { redirect_to current_user}
+      format.js {}
+    end
   end
 
   # POST /correspondances
@@ -35,6 +42,8 @@ class CorrespondancesController < ApplicationController
     if @correspondance.update(status: status)
       if status == "validated"
         other_user = @correspondance.other_friend(current_user)
+        other_user.update(token: other_user.token + 5)
+        current_user.update(token: current_user.token + 5)
         @conversation = Conversation.create(receiver: other_user, author: current_user)
         quizs = Quiz.all
         i = 0

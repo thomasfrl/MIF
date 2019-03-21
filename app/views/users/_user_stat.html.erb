@@ -7,7 +7,7 @@
             <div class="equal">
               <div class="boxed bg-primary text-white">
                 <div class="equal-header">
-                  <b class="h2"><%= @correspondances.count %></b>
+                  <b class="h2"><%= @validated_correspondances.count %></b>
                 </div>
                 <div class="equal-footer">
                   <span class="text-muted">Correspondances</span>
@@ -19,10 +19,10 @@
             <div class="equal">
               <div class="boxed">
                 <div class="equal-header">
-                  <b class="h2">14</b>
+                  <b class="h2"><%= @user.token %></b>
                 </div>
                 <div class="equal-footer">
-                  <span class="text-muted">likes</span>
+                  <span class="text-muted">Token</span>
                 </div>
               </div>
             </div>
@@ -34,7 +34,7 @@
                   <b class="h2">9</b>
                 </div>
                 <div class="equal-footer">
-                  <span class="text-muted">articles</span>
+                  <span class="text-muted">Trips</span>
                 </div>
               </div>
             </div>
@@ -43,10 +43,10 @@
             <div class="equal">
               <div class="boxed">
                 <div class="equal-header">
-                  <b class="h2">119</b>
+                  <b class="h2"><%= @user.received_comments.count %></b>
                 </div>
                 <div class="equal-footer">
-                  <span class="text-muted">following</span>
+                  <span class="text-muted">Comments</span>
                 </div>
               </div>
             </div>

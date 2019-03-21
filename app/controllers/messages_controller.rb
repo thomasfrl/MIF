@@ -20,6 +20,9 @@ class MessagesController < ApplicationController
     @message = Message.new(user: current_user, conversation_id: params[:conversation_id], content: params[:content])
     respond_to do |format|
       if @message.save
+        if @conversation.messages.size == 1
+          current_user.update(token: current_user.token + 5)
+        end
         format.html { redirect_to root_path }
         format.js {}
       else

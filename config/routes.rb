@@ -16,11 +16,11 @@ Rails.application.routes.draw do
   resources :users, only: [:update, :show, :edit, :index] do
     resources :avatars, only: [:create]
     resources :user_pictures, only: [:create, :destroy]
+    resources :comments, only: [:index, :create]
   end
 
 
   resources :correspondances, except: [:show, :edit, :new]
-  resources :comments, only: [:index, :create]
 
   resources :conversations, only: [:index] do
     resources :messages, only: [:index, :create]
@@ -31,13 +31,17 @@ Rails.application.routes.draw do
   resources :flats, except: [:destroy, :index, :new] do
     resources :flat_pictures, only: [:create, :destroy]
   end
+  
   resources :cities, only: [:show, :index]
+
   resources :user_preferences, only: [:create, :new]
 
   namespace :admins do
     resources :users, only: [:index, :update]
     resources :cities, except: [:show, :edit, :new, :destroy]
     resources :languages, except: [:show, :edit, :new]
+    root to: "admins#index"
+
   end
 
 
