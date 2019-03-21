@@ -107,11 +107,19 @@
           <div class="form-row">
             <div class="col">
               <div class="form-group">
-                <%= form.label :city_id %>
-                <%= form.collection_select :city_id, City.order(:name),:id,:name%>  
+                <%= form.label :city_id %>              
+                <select id="user_city_id" name="user[city_id]" style="opacity: 1 !important;" class="form-control">
+                  <% City.order(:name).each do |city| %>
+                    <% if city == @user.city %>
+                      <% select = "selected" %>
+                    <% end %>
+                    <option value="<%=city.id%>" <%= select %>   ><%= city.name %></option>
+                  <% end %>
+                </select>
               </div>
             </div>
           </div>
+
           <div class="form-row">
             <div class="col">
               <div class="form-group">
