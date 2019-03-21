@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
 
-  resources :trips
   root to: "home#index"
   get 'home/about_us', to: "home#about_us"
   get 'home/contact', to: "home#contact"
@@ -22,6 +21,8 @@ Rails.application.routes.draw do
 
 
   resources :correspondances, except: [:show, :edit, :new]
+  
+  resources :trips
 
   resources :conversations, only: [:index] do
     resources :messages, only: [:index, :create]
@@ -41,8 +42,6 @@ Rails.application.routes.draw do
     resources :users, only: [:index, :update]
     resources :cities, except: [:show, :edit, :new, :destroy]
     resources :languages, except: [:show, :edit, :new]
-    root to: "admins#index"
-
   end
 
 

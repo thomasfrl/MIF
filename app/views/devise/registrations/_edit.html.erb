@@ -1,14 +1,11 @@
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
+<hr>
+<h5 class="mb-2 fs-20 font-weight-normal">Account settings</h5>
 
-<%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+<%= simple_form_for(  @user, url: registration_path(@user), html: { method: :put }) do |f| %>
   <%= f.error_notification %>
 
   <div class="form-inputs">
     <%= f.input :email, required: true, autofocus: true %>
-
-    <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-      <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
-    <% end %>
 
     <%= f.input :password,
                 hint: "leave it blank if you don't want to change it",
@@ -24,12 +21,10 @@
   </div>
 
   <div class="form-actions">
-    <%= f.button :submit, "Update" %>
+    <%= f.button :submit, "Update", class: "btn btn-secondary mb-5" %>
   </div>
 <% end %>
 
-<h3>Cancel my account</h3>
+<h5 class="mb-2 fs-20 font-weight-normal">Cancel my account</h5>
 
-<p>Unhappy? <%= link_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
-
-<%= link_to "Back", :back %>
+<%= link_to "Cancel my account", registration_path(@user), data: { confirm: "Are you sure?" }, method: :delete, class: "btn btn-danger mb-5" %>
