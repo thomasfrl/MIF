@@ -16,9 +16,9 @@ class User < ApplicationRecord
   validates :first_name,
     presence: true,
     format: {with: /\A[a-zA-Z0-9 _\.]*\z/}
-  validates :last_name,
-    presence: true,
-    format: {with: /\A[a-zA-Z0-9 _\.]*\z/}
+  # validates :last_name,
+  #   presence: true,
+  #   format: {with: /\A[a-zA-Z0-9 _\.]*\z/}
   validates :city_id, presence: true
   validates :status, inclusion: { in: ["waiting", "validated", "banned"], message: "%{value} is not a valid status"}
 
