@@ -93,6 +93,7 @@
                         required: true,
                         input_html: { autocomplete: "new-password", class: "form-control" } %>
                   </div>
+                        <%= render "devise/shared/links", color: @black %>
 
                   <%= f.button :submit, "Créer un compte", class: "btn btn-primary btn-block" %>
                 <% end %>
