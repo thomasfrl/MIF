@@ -69,7 +69,8 @@
 
       <% end %>
 
-
+      
+      <% unless current_user.nil? %>
       <% if current_user.try(:admin?) %>
       <ul class="navbar-nav align-items-center mr-0">
       <li class="nav-item dropdown">
@@ -92,6 +93,8 @@
         </div>
       </li>
       </ul>
+
+
       <% end %>
 
     </div>
