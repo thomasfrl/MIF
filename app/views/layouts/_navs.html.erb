@@ -53,14 +53,14 @@
             <%= link_to "Login", new_user_session_path, class: "nav-link" %>
           </li>
 
-          
+
           <% if false %>
             <li class="nav-item">
             <%= link_to "Login via facebook", user_facebook_omniauth_authorize_path, class: "nav-link" %>
           </li>
-            
+
           <% end %>
-          
+
 
           <li>
             <%= link_to "Sign up", new_user_registration_path, class: "nav-link"  %>
@@ -70,7 +70,7 @@
       <% end %>
 
 
-      <% if current_user.is_admin == true %>
+      <% if current_user.try(:admin?) %>
       <ul class="navbar-nav align-items-center mr-0">
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" id="navbarDropdown-2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
