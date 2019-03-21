@@ -5,14 +5,13 @@ class MessagesController < ApplicationController
 
   # GET /messages
   def index
-    options = { units: "metric", APPID: "1111111111" }
-    ow = Rails.configuration.open_weather_api
-    @weather = ow.current city: 'Paris', country_code: 'fr'
-    @icon = @weather['weather'][0]['icon']
-    @temp = (((@weather['main']['temp'].to_f) - 273.15)*10).to_i.to_f / 10
     @conversation = Conversation.find(params[:conversation_id])
     @messages = Message.order(:created_at).where(conversation: @conversation)
     @other_user = @conversation.other_participant(current_user)
+    ow = Rails.configuration.open_weather_api
+    weather = ow.current id: @other_user.city.weather_id
+    @icon = weather['weather'][0]['icon']
+    @temp = (((weather['main']['temp'].to_f) - 273.15)*10).to_i.to_f / 10
     respond_to do |format|
       format.html{redirect_to root_path }
       format.js{}
