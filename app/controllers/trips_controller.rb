@@ -4,12 +4,14 @@ class TripsController < ApplicationController
   # GET /trips
   # GET /trips.json
   def index
-    @correspondances = current_user.correspondances
-    @trips = []
-    @correspondances.each do |c|
-      @trips << c.trips
-    end
+    trips_validated
+    pending_trips
+
     @visitor = current_user
+    respond_to do |format|
+      format.html{}
+      format.js{}
+    end
   end
 
   # GET /trips/1
@@ -48,6 +50,7 @@ class TripsController < ApplicationController
         format.json { render json: @trip.errors, status: :unprocessable_entity }
       end
     end
+
   end
 
   # PATCH/PUT /trips/1
@@ -90,4 +93,33 @@ class TripsController < ApplicationController
     def trip_params
       params.require(:trip).permit(:correspondance_id, :host_id, :duration, :start_date, :validated)
     end
+
+    def trips_validated
+      @correspondances = current_user.correspondances
+      @all_trips = []
+      @correspondances.each do |c|
+          @all_trips += c.trips
+      end
+      @trips = []
+      @all_trips.each do |trip|
+        if trip.validated == true
+          @trips << trip
+        end
+      end
+    end
+
+    def pending_trips
+      @correspondances = current_user.correspondances
+      @all_trips = []
+      @correspondances.each do |c|
+          @all_trips += c.trips
+      end
+      @pending_trips = []
+      @all_trips.each do |trip|
+        if trip.validated == false
+          @pending_trips << trip
+        end
+      end
+    end
+
 end
