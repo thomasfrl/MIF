@@ -7,7 +7,9 @@ class MessagesController < ApplicationController
   def index
     options = { units: "metric", APPID: "1111111111" }
     ow = Rails.configuration.open_weather_api
-    @weather = ow.current city: 'Santa Cruz de Tenerife', country_code: 'es'
+    @weather = ow.current city: 'Paris', country_code: 'fr'
+    @icon = @weather['weather'][0]['icon']
+    @temp = (@weather['main']['temp'].to_f).to_f - 273.1
     @conversation = Conversation.find(params[:conversation_id])
     @messages = Message.order(:created_at).where(conversation: @conversation)
     @other_user = @conversation.other_participant(current_user)
