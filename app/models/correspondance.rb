@@ -1,7 +1,7 @@
 class Correspondance < ApplicationRecord
   belongs_to :creator, class_name: "User"
   belongs_to :acceptor, class_name: "User"
-  has_many :trip
+  has_many :trips
   validates :status, inclusion: { in: ["waiting", "validated", "refused"], message: "%{value} is not a valid status"}
   #validates :message, length: { in: 6..30 }
   def friends

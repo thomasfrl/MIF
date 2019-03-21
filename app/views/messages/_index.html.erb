@@ -16,9 +16,13 @@
           </div>
         </div>
       </div>
-      <div class="col-2 text-md-right"> 
-        <%= link_to new_conversation_answer_path(@conversation),  {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal_answer' , class: "btn btn-ico btn-outline-light text-dark rounded btn-sm"} do  %>
-            <i class="fas fa-plus-circle fa-2x p-1 text-primary"></i>
+
+      <div class="col-2 p-0">
+        <%= link_to new_conversation_trip_path(@conversation), {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal_trips'} do  %>
+          <i class="fas fa-plane fa-lg text-primary mr-2"></i>
+        <% end %>
+        <%= link_to new_conversation_answer_path(@conversation),  {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal_answer'} do  %>
+            <i class="fas fa-plus-circle fa-lg text-primary"></i>
         <% end %>
       </div>
     </div>
@@ -42,10 +46,10 @@
               <blockquote class="bg-primary rounded">
                 <p class="text-muted text-center p-2"><%= message.content %></p>
               </blockquote>
-            </div>      
+            </div>
           </div>
         <% end %>
-      </div>    
+      </div>
     <% end %>
   </div>
   <br>

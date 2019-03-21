@@ -19,7 +19,7 @@
             <div class="equal">
               <div class="boxed">
                 <div class="equal-header">
-                  <b class="h2"><%= current_user.token %></b>
+                  <b class="h2"><%= @user.token %></b>
                 </div>
                 <div class="equal-footer">
                   <span class="text-muted">Token</span>
@@ -43,7 +43,7 @@
             <div class="equal">
               <div class="boxed">
                 <div class="equal-header">
-                  <b class="h2"><%= current_user.received_comments.count %></b>
+                  <b class="h2"><%= @user.received_comments.count %></b>
                 </div>
                 <div class="equal-footer">
                   <span class="text-muted">Comments</span>

@@ -3,7 +3,10 @@ class FlatPicturesController < ApplicationController
   before_action :good_user
 
   def create
-    @flat.pictures.attach(params[:pictures])
+    image = MiniMagick::Image.new(params[:pictures].tempfile.path)
+    image.resize "500x300\!"
+    image.format "png"
+    @flat.pictures.attach(io: File.open(image.path), filename: image.path.slice(5...image.path.length))
     redirect_to current_user, notice: 'Image was successfully uploaded.'
   end
 
