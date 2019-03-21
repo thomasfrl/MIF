@@ -19,16 +19,37 @@
                 <h4 class="mb-0"><b><%= @user.first_name%></b> <%= @user.last_name %></h4>
                 <%= form_tag user_avatars_path(@user), multipart: true do %>
                   <%= file_field_tag :avatar %>
-                  <%= submit_tag "uploader l'avatar", class: "fs-14 link text-primary" %>
+                  <%= submit_tag "Upload avatar", class: "fs-14 link text-primary" %>
                 <% end %>
               </div>
               <div class="col-md-4 text-center text-md-right mt-1 mt-md-0">
-                <a href="" class="btn btn-primary btn-rounded">Upgrade Plan</a>
               </div>
             </div>
           </div>
         </div>
       </div>
+
+
+      <h4 class="mb-2 fs-20 font-weight-normal">Pictures Information</h4>
+      <p><%= label_tag "Delete pictures" %></p> 
+      <div class="row ">
+        <% user.pictures.each do |pic| %>
+          <div class="col-md-4">
+            <figure>
+              <%=image_tag(pic, :alt => "picture")%>
+              <figcaption class="user-caption">
+                <%= link_to 'Delete', user_user_picture_path(user,:pic => pic), :method => :delete, :data => {:confirm => 'Are you sure?'}, class: "btn btn-secondary m-auto"  %>
+              </figcaption>
+            </figure>
+          </div>
+        <%end%>
+      </div>
+
+      <%= form_tag user_user_pictures_path(user.id), multipart: true do %>
+        <p><%= label_tag "Add a new picture" %></p> 
+        <%= file_field_tag :pictures %> <br><br>
+        <%= submit_tag "Upload picture", class: "btn btn-secondary mb-5" %>
+      <% end %>
 
       <%= form_with(model: user, local: true) do |form| %>
         <div class="row">
@@ -124,12 +145,9 @@
           </div>
         </div>
       <% end %>
-      
 
-      
-      
-
-
+      <h4 class="mb-2 fs-20 font-weight-normal">Modify your preferences</h4>
+      <%= link_to "Edit your preferences", new_user_preference_path, {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal_preferences' , class: "btn btn-secondary mb-5"}  %>
     </div>
   </div>
 </div>

@@ -1,0 +1,23 @@
+<%= month_calendar trips: @trips do |date, trips| %>
+  <%= date.day %>
+
+  <% @trips.each do |trip| %>
+    <% if trip.start_date == date %>
+      <% if trip.host == current_user %>
+        <div class="text-center">
+          Hosting <%= trip.correspondance.other_friend(current_user).first_name %>
+        </div>
+      <% else %>
+        <div class="text-center">
+          <%= trip.correspondance.other_friend(current_user).first_name %>
+        </div>
+      <% end %>
+    <% end %>
+    <% if trip.end_date == date %>
+      <div class="text-center">
+        Trip end <br>
+        with <%= trip.correspondance.other_friend(current_user).first_name %>
+      </div>
+    <% end %>
+  <% end %>
+<%end%>

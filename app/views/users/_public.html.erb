@@ -2,7 +2,7 @@
     <%= render 'comments/modal_create' %>
 
     <section class="p-0 bg-light">
-      <div class="image image-overlay image-cover" style="background-image:url('<%=asset_path("cities/#{@user.city.name.downcase}.jpg")%>')"
+      <div class="image image-overlay image-cover" style="background-image:url(<%=rails_blob_url(@user.city.picture)%>)"
       data-top-top="transform: translateY(0px);"
       data-top-bottom="transform: translateY(-250px);"></div>
       <div class="container">
@@ -26,18 +26,24 @@
                   <div class="col-md-4 text-left text-md-right">
                     <% correspondance = Correspondance.select(current_user, @user) %>
                     <% if !correspondance %>
-                      <%= link_to "#", "data-toggle" =>"modal", 'data-target' => '#modal_correspondances', class: "btn btn-rounded btn-ico btn-white", title: "Add Friend" do %>
-                        Ask to be your friend<i class="fas fa-plus fa-2x p-1 text-primary"></i>
-                      <% end %>
+                      <div class="row align-items-center "> 
+                        <p class="text-black mb-0">Ask to be your friend  </p>
+                        <%= link_to "#", "data-toggle" =>"modal", 'data-target' => '#modal_correspondances', title: "Add Friend" do %>
+                          <i class="btn btn-rounded btn-ico btn-white"><i class="fas fa-plus fa-2x p-1 text-primary"></i></i> 
+                        <% end %>
+                      </div>
                     <% elsif correspondance.status == "waiting" && correspondance.creator == current_user %>
                       <p>Correspondance waiting for validation</p>
                     <% elsif correspondance.status == "waiting" && correspondance.creator == @user %>
                       <%= link_to "Accept", correspondance_path(correspondance, :update => true), class: "btn-success p-1", method: :put  %>
                       <%= link_to "Refuse", correspondance_path(correspondance, :update => false), class: "btn-danger p-1", method: :put  %>
                     <% elsif correspondance.status == "validated"%>
-                      <%= link_to "#", "data-toggle" =>"modal", 'data-target' => '#modal_comments', class: "btn btn-rounded btn-ico btn-white", title: "Add Friend" do %>
-                        Leave a comment<i class="fas fa-plus fa-2x p-1 text-primary"></i>
-                      <% end %>
+                      <div class="row align-items-center "> 
+                        <p class="text-black mb-0">Leave a comment  </p>
+                        <%= link_to "#", "data-toggle" =>"modal", 'data-target' => '#modal_comments', class: "btn btn-rounded btn-ico btn-white", title: "Add Friend" do %>
+                          <i class="fas fa-plus fa-2x p-1 text-primary"></i>
+                        <% end %>
+                      </div>
                     <% elsif correspondance.status == "refused"%>
                       <p>Friendship refused</p> 
                     <% end %>
@@ -58,15 +64,18 @@
             <div class="nav nav-tabs mb-1">
               <a class="nav-item nav-link active" data-toggle="tab" href="#demo-2-1">Profile</a>
               <a class="nav-item nav-link" data-toggle="tab" href="#demo-2-2">Comments</a>
-              <a class="nav-item nav-link" data-toggle="tab" href="#demo-2-3">Flat</a>
-              
+              <% if correspondance %>
+                <% if correspondance.status == "validated" %>
+                  <a class="nav-item nav-link" data-toggle="tab" href="#demo-2-3">Flat</a>
+                <% end %>
+              <% end %>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-
+    <%= render "user_stat" %>
 
     <section class="bg-light pt-2">
 
@@ -75,85 +84,7 @@
 
           <!-- tab info -->
           <div class="tab-pane show active" id="demo-2-1" role="tabpanel" aria-labelledby="demo-2-1">
-            <div class="row justify-content-center">
-              <div class="col-md-10 col-lg-8">
-
-                <!-- stats -->
-                <div class="row gutter-1 mb-2">
-                  <div class="col-6 col-md-4 col-lg-3">
-                    <div class="equal">
-                      <div class="boxed bg-primary text-white">
-                        <div class="equal-header">
-                          <b class="h2">89</b>
-                        </div>
-                        <div class="equal-footer">
-                          <span class="text-muted">Tokens</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-6 col-md-4 col-lg-3">
-                    <div class="equal">
-                      <div class="boxed">
-                        <div class="equal-header">
-                          <b class="h2"><%= @correspondances.count %></b>
-                        </div>
-                        <div class="equal-footer">
-                          <span class="text-muted">Correspondances</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <!-- / stats -->
-
-                <!-- post -->
-                <div class="row mb-1">
-                  <div class="col">
-                    <article class="card">
-                      <div class="card-header text-center">
-                        <h2><%= @user.first_name %>'s diaporama</h2>
-                      </div>
-                      <div class="card-body overflow-hidden">
-                        <div class="owl-carousel gallery visible" data-items="[2,2]" data-margin="10" data-nav="true">
-                          <figure class="photo">
-                            <a href="/assets/cities/barcelone.jpg" title="Image title">
-                              <img src="/assets/cities/barcelone.jpg" alt="Image">
-                            </a>
-                          </figure>
-                          <figure class="photo">
-                            <a href="/assets/cities/london.jpg" title="Image title">
-                              <img src="/assets/cities/london.jpg" alt="Image">
-                            </a>
-                          </figure>
-                          <figure class="photo">
-                            <a href="/assets/cities/paris.jpg" title="Image title">
-                              <img src="/assets/cities/paris.jpg" alt="Image">
-                            </a>
-                          </figure>
-                        </div>
-                      </div>
-                    </article>
-                  </div>
-                </div>
-                <!-- / post -->
-
-
-                <div class="row mb-1">
-                  <div class="col">
-                    <article class="card">
-                      <div class="card-header text-center">
-                          <h2><%= @user.first_name%>'s description</h2>
-                      </div>
-                      <div class="card-body overflow-hidden">
-                       <h3 class="text-decorated text-decorated--paddin"><%= @user.description %></h3>
-                      </div>
-                    </article>
-                  </div>
-                </div>
-
-              </div>
-            </div>
+            <%= render "show_public" %>
           </div>
           <!-- / tab -->
 
@@ -163,9 +94,14 @@
             <%= render "comments/index" %>
           </div>
           
-          <div class="tab-pane" id="demo-2-3" role="tabpanel" aria-labelledby="demo-2-3">
-          <%= render "flats/flat" %>
-          </div>
+          
+          <% if correspondance %>
+            <% if correspondance.status == "validated" %>
+              <div class="tab-pane" id="demo-2-3" role="tabpanel" aria-labelledby="demo-2-3">
+                <%= render "flats/flat" %>
+              </div>
+            <% end %>
+          <% end %>   
         </div>
-    </div>
-</section>
+      </div>
+    </section>

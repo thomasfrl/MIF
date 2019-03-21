@@ -5,13 +5,29 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-def get_random_image
-  image_path_prefix = "app/assets/images/img/"
+def get_random_image_avatar
+  image_path_prefix = "app/assets/images/img/avatar/"
+  image_files = Dir.glob("#{image_path_prefix}*")
+  image_select = image_files.sample
+  [image_select, image_select.split(image_path_prefix)[1]]
+end
+def get_random_image_flat
+  image_path_prefix = "app/assets/images/img/flat/"
   image_files = Dir.glob("#{image_path_prefix}*")
   image_select = image_files.sample
   [image_select, image_select.split(image_path_prefix)[1]]
 end
 
+def get_random_image_user
+  image_path_prefix = "app/assets/images/img/user_picture/"
+  image_files = Dir.glob("#{image_path_prefix}*")
+  image_select = image_files.sample
+  [image_select, image_select.split(image_path_prefix)[1]]
+end
+
+
+
+Preference.destroy_all
 Answer.destroy_all
 Quiz.destroy_all
 UserLanguage.destroy_all
@@ -98,25 +114,25 @@ Quiz.create( question:"If you add to choose one : sex or food ?", level:3)
 
 puts "Quiz create"
 
-barcelone = City.create!(name: "Barcelone", country: "Spain", zip_code: "08001", description: "")
+barcelone = City.create!(name: "Barcelone", country: "Spain", zip_code: "08001", description: "Allow me to state here how much I love Barcelona , an admirable city, a city full of life, intense, a port open to the past and future.  Le Corbusier")
 puts "Barcelone created"
-berlin = City.create!(name: "Berlin", country: "Germany", zip_code: "10115", description: "The city of creation: Mode, Art, Design, Music")
+berlin = City.create!(name: "Berlin", country: "Germany", zip_code: "10115", description: "The city of creation: Mode, Art, Design, Music. All free men, wherever they may live, are citizens of Berlin. And therefore, as a free man, I take pride in the words, ‘Ich bin ein Berliner! John Kennedy ")
 puts "Berlin created"
-london =  City.create!(name: "London", country: "England", zip_code: "WC2N 5DU", description: " ")
+london =  City.create!(name: "London", country: "England", zip_code: "WC2N 5DU", description: "when a man is tired of London, he is tired of life. Samuel Johnson")
 puts "London created"
-lisbon = City.create!(name: "Lisbon", country: "Portugal", zip_code: "1000", description: " ")
+lisbon = City.create!(name: "Lisbon", country: "Portugal", zip_code: "1000", description: "“By day Lisbon has a naive theatrical quality that enchants and captivates, but by night it is a fairy-tale city, descending over lighted terraces to the sea, like a woman in festive garments going down to meet her dark lover.” Erich Maria Remarque")
 puts "Lisbon created"
-copenhagen =City.create!(name: "Copenhagen", country: "Denmark", zip_code: "1050", description: " ")
+copenhagen =City.create!(name: "Copenhagen", country: "Denmark", zip_code: "1050", description: "The city somehow manages to combine a very zippy vibe, thanks to its cultural and nightlife offerings, with a holiday-resort-style chill, due to its small size and some of the most laid-back people you’re likely to meet.")
 puts "Copenhagen created"
-prague = City.create!(name: "Prague", country: "Czech Republic", zip_code: "100 00", description: " ")
+prague = City.create!(name: "Prague", country: "Czech Republic", zip_code: "100 00", description: "Prague is a living and breathing enigma; old and dirty but somehow unimaginably graceful. And the Beer? The best of Europe for 50 cent.")
 puts "Prague created"
-budapest = City.create!(name: "Budapest", country: "Hungary", zip_code: "1007", description: " ")
+budapest = City.create!(name: "Budapest", country: "Hungary", zip_code: "1007", description: "In Budapest, you’ll find experiences like nothing else in Europe: Feel your stress ebb away as you soak in hundred-degree water, surrounded by opulent Baroque domes…and by Speedo- and bikini-clad Hungarians. Ogle some of Europe’s most richly decorated interiors, which echo a proud little nation’s bygone glory days. Rick Steves")
 puts "Budapest created"
-paris = City.create!(name: "Paris", country: "France", zip_code: "75000", description: " ")
+paris = City.create!(name: "Paris", country: "France", zip_code: "75000", description: "A walk about Paris will provide lessons in history, beauty, and in the point of Life. -Thomas Jefferson")
 puts "Paris created"
-roma = City.create!(name: "Roma", country: "Italy", zip_code: "00100", description: " ")
+roma = City.create!(name: "Roma", country: "Italy", zip_code: "00100", description: "The beauty of the Eternal City, the chaos, the mismatch of elegance and decay that is around every corner. If we could be reborn wherever we chose, how crowded Rome would be.")
 puts "Roma created"
-madrid = City.create!(name: "Madrid", country: "Spain", zip_code: "28001",  description: " ")
+madrid = City.create!(name: "Madrid", country: "Spain", zip_code: "28001",  description: "God worked six days, and rested on the seventh: Madrilenos rest the six,and on the seventh... go to the bullfight. H O'Shea")
 puts "Madrid created"
 
 barcelone.picture.attach(io: File.open("app/assets/images/cities/barcelone.jpg"), filename:"barcelone.jpg")
@@ -182,19 +198,34 @@ Preference.create!(description: "I don't care till i'm having fun")
 
 puts "preferences created"
 
-30.times do
-  img = get_random_image
+300.times do
+  img = get_random_image_avatar
   i = [1,2,4,7,9,10].sample
-  user = User.create!(first_name: Faker::Name.first_name, last_name: Faker::Name.unique.last_name, description: Faker::Lorem.paragraph_by_chars, age: (rand(15)+20), email: "#{Faker::Name.unique.first_name}@yopmail.com", password: "123456", city_id: City.all.sample.id )
-  user.avatar.attach(io: File.open(img[0]), filename: img[1])
-end
-img = get_random_image
-user = User.create!(first_name: "user", last_name: "family", description: Faker::Lorem.paragraph_by_chars, age: (rand(15)+20), email: "user1@yopmail.com", password: "123456", city_id: City.all.sample.id )
-user.avatar.attach(io: File.open(img[0]), filename: img[1])
 
-img = get_random_image
-user = User.create!(first_name: "user", last_name: "family", description: Faker::Lorem.paragraph_by_chars, age: (rand(15)+20), email: "user2@yopmail.com", password: "123456", city_id: City.all.sample.id )
+  user = User.create!(first_name: Faker::Name.first_name, last_name: Faker::Name.unique.last_name, description: Faker::Lorem.paragraph_by_chars, age: (rand(15)+20), email: "#{Faker::Name.unique.first_name}@yopmail.com", password: "123456", city_id: City.all.sample.id, welcome_message: Faker::Lorem.sentence, nationality: Faker::Nation.nationality )
+
+  user.avatar.attach(io: File.open(img[0]), filename: img[1])
+  3.times do
+    img = get_random_image_user
+    user.pictures.attach(io: File.open(img[0]), filename: img[1])
+  end
+
+end
+img = get_random_image_avatar
+user = User.create!(first_name: "jean", last_name: "effe", description: Faker::Lorem.paragraph_by_chars, age: (rand(15)+20), email: "user1@yopmail.com", password: "123456", city_id: City.all.sample.id, welcome_message: Faker::Lorem.sentence, nationality: Faker::Nation.nationality )
 user.avatar.attach(io: File.open(img[0]), filename: img[1])
+3.times do
+  img = get_random_image_user
+  user.pictures.attach(io: File.open(img[0]), filename: img[1])
+end
+
+img = get_random_image_avatar
+user = User.create!(first_name: "flo", last_name: "bobo", description: Faker::Lorem.paragraph_by_chars, age: (rand(15)+20), email: "user2@yopmail.com", password: "123456", city_id: City.all.sample.id, welcome_message: Faker::Lorem.sentence, nationality: Faker::Nation.nationality )
+user.pictures.attach(io: File.open(img[0]), filename: img[1])
+3.times do
+  img = get_random_image_user
+  user.pictures.attach(io: File.open(img[0]), filename: img[1])
+end
 
 
 puts "User created"
@@ -349,13 +380,16 @@ puts "comment created"
 
 
 User.all.each do |u|
-  img = get_random_image
+  sleep = ["Bed", "Couch"].sample
+  place = rand(1..3)
+  room = ["Living-room", "Bed-room"].sample
+  img = get_random_image_flat
   flat = Flat.find_by(user: u)
-  flat.update(description: Faker::Lorem.paragraph_by_chars, address: Faker::Address.street_address)
+  flat.update(description: Faker::Lorem.paragraph_by_chars, address: Faker::Address.street_address, sleep: sleep, place: place, room: room)
   flat.pictures.attach(io: File.open(img[0]), filename: img[1])
-  img = get_random_image
+  img = get_random_image_flat
   flat.pictures.attach(io: File.open(img[0]), filename: img[1])
-  img = get_random_image
+  img = get_random_image_flat
   flat.pictures.attach(io: File.open(img[0]), filename: img[1])
 end
 puts "Flat created"

@@ -1,5 +1,7 @@
 class User < ApplicationRecord
+  # after_create :welcome_send
   after_create :create_flat
+
   after_create :set_default_avatar
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
@@ -45,6 +47,7 @@ class User < ApplicationRecord
   has_many :languages, through: :user_languages
 
   has_one_attached :avatar
+  has_many_attached :pictures
 
   has_many :user_preferences, dependent: :destroy
   has_many :preferences, through: :user_preferences
@@ -91,6 +94,40 @@ class User < ApplicationRecord
 
   def refused_correspondances
     self.created_correspondances.where(status: "refused") +  self.received_correspondances.where(status: "refused")
+  end
+
+  def matchmaking(x)
+    arrayuser = []
+    arraycontender = []
+    value = 0
+    x.preference_ids.each do |userpref|
+      arrayuser << userpref
+      arrayuser
+
+    end
+
+    self.preference_ids.each do |contenderpref|
+      arraycontender << contenderpref
+      arraycontender
+
+    end
+
+
+    arraycontender.each_with_index do |pref|
+      arrayuser.each do |pref2|
+        if pref == pref2
+          value += 1
+        end
+      end
+    end
+
+
+
+    return value
+  end
+
+  def welcome_send
+    UserMailer.welcome_email(self).deliver_now
   end
 
   private

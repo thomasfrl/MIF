@@ -1,44 +1,44 @@
 Rails.application.routes.draw do
 
-  get 'user_preferences/create'
-  get 'quiz/new'
-  get 'quiz/create'
-  get 'quiz/show'
-
   resources :trips
   root to: "home#index"
   get 'home/about_us', to: "home#about_us"
   get 'home/contact', to: "home#contact"
   get 'home/team', to: "home#team"
+  get 'home/not_found', to: "home#not_found"
 
   devise_for :users, controllers: {
     omniauth_callbacks: "users/omniauth_callbacks"
   }
 
-  
-  
+
+
   resources :users do
     resources :avatars, only: [:create]
+    resources :user_pictures, only: [:create, :destroy]
   end
 
-  resources :user_languages
   resources :tickets
+
+
   resources :correspondances
-  resources :testifies
   resources :comments
   resources :conversations, only: [:index, :create, :new] do
     resources :messages, only: [:index, :create]
     resources :answers, only: [:new, :create]
   end
-  resources :languages
+
   resources :flats do
-    resources :flat_pictures
+    resources :flat_pictures, only: [:create, :destroy]
   end
-  resources :users
   resources :cities
-  resources :home
   resources :user_preferences, only: [:create, :new]
 
+  namespace :admins do
+    resources :users, only: [:index, :update]
+    resources :cities, except: [:show, :edit, :new]
+    resources :languages, except: [:show, :edit, :new]
+  end
 
 
 
