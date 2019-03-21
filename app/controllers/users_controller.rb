@@ -6,15 +6,14 @@ class UsersController < ApplicationController
 
 
   # GET /users/1
-  # GET /users/1.json
   def show
     @user = User.find(params[:id])
-    @languages = Language.all
-    @flat = @user.flat
     @trips = current_user.trips
-    conversations_controller
-    comments_controller
-    correspondances_controller
+
+    respond_to do |format|
+      format.html {}
+      format.js {render "show_user"}
+    end
   end
 
 
@@ -22,6 +21,10 @@ class UsersController < ApplicationController
   def edit
     @user = current_user
     @languages = Language.all
+    respond_to do |format|
+      format.html { redirect_to current_user}
+      format.js {}
+    end
   end
 
   # POST /users
@@ -30,7 +33,6 @@ class UsersController < ApplicationController
     respond_to do |format|
       if @user.save
         format.html { redirect_to @user, notice: 'User was successfully created.' }
-        format.json { render :show, status: :created, location: @user }
       else
         format.html { render :new }
         format.json { render json: @user.errors, status: :unprocessable_entity }

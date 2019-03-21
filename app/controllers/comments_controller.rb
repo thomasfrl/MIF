@@ -7,6 +7,10 @@ class CommentsController < ApplicationController
     @user = User.find(params[:user_id])
     @sent_comments = current_user.authored_comments
     @received_comments = @user.received_comments
+    respond_to do |format|
+      format.html { redirect_to current_user}
+      format.js {}
+    end
   end
 
   # POST /comments

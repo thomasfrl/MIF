@@ -11,6 +11,10 @@ class ConversationsController < ApplicationController
     end
     @conversation_new = Conversation.new
     @users = User.all.reject{|u| u == current_user}
+    respond_to do |format|
+      format.html { redirect_to current_user}
+      format.js {}
+    end
 end
 
   #IMPORTANT!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!

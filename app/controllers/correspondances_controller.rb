@@ -6,6 +6,10 @@ class CorrespondancesController < ApplicationController
   # GET /correspondances
   def index
     correspondances_controller
+    respond_to do |format|
+      format.html { redirect_to current_user}
+      format.js {}
+    end
   end
 
   # POST /correspondances
