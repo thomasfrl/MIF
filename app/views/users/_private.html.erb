@@ -34,11 +34,11 @@
     <div class="row justify-content-center">
       <div class="col col-md-10 col-lg-8">
         <div class="nav nav-tabs mb-1">
-          <a class="nav-item nav-link active" data-toggle="tab" href="#demo-2-1">My conversations</a>
+          <%= link_to "My conversations", conversations_path, remote: true, class: "nav-item nav-link"   %>
           <a class="nav-item nav-link" data-toggle="tab" href="#demo-2-2">My Friends</a>
           <a class="nav-item nav-link" data-toggle="tab" href="#demo-2-3">My trips</a>
-          <a class="nav-item nav-link" data-toggle="tab" href="#demo-2-4">Comments</a>
-          <a class="nav-item nav-link" data-toggle="tab" href="#demo-2-5">My profile</a>
+          <%= link_to "Comments", user_comments_path(@user), remote: true, class: "nav-item nav-link"   %>
+          <%= link_to "My profil", edit_user_path(current_user), remote: true, class: "nav-item nav-link"   %>
           <a class="nav-item nav-link" data-toggle="tab" href="#demo-2-6">My flat</a>
         </div>
       </div>
@@ -58,15 +58,7 @@
     <div class="tab-content" id="demo-2">
 
       <!-- tab conversations -->
-      <div class="tab-pane show active" id="demo-2-1" role="tabpanel" aria-labelledby="demo-2-1">
-        <div class="row justify-content-center">
-          <div class="col-md-10 col-lg-8">
-            <div class="row mb-1">
-              <%= render "conversations/index" %>
-            </div>
-          </div>
-        </div>
-      </div>
+        <div id="tab"></div>
       <!-- / tab conversations -->
 
       <!-- tab friends -->
@@ -90,13 +82,10 @@
       <!-- / tab -->
 
       <!-- tab comments -->
-      <div class="tab-pane" id="demo-2-4" role="tabpanel" aria-labelledby="demo-2-4">
-        <%= render "comments/index" %>
-      </div>
+      <div id="comments"></div>
       <!-- / tab -->
 
       <!-- tab settings -->
-      <%= render 'form', user: @user %>
       <!-- / tab -->
 
       <!-- tab flat -->

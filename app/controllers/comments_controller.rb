@@ -4,8 +4,8 @@ class CommentsController < ApplicationController
 
   # GET /comments
   def index
-    @user = current_user
-    @sent_comments = @user.authored_comments
+    @user = User.find(params[:user_id])
+    @sent_comments = current_user.authored_comments
     @received_comments = @user.received_comments
   end
 
