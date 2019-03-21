@@ -63,10 +63,13 @@ class TripsController < ApplicationController
     respond_to do |format|
       if @trip.update(validated: validated)
         if validated == true
+          @trip.participants.each do |u|
+            u.update(token: u.token + 5)
+          end
           format.js { render :layout => false , notice: 'Success of acceptance of correspondance status' }
-      else
-        flash[:danger] = 'Failure of modification of correspondance status.'
-        redirect_to current_user
+        else
+          flash[:danger] = 'Failure of modification of correspondance status.'
+          redirect_to current_user
         end
       end
     end

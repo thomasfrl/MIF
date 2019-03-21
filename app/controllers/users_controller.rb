@@ -16,8 +16,6 @@ class UsersController < ApplicationController
       format.html {}
       format.js {render "show_user"}
     end
-    trips_validated
-    pending_trips
   end
 
 
@@ -83,31 +81,4 @@ class UsersController < ApplicationController
       params.require(:user).permit(:first_name, :last_name, :description, :age, :welcome_message, :city_id, :nationality)
     end
 
-    def trips_validated
-      @correspondances = current_user.correspondances
-      @all_trips = []
-      @correspondances.each do |c|
-          @all_trips += c.trips
-      end
-      @trips = []
-      @all_trips.each do |trip|
-        if trip.validated == true
-          @trips << trip
-        end
-      end
-    end
-
-    def pending_trips
-      @correspondances = current_user.correspondances
-      @all_trips = []
-      @correspondances.each do |c|
-          @all_trips += c.trips
-      end
-      @pending_trips = []
-      @all_trips.each do |trip|
-        if trip.validated == false
-          @pending_trips << trip
-        end
-      end
-    end
 end

@@ -104,6 +104,18 @@ class User < ApplicationRecord
     UserMailer.welcome_email(self).deliver_now
   end
 
+  def trips_validated
+    trips = []
+    self.validated_correspondances.each do |c|
+      c.trips.each do |t|
+        if t.validated == true
+          trips << t
+        end
+      end
+    end
+    return trips
+  end
+
   private
   def create_flat
     Flat.create(user: User.last)
