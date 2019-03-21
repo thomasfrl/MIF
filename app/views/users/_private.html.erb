@@ -77,3 +77,13 @@
 <%= render "answers/modal_new" %>
 <%= render "user_preferences/modal_new" %>
 <%= render "trips/modal_trips" %>
+
+<script>  
+    $.ajax({
+      url: "/conversations",
+      type: "GET",
+      data: {},
+      dataType: "script"
+    });
+
+</script>
