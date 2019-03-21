@@ -13,13 +13,16 @@
             <%= link_to  @other_user do %>
               <span class="text-muted">View profile</span>
             <% end %>
+            <div class="row align-items-center">
+              <%= @other_user.city.name %>
+              <div id="icon"><img id="wicon" src="http://openweathermap.org/img/w/<%=@icon%>.png" alt="Weather icon"></div> 
+              <%= @temp %> °C   
+            </div>
           </div>
         </div>
       </div>
 
       <div class="col-2 p-0">
-      <div id="icon"><img id="wicon" src="http://openweathermap.org/img/w/<%=@icon%>.png" alt="Weather icon"></div> 
-      <%= @temp %> °C   
       <%= link_to new_conversation_trip_path(@conversation), {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal_trips'} do  %>
           <i class="fas fa-plane fa-lg text-primary mr-2"></i>
         <% end %>

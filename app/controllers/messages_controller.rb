@@ -9,7 +9,7 @@ class MessagesController < ApplicationController
     ow = Rails.configuration.open_weather_api
     @weather = ow.current city: 'Paris', country_code: 'fr'
     @icon = @weather['weather'][0]['icon']
-    @temp = (@weather['main']['temp'].to_f).to_f - 273.1
+    @temp = (((@weather['main']['temp'].to_f) - 273.15)*10).to_i.to_f / 10
     @conversation = Conversation.find(params[:conversation_id])
     @messages = Message.order(:created_at).where(conversation: @conversation)
     @other_user = @conversation.other_participant(current_user)
