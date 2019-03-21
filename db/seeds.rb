@@ -262,8 +262,11 @@ users=  User.all
   unless Correspondance.already_contain?(correspondance)
     correspondance.save!
     if status == "validated"
-      u1.token += 5
-      u2.token += 5
+      t1 = u1.token + 5
+      t2 = u2.token + 5
+      u1.update(token: t1)
+      u2.update(token: t2)
+
       conv = Conversation.create!(author: u1, receiver: u2)
       quizs = Quiz.all
       i = 0
@@ -292,7 +295,8 @@ conversations.each do |conv|
     u = conv.participants.sample
     Message.create!(user: u, conversation: conv, content: Faker::Lorem.sentence )
     if i == 0
-      u.token += 5
+      t = u.token + 5
+      u.update(token: t)
     end
   end
 end
