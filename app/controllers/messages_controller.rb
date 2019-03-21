@@ -21,7 +21,6 @@ class MessagesController < ApplicationController
     respond_to do |format|
       if @message.save
         if @conversation.messages.size == 1
-          binding.pry
           current_user.update(token: current_user.token + 5)
         end
         format.html { redirect_to root_path }
