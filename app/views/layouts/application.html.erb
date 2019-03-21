@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <link rel="shortcut icon" href="../assets/logo/favicon.ico"/>
+    <link rel="shortcut icon" href="/assets/logo/favicon.ico"/>
     <title>MIF</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -13,25 +13,12 @@
   <body>
 
 
-    <%= render 'layouts/navs' %>
+    <%= render "layouts/navs" %>
     <%= render "layouts/alerts" %>
 
     <%= yield %>
 
-    <%= render "layouts/footer"%>
-   
-
-
-
-
-    
-
-   
-
-        
-
-
-        
+    <%= render "layouts/footer" %>
 
   </body>
 </html>
