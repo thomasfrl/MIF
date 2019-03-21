@@ -48,7 +48,7 @@ class User < ApplicationRecord
 
   has_one_attached :avatar
   has_many_attached :pictures
-  
+
   has_many :user_preferences, dependent: :destroy
   has_many :preferences, through: :user_preferences
 

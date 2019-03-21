@@ -12,6 +12,7 @@ class UsersController < ApplicationController
     @languages = Language.all
     @flat = @user.flat
     trips_validated
+    pending_trips
     conversations_controller
     comments_controller
     correspondances_controller
@@ -86,6 +87,20 @@ class UsersController < ApplicationController
       @all_trips.each do |trip|
         if trip.validated == true
           @trips << trip
+        end
+      end
+    end
+
+    def pending_trips
+      @correspondances = current_user.correspondances
+      @all_trips = []
+      @correspondances.each do |c|
+          @all_trips += c.trips
+      end
+      @pending_trips = []
+      @all_trips.each do |trip|
+        if trip.validated == false
+          @pending_trips << trip
         end
       end
     end
