@@ -11,6 +11,11 @@ class AnswersController < ApplicationController
     if @answer.save
       i = @conversation.iteration_quiz
       @conversation.update(iteration_quiz: i + 0.5)
+      if @conversation.iteration_quiz == 14
+        @conversation.participants.each do |u|
+          u.token += 5
+        end
+      end
       c = Conversation.find(params[:conversation_id])
       if c.iteration_quiz.to_i == i.to_i 
         respond_to do |format|
