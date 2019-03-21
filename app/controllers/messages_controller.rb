@@ -5,6 +5,9 @@ class MessagesController < ApplicationController
 
   # GET /messages
   def index
+    options = { units: "metric", APPID: "1111111111" }
+    ow = Rails.configuration.open_weather_api
+    @weather = ow.current city: 'Santa Cruz de Tenerife', country_code: 'es'
     @conversation = Conversation.find(params[:conversation_id])
     @messages = Message.order(:created_at).where(conversation: @conversation)
     @other_user = @conversation.other_participant(current_user)
