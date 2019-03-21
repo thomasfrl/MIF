@@ -22,7 +22,6 @@
                   <div class="col-md-4 text-left text-md-right">
                     <% if !@correspondance %>
                       <div class="row align-items-center "> 
-                        <p class="text-black mb-0">Ask to be your friend  </p>
                         <%= link_to "#", "data-toggle" =>"modal", 'data-target' => '#modal_correspondances', title: "Add Friend" do %>
                           <i class="btn btn-rounded btn-ico btn-white"><i class="fas fa-plus fa-2x p-1 text-primary"></i></i> 
                         <% end %>
@@ -30,13 +29,11 @@
                     <% elsif @correspondance.status == "waiting" && @correspondance.creator == current_user %>
                       <p>Correspondance waiting for validation</p>
                     <% elsif @correspondance.status == "waiting" && @correspondance.creator == @user %>
-                      <%= link_to "Accept", correspondance_path(@correspondance, :update => true), class: "btn-success p-1", method: :put  %>
-                      <%= link_to "Refuse", correspondance_path(@correspondance, :update => false), class: "btn-danger p-1", method: :put  %>
+                      <%= link_to "Accept", correspondance_path(@correspondance, :update => true), class: "btn-success btn-rounded p-1", method: :put  %>
+                      <%= link_to "Refuse", correspondance_path(@correspondance, :update => false), class: "btn-danger btn-rounded p-1", method: :put  %>
                     <% elsif @correspondance.status == "validated"%>
-                      <div class="row align-items-center "> 
-                        <p class="text-black mb-0">Leave a comment  </p>
-                        <%= link_to "#", "data-toggle" =>"modal", 'data-target' => '#modal_comments', class: "btn btn-rounded btn-ico btn-white", title: "Add Friend" do %>
-                          <i class="fas fa-plus fa-2x p-1 text-primary"></i>
+                      <div class="row align-items-center ">                         <%= link_to "#", "data-toggle" =>"modal", 'data-target' => '#modal_comments', class: "btn btn-rounded btn-ico btn-white", title: "Leave a comment" do %>
+                          <i class="fas fa-comment fa-2x p-1 text-primary"></i>
                         <% end %>
                       </div>
                     <% elsif @correspondance.status == "refused"%>
