@@ -42,8 +42,8 @@ class CorrespondancesController < ApplicationController
     if @correspondance.update(status: status)
       if status == "validated"
         other_user = @correspondance.other_friend(current_user)
-        other_user.token += 5
-        current_user.token += 5
+        other_user.update(token: other_user.token + 5)
+        current_user.update(token: current_user.token + 5)
         @conversation = Conversation.create(receiver: other_user, author: current_user)
         quizs = Quiz.all
         i = 0
