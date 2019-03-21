@@ -16,4 +16,27 @@
  *= require alert_message
  *= require simple_calendar
  */
+/* override position and transform in 3.3.x */
+.carousel-inner .item.left.active {
+  transform: translateX(-33%);
+}
+.carousel-inner .item.right.active {
+  transform: translateX(33%);
+}
 
+.carousel-inner .item.next {
+  transform: translateX(33%);
+}
+.carousel-inner .item.prev {
+  transform: translateX(-33%);
+}
+
+.carousel-inner .item.right,
+.carousel-inner .item.left {
+  transform: translateX(0);
+}
+
+.carousel-control.left,
+.carousel-control.right {
+  background-image: none;
+}

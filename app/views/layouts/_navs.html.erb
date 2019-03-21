@@ -36,6 +36,7 @@
                 <i class="fas fa-user mr-1 text-primary"></i>
                 Profile
               <% end %>
+              <div class="dropdown-divider"></div>
               <%= link_to destroy_user_session_path, method: :delete, class: "dropdown-item" do %>
                 <i class="fas fa-sign-out-alt mr-1 text-primary"></i>
                 Disconnect
@@ -45,24 +46,56 @@
           <div class="container" id= "correspondances_notifs">
             <%= render "correspondances/notifications" %>
           </div>
-
-
         </ul>
       <% else %>
         <ul class="navbar-nav align-items-center mr-0">
           <li class="nav-item">
             <%= link_to "Login", new_user_session_path, class: "nav-link" %>
           </li>
+
+
+          <% if false %>
             <li class="nav-item">
             <%= link_to "Login via facebook", user_facebook_omniauth_authorize_path, class: "nav-link" %>
           </li>
 
-          <li>
+          <% end %>
+
+
+          <li class="nav-item">
             <%= link_to "Sign up", new_user_registration_path, class: "nav-link"  %>
           </li>
         </ul>
 
       <% end %>
+
+
+      <% unless current_user.nil? %>
+        <% if current_user.try(:admin?) %>
+        <ul class="navbar-nav align-items-center mr-0">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" id="navbarDropdown-2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Admin
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <%= link_to admins_users_path, class: "dropdown-item" do %>
+              Users
+            <% end %>
+            <div class="dropdown-divider"></div>
+
+            <%= link_to admins_cities_path, class: "dropdown-item" do  %>
+              Cities
+            <% end %>
+            <div class="dropdown-divider"></div>
+            <%= link_to admins_languages_path, class: "dropdown-item" do %>
+              Languages
+            <% end %>
+          </div>
+        </li>
+        </ul>
+        <% end %>
+      <% end %>
+
     </div>
   </nav>
 </div>

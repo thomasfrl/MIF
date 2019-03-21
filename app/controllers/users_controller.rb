@@ -2,44 +2,41 @@ class UsersController < ApplicationController
   before_action :authenticate_user!
   # before_action :validated_user?
   before_action :good_user, only: [:update]
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :set_user, only: [:edit, :update]
 
-  # GET /users
-  # GET /users.json
-  def index
-    @users = User.all
-  end
 
   # GET /users/1
-  # GET /users/1.json
   def show
     @user = User.find(params[:id])
-    @languages = Language.all
-    @flat = @user.flat
-    @trips = current_user.trips
-    conversations_controller
-    comments_controller
-    correspondances_controller
+    @validated_correspondances = @user.validated_correspondances
+    @correspondance_new = Correspondance.new
+    @correspondance = Correspondance.select(current_user, @user)
+
+    respond_to do |format|
+      format.html {}
+      format.js {render "show_user"}
+    end
+    trips_validated
+    pending_trips
   end
 
-  # GET /users/new
-  def new
-    @user = User.new
-  end
 
   # GET /users/1/edit
   def edit
+    @user = current_user
     @languages = Language.all
+    respond_to do |format|
+      format.html { redirect_to current_user}
+      format.js {}
+    end
   end
 
   # POST /users
-  # POST /users.json
   def create
     @user = User.new(user_params)
     respond_to do |format|
       if @user.save
         format.html { redirect_to @user, notice: 'User was successfully created.' }
-        format.json { render :show, status: :created, location: @user }
       else
         format.html { render :new }
         format.json { render json: @user.errors, status: :unprocessable_entity }
@@ -48,7 +45,6 @@ class UsersController < ApplicationController
   end
 
   # PATCH/PUT /users/1
-  # PATCH/PUT /users/1.json
   def update
     respond_to do |format|
       if @user.update(user_params)
@@ -70,15 +66,6 @@ class UsersController < ApplicationController
     end
   end
 
-  # DELETE /users/1
-  # DELETE /users/1.json
-  def destroy
-    @user.destroy
-    respond_to do |format|
-      format.html { redirect_to users_url, notice: 'User was successfully destroyed.' }
-      format.json { head :no_content }
-    end
-  end
 
   private
     def good_user
@@ -96,22 +83,31 @@ class UsersController < ApplicationController
       params.require(:user).permit(:first_name, :last_name, :description, :age, :welcome_message, :city_id, :nationality)
     end
 
-    def conversations_controller
-      @conversations = Conversation.sort_by_last_message.select{|c| c.participants.include?(current_user)}
-      unless @conversations.empty?
-        @conversation = @conversations.first
-        @messages = Message.order(:created_at).where(conversation: @conversation)
-        @other_user = @conversation.other_participant(current_user)
+    def trips_validated
+      @correspondances = current_user.correspondances
+      @all_trips = []
+      @correspondances.each do |c|
+          @all_trips += c.trips
       end
-      @conversation_new = Conversation.new
-      @users = User.all.reject{|u| u == current_user}
+      @trips = []
+      @all_trips.each do |trip|
+        if trip.validated == true
+          @trips << trip
+        end
+      end
     end
 
-    def comments_controller
-      @sent_comments = current_user.authored_comments
-      @received_comments = current_user.received_comments
-      @comment = Comment.new
+    def pending_trips
+      @correspondances = current_user.correspondances
+      @all_trips = []
+      @correspondances.each do |c|
+          @all_trips += c.trips
+      end
+      @pending_trips = []
+      @all_trips.each do |trip|
+        if trip.validated == false
+          @pending_trips << trip
+        end
+      end
     end
-
-
 end

@@ -111,7 +111,7 @@
                   <% end %>
                   <article class="tile">
                 <% end %>
-                  <div class="tile-image" style="background-image: url('<%=asset_path("cities/#{city.name.downcase}.jpg")%>');"></div>
+                  <div class="tile-image" style="background-image: url(<%=rails_blob_url(city.picture)%>);"></div>
                     <%= link_to city_path(city) do%>
                     <div class="tile-header">
                       <h2 class="text-white" style="text-align: center"><%= city.name %></h2>
@@ -174,7 +174,7 @@
                 <p>Great to meet girls.</p>
                 <footer class="blockquote-footer">
                   <div class="media align-items-center">
-                    <%=image_tag("img/avatar/thom.jpg", :alt => "Avatar", class: "avatar user-rounded")%>
+                    <%=image_tag("img/avatar/thom.png", :alt => "Avatar", class: "avatar user-rounded")%>
                     <div class="media-body ml-2">
                       <span class="d-block mb-0 text-white">Thomas Feral</span>
                       <small class="text-primary">Ingenieur</small>

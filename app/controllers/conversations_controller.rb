@@ -1,16 +1,21 @@
 class ConversationsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_conversation, only: [:destroy]
 
   # GET /conversations
   def index
     @conversations = Conversation.sort_by_last_message.select{|c| c.participants.include?(current_user)}
-    @conversation = @conversations.first
-    @messages = Message.order(:created_at).where(conversation: @conversation)
-    @other_user = @conversation.other_participant(current_user)
+    unless @conversations.empty?
+      @conversation = @conversations.first
+      @messages = Message.order(:created_at).where(conversation: @conversation)
+      @other_user = @conversation.other_participant(current_user)
+    end
     @conversation_new = Conversation.new
     @users = User.all.reject{|u| u == current_user}
-  end
+    respond_to do |format|
+      format.html { redirect_to current_user}
+      format.js {}
+    end
+end
 
   #IMPORTANT!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
   #IL FAUDRA SUPPRIMER CETTE MÉTHODE ET PEUT ETRE TOUTES CELLES EN DESSSOUS

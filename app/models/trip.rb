@@ -6,4 +6,6 @@ class Trip < ApplicationRecord
     enddate = self.start_date + self.duration.days
     return enddate
   end
+
+
 end

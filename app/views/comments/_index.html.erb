@@ -3,7 +3,7 @@
 	<div class="col-md-10 col-lg-8">
 		<div class="mb-3">
 			<h3>Comments received</h3>
-			<% @user.received_comments.each do |c| %>
+			<% @received_comments.each do |c| %>
 				<blockquote class="blockquote blockquote-2 boxed mb-1">
 					<p><%= c.content %></p>
 					<footer class="blockquote-footer">

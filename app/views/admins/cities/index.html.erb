@@ -1,3 +1,4 @@
+<div class="image image-overlay image-zoom" style="background-image:url('<%=asset_path("img/flat/bedroom-416062_1280.jpg")%>')"></div>
 <div class="row justify-content-center mt-5 mb-5">
   <div class="col-8">
     <h1 class="text-center mt-5">Cities</h1>
@@ -5,31 +6,30 @@
 
       <table>
         <thead>
-          <tr><th colspan="7"><h2>Update</h2></th></tr>
+          <tr><th colspan="6"><h2>Update</h2></th></tr>
           <tr>
             <th>Name</th>
             <th>Country</th>
             <th>Zip code</th>
             <th>Description</th>
             <th>Picture</th>
-            <th colspan="2"></th>
+            <th></th>
           </tr>
         </thead>
 
         <tbody>
           <% @cities.each do |city| %>
-            <%= form_with(model: city, url: admins_city_path(city) , multipart: true) do |form| %>
+            <%= form_with(model: city, url: admins_city_path(city) ,local: true, multipart: true) do |form| %>
               <tr>
                 <td><%= form.text_field :name %></td>
                 <td><%= form.text_field :country %></td>
                 <td><%= form.text_field :zip_code %></td>
                 <td><%= form.text_area :description %></td>							
                 <td>
-                  <%= image_tag city.icon, style: "width: 2rem" %>
-                  <%= file_field_tag :icon %>            
+                  <%= image_tag city.picture, style: "width: 6rem" %>
+                  <%= file_field_tag :picture %>            
                 </td>
                 <td><%= form.submit "Update" %></td>
-                <td><%= link_to 'Destroy', admins_city_path(city), method: :delete, data: { confirm: 'Are you sure?' } %></td>
               </tr>
               <tr>
                 <% if city.errors.any? %>
@@ -47,24 +47,27 @@
           <% end %>
         </tbody>
         <thead>
-          <tr><th colspan="7"><h2>Update</h2></th></tr>
+          <tr><th colspan="6"><h2>Update</h2></th></tr>
           <tr>
             <th>Name</th>
             <th>Country</th>
             <th>Zip code</th>
             <th>Description</th>
             <th>Picture</th>
-            <th colspan="2"></th>
+            <th></th>
           </tr>
         </thead>
           <%= form_with(model: @city_new, url: admins_cities_path , local: true, multipart: true) do |form| %>
-            <tr>
-              <td><%= form.text_field :city %></td>
-              <td>
-                <%= file_field_tag :icon %>            
-              </td>
-              <td><%= form.submit "Create" %></td>
-            </tr>
+						<tr>
+							<td><%= form.text_field :name %></td>
+							<td><%= form.text_field :country %></td>
+							<td><%= form.text_field :zip_code %></td>
+							<td><%= form.text_area :description %></td>							
+							<td>
+								<%= file_field_tag :picture %>            
+							</td>
+							<td><%= form.submit "Create" %></td>
+						</tr>
             <tr>
               <% if @city_new.errors.any? %>
                 <div id="error_explanation">

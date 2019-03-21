@@ -8,7 +8,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <%= form_with(model: @correspondance, local: true) do |form| %>
+        <%= form_with(model: @correspondance_new, local: true) do |form| %>
           <%= form.hidden_field :user_id, :value => @user.id %>
           <div class="row">
             <div class="field col-10">

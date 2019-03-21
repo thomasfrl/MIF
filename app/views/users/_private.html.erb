@@ -16,9 +16,6 @@
                   <span class="text-muted"><%= @user.age %> years old, <%= @user.city.name%></span> <br>
                   <span class="text-muted">"<%= @user.welcome_message %>"</span>
                 </div>
-                <div class="col-md-4 text-left text-md-right">
-                  <button type="button" class="btn btn-rounded btn-ico btn-primary" data-toggle="tooltip" data-placement="top" title="Add Friend"><i class="fas fa-plus"></i></button>
-                </div>
               </div>
             </div>
           </div>
@@ -34,12 +31,12 @@
     <div class="row justify-content-center">
       <div class="col col-md-10 col-lg-8">
         <div class="nav nav-tabs mb-1">
-          <a class="nav-item nav-link active" data-toggle="tab" href="#demo-2-1">My conversations</a>
-          <a class="nav-item nav-link" data-toggle="tab" href="#demo-2-2">My Friends</a>
+          <%= link_to "My conversations", conversations_path, remote: true, class: "nav-item nav-link"   %>
+          <%= link_to "My friends", correspondances_path, remote: true, class: "nav-item nav-link"   %>
           <a class="nav-item nav-link" data-toggle="tab" href="#demo-2-3">My trips</a>
-          <a class="nav-item nav-link" data-toggle="tab" href="#demo-2-4">Comments</a>
-          <a class="nav-item nav-link" data-toggle="tab" href="#demo-2-5">My profile</a>
-          <a class="nav-item nav-link" data-toggle="tab" href="#demo-2-6">My flat</a>
+          <%= link_to "Comments", user_comments_path(@user), remote: true, class: "nav-item nav-link"   %>
+          <%= link_to "My profil", edit_user_path(current_user), remote: true, class: "nav-item nav-link"   %>
+          <%= link_to "My flat", edit_flat_path(current_user.flat), remote: true, class: "nav-item nav-link"   %>
         </div>
       </div>
     </div>
@@ -57,53 +54,18 @@
   <div class="container">
     <div class="tab-content" id="demo-2">
 
-      <!-- tab conversations -->
-      <div class="tab-pane show active" id="demo-2-1" role="tabpanel" aria-labelledby="demo-2-1">
-        <div class="row justify-content-center">
-          <div class="col-md-10 col-lg-8">
-            <div class="row mb-1">
-              <%= render "conversations/index" %>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- / tab conversations -->
+        <div id="tab"></div>
 
-      <!-- tab friends -->
-      <div class="tab-pane" id="demo-2-2" role="tabpanel" aria-labelledby="demo-2-2">
-        <div class="row justify-content-center">
-          <div class="col col-md-10 col-lg-8">
-              <%= render "correspondances/index" %>
-          </div>
-        </div>
-      </div>
-      <!-- / tab -->
 
 
       <!-- tab trips -->
       <div class="tab-pane" id="demo-2-3" role="tabpanel" aria-labelledby="demo-2-3">
-        <div class="w-75 m-auto" id="trips_calendar">
-          <%= render partial: "trips/index", locals: {trips: @trips} %>
+        <div class="w-75 m-auto">
+          <%= render "trips/index", locals: {trips: @trips} %>
         </div>
-
       </div>
       <!-- / tab -->
 
-      <!-- tab comments -->
-      <div class="tab-pane" id="demo-2-4" role="tabpanel" aria-labelledby="demo-2-4">
-        <%= render "comments/index" %>
-      </div>
-      <!-- / tab -->
-
-      <!-- tab settings -->
-      <%= render 'form', user: @user %>
-      <!-- / tab -->
-
-      <!-- tab flat -->
-      <div class="tab-pane" id="demo-2-6" role="tabpanel" aria-labelledby="demo-2-6">
-        <%= render "flats/flat_edit" %>
-      </div>
-      <!-- / tab -->
 
     </div>
   </div>
@@ -114,3 +76,14 @@
 <!-- / footer -->
 <%= render "answers/modal_new" %>
 <%= render "user_preferences/modal_new" %>
+<%= render "trips/modal_trips" %>
+
+<script>  
+    $.ajax({
+      url: "/conversations",
+      type: "GET",
+      data: {},
+      dataType: "script"
+    });
+
+</script>

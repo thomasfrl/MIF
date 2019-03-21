@@ -211,7 +211,7 @@ puts "preferences created"
 
 end
 img = get_random_image_avatar
-user = User.create!(first_name: "jean", last_name: "effe", description: Faker::Lorem.paragraph_by_chars, age: (rand(15)+20), email: "user1@yopmail.com", password: "123456", city_id: City.all.sample.id, welcome_message: Faker::Lorem.sentence, nationality: Faker::Nation.nationality )
+user = User.create!(first_name: "jean", last_name: "effe", description: Faker::Lorem.paragraph_by_chars, age: (rand(15)+20), email: "user1@yopmail.com", password: "123456", city_id: City.all.sample.id, welcome_message: Faker::Lorem.sentence, nationality: Faker::Nation.nationality, is_admin: true )
 user.avatar.attach(io: File.open(img[0]), filename: img[1])
 3.times do
   img = get_random_image_user
@@ -219,7 +219,7 @@ user.avatar.attach(io: File.open(img[0]), filename: img[1])
 end
 
 img = get_random_image_avatar
-user = User.create!(first_name: "flo", last_name: "bobo", description: Faker::Lorem.paragraph_by_chars, age: (rand(15)+20), email: "user2@yopmail.com", password: "123456", city_id: City.all.sample.id, welcome_message: Faker::Lorem.sentence, nationality: Faker::Nation.nationality )
+user = User.create!(first_name: "flo", last_name: "bobo", description: Faker::Lorem.paragraph_by_chars, age: (rand(15)+20), email: "user2@yopmail.com", password: "123456", city_id: City.all.sample.id, welcome_message: Faker::Lorem.sentence, nationality: Faker::Nation.nationality, is_admin: true )
 user.pictures.attach(io: File.open(img[0]), filename: img[1])
 3.times do
   img = get_random_image_user
@@ -262,6 +262,11 @@ users=  User.all
   unless Correspondance.already_contain?(correspondance)
     correspondance.save!
     if status == "validated"
+      t1 = u1.token + 5
+      t2 = u2.token + 5
+      u1.update(token: t1)
+      u2.update(token: t2)
+
       conv = Conversation.create!(author: u1, receiver: u2)
       quizs = Quiz.all
       i = 0
@@ -286,8 +291,13 @@ puts "QuizConv create"
 
 conversations = Conversation.all
 conversations.each do |conv|
-  10.times do
-    Message.create!(user: conv.participants.sample, conversation: conv, content: Faker::Lorem.sentence )
+  10.times do |i|
+    u = conv.participants.sample
+    Message.create!(user: u, conversation: conv, content: Faker::Lorem.sentence )
+    if i == 0
+      t = u.token + 5
+      u.update(token: t)
+    end
   end
 end
 puts "Message created"
