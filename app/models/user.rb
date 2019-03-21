@@ -5,11 +5,10 @@ class User < ApplicationRecord
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
-  attr_accessor :login
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  devise :omniauthable, omniauth_providers: [:facebook]
+  # devise :omniauthable, omniauth_providers: [:facebook]
 
   # validates :user_name,
   #   format: {with: /\A[a-zA-Z0-9 _\.]*\z/} #, uniqueness: {case_sensitive: false}
@@ -52,19 +51,22 @@ class User < ApplicationRecord
   
   has_many :user_preferences, dependent: :destroy
   has_many :preferences, through: :user_preferences
+  
+  #attr_accessor :login
 
-  def self.find_first_by_auth_conditions(warden_conditions)
-    conditions = warden_conditions.dup
-    if login = conditions.delete(:login)
-      where(conditions.to_hash).where("lower(user_name) = :value OR lower(email) = :value", value:login.downcase).first
-    else
-      where(conditions.to_hash)
-    end
-  end
+  # def self.find_first_by_auth_conditions(warden_conditions)
+  #   conditions = warden_conditions.dup
+  #   if login = conditions.delete(:login)
+  #     where(conditions.to_hash).where("lower(user_name) = :value OR lower(email) = :value", value:login.downcase).first
+  #   else
+  #     where(conditions.to_hash)
+  #   end
+  # end
 
-  def self.from_facebook(auth)
-    where()
-  end
+  # def self.from_facebook(auth)
+  #   where()
+  # end
+  
   def name
     self.first_name + " " + self.last_name
   end
