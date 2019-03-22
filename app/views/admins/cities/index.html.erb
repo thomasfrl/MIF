@@ -1,7 +1,6 @@
-<div class="image image-overlay image-zoom" style="background-image:url('<%=asset_path("img/flat/bedroom-416062_1280.jpg")%>')"></div>
-<div class="row justify-content-center mt-5 mb-5">
-  <div class="col-8">
-    <h1 class="text-center mt-5">Cities</h1>
+<div class="row justify-content-center mb-5 min-vh-100 bg-primary">
+  <div class="col-8 mt-5 text-white">
+    <h1 class="text-center mt-5 ">Cities</h1>
     <div class="row justify-content-center">
 
       <table>
@@ -11,6 +10,7 @@
             <th>Name</th>
             <th>Country</th>
             <th>Zip code</th>
+            <th>Weather ID</th>
             <th>Description</th>
             <th>Picture</th>
             <th></th>
@@ -24,6 +24,7 @@
                 <td><%= form.text_field :name %></td>
                 <td><%= form.text_field :country %></td>
                 <td><%= form.text_field :zip_code %></td>
+                <td><%= form.number_field :weather_id %></td>
                 <td><%= form.text_area :description %></td>							
                 <td>
                   <%= image_tag city.picture, style: "width: 6rem" %>
@@ -52,6 +53,7 @@
             <th>Name</th>
             <th>Country</th>
             <th>Zip code</th>
+            <th>Weather ID</th>
             <th>Description</th>
             <th>Picture</th>
             <th></th>
@@ -62,6 +64,7 @@
 							<td><%= form.text_field :name %></td>
 							<td><%= form.text_field :country %></td>
 							<td><%= form.text_field :zip_code %></td>
+              <td><%= form.number_field :weather_id %></td>
 							<td><%= form.text_area :description %></td>							
 							<td>
 								<%= file_field_tag :picture %>            

@@ -2,35 +2,40 @@
 <% @session2 ||= "" %>
 <% @regist ||= "" %>
 <% @regist ||= "" %>
-<div class="row justify-content-center align-items-center mt-5 pt-5">
-  <div class="col-md-6 col-lg-5">
-    <section class="bg-light pt-5">
-      <div class="container">
-        <div class="row justify-content-center">
-          <div class="col col-md-10 col-lg-8">
-            <div class="nav nav-tabs mb-1">
-              <a class="nav-item nav-link <%=@session%> " data-toggle="tab" href="#demo-2-1">Sign in</a>
-              <a class="nav-item nav-link <%=@regist%>" data-toggle="tab" href="#demo-2-2">Sign up</a>
+
+<%= image_tag(asset_path("img/4FriendsTopCity2.jpg"), :alt => "avatar", class: "image image-overlay", style: "transform: scale(1.1);", size: "2000x850") %>
+
+    <div class="row justify-content-center align-items-center mt-5 pt-5">
+      <div class="col-md-6 col-lg-5">
+        <section class="bg-light pt-5">
+          <div class="container">
+            <div class="row justify-content-center">
+              <div class="col col-md-10 col-lg-8">
+                <div class="nav nav-tabs mb-1">
+                  <a class="nav-item nav-link <%=@session%> " data-toggle="tab" href="#demo-2-1">Sign in</a>
+                  <a class="nav-item nav-link <%=@regist%>" data-toggle="tab" href="#demo-2-2">Sign up</a>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
-    </section>
-    <div class="bg-light pb-5 pt-2">
-      <div class="container">
-        <div class="tab-content" id="demo-2">
-          <div class="tab-pane <%=@session2%>" id="demo-2-1" role="tabpanel" aria-labelledby="demo-2-1">
-            <div class="w-75 m-auto">
-              <%= render "devise/shared/login" %>
-            </div>
-          </div>
-          <div class="tab-pane <%=@regist2%>" id="demo-2-2" role="tabpanel" aria-labelledby="demo-2-2">
-            <div class="w-75 m-auto">
-              <%= render "devise/shared/signup" %>
-            </div>
+        </section>
+        <div class="bg-light pb-5 pt-2">
+          <div class="container">
+            <div class="tab-content" id="demo-2">
+              <div class="tab-pane <%=@session2%>" id="demo-2-1" role="tabpanel" aria-labelledby="demo-2-1">
+                <div class="w-75 m-auto">
+                  <%= render "devise/shared/login" %>
+                </div>
+              </div>
+              <div class="tab-pane <%=@regist2%>" id="demo-2-2" role="tabpanel" aria-labelledby="demo-2-2">
+                <div class="w-75 m-auto">
+                  <%= render "devise/shared/signup" %>
+            
+              </div>
           </div>
         </div>
       </div>
     </div>
   </div>
 </div>
+<br><br><br><br><br><br>

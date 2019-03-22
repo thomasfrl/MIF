@@ -34,12 +34,12 @@
                   <div class="carousel-inner">
                     <div class="carousel-item active">
                       <div class="row">
-                        <%= image_tag @flat.pictures[0], :alt => "Image"%>
+                        <%= image_tag @flat.pictures[0], :alt => "Image", style: "width: 100%;"%>
                       </div>
                     </div>
                     <%(1...@flat.pictures.count).each do |pic|%>
                       <div class="carousel-item">
-                        <%= image_tag @flat.pictures[pic], :alt => "Image"  %>
+                        <%= image_tag @flat.pictures[pic], :alt => "Image", style: "width: 100%;"  %>
                       </div>
                     <% end %>  
                   </div>

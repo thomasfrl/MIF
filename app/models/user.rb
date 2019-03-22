@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  # after_create :welcome_send
+  after_create :welcome_send
   after_create :create_flat
   after_create :set_default_avatar
 
@@ -102,6 +102,18 @@ class User < ApplicationRecord
 
   def welcome_send
     UserMailer.welcome_email(self).deliver_now
+  end
+
+  def trips_validated
+    trips = []
+    self.validated_correspondances.each do |c|
+      c.trips.each do |t|
+        if t.validated == true
+          trips << t
+        end
+      end
+    end
+    return trips
   end
 
   private

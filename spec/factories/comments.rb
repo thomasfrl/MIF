@@ -3,6 +3,6 @@ FactoryBot.define do
   factory :comment do
     author
     receiver
-    content { "MyText" }
+    content { "MyTextMyTextMyText" }
   end
 end

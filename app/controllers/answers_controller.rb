@@ -1,19 +1,18 @@
 class AnswersController < ApplicationController
   before_action :authenticate_user!
   before_action :good_user
-  before_action :set_env
   before_action :finish?
+  before_action :set_env
   before_action :already_answered?
 
   def create
-    @answer = Answer.new(author: current_user, content: params[:answer][:content] )
-    @answer.quiz_conv = @quiz_conv
+    @answer = Answer.new(author: current_user, content: params[:answer][:content], quiz_conv: @current_quiz_conv )
     if @answer.save
       i = @conversation.iteration_quiz
       @conversation.update(iteration_quiz: i + 0.5)
-      if @conversation.iteration_quiz == 14
+      if @conversation.iteration_quiz == 15
         @conversation.participants.each do |u|
-          u.token += 5
+          u.update(token: u.token + 5)
         end
       end
       c = Conversation.find(params[:conversation_id])
@@ -45,7 +44,7 @@ class AnswersController < ApplicationController
   private
 
   def already_answered?
-    answers = @quiz_conv.answers
+    answers = @current_quiz_conv.answers
     unless answers.empty?
       answers.each do |a|
         if a.author == current_user
@@ -62,7 +61,8 @@ class AnswersController < ApplicationController
   end 
 
   def finish?
-    if @iteration >= 14
+    @iteration = @conversation.iteration_quiz.to_i
+    if @iteration >= 15
       @quizzes = @conversation.quizzes
       @other_user = @conversation.other_participant(current_user)
       respond_to do |format|
@@ -76,19 +76,12 @@ class AnswersController < ApplicationController
   end
 
   def set_env
-    @quiz_conv = @conversation.quiz_conv
-    @quiz = @quiz_conv.quiz
+    @current_quiz_conv = @conversation.current_quiz_conv
+    @quiz = @current_quiz_conv.quiz
     @answer = Answer.new
-    @iteration = @conversation.iteration_quiz.to_i
     if @iteration >= 1
-      previews_quiz = @conversation.previews_quiz
-      @previews_question = previews_quiz.question
-      previews_answers = QuizConv.find_by(conversation: @conversation, index: @iteration - 1 ).answers
-      previews_answers.each do |answer|
-        if answer.author != current_user
-          @previews_answer = answer.content
-        end
-      end
+      @previews_question = @conversation.previews_question
+      @previews_answer = @conversation.previews_other_answer(current_user)
     end
   end
 

@@ -12,12 +12,12 @@
                   <div class="carousel-inner">
                     <div class="carousel-item active">
                       <div class="d-flex">
-                        <%= image_tag @user.pictures[0], :alt => "Image"%>
+                        <%= image_tag @user.pictures[0], :alt => "Image", style: "width: 100%;"%>
                       </div>
                     </div>
                     <%(1...@user.pictures.count).each do |pic|%>
                       <div class="carousel-item">
-                        <%= image_tag @user.pictures[pic], :alt => "Image"%>
+                        <%= image_tag @user.pictures[pic], :alt => "Image", style: "width: 100%;"%>
                       </div>
                     <% end %>  
                   </div>

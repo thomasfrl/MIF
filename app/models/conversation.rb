@@ -38,15 +38,32 @@ class Conversation < ApplicationRecord
     return p[0]
   end
 
-  def quiz_conv
+  def current_quiz_conv
     QuizConv.find_by(conversation: self, index: self.iteration_quiz.to_i)
   end
 
-  def quiz
+  def current_quiz
     QuizConv.find_by(conversation: self, index: self.iteration_quiz.to_i).quiz
   end
+
   def previews_quiz
     QuizConv.find_by(conversation: self, index: self.iteration_quiz.to_i-1).quiz
+  end
+
+  def previews_question
+    self.previews_quiz.question
+  end
+
+  def previews_answers
+    QuizConv.find_by(conversation: self, index: self.iteration_quiz.to_i-1 ).answers
+  end
+
+  def previews_other_answer(current_user)
+    self.previews_answers.each do |answer|
+      if answer.author != current_user
+        return answer.content
+      end
+    end
   end
 
 end
