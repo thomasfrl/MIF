@@ -100,6 +100,36 @@ class User < ApplicationRecord
     self.created_correspondances.where(status: "refused") +  self.received_correspondances.where(status: "refused")
   end
 
+  def matchmaking(x)
+    arrayuser = []
+    arraycontender = []
+    value = 0
+    x.preference_ids.each do |userpref|
+      arrayuser << userpref
+      arrayuser
+
+    end
+
+    self.preference_ids.each do |contenderpref|
+      arraycontender << contenderpref
+      arraycontender
+
+    end
+
+
+    arraycontender.each_with_index do |pref|
+      arrayuser.each do |pref2|
+        if pref == pref2
+          value += 1
+        end
+      end
+    end
+
+
+
+    return value
+  end
+
   def welcome_send
     UserMailer.welcome_email(self).deliver_now
   end

@@ -64,7 +64,6 @@ class UsersController < ApplicationController
     end
   end
 
-
   private
     def good_user
       if current_user != User.find(params[:id])
