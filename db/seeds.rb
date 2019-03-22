@@ -178,26 +178,57 @@ sp.icon.attach(io: File.open("app/assets/images/flag/norvege.png"), filename:"no
 
 puts "language created"
 
-Preference.create!(description: "Have some drink till the dawn")
-Preference.create!(description: "Meet friends of my Host")
-Preference.create!(description: "Dance all night long with electronic music")
-Preference.create!(description: "Running in the city")
-Preference.create!(description: "Visit Museum")
-Preference.create!(description: "Typical local Restaurant")
-Preference.create!(description: "Visit museum")
-Preference.create!(description: "Play music in da street")
-Preference.create!(description: "Concert with local music")
-Preference.create!(description: "Chilling in a parc")
-Preference.create!(description: "Smoking salad")
-Preference.create!(description: "Skating the city")
-Preference.create!(description: "Biking the city")
-Preference.create!(description: "Just walking and seeing the culture")
+p = Preference.create!(description: "Have some drink till the dawn")
+p.icon.attach(io: File.open("app/assets/images/icon_pref/drink.png"), filename: "drink.png")
+
+p = Preference.create!(description: "Meet friends of my Host")
+p.icon.attach(io: File.open("app/assets/images/icon_pref/friends.png"), filename: "friends.png")
+
+p = Preference.create!(description: "Dance all night long with electronic music")
+p.icon.attach(io: File.open("app/assets/images/icon_pref/music.png"), filename: "music.png")
+
+p = Preference.create!(description: "Running in the city")
+p.icon.attach(io: File.open("app/assets/images/icon_pref/running.png"), filename: "running.png")
+
+p = Preference.create!(description: "Visit Museum")
+p.icon.attach(io: File.open("app/assets/images/icon_pref/monument.png"), filename: "monument.png")
+
+p = Preference.create!(description: "Typical local Restaurant")
+p.icon.attach(io: File.open("app/assets/images/icon_pref/resto.png"), filename: "resto.png")
+
+p = Preference.create!(description: "Play music in da street")
+p.icon.attach(io: File.open("app/assets/images/icon_pref/music.png"), filename: "music.png")
+
+p = Preference.create!(description: "Concert with local music")
+p.icon.attach(io: File.open("app/assets/images/icon_pref/music.png"), filename: "music.png")
+
+p = Preference.create!(description: "Chilling in a parc")
+p.icon.attach(io: File.open("app/assets/images/icon_pref/parc.png"), filename: "parc.png")
+
+p = Preference.create!(description: "Smoking salad")
+p.icon.attach(io: File.open("app/assets/images/icon_pref/joint.png"), filename: "joint.png")
+
+p = Preference.create!(description: "Skating the city")
+p.icon.attach(io: File.open("app/assets/images/icon_pref/skating.png"), filename: "skating.png")
+
+p = Preference.create!(description: "Biking the city")
+p.icon.attach(io: File.open("app/assets/images/icon_pref/bike.png"), filename: "bike.png")
+
+p = Preference.create!(description: "Just walking and seeing the culture")
+p.icon.attach(io: File.open("app/assets/images/icon_pref/walking.png"), filename: "walking.png")
+
 puts "preferences created"
 
 
-Budget.create!(description: "Less than 100€ ")
-Budget.create!(description: "Between 100€ and 200€")
-Budget.create!(description: "I don't care till i'm having fun")
+p = Budget.create!(description: "Less than 100€ ")
+p.icon.attach(io: File.open("app/assets/images/icon_pref/euro.png"), filename: "euro.png")
+
+p = Budget.create!(description: "Between 100€ and 200€")
+p.icon.attach(io: File.open("app/assets/images/icon_pref/euro.png"), filename: "euro.png")
+
+p = Budget.create!(description: "I don't care till i'm having fun")
+p.icon.attach(io: File.open("app/assets/images/icon_pref/euro.png"), filename: "euro.png")
+
 
 puts "budgets created"
 
