@@ -23,6 +23,7 @@ class User < ApplicationRecord
   validates :password, :format => {:with => /\A(?=.*[a-zA-Z])(?=.*[0-9]).{8,}\z/, message: "must contains at least a lowercase letter, a uppercase, a digit and minimum 8 characters"}
 
 
+  belongs_to :budget, optional: true
   belongs_to :city
   has_one :flat, dependent: :destroy
 
