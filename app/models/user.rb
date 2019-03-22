@@ -20,6 +20,8 @@ class User < ApplicationRecord
   #   format: {with: /\A[a-zA-Z0-9 _\.]*\z/}
   validates :city_id, presence: true
   validates :status, inclusion: { in: ["waiting", "validated", "banned"], message: "%{value} is not a valid status"}
+  validates :password, :format => {:with => /\A(?=.*[a-zA-Z])(?=.*[0-9]).{8,}\z/, message: "must contains at least a lowercase letter, a uppercase, a digit and minimum 8 characters"}
+
 
   belongs_to :city
   has_one :flat, dependent: :destroy
@@ -80,8 +82,14 @@ class User < ApplicationRecord
      self.authored_conversations.to_a << self.received_conversations.to_a
   end
 
-  # User's correspondances
+  # mail
 
+  def welcome_send
+    UserMailer.welcome_email(self).deliver_now
+  end
+
+  # User's correspondances
+  # =======================================
   def correspondances
     self.created_correspondances +  self.received_correspondances
   end
@@ -101,10 +109,8 @@ class User < ApplicationRecord
   def refused_correspondances
     self.created_correspondances.where(status: "refused") +  self.received_correspondances.where(status: "refused")
   end
+  # =======================================
 
-  def welcome_send
-    UserMailer.welcome_email(self).deliver_now
-  end
 
   # User's trips
   # =======================================

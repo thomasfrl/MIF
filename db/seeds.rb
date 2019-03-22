@@ -211,7 +211,7 @@ puts "preferences created"
 
 end
 img = get_random_image_avatar
-user = User.create!(first_name: "jean", last_name: "effe", description: Faker::Lorem.paragraph_by_chars, age: (rand(15)+20), email: "user1@yopmail.com", password: "123456", city_id: City.all.sample.id, welcome_message: Faker::Lorem.sentence, nationality: Faker::Nation.nationality, is_admin: true )
+user = User.create!(first_name: "jean", last_name: "effe", description: Faker::Lorem.paragraph_by_chars, age: (rand(15)+20), email: "user1@yopmail.com", password: "Mif12345", city_id: City.all.sample.id, welcome_message: Faker::Lorem.sentence, nationality: Faker::Nation.nationality, is_admin: true )
 user.avatar.attach(io: File.open(img[0]), filename: img[1])
 3.times do
   img = get_random_image_user
@@ -219,7 +219,7 @@ user.avatar.attach(io: File.open(img[0]), filename: img[1])
 end
 
 img = get_random_image_avatar
-user = User.create!(first_name: "flo", last_name: "bobo", description: Faker::Lorem.paragraph_by_chars, age: (rand(15)+20), email: "user2@yopmail.com", password: "123456", city_id: City.all.sample.id, welcome_message: Faker::Lorem.sentence, nationality: Faker::Nation.nationality, is_admin: true )
+user = User.create!(first_name: "flo", last_name: "bobo", description: Faker::Lorem.paragraph_by_chars, age: (rand(15)+20), email: "user2@yopmail.com", password: "Mif12345", city_id: City.all.sample.id, welcome_message: Faker::Lorem.sentence, nationality: Faker::Nation.nationality, is_admin: true )
 user.pictures.attach(io: File.open(img[0]), filename: img[1])
 3.times do
   img = get_random_image_user
