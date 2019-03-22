@@ -223,7 +223,6 @@
 
     <!-- featured carousel -->
     <section class="bg-light pb-0">
-      <div class="container-fluid">
         <div class="row" data-aos="fade-up">
           <div class="col">
             <div class="gallery">
@@ -238,7 +237,7 @@
                           <div class="col text-center">
                             <span class="eyebrow">Join The Community</span>
                             <h1 class="display-3">The miffers are waiting for you.</h1>
-                            <a href="" class="btn btn-outline-white btn-rounded">Sign Up</a>
+                            <%= link_to "Sign Up",new_user_registration_path, class: "btn btn-outline-white btn-rounded"  %>
                           </div>
                         </div>
                       </div>
@@ -256,7 +255,7 @@
                             <span class="eyebrow">Travel</span>
                             <h1 class="display-3 mb-1">Discover Europe</h1>
                             <p>Stay with locals and meet other travelers Live a authentic experience</p>
-                            <a href="" class="btn btn-white btn-rounded mt-2 px-5">Go</a>
+                            <%= link_to "Go", cities_path, class: "btn btn-white btn-rounded mt-2 px-5"  %>
                           </div>
                         </div>
                       </div>
@@ -272,7 +271,7 @@
           <div class="col-md-8 col-lg-6 text-center text-white text-shadow">
             <span class="eyebrow mb-1">More Questions ?</span>
             <h2 class="display-4">Ask our <b>live support</b> via chat or phone</h2>
-            <a href="" class="btn btn-white btn-rounded px-4">Contact</a>
+              <%= link_to "Contact", "/home/contact", class: "btn btn-white btn-rounded px-4" %>
           </div>
         </div>
       </div>
@@ -296,7 +295,6 @@
             </div>
           </div>
         </div>
-      </div>
     </section>
     <!-- / featured carousel -->
 
