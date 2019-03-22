@@ -22,7 +22,7 @@
 <% end %>
 
 <section class="p-0 bg-light">
-  <div class="image image-overlay image-cover" style="background-image:url(<%=rails_blob_url(@city.picture)%>)"  
+  <div class="image image-overlay image-cover" style="background-image:url(<%=rails_blob_url(@city.picture)%>)"
     data-top-top="transform: translateY(0px);"
     data-top-bottom="transform: translateY(-250px);"></div>
     <div class="container">
@@ -36,7 +36,7 @@
                   <h2 class="mb-0 text-black"><%= @city.country.capitalize %></h2>
                   <div>
                       <%= link_to cities_path, class:"btn btn-rounded btn-with-ico btn-primary" do %>
-                        View All Cities <i class="icon-chevron-right2 fs-24"></i>
+                        View All Cities <i class="fas fa-chevron-right fs-24"></i>
                       <%end%>
                     </div>
                 </div>

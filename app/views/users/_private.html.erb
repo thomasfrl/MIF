@@ -33,7 +33,7 @@
         <div class="nav nav-tabs mb-1">
           <%= link_to "My conversations", conversations_path, remote: true, class: "nav-item nav-link"   %>
           <%= link_to "My friends", correspondances_path, remote: true, class: "nav-item nav-link"   %>
-          <a class="nav-item nav-link" data-toggle="tab" href="#demo-2-3">My trips</a>
+          <%= link_to "My trips", trips_path, remote: true, class: "nav-item nav-link"   %>
           <%= link_to "Comments", user_comments_path(@user), remote: true, class: "nav-item nav-link"   %>
           <%= link_to "My profil", edit_user_path(current_user), remote: true, class: "nav-item nav-link"   %>
           <%= link_to "My flat", edit_flat_path(current_user.flat), remote: true, class: "nav-item nav-link"   %>
@@ -50,24 +50,8 @@
 
 
 <div class="bg-light pt-2">
-
   <div class="container">
-    <div class="tab-content" id="demo-2">
-
-        <div id="tab"></div>
-
-
-
-      <!-- tab trips -->
-      <div class="tab-pane" id="demo-2-3" role="tabpanel" aria-labelledby="demo-2-3">
-        <div class="w-75 m-auto">
-          <%= render "trips/index", locals: {trips: @trips} %>
-        </div>
-      </div>
-      <!-- / tab -->
-
-
-    </div>
+    <div id="tab"></div>
   </div>
 </div>
 

@@ -7,5 +7,8 @@ class Trip < ApplicationRecord
     return enddate
   end
 
+  def participants
+    self.correspondance.friends
+  end
 
 end
