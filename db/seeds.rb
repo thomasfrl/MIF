@@ -197,7 +197,7 @@ Preference.create!(description: "I don't care till i'm having fun")
 
 puts "preferences created"
 
-30.times do
+8.times do
   img = get_random_image_avatar
   i = [1,2,4,7,9,10].sample
 
