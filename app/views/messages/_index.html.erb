@@ -15,18 +15,18 @@
             <% end %>
             <div class="row align-items-center">
               <%= @other_user.city.name %>
-              <div id="icon"><img id="wicon" src="http://openweathermap.org/img/w/<%=@icon%>.png" alt="Weather icon"></div> 
-              <%= @temp %> °C   
+              <div id="icon"><img id="wicon" src="http://openweathermap.org/img/w/<%=@icon%>.png" alt="Weather icon"></div>
+              <%= @temp %> °C
             </div>
           </div>
         </div>
       </div>
 
       <div class="col-2 p-0">
-      <%= link_to new_conversation_trip_path(@conversation), {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal_trips'} do  %>
+      <%= link_to new_conversation_trip_path(@conversation), {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal_trips', :class => "btn btn-rounded btn-ico btn-white"} do  %>
           <i class="fas fa-plane fa-lg text-primary mr-2"></i>
         <% end %>
-        <%= link_to new_conversation_answer_path(@conversation),  {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal_answer'} do  %>
+        <%= link_to new_conversation_answer_path(@conversation),  {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal_answer', :class => "btn btn-rounded btn-ico btn-white"} do  %>
             <i class="fas fa-gamepad fa-lg text-primary"></i>
         <% end %>
       </div>
