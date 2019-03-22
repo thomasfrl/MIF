@@ -80,6 +80,8 @@ class User < ApplicationRecord
      self.authored_conversations.to_a << self.received_conversations.to_a
   end
 
+  # User's correspondances
+
   def correspondances
     self.created_correspondances +  self.received_correspondances
   end
@@ -104,6 +106,8 @@ class User < ApplicationRecord
     UserMailer.welcome_email(self).deliver_now
   end
 
+  # User's trips
+  # =======================================
   def trips_validated
     trips = []
     self.validated_correspondances.each do |c|
@@ -115,6 +119,19 @@ class User < ApplicationRecord
     end
     return trips
   end
+
+  def pending_trips
+    trips = []
+    self.validated_correspondances.each do |c|
+      c.trips.each do |t|
+        if t.validated == false
+          trips << t
+        end
+      end
+    end
+    return trips
+  end
+  # =======================================
 
   private
   def create_flat
