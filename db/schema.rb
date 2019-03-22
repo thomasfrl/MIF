@@ -111,15 +111,6 @@ ActiveRecord::Schema.define(version: 2019_03_22_113619) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "matchmaking_results", force: :cascade do |t|
-    t.bigint "user_id"
-    t.integer "party_animal", default: 0
-    t.integer "people_person", default: 0
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_matchmaking_results_on_user_id"
-  end
-
   create_table "messages", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "conversation_id"
@@ -234,7 +225,6 @@ ActiveRecord::Schema.define(version: 2019_03_22_113619) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "answers", "quiz_convs"
   add_foreign_key "flats", "users"
-  add_foreign_key "matchmaking_results", "users"
   add_foreign_key "messages", "conversations"
   add_foreign_key "messages", "users"
   add_foreign_key "quiz_convs", "conversations"
@@ -246,5 +236,6 @@ ActiveRecord::Schema.define(version: 2019_03_22_113619) do
   add_foreign_key "user_languages", "users"
   add_foreign_key "user_preferences", "preferences"
   add_foreign_key "user_preferences", "users"
+  add_foreign_key "users", "budgets"
   add_foreign_key "users", "cities"
 end
