@@ -6,11 +6,9 @@ class UserPreferencesController < ApplicationController
     params[:preference_ids].each_with_index do |p_id, i|
       @user_preference = UserPreference.new(user: current_user, position: positions[i], preference: Preference.find(p_id))
       unless @user_preference.save
-        flash[:danger] = "You have not created your profil preferences"
-        redirect_to root_path
+        binding.pry
       end
     end
-    
     budget = params[:preference][:budget]
     current_user.update(budget_id: budget)
     flash[:notice] = "You have created your profil preferences correctly"
@@ -18,6 +16,7 @@ class UserPreferencesController < ApplicationController
   end
 
   def new
+    @user_preferences = current_user.preferences
     @budgets = Budget.all
     @preferences = Preference.all
     respond_to do |format|

@@ -1,22 +1,70 @@
 <div class="container">
 	<%= form_tag(user_preferences_path) do |f| %>
-		<ul>
+		<ul class="pl-0">
 			<h3>Please select the 5 stuff you prefere doing when your visiting a city and order it form 1 to 5</h3>
 			<% @preferences.each_with_index do |preference, i| %>
-				<li class="row align-items-center">
-					<p class= "col-6"><%= preference.description %></p>
-					<%= check_box_tag("preference_ids[]" , preference.id, false, id: "preference_ids_#{preference.id}") %>
-					<div class="col-3"><%= number_field_tag("position_ids[]", within: 1..5, disabled: true) %></div>			
+				<% @user_preferences.include?(preference) ? checked = true: checked = false %>
+				<li class="row align-items-center justify-content-center">
+					<p class=" pr-2 m-0 pl-0 col-4"><%= preference.description %></p>
+					<%= check_box_tag("preference_ids[]" , preference.id, checked, id: "preference_ids_#{preference.id}", class: "checkbox") %>
+
+	<div class="col-3"><%= number_field_tag("position_ids[]") %></div>
+
 				</li>
 			<% end %>
 			<h3>Please select the budget you have when traveling</h3>
 			<% @budgets.each do |budget| %>
-				<li class="row align-items-center justify-content-between">
+				<% current_user.budget == budget ? checked = true : checked = false%>
+					<li class="row align-items-center justify-content-between">
 					<p><%= budget.description %></p>
-					<%= radio_button("preference", "budget", budget.id, class: "pr-5 mr-5") %>
+					<%= radio_button("preference", "budget", budget.id, checked: checked, class: "pr-5 mr-5") %>
 				</li>
 			<% end %>
-			<%= submit_tag "Post" %>
+			<%= submit_tag "Post", id: "btnSubmit" %>
 		</ul>
 	<% end %>
 </div>
+
+<script>
+	var nb = 0;
+
+	$(".checkbox").each(function(c){
+		if(this.checked === true){
+			nb ++;
+		}
+	});
+	console.log(nb);
+	
+
+	if(nb === 5){
+		$('#btnSubmit').attr("disabled", false);
+	}else{
+		$('#btnSubmit').attr("disabled", true);
+	}
+
+
+	$(".checkbox").click(function(e) {
+    var bool = this.checked ? true : false;
+		if(bool){
+			if(nb>=5){
+				alert("You can not select less more than 5 criteria");
+				e.preventDefault();
+			}else{
+				nb ++;
+				console.log("clik");
+				console.log(nb);
+			}
+		}else{
+			nb --;
+			console.log("unclick");
+			console.log(nb);
+		}
+		if(nb === 5){
+			$('#btnSubmit').attr("disabled", false);
+		}else{
+			$('#btnSubmit').attr("disabled", true);
+		}
+  });
+
+
+</script>
