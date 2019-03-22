@@ -202,7 +202,7 @@ puts "preferences created"
   img = get_random_image_avatar
   i = [1,2,4,7,9,10].sample
 
-  user = User.create!(first_name: Faker::Name.first_name, last_name: Faker::Name.unique.last_name, description: Faker::Lorem.paragraph_by_chars, age: (rand(15)+20), email: "#{Faker::Name.unique.first_name}@yopmail.com", password: "123456", city_id: City.all.sample.id, welcome_message: Faker::Lorem.sentence, nationality: Faker::Nation.nationality )
+  user = User.create!(first_name: Faker::Name.first_name, last_name: Faker::Name.unique.last_name, description: Faker::Lorem.paragraph_by_chars, age: (rand(15)+20), email: "#{Faker::Name.unique.first_name}@yopmail.com", password: "Mif12345", city_id: City.all.sample.id, welcome_message: Faker::Lorem.sentence, nationality: Faker::Nation.nationality )
 
   user.avatar.attach(io: File.open(img[0]), filename: img[1])
   3.times do
