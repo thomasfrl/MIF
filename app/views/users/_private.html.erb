@@ -1,5 +1,5 @@
 <section class="p-0 bg-light">
-  <div class="image image-overlay image-cover" style="background-image:url(<%=rails_blob_url(@user.city.picture)%>)"  
+  <div class="image image-overlay image-cover" style="background-image:url(<%=rails_blob_url(@user.city.picture)%>)"
     data-top-top="transform: translateY(0px);"
     data-top-bottom="transform: translateY(-250px);"></div>
     <div class="container">
@@ -35,7 +35,7 @@
           <%= link_to "My friends", correspondances_path, remote: true, class: "nav-item nav-link"   %>
           <%= link_to "My trips", trips_path, remote: true, class: "nav-item nav-link"   %>
           <%= link_to "Comments", user_comments_path(@user), remote: true, class: "nav-item nav-link"   %>
-          <%= link_to "My profil", edit_user_path(current_user), remote: true, class: "nav-item nav-link"   %>
+          <%= link_to "My profile", edit_user_path(current_user), remote: true, class: "nav-item nav-link"   %>
           <%= link_to "My flat", edit_flat_path(current_user.flat), remote: true, class: "nav-item nav-link"   %>
         </div>
       </div>
@@ -62,7 +62,7 @@
 <%= render "user_preferences/modal_new" %>
 <%= render "trips/modal_trips" %>
 
-<script>  
+<script>
     $.ajax({
       url: "/conversations",
       type: "GET",

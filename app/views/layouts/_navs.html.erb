@@ -26,11 +26,6 @@
             <%= current_user.first_name %>
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <%= link_to conversations_path, class: "dropdown-item" do %>
-                <i class="fas fa-envelope mr-1 text-primary"></i>
-                Messages
-              <% end %>
-              <div class="dropdown-divider"></div>
 
               <%= link_to user_path(current_user.id), class: "dropdown-item" do  %>
                 <i class="fas fa-user mr-1 text-primary"></i>

@@ -4,8 +4,8 @@ class TripsController < ApplicationController
   # GET /trips
   # GET /trips.json
   def index
-    trips_validated
-    pending_trips
+    @trips = current_user.trips_validated
+    @pending_trips = current_user.pending_trips
 
     @visitor = current_user
     respond_to do |format|
@@ -95,34 +95,6 @@ class TripsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def trip_params
       params.require(:trip).permit(:correspondance_id, :host_id, :duration, :start_date, :validated)
-    end
-
-    def trips_validated
-      @correspondances = current_user.correspondances
-      @all_trips = []
-      @correspondances.each do |c|
-          @all_trips += c.trips
-      end
-      @trips = []
-      @all_trips.each do |trip|
-        if trip.validated == true
-          @trips << trip
-        end
-      end
-    end
-
-    def pending_trips
-      @correspondances = current_user.correspondances
-      @all_trips = []
-      @correspondances.each do |c|
-          @all_trips += c.trips
-      end
-      @pending_trips = []
-      @all_trips.each do |trip|
-        if trip.validated == false
-          @pending_trips << trip
-        end
-      end
     end
 
 end

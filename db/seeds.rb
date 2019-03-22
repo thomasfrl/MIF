@@ -38,6 +38,7 @@ Language.destroy_all
 Correspondance.destroy_all
 User.destroy_all
 City.destroy_all
+UserPreference.destroy_all
 
 Quiz.create( question:"Did you had a pet when you where a child?", level:1)
 Quiz.create( question:"Where did you grow up?", level:1)
@@ -212,7 +213,7 @@ puts "budgets created"
 
 end
 img = get_random_image_avatar
-user = User.create!(first_name: "jean", last_name: "effe", description: Faker::Lorem.paragraph_by_chars, age: (rand(15)+20), email: "user1@yopmail.com", password: "123456", city_id: City.all.sample.id, welcome_message: Faker::Lorem.sentence, nationality: Faker::Nation.nationality, is_admin: true )
+user = User.create!(first_name: "jean", last_name: "effe", description: Faker::Lorem.paragraph_by_chars, age: (rand(15)+20), email: "user1@yopmail.com", password: "Mif12345", city_id: City.all.sample.id, welcome_message: Faker::Lorem.sentence, nationality: Faker::Nation.nationality, is_admin: true )
 user.avatar.attach(io: File.open(img[0]), filename: img[1])
 3.times do
   img = get_random_image_user
@@ -220,7 +221,7 @@ user.avatar.attach(io: File.open(img[0]), filename: img[1])
 end
 
 img = get_random_image_avatar
-user = User.create!(first_name: "flo", last_name: "bobo", description: Faker::Lorem.paragraph_by_chars, age: (rand(15)+20), email: "user2@yopmail.com", password: "123456", city_id: City.all.sample.id, welcome_message: Faker::Lorem.sentence, nationality: Faker::Nation.nationality, is_admin: true )
+user = User.create!(first_name: "flo", last_name: "bobo", description: Faker::Lorem.paragraph_by_chars, age: (rand(15)+20), email: "user2@yopmail.com", password: "Mif12345", city_id: City.all.sample.id, welcome_message: Faker::Lorem.sentence, nationality: Faker::Nation.nationality, is_admin: true )
 user.pictures.attach(io: File.open(img[0]), filename: img[1])
 3.times do
   img = get_random_image_user
@@ -252,6 +253,81 @@ end
 # end
 
 puts "language association created"
+
+
+User.all.each do |u|
+  pref_except = Preference.all
+  1.upto(5) do |i|
+    p = pref_except.sample
+    userpreferences = UserPreference.new(user: u, preference: p, position: i)
+    userpreferences.save!
+    pref_except = pref_except.reject{|pref| pref == p}
+  end
+end
+#   arraystock = []
+#   u.user_preferences.each do |f|
+#     arraystock << f
+#   end
+#   u.user_preferences.each do |x|
+#     while x == arraystock[0] || arraystock[1] || arraystock[2] || arraystock[3] || arraystock[4]
+#       x = preferences.uniq.sample
+#       x.save!
+#     end
+#   end
+# end
+
+# arraystock = []
+# iteratordemerde = 0
+# preferences = Preference.all
+# 5.times do
+#   p = preferences.sample
+#   arraystock << p
+# end
+#
+# User.all.each do |u|
+#   arraystock.each do |z,index|
+#     if index == 0
+#       first = z
+#     elsif index == 1
+#       second = z
+#     elsif index == 2
+#       third == z
+#     elsif index == 3
+#       fourth == z
+#     elsif index == 4
+#       fifth == z
+#       while first == second || first == third || first == fourth || first == fifth || second == third || second == fourth || second == fifth || third == fourth || third == fifth || fourth == fifth
+#         if first.id == z.id
+#           first = p
+#         end
+#         if second.id == z.id
+#           second = p
+#         end
+#         if third.id == z.id
+#           third = p
+#         end
+#         if fourth.id == z.id
+#           fourth = p
+#         end
+#         if fifth.id == z.id
+#           fifth = p
+#         end
+#         arraystock[0] = first
+#         arraystock[1] = second
+#         arraystock[2] = third
+#         arraystock[3] = fourth
+#         arraystock[4] = fifth
+#       end
+#     end
+#   end
+#   arraystock.each do |f|
+#     userpreferences = UserPreference.new(user: u, preference: f, position: rand(1..5))
+#     userpreferences.save!
+#   end
+# end
+
+
+puts "preference association created"
 
 
 users=  User.all

@@ -22,7 +22,7 @@
 <% end %>
 
 <section class="p-0 bg-light">
-  <div class="image image-overlay image-cover" style="background-image:url(<%=rails_blob_url(@city.picture)%>)"  
+  <div class="image image-overlay image-cover" style="background-image:url(<%=rails_blob_url(@city.picture)%>)"
     data-top-top="transform: translateY(0px);"
     data-top-bottom="transform: translateY(-250px);"></div>
     <div class="container">
@@ -36,7 +36,7 @@
                   <h2 class="mb-0 text-black"><%= @city.country.capitalize %></h2>
                   <div>
                       <%= link_to cities_path, class:"btn btn-rounded btn-with-ico btn-primary" do %>
-                        View All Cities <i class="icon-chevron-right2 fs-24"></i>
+                        View All Cities <i class="fas fa-chevron-right fs-24"></i>
                       <%end%>
                     </div>
                 </div>
@@ -61,14 +61,78 @@
           </div>
         </div>
         <div class="row gutter-0">
-          <% @city.users.each_with_index do |user,count| %>
-            <% if count == 1 %>
-              <div class="col-md-4">
-            <% else %>
-              <div class="col-md-4" style="border-radius: 30px;" data-aos="fade-up" data-aos-delay="<%= count * 100 %>">
-            <% end %>
+          <% i = 0 %>
+          <% @city.users.each do |user| %>
+            <% if user.matchmaking(current_user) == 5 %>
+              <% if i == 0 %>
+                <div class="col-md-4">
+              <% else %>
+                <div class="col-md-4" style="border-radius: 30px;" data-aos="fade-up" data-aos-delay="<%= i * 50 %>">
+              <% end %>
               <%= render partial: "users/user_card", locals: {user: user} %>
               </div>
+              <% i += 1 %>
+            <% end %>
+          <% end %>
+          <% @city.users.each do |user| %>
+            <% if user.matchmaking(current_user) == 4 %>
+              <% if i == 0 %>
+                <div class="col-md-4">
+              <% else %>
+                <div class="col-md-4" style="border-radius: 30px;" data-aos="fade-up" data-aos-delay="<%= i * 100 %>">
+              <% end %>
+              <%= render partial: "users/user_card", locals: {user: user} %>
+              </div>
+              <% i += 1 %>
+            <% end %>
+          <% end %>
+          <% @city.users.each do |user| %>
+            <% if user.matchmaking(current_user) == 3 %>
+              <% if i == 0 %>
+                <div class="col-md-4">
+              <% else %>
+                <div class="col-md-4" style="border-radius: 30px;" data-aos="fade-up" data-aos-delay="<%= i * 100 %>">
+              <% end %>
+              <%= render partial: "users/user_card", locals: {user: user} %>
+              </div>
+              <% i += 1 %>
+            <% end %>
+          <% end %>
+          <% @city.users.each do |user| %>
+            <% if user.matchmaking(current_user) == 2 %>
+              <% if i == 0 %>
+                <div class="col-md-4">
+              <% else %>
+                <div class="col-md-4" style="border-radius: 30px;" data-aos="fade-up" data-aos-delay="<%= i * 100 %>">
+              <% end %>
+              <%= render partial: "users/user_card", locals: {user: user} %>
+              </div>
+              <% i += 1 %>
+            <% end %>
+          <% end %>
+          <% @city.users.each do |user| %>
+            <% if user.matchmaking(current_user) == 1 %>
+              <% if i == 0 %>
+                <div class="col-md-4">
+              <% else %>
+                <div class="col-md-4" style="border-radius: 30px;" data-aos="fade-up" data-aos-delay="<%= i * 100 %>">
+              <% end %>
+              <%= render partial: "users/user_card", locals: {user: user} %>
+              </div>
+              <% i += 1 %>
+            <% end %>
+          <% end %>
+          <% @city.users.each do |user| %>
+            <% if user.matchmaking(current_user) == 0 %>
+              <% if i == 0 %>
+                <div class="col-md-4">
+              <% else %>
+                <div class="col-md-4" style="border-radius: 30px;" data-aos="fade-up" data-aos-delay="<%= i * 100 %>">
+              <% end %>
+              <%= render partial: "users/user_card", locals: {user: user} %>
+              </div>
+              <% i += 1 %>
+            <% end %>
           <% end %>
         </div>
       </div>
