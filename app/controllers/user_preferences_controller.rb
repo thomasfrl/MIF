@@ -12,12 +12,13 @@ class UserPreferencesController < ApplicationController
     end
     
     budget = params[:preference][:budget]
-    binding.pry
+    current_user.update(budget_id: budget)
     flash[:notice] = "You have created your profil preferences correctly"
     redirect_to current_user
   end
 
   def new
+    @budgets = Budget.all
     @preferences = Preference.all
     respond_to do |format|
       format.html { redirect_to root_path }
