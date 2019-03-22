@@ -37,16 +37,16 @@
             <%=image_tag("logo/logo.png", :alt => "Logo", class: "logo-md")%>
             </div>
             <div class="col-md-5 text-center text-md-right">
-              <ul class="socials">
-                  <%= link_to "/home/not_found" do %>
-                         <li><i class="fab fa-facebook-f"></i></li>
-                       <% end %>
-                <%= link_to "https://github.com/thomasfrl/MIF" do %>
-                        <li><i class="fab fa-github"></i></li>
-                       <% end %>
+              <ul class="row align-items-center justify-content-center pl-0">
                 <%= link_to "/home/not_found" do %>
-                        <li><i class="fab fa-linkedin-in"></i></li>
-                       <% end %>
+                  <i class="fab fa-facebook-f p-2"></i>
+                <% end %>
+                <%= link_to "https://github.com/thomasfrl/MIF" do %>
+                  <i class="fab fa-github p-2"></i>
+                <% end %>
+                <%= link_to "/home/not_found" do %>
+                  <i class="fab fa-linkedin-in p-2"></i>
+                <% end %>
               </ul>
             </div>
           </div>
