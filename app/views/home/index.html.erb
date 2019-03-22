@@ -43,6 +43,10 @@
     </section>
      <!-- cover -->
 
+    <% if user_signed_in? %>
+      <%= render "caroussel_profil" %>
+    <% end %>
+
      <!-- presentation -->
     <section class="section-lg bg-gray">
       <div class="container">
