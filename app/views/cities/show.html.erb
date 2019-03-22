@@ -61,14 +61,78 @@
           </div>
         </div>
         <div class="row gutter-0">
-          <% @city.users.each_with_index do |user,count| %>
-            <% if count == 1 %>
-              <div class="col-md-4">
-            <% else %>
-              <div class="col-md-4" style="border-radius: 30px;" data-aos="fade-up" data-aos-delay="<%= count * 100 %>">
-            <% end %>
+          <% i = 0 %>
+          <% @city.users.each do |user| %>
+            <% if user.matchmaking(current_user) == 5 %>
+              <% if i == 0 %>
+                <div class="col-md-4">
+              <% else %>
+                <div class="col-md-4" style="border-radius: 30px;" data-aos="fade-up" data-aos-delay="<%= i * 50 %>">
+              <% end %>
               <%= render partial: "users/user_card", locals: {user: user} %>
               </div>
+              <% i += 1 %>
+            <% end %>
+          <% end %>
+          <% @city.users.each do |user| %>
+            <% if user.matchmaking(current_user) == 4 %>
+              <% if i == 0 %>
+                <div class="col-md-4">
+              <% else %>
+                <div class="col-md-4" style="border-radius: 30px;" data-aos="fade-up" data-aos-delay="<%= i * 100 %>">
+              <% end %>
+              <%= render partial: "users/user_card", locals: {user: user} %>
+              </div>
+              <% i += 1 %>
+            <% end %>
+          <% end %>
+          <% @city.users.each do |user| %>
+            <% if user.matchmaking(current_user) == 3 %>
+              <% if i == 0 %>
+                <div class="col-md-4">
+              <% else %>
+                <div class="col-md-4" style="border-radius: 30px;" data-aos="fade-up" data-aos-delay="<%= i * 100 %>">
+              <% end %>
+              <%= render partial: "users/user_card", locals: {user: user} %>
+              </div>
+              <% i += 1 %>
+            <% end %>
+          <% end %>
+          <% @city.users.each do |user| %>
+            <% if user.matchmaking(current_user) == 2 %>
+              <% if i == 0 %>
+                <div class="col-md-4">
+              <% else %>
+                <div class="col-md-4" style="border-radius: 30px;" data-aos="fade-up" data-aos-delay="<%= i * 100 %>">
+              <% end %>
+              <%= render partial: "users/user_card", locals: {user: user} %>
+              </div>
+              <% i += 1 %>
+            <% end %>
+          <% end %>
+          <% @city.users.each do |user| %>
+            <% if user.matchmaking(current_user) == 1 %>
+              <% if i == 0 %>
+                <div class="col-md-4">
+              <% else %>
+                <div class="col-md-4" style="border-radius: 30px;" data-aos="fade-up" data-aos-delay="<%= i * 100 %>">
+              <% end %>
+              <%= render partial: "users/user_card", locals: {user: user} %>
+              </div>
+              <% i += 1 %>
+            <% end %>
+          <% end %>
+          <% @city.users.each do |user| %>
+            <% if user.matchmaking(current_user) == 0 %>
+              <% if i == 0 %>
+                <div class="col-md-4">
+              <% else %>
+                <div class="col-md-4" style="border-radius: 30px;" data-aos="fade-up" data-aos-delay="<%= i * 100 %>">
+              <% end %>
+              <%= render partial: "users/user_card", locals: {user: user} %>
+              </div>
+              <% i += 1 %>
+            <% end %>
           <% end %>
         </div>
       </div>
