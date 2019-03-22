@@ -3,6 +3,8 @@ FactoryBot.define do
     user
     address { "Address" }
     description { "MyText" }
-    has_wifi { false }
+    place { 1 }
+    room {"Bed-room"}
+    sleep { "Couch" }
   end
 end
