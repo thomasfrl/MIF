@@ -36,14 +36,14 @@
 
 		<!-- city -->
 		<div class="form-group">
-			<%= f.collection_select :city_id, City.order(:name),:id,:name%>  
+			<%= f.collection_select :city_id, City.order(:name),:id,:name%>
 		</div>
 
 		<!-- password -->
 		<div class="form-group">
 			<%= f.input :password,
 				required: true,
-				hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length),
+				hint: ("It must contains at least a lowercase letter, a uppercase, a digit and minimum 8 characters"),
 				input_html: { autocomplete: "new-password", class: "form-control" } %>
 		</div>
 
