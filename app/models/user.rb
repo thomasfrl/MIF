@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  # after_create :welcome_send
+  after_create :welcome_send
   after_create :create_flat
   after_create :set_default_avatar
 
@@ -20,6 +20,8 @@ class User < ApplicationRecord
   #   format: {with: /\A[a-zA-Z0-9 _\.]*\z/}
   validates :city_id, presence: true
   validates :status, inclusion: { in: ["waiting", "validated", "banned"], message: "%{value} is not a valid status"}
+  validates :password, :format => {:with => /\A(?=.*[a-zA-Z])(?=.*[0-9]).{8,}\z/, message: "must contains at least a lowercase letter, a uppercase, a digit and minimum 8 characters"}
+
 
   belongs_to :city
   has_one :flat, dependent: :destroy
@@ -80,6 +82,14 @@ class User < ApplicationRecord
      self.authored_conversations.to_a << self.received_conversations.to_a
   end
 
+  # mail
+
+  def welcome_send
+    UserMailer.welcome_email(self).deliver_now
+  end
+
+  # User's correspondances
+  # =======================================
   def correspondances
     self.created_correspondances +  self.received_correspondances
   end
@@ -99,41 +109,37 @@ class User < ApplicationRecord
   def refused_correspondances
     self.created_correspondances.where(status: "refused") +  self.received_correspondances.where(status: "refused")
   end
+  # =======================================
 
-  def matchmaking(x)
+  # Matchmaking
+
+  def matchmaking(current_user)
     arrayuser = []
     arraycontender = []
     value = 0
-    x.preference_ids.each do |userpref|
+    current_user.preference_ids.each do |userpref|
       arrayuser << userpref
       arrayuser
-
     end
 
     self.preference_ids.each do |contenderpref|
       arraycontender << contenderpref
       arraycontender
-
     end
 
-
     arraycontender.each_with_index do |pref|
-      arrayuser.each do |pref2|
-        if pref == pref2
+      arrayuser.each do |userpref|
+        if pref == userpref
           value += 1
         end
       end
     end
-
-
-
     return value
   end
 
-  def welcome_send
-    UserMailer.welcome_email(self).deliver_now
-  end
 
+  # User's trips
+  # =======================================
   def trips_validated
     trips = []
     self.validated_correspondances.each do |c|
@@ -145,6 +151,19 @@ class User < ApplicationRecord
     end
     return trips
   end
+
+  def pending_trips
+    trips = []
+    self.validated_correspondances.each do |c|
+      c.trips.each do |t|
+        if t.validated == false
+          trips << t
+        end
+      end
+    end
+    return trips
+  end
+  # =======================================
 
   private
   def create_flat

@@ -17,7 +17,10 @@ RSpec.describe Comment, type: :model do
   end
 
 
-  describe 'Associations' do
+
+
+
+  describe 'associations' do
     it { is_expected.to belong_to(:author) }
     it { is_expected.to belong_to(:receiver) }
   end
