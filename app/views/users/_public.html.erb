@@ -20,7 +20,7 @@
                     <span class="text-muted">"<%= @user.welcome_message %>"</span>
                     <div class="col-10 row align-content-center justify-content-around mt-1">
                       <% @user.preferences.each do |pref| %>
-                        <%=image_tag pref.icon, style: "width: 1rem;"%>
+                        <%=image_tag pref.icon, style: "width: 1rem; max-height: 1.5rem;"%>
                       <% end %>
                     </div>
                   </div>
