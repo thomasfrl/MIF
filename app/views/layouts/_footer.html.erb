@@ -1,5 +1,4 @@
  <footer class="bg-white text-dark">
-  <section class="section-decorated-bottom pt-0">
       <div class="decorated-bottom text-orange">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 40"  preserveAspectRatio="none">
           <path d="">
@@ -17,43 +16,37 @@
               </animate>
           </path>
         </svg>
-      </div>
-    </section>
-    
+      </div> 
       <div class="separator-top">
         <div class="container py-5">
           <div class="row justify-content-between align-items-center">
             <div class="col-md-5 text-center text-md-left">
               <ul class="nav">
                 <li class="nav-item">
-                  <%= link_to "Contacts", home_contact_path, class: "nav-link text-primary"  %>
+                  <%= link_to "Contacts", "/home/contact", class: "nav-link text-primary"  %>
                 </li>
                 <li class="nav-item">
-                  <%= link_to "About Us", home_about_us_path, class: "nav-link text-primary"  %>                
+                  <%= link_to "About Us", "/home/about_us", class: "nav-link text-primary"  %>                
                 </li>
                 <li class="nav-item">
-                  <%= link_to "Team",home_team_path, class: "nav-link text-primary"  %>
+                  <%= link_to "Team", "/home/team", class: "nav-link text-primary"  %>
                 </li>
               </ul>
             </div>
             <div class="col-md-2 text-center">
-              <img class="logo-md" src="../assets/logo/logo.png" alt="Logo">
+            <%=image_tag("logo/logo.png", :alt => "Logo", class: "logo-md")%>
             </div>
             <div class="col-md-5 text-center text-md-right">
-              <ul class="socials">
-                  <%= link_to home_not_found_path do %>
-                         <li><i class="fab fa-facebook-f"></i></li>
-                       <% end %>
-                <%= link_to home_not_found_path do %>
-                        <li><i class="fab fa-instagram"></i></li>
-                       <% end %>
-                <%= link_to home_not_found_path do %>
-                        <li><i class="fab fa-github"></i></li>
-                       <% end %>
-                <%= link_to home_not_found_path do %>
-                        <li><i class="fab fa-linkedin-in"></i></li>
-                       <% end %>
-              </ul>
+              <ul class="row align-items-center justify-content-center pl-0">
+                <%= link_to "/home/not_found" do %>
+                  <i class="fab fa-facebook-f p-2"></i>
+                <% end %>
+                <%= link_to "https://github.com/thomasfrl/MIF" do %>
+                  <i class="fab fa-github p-2"></i>
+                <% end %>
+                <%= link_to "/home/not_found" do %>
+                  <i class="fab fa-linkedin-in p-2"></i>
+                <% end %>
               </ul>
             </div>
           </div>

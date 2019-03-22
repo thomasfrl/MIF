@@ -8,6 +8,10 @@ class MessagesController < ApplicationController
     @conversation = Conversation.find(params[:conversation_id])
     @messages = Message.order(:created_at).where(conversation: @conversation)
     @other_user = @conversation.other_participant(current_user)
+    ow = Rails.configuration.open_weather_api
+    weather = ow.current id: @other_user.city.weather_id
+    @icon = weather['weather'][0]['icon']
+    @temp = (((weather['main']['temp'].to_f) - 273.15)*10).to_i.to_f / 10
     respond_to do |format|
       format.html{redirect_to root_path }
       format.js{}
@@ -20,6 +24,9 @@ class MessagesController < ApplicationController
     @message = Message.new(user: current_user, conversation_id: params[:conversation_id], content: params[:content])
     respond_to do |format|
       if @message.save
+        if @conversation.messages.size == 1
+          current_user.update(token: current_user.token + 5)
+        end
         format.html { redirect_to root_path }
         format.js {}
       else

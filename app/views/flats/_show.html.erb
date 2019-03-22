@@ -1,0 +1,72 @@
+
+<div class="container col-9">
+  <div class="container pr-5 pl-5">
+    <div class="row gutter-2 gutter-lg-4">
+      <div class="col-md-6 col-lg-4">
+        <div class="media align-items-center mb-2">
+          <i class="fas text-primary fa-2x mr-3 fa-users"></i>
+          <h5 class="fs-25 font-weight-bold"><%= @flat.place %> place(s)</h5>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4">
+        <div class="media align-items-center mb-2">
+          <i class="fas text-primary fa-2x mr-3 fa-bed"></i>
+            <h5 class="fs-25 font-weight-bold"><%= @flat.sleep %></h5>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4">
+        <div class="media align-items-center mb-2">
+          <i class="fas text-primary fa-2x mr-3 fa-home"></i>
+            <h5 class="fs-25 font-weight-bold"><%= @flat.room %></h5>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <div class="container">
+      <label>Pictures</label> 
+      <div class="row mb-2 ">
+        <div class="col">
+          <article class="card">
+            <div class="card-body overflow-hidden">
+              <%if @flat.pictures.attached?%>
+                <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                  <div class="carousel-inner">
+                    <div class="carousel-item active">
+                      <div class="row">
+                        <%= image_tag @flat.pictures[0], :alt => "Image", style: "width: 100%;"%>
+                      </div>
+                    </div>
+                    <%(1...@flat.pictures.count).each do |pic|%>
+                      <div class="carousel-item">
+                        <%= image_tag @flat.pictures[pic], :alt => "Image", style: "width: 100%;"  %>
+                      </div>
+                    <% end %>  
+                  </div>
+                  <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                  </a>
+                  <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                  </a>
+                </div>
+              <% end %>
+            </div>
+          </article>
+        </div>
+      </div>
+    </div>
+  
+
+  <div class="container"> 
+    <label>Description</label> 
+  	<article class="card"> 
+      <div class="mb-1 mt-1 p-2">
+        <%= @flat.description %>
+      </div>
+    </article>
+  </div>
+</div>
+  <!-- / post -->

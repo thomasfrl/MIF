@@ -5,16 +5,10 @@ class ApplicationController < ActionController::Base
 
   private
   def configure_devise_parameters
-    devise_parameter_sanitizer.permit(:sign_up){|u| u.permit(:first_name, :last_name, :email, :password, :password_confirmation, :user_name, :city_id)}
+    devise_parameter_sanitizer.permit(:sign_up){|u| u.permit(:first_name, :last_name, :email, :password, :password_confirmation, :city_id)}
   end
 
   def correspondances_controller
-    @correspondances = current_user.correspondances
-    @validated_correspondances = current_user.validated_correspondances
-    @sent_correspondances = current_user.sent_correspondances
     @received_correspondances = current_user.waiting_correspondances
-    @refused_correspondances = current_user.refused_correspondances
-    @correspondance = Correspondance.new
   end
-
 end

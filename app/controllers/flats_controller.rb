@@ -1,30 +1,27 @@
 class FlatsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_flat, only: [:show, :edit, :update, :destroy]
-
-  # GET /flats
-  # GET /flats.json
-  def index
-    @flats = Flat.all
-  end
+  before_action :set_flat, only: [:show, :edit, :update]
 
   # GET /flats/1
-  # GET /flats/1.json
   def show
     @flat = Flat.find(params[:id])
+    respond_to do |format|
+      format.html { redirect_to current_user}
+      format.js {}
+    end
   end
 
-  # GET /flats/new
-  def new
-    @flat = Flat.new
-  end
 
   # GET /flats/1/edit
   def edit
+    @flat = current_user.flat
+    respond_to do |format|
+      format.html { redirect_to current_user}
+      format.js {}
+    end
   end
 
   # POST /flats
-  # POST /flats.json
   def create
     @flat = Flat.new(flat_params)
 
@@ -46,16 +43,6 @@ class FlatsController < ApplicationController
       else
         format.html { redirect_to :current_user }
       end
-    end
-  end
-
-  # DELETE /flats/1
-  # DELETE /flats/1.json
-  def destroy
-    @flat.destroy
-    respond_to do |format|
-      format.html { redirect_to flats_url, notice: 'Flat was successfully destroyed.' }
-      format.json { head :no_content }
     end
   end
 

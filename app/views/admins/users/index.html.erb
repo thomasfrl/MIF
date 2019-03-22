@@ -1,0 +1,48 @@
+<div class="row justify-content-center mb-5 min-vh-100 bg-primary">
+  <div class="col-8 mt-5 text-white">
+    <h1 class="text-center mt-5">Users</h1>
+    <div class="row justify-content-center">
+    
+      <table>
+        <thead>
+          <tr>
+            <th>First name</th>
+            <th>Last name</th>
+            <th>Age</th>
+            <th>Token</th>
+            <th>Welcome message</th>
+            <th>Nationality</th>
+            <th>City</th>
+            <th>Email</th>
+            <th>status</th>
+            <th>Is admin?</th>
+
+            <th colspan="2"></th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% @users.each do |user| %>
+            <%= form_with(model: user, url: admins_user_path(user) ,local: true) do |form| %>
+              <tr class="mb-1">
+                <td><%= user.first_name %></td>
+                <td><%= user.last_name %></td>
+                <td><%= user.age %></td>
+                <td><%= user.token %></td>
+                <td><%= user.welcome_message %></td>
+                <td><%= user.nationality %></td>
+                <td><%= user.city.name %></td>
+                <td><%= user.email %></td>
+                <td><%= form.text_field :status, onchange: "if ($('#user_status').val() != 'validated' && $('#user_status').val() != 'waiting' && $('#user_status').val() != 'banned') { alert('The status cannot be different than waiting, banned or validated !'); }" %></td>
+                <td><%= form.check_box :is_admin , {}, "true", "false"%></td>
+                <td><%= link_to 'Show', user %></td>
+                <td><%= form.submit "Update" %></td>
+              </tr>
+            <% end %>
+            <br>  
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

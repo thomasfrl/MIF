@@ -1,0 +1,60 @@
+<div class="row justify-content-center">
+	<div class="col-md-10 col-lg-8">
+		<!-- post -->
+    <div class="container">
+      <label>Pictures</label> 
+      <div class="row mb-2 ">
+        <div class="col">
+          <article class="card">
+            <div class="card-body overflow-hidden">
+              <%if @user.pictures.attached?%>
+                <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                  <div class="carousel-inner">
+                    <div class="carousel-item active">
+                      <div class="d-flex">
+                        <%= image_tag @user.pictures[0], :alt => "Image", style: "width: 100%;"%>
+                      </div>
+                    </div>
+                    <%(1...@user.pictures.count).each do |pic|%>
+                      <div class="carousel-item">
+                        <%= image_tag @user.pictures[pic], :alt => "Image", style: "width: 100%;"%>
+                      </div>
+                    <% end %>  
+                  </div>
+                  <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                  </a>
+                  <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                  </a>
+                </div>
+              <% end %>                             
+            </div>
+          </article>
+        </div>
+      </div>
+    </div>		<!-- / post -->
+
+		<div class="container"> 
+			<label>Description</label> 
+			<article class="card"> 
+				<div class="mb-1 mt-1 p-2">
+					<%= @user.description %>
+				</div>
+			</article>
+		</div>
+
+    <div class="container"> 
+			<label>Languages spoken</label>
+      <div>
+        <% @user.languages.each do |l| %>
+          <%= image_tag l.icon, alt: l.language%>
+        <% end %>      
+      </div>
+		</div>
+
+
+	</div>
+</div>

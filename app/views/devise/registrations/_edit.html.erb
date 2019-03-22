@@ -1,0 +1,30 @@
+<hr>
+<h5 class="mb-2 fs-20 font-weight-normal">Account settings</h5>
+
+<%= simple_form_for(  @user, url: registration_path(@user), html: { method: :put }) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :email, required: true, autofocus: true %>
+
+    <%= f.input :password,
+                hint: "leave it blank if you don't want to change it",
+                required: false,
+                input_html: { autocomplete: "new-password" } %>
+    <%= f.input :password_confirmation,
+                required: false,
+                input_html: { autocomplete: "new-password" } %>
+    <%= f.input :current_password,
+                hint: "we need your current password to confirm your changes",
+                required: true,
+                input_html: { autocomplete: "current-password" } %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit, "Update", class: "btn btn-secondary mb-5" %>
+  </div>
+<% end %>
+
+<h5 class="mb-2 fs-20 font-weight-normal">Cancel my account</h5>
+
+<%= link_to "Cancel my account", registration_path(@user), data: { confirm: "Are you sure?" }, method: :delete, class: "btn btn-danger mb-5" %>

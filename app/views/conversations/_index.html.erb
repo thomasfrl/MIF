@@ -1,50 +1,52 @@
-<div class="col-3">
-  <div class="container bg-white" style="height: 42em;overflow: auto;">
+<div class="row justify-content-center">
+  <div class="col-md-10 col-lg-8">
+    <div class="row mb-1">
+      <div class="col-3">
+        <div class="container bg-white" style="height: 42em;overflow: auto;">
 
 
-    <% if false %>
-      <%= form_for(@conversation_new, remote: true) do |f| %>
-        <div class="row">
-          <%= f.collection_select :receiver_id, @users,:id,:name, {prompt: "New Conversation"},   {class: "col-auto"} %>
-          <%= button_tag(type: 'submit', class: "border-0") do %>
-            <i class="fas fa-plus-circle fa-2x p-1 text-primary"></i>
-          <% end %>
-        </div>
-      <% end %>        
-    <% end %>
-
-
-    
-    <div id="conversations">
-      <% @conversations.each do |conversation| %>
-        <% user = conversation.other_participant(current_user) %>
-        <div id="conv<%= conversation.id %>">
-          <%= link_to conversation_messages_path(conversation), remote: true, class: "user-photo"  do %>
-            <div class="row align-items-center m-2">
-              <%if user.avatar.attached?%>
-                <%=image_tag(user.avatar, :alt => "avatar", class: "avatar avatar-sm rounded mr-3")%>
-              <%else%>
-                <%= image_tag("img/user-1.jpg", :alt => "avatar", class: "avatar avatar-sm rounded mr-3") %>
-              <%end%>
-              <div class="">
-                <h6 class="mb-0"><%= user.name %></h6>
-                <% unless conversation.messages.empty? %>
-                  <span class="text-muted"><%= conversation.last_message.content[0..10] + "..." %></span>
-                <% else %>
-                  <span class="text-muted"></span>
+          <% if false %>
+            <%= form_for(@conversation_new, remote: true) do |f| %>
+              <div class="row">
+                <%= f.collection_select :receiver_id, @users,:id,:name, {prompt: "New Conversation"},   {class: "col-auto"} %>
+                <%= button_tag(type: 'submit', class: "border-0") do %>
+                  <i class="fas fa-plus-circle fa-2x p-1 text-primary"></i>
                 <% end %>
               </div>
-            </div>    
+            <% end %>        
           <% end %>
-        </div>        
-      <% end %>
-    </div>
-    <br>
-  </div>  
-</div>
 
-<div id="messages" class="col-9">
-  <%= render "messages/index"%> 
+
+          
+          <div id="conversations">
+            <% @conversations.each do |conversation| %>
+              <% user = conversation.other_participant(current_user) %>
+              <div id="conv<%= conversation.id %>">
+                <%= link_to conversation_messages_path(conversation), remote: true, class: "user-photo"  do %>
+                  <div class="row align-items-center m-2">
+                    <%=image_tag(user.avatar, :alt => "avatar", class: "avatar avatar-sm rounded mr-3")%>
+                    <div class="">
+                      <h6 class="mb-0"><%= user.name %></h6>
+                      <% unless conversation.messages.empty? %>
+                        <span class="text-muted"><%= conversation.last_message.content[0..10] + "..." %></span>
+                      <% else %>
+                        <span class="text-muted"></span>
+                      <% end %>
+                    </div>
+                  </div>    
+                <% end %>
+              </div>        
+            <% end %>
+          </div>
+          <br>
+        </div>  
+      </div>
+
+      <div id="messages" class="col-9">
+        <%= render "messages/index"%> 
+      </div>
+    </div>
+  </div>
 </div>
 
 <script>
