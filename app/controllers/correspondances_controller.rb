@@ -36,7 +36,7 @@ class CorrespondancesController < ApplicationController
   def update
     if params[:update]
       status = "validated"
-    elsif
+    else
       status = "refused"
     end
     if @correspondance.update(status: status)
