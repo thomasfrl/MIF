@@ -35,7 +35,7 @@
                   <h1 class="mb-0"><b><%= @city.name.slice(0,1).capitalize + @city.name.slice(1..-1) %></h1>
                   <h2 class="mb-0 text-black"><%= @city.country.capitalize %></h2>
                   <div>
-                      <%= link_to cities_path, class:"btn btn-rounded btn-with-ico btn-primary" do %>
+                      <%= link_to cities_path, class:"btn btn-rounded btn-with-ico btn-primary mt-3" do %>
                         View All Cities <i class="fas fa-chevron-right fs-24"></i>
                       <%end%>
                     </div>
