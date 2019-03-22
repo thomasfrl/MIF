@@ -21,6 +21,7 @@ class User < ApplicationRecord
   validates :city_id, presence: true
   validates :status, inclusion: { in: ["waiting", "validated", "banned"], message: "%{value} is not a valid status"}
 
+  belongs_to :budget, optional: true
   belongs_to :city
   has_one :flat, dependent: :destroy
 

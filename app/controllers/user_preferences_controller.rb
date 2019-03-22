@@ -10,6 +10,9 @@ class UserPreferencesController < ApplicationController
         redirect_to root_path
       end
     end
+    
+    budget = params[:preference][:budget]
+    binding.pry
     flash[:notice] = "You have created your profil preferences correctly"
     redirect_to current_user
   end
