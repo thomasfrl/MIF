@@ -124,6 +124,9 @@ class User < ApplicationRecord
         end
       end
     end
+    if arraycontender.include?(arrayuser[0]) && arraycontender.include?(arrayuser[1]) && arraycontender.include?(arrayuser[2]) && arraycontender.include?(arrayuser[3]) && arraycontender.include?(arrayuser[4])
+      value = 0
+    end
 
 
 
