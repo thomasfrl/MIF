@@ -25,7 +25,7 @@ def get_random_image_user
   [image_select, image_select.split(image_path_prefix)[1]]
 end
 
-
+Budget.destroy_all
 Trip.destroy_all
 Preference.destroy_all
 Answer.destroy_all
@@ -192,18 +192,19 @@ Preference.create!(description: "Smoking salad")
 Preference.create!(description: "Skating the city")
 Preference.create!(description: "Biking the city")
 Preference.create!(description: "Just walking and seeing the culture")
-Preference.create!(description: "Less than 100€ ")
-Preference.create!(description: "Between 100€ and 200€")
-Preference.create!(description: "I don't care till i'm having fun")
-
 puts "preferences created"
+
+
+Budget.create!(description: "Less than 100€ ")
+Budget.create!(description: "Between 100€ and 200€")
+Budget.create!(description: "I don't care till i'm having fun")
+
+puts "budgets created"
 
 8.times do
   img = get_random_image_avatar
   i = [1,2,4,7,9,10].sample
-
-  user = User.create!(first_name: Faker::Name.first_name, last_name: Faker::Name.unique.last_name, description: Faker::Lorem.paragraph_by_chars, age: (rand(15)+20), email: "#{Faker::Name.unique.first_name}@yopmail.com", password: "Mif12345", city_id: City.all.sample.id, welcome_message: Faker::Lorem.sentence, nationality: Faker::Nation.nationality )
-
+  user = User.create!(first_name: Faker::Name.first_name, last_name: Faker::Name.unique.last_name, description: Faker::Lorem.paragraph_by_chars, age: (rand(15)+20), email: "#{Faker::Name.unique.first_name}@yopmail.com", password: "123456", city_id: City.all.sample.id, welcome_message: Faker::Lorem.sentence, nationality: Faker::Nation.nationality )
   user.avatar.attach(io: File.open(img[0]), filename: img[1])
   3.times do
     img = get_random_image_user
