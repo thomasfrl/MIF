@@ -10,7 +10,7 @@ FactoryBot.define do
     nationality { "Nationality" }
     city {FactoryBot.create(:city)}
     email { Faker::Internet.email }
-    password { "test123456" }
+    password { "Mif12345" }
   end
 end
 
