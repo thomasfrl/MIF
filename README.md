@@ -13,7 +13,9 @@ No worries we also have a little game for breaking the ice between you, now you 
 
 ## Languages used
 -Ruby
+
 -Javascript
+
 -HTML/CSS
 
 ## Database
@@ -22,8 +24,13 @@ No worries we also have a little game for breaking the ice between you, now you 
 
 ## Devellopers
 -Thomas Feral
+
 -Florent Bilocq
+
 -Maxence Kiger
+
 -Jean Tirard
+
 -Julien Nguyen
+
 -Gregoire Dalmasso
