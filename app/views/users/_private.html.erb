@@ -15,6 +15,11 @@
                   <h2 class="mb-0"><b><%= @user.first_name %></b> <%= @user.last_name %></h2>
                   <span class="text-muted"><%= @user.age %> years old, <%= @user.city.name%></span> <br>
                   <span class="text-muted">"<%= @user.welcome_message %>"</span>
+                  <div class="col-10 row align-content-center justify-content-around mt-1">
+                    <% @user.preferences.each do |pref| %>
+                      <%=image_tag pref.icon, style: "width: 1rem;"%>
+                    <% end %>
+                  </div>
                 </div>
               </div>
             </div>

@@ -20,7 +20,7 @@ class User < ApplicationRecord
   #   format: {with: /\A[a-zA-Z0-9 _\.]*\z/}
   validates :city_id, presence: true
   validates :status, inclusion: { in: ["waiting", "validated", "banned"], message: "%{value} is not a valid status"}
-  validates :password, :format => {:with => /\A(?=.*[a-zA-Z])(?=.*[0-9]).{8,}\z/, message: "must contains at least a lowercase letter, a uppercase, a digit and minimum 8 characters"}
+  #validates :password, :format => {:with => /\A(?=.*[a-zA-Z])(?=.*[0-9]).{8,}\z/, message: "must contains at least a lowercase letter, a uppercase, a digit and minimum 8 characters"}
 
 
   belongs_to :budget, optional: true

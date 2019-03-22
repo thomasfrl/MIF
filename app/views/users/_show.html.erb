@@ -55,6 +55,32 @@
       </div>
 		</div>
 
+    <div class="container"> 
+			<label>Budget</label>
+      <div>  
+        <% unless @user.budget.nil? %>
+          <%= image_tag @user.budget.icon, class: "pr-1", style: "width: 2rem;"%>
+          <span><%=@user.budget.description%></span>
+        <% end %> 
+      </div>
+		</div>
+
+    <div class="container"> 
+			<label>Preferences</label>
+      <div>
+        <ul class="list-group list-group-line">
+          <% @user.preferences.each do |pref| %>
+            <li class="list-group-item d-flex align-items-center">
+              <%=image_tag pref.icon, class: "pr-1", style: "width: 2rem;"%>
+              <span><%=pref.description%></span>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+		</div>
+
+
+
 
 	</div>
 </div>
