@@ -111,6 +111,32 @@ class User < ApplicationRecord
   end
   # =======================================
 
+  # Matchmaking
+
+  def matchmaking(current_user)
+    arrayuser = []
+    arraycontender = []
+    value = 0
+    current_user.preference_ids.each do |userpref|
+      arrayuser << userpref
+      arrayuser
+    end
+
+    self.preference_ids.each do |contenderpref|
+      arraycontender << contenderpref
+      arraycontender
+    end
+
+    arraycontender.each_with_index do |pref|
+      arrayuser.each do |userpref|
+        if pref == userpref
+          value += 1
+        end
+      end
+    end
+    return value
+  end
+
 
   # User's trips
   # =======================================
