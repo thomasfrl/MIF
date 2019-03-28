@@ -1,4 +1,5 @@
 class CitiesController < ApplicationController
+  before_action :authenticate_user!, only: [:show]
   before_action :set_city, only: [:show]
 
   # GET /cities
